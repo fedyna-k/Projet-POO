@@ -1,8 +1,3 @@
-
-if [[ "$@" =~ --del-all ]]; then echo "del"; fi
-if [[ "$@" =~ --test ]]; then echo "test"; fi
-
-
 # Delete all previously compiled files
 if [[ "$@" =~ --del-all ]]; then
     echo -e '\033[0;31mSuppressions des fichiers class...\033[0m'
