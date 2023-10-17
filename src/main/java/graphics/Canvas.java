@@ -1,24 +1,22 @@
 package graphics;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import javax.swing.Timer;
+
+import graphics.Animation;
+
 
 public class Canvas extends JPanel {
     private boolean isFullscreen;
     private Timer timer;
-    private Timer changeFrame;
 
-    private int frameIndex;
-    private BufferedImage[] frames;
+    private Animation perso;
 
     public Canvas() {
         this(false);
@@ -36,21 +34,13 @@ public class Canvas extends JPanel {
         });
         timer.start();
 
-        changeFrame = new Timer(100, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                frameIndex = (frameIndex + 1) % 5;
-            }
-        });
-        changeFrame.start();
-
-        this.frameIndex = 0;
-        this.frames = new BufferedImage[5];
-        for (int i = 1 ; i < 6 ; i++) {
-            try {
-                this.frames[i - 1] = ImageIO.read(new File("../src/main/resources/player/standing" + i + ".png"));
-            } catch (IOException e) {}
+        try {
+            perso = new Animation("standing", Animation.RESOURCES_FOLDER + "player/", 10);
+        } catch (IOException e) {
+            System.out.println("Couldn't create character");
         }
+
+        perso.play();
     }
 
     @Override
@@ -68,7 +58,7 @@ public class Canvas extends JPanel {
         
         for (int i = 0 ; i < 5 ; i++) {
             for (int j = 0 ; j < 5 ; j++) {
-                g.drawImage(this.frames[(this.frameIndex + i + j) % 5], i * 120, j * 120, 128, 128, this);
+                g.drawImage(perso.getCurrentFrame(), i * 120, j * 120, 128, 128, this);
             }
         }
     }

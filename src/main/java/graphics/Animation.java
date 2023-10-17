@@ -49,7 +49,7 @@ public class Animation {
 
         // Create timer for the animation
         this.frameIndex = 0;
-        this.frameTimer = new Timer(100, new ActionListener() {
+        this.frameTimer = new Timer(Math.round(1000 / frameRate), new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
                 frameIndex = (frameIndex + 1) % frameCounter;
