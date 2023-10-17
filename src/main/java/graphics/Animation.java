@@ -19,6 +19,23 @@ public class Animation {
     private int frameIndex;
 
     /**
+     * Helper function to load without returning an error
+     * @param framesName The frame base name. Frames should be named "framesNameX.png" with X starting at 1
+     * @param baseURL The base URL to the folder with frames
+     * @param frameRate The number of frames per seconds
+     * @return The new Animation object
+     */
+    public static Animation load(String framesName, String baseURL, int frameRate) {
+        try {
+            return new Animation(framesName, baseURL, frameRate);
+        } catch (IOException e) {
+            System.err.println("Couldn't load animation : " + e);
+        }
+
+        return null;
+    }
+
+    /**
      * Create animation object with multiple frames
      * @param framesName The frame base name. Frames should be named "framesNameX.png" with X starting at 1
      * @param baseURL The base URL to the folder with frames
