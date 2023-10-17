@@ -5,7 +5,6 @@ public abstract class Entity {
     protected int height;
     protected int width;
     protected String name;
-    
 
     /**
      * Move Entity by a given vector
