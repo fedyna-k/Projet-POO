@@ -22,6 +22,7 @@ public class Canvas extends JPanel {
     // TESTING PURPOSE
     private Player player;
     private KeyStack stack;
+    private boolean wasReleasedO;
     private boolean wasReleasedSpace;
     // ---------------
 
@@ -38,11 +39,13 @@ public class Canvas extends JPanel {
         // TESTING PURPOSE
         this.player = new Player();
         this.stack = new KeyStack(this);
+        this.wasReleasedO = true;
         this.wasReleasedSpace = true;
         stack.listenTo("Z");
         stack.listenTo("S");
         stack.listenTo("Q");
         stack.listenTo("D");
+        stack.listenTo("O"); 
         stack.listenTo("SPACE");
         // ---------------
 
@@ -63,10 +66,20 @@ public class Canvas extends JPanel {
                 if (stack.isPressed("D")) {
                     movement.x += 4;
                 }
-                if (stack.isPressed("SPACE")) {
+                if (stack.isPressed("O")) {
                     if (wasReleasedSpace) {
                         player.attack();
+                        wasReleasedO = false;
+                    }
+                } else {
+                    wasReleasedO = true;
+                }
+                if (stack.isPressed("SPACE")) {
+                    if (wasReleasedSpace) {
+                        player.dodge();
+                        movement.x -= 128;
                         wasReleasedSpace = false;
+                       
                     }
                 } else {
                     wasReleasedSpace = true;
