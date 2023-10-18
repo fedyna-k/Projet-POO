@@ -50,6 +50,14 @@ public abstract class Entity {
     }
 
     /**
+     * Move Entity by a given vector
+     * @param movement The [dx, dy] vector
+     */
+    public void move(Vector2D movement) {
+        this.move(movement.x, movement.y);
+    }
+
+    /**
      * Go through all basic animations and load them
      * @param dir The folder contaning all frames
      */
@@ -57,6 +65,8 @@ public abstract class Entity {
         standing = Animation.load("standing", Animation.RESOURCES_FOLDER + dir, 10);
         leftRun = Animation.load("leftrun", Animation.RESOURCES_FOLDER + dir, 10);
         rightRun = Animation.load("rightrun", Animation.RESOURCES_FOLDER + dir, 10);
+        current = standing;
+        current.play();
     }
 
     /**
