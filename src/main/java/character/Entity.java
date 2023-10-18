@@ -13,10 +13,10 @@ public abstract class Entity {
         STANDING, LEFTRUN, RIGHTRUN
     };
 
-    protected Vector2D coordinates;
-    protected int height;
-    protected int width;
-    protected String name;
+    public Vector2D coordinates;
+    public int height;
+    public int width;
+    public String name;
 
     protected Animation current;
     protected Animation standing;
@@ -24,11 +24,27 @@ public abstract class Entity {
     protected Animation rightRun;
 
     /**
+     * Get the Vector2D representation of entity position
+     * @return The position vector of the entity
+     */
+    public Vector2D getPosition() {
+        return this.coordinates;
+    }
+
+    /**
      * Move Entity by a given vector
      * @param dx x coordinate of vector
      * @param dy y coordinate of vector
      */
     public void move(double dx, double dy) {
+        if (dx > 0 || dx == 0 && dy != 0) {
+            swapAnimation(AnimationIndex.RIGHTRUN);
+        } else if (dx < 0) {
+            swapAnimation(AnimationIndex.LEFTRUN);
+        } else {
+            swapAnimation(AnimationIndex.STANDING);
+        }
+
         this.coordinates.x += dx;
         this.coordinates.y += dy;
     }
@@ -57,16 +73,18 @@ public abstract class Entity {
      * @param animationIndex A constant index that describes the type of animation
      */
     public void swapAnimation(AnimationIndex animationIndex) {
-        this.current.stop();
-        
         if (animationIndex == AnimationIndex.STANDING && this.current != this.standing) {
+            this.current.stop();
             this.current = this.standing;
+            this.current.play();
         } else if (animationIndex == AnimationIndex.LEFTRUN && this.current != this.leftRun) {
+            this.current.stop();
             this.current = this.leftRun;
+            this.current.play();
         } else if (animationIndex == AnimationIndex.RIGHTRUN && this.current != this.rightRun) {
+            this.current.stop();
             this.current = this.rightRun;
+            this.current.play();
         }
-
-        this.current.play();
     }
 }
