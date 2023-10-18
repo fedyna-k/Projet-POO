@@ -7,4 +7,9 @@ public class Player extends Entity {
         this.setAnimations("player/");
         this.coordinates = new Vector2D();
     }
+
+    public Player(double x, double y) {
+        this.setAnimations("player/");
+        this.coordinates = new Vector2D(x, y);
+    }
 }

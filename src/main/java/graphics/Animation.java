@@ -15,8 +15,10 @@ public class Animation {
     public static final String RESOURCES_FOLDER = "../src/main/resources/";
     private BufferedImage[] frames;
     private Timer frameTimer;
+    private Timer frameOnceTimer;
     private int frameCounter;
     private int frameIndex;
+    private boolean isPlaying;
 
     /**
      * Helper function to load without returning an error
@@ -46,6 +48,7 @@ public class Animation {
         // Count all frames with given name
         File[] all_files = new File(baseURL).listFiles();
         this.frameCounter = 0;
+        this.isPlaying = false;
 
         for (File file : all_files) {
             if (file.getName().startsWith(framesName)) {
@@ -72,6 +75,17 @@ public class Animation {
                 frameIndex = (frameIndex + 1) % frameCounter;
             }
         });
+        this.frameOnceTimer = new Timer(Math.round(1000 / frameRate), new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent event) {
+                frameIndex++;
+                if (frameIndex == frameCounter) {
+                    frameIndex = 0;
+                    frameOnceTimer.stop();
+                    isPlaying = false;
+                }
+            }
+        });
     }
 
     /**
@@ -79,6 +93,16 @@ public class Animation {
      */
     public void play() {
         this.frameTimer.start();
+        this.isPlaying = true;
+    }
+
+    /**
+     * Start animation
+     */
+    public void playOnce() {
+        this.frameIndex = 0;
+        this.frameOnceTimer.start();
+        this.isPlaying = true;
     }
 
     /**
@@ -86,6 +110,7 @@ public class Animation {
      */
     public void stop() {
         this.frameTimer.stop();
+        this.isPlaying = false;
     }
 
     /**
@@ -94,5 +119,21 @@ public class Animation {
      */
     public BufferedImage getCurrentFrame() {
         return this.frames[this.frameIndex];
+    }
+
+    /**
+     * Gets the dimension of the current frame
+     * @return An array in the form of {width, height}
+     */
+    public int[] getSize() {
+        return new int[]{this.frames[this.frameIndex].getWidth(), this.frames[this.frameIndex].getHeight()};
+    }
+
+    /**
+     * Check if animation is playing
+     * @return The current state of the animation
+     */
+    public boolean isPlaying() {
+        return this.isPlaying;
     }
 }
