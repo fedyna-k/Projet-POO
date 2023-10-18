@@ -10,7 +10,7 @@ public class Player extends Entity {
     public Player(double x, double y) {
         this.setAnimations("player/");
         this.coordinates = new Vector2D(x, y);
-        this.isFacingLeft = true;
+        this.isFacingLeft = false;
     }
 
     public Vector2D getOffset() {
