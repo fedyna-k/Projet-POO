@@ -67,33 +67,27 @@ public class Canvas extends JPanel {
                     movement.x += 4;
                 }
                 if (stack.isPressed("O")) {
-                    if (wasReleasedSpace) {
+                    if (wasReleasedO && !player.isDodging()) {
                         player.attack();
                         wasReleasedO = false;
                     }
                 } else {
                     wasReleasedO = true;
                 }
-                if (stack.isPressed("SPACE") && stack.isPressed("Q") ) {
+                if (stack.isPressed("SPACE")) {
                     if (wasReleasedSpace) {
-                        player.dodgeRight();
-                        movement.x -= 16;
+                        player.dodge();
                         wasReleasedSpace = false;
                        
                     }
                 } else {
                     wasReleasedSpace = true;
                 }
-                if (stack.isPressed("SPACE") && stack.isPressed("D") ) {
-                    if (wasReleasedSpace) {
-                        player.dodgeLeft();
-                        movement.x += 16;
-                        wasReleasedSpace = false;
-                       
-                    }
-                } else {
-                    wasReleasedSpace = true;
+
+                if (player.isDodging()) {
+                    movement = Vector2D.scale(movement, 3);
                 }
+
                 player.move(movement);
                 // ---------------
 
