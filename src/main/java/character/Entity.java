@@ -10,7 +10,7 @@ import graphics.Animation;
 
 public abstract class Entity {
     public enum AnimationIndex {
-        STANDING, LEFTRUN, RIGHTRUN, ATTACK
+        STANDING, LEFTRUN, RIGHTRUN, ATTACK, DODGE
     };
 
     public Vector2D coordinates;
@@ -19,6 +19,7 @@ public abstract class Entity {
     public String name;
     protected boolean isAttacking;
     protected boolean isFacingLeft;
+    protected boolean isDodging;
 
     protected Animation current;
     protected Animation standing;
@@ -28,6 +29,9 @@ public abstract class Entity {
     protected Animation currentAttack;
     protected Animation leftAttack;
     protected Animation rightAttack;
+
+    private Animation rightDodge;
+    private Animation leftDodge;
 
     /**
      * Get the Vector2D representation of entity position
@@ -49,6 +53,13 @@ public abstract class Entity {
      * @param dy y coordinate of vector
      */
     public void move(double dx, double dy) {
+        // Important ! Or else dodging animation won't ever work
+        if (isDodging) {
+        // Check if dodging animation ended
+        if (!current.isPlaying()) {
+            isDodging = false; // Change state
+        }
+    } else {
         if (dx > 0 || dx == 0 && dy != 0 && !isFacingLeft) {
             swapAnimation(AnimationIndex.RIGHTRUN);
         } else if (dx < 0 || dx == 0 && dy != 0 && isFacingLeft) {
@@ -56,6 +67,7 @@ public abstract class Entity {
         } else {
             swapAnimation(AnimationIndex.STANDING);
         }
+    }
 
         this.coordinates.x += dx;
         this.coordinates.y += dy;
@@ -87,6 +99,31 @@ public abstract class Entity {
     }
 
     /**
+     * Put the entity into dodge state
+     */
+    public void dodge() {
+        if (!this.isDodging) {
+            swapAnimation(AnimationIndex.DODGE);
+        }
+    }
+
+    /**
+     * Get the dodging state of the entity
+     * @return The dodging state
+     */
+    public boolean isDodging() {
+        return this.isDodging;
+    }
+
+    /**
+     * Get the entity's orientation
+     * @return true if facing left
+     */
+    public boolean isFacingLeft() {
+        return this.isFacingLeft;
+    }
+
+    /**
      * Go through all basic animations and load them
      * @param dir The folder contaning all frames
      */
@@ -96,6 +133,8 @@ public abstract class Entity {
         rightRun = Animation.load("rightrun", Animation.RESOURCES_FOLDER + dir, 10);
         leftAttack = Animation.load("leftattack", Animation.RESOURCES_FOLDER + dir, 30);
         rightAttack = Animation.load("rightattack", Animation.RESOURCES_FOLDER + dir, 30);
+        rightDodge = Animation.load("dodgeright", Animation.RESOURCES_FOLDER + dir, 30);
+        leftDodge = Animation.load("dodgeleft", Animation.RESOURCES_FOLDER + dir, 30);
         current = standing;
         currentAttack = leftAttack;
         current.play();
@@ -125,26 +164,36 @@ public abstract class Entity {
     public void swapAnimation(AnimationIndex animationIndex) {
         if (animationIndex == AnimationIndex.STANDING && this.current != this.standing && !this.currentAttack.isPlaying()) {
             this.isAttacking = false;
+            this.isDodging = false;
             this.current.stop();
             this.current = this.standing;
             this.current.play();
         } else if (animationIndex == AnimationIndex.LEFTRUN && this.current != this.leftRun && !this.currentAttack.isPlaying()) {
             this.isAttacking = false;
+            this.isDodging = false;
             this.isFacingLeft = true;
             this.current.stop();
             this.current = this.leftRun;
             this.current.play();
         } else if (animationIndex == AnimationIndex.RIGHTRUN && this.current != this.rightRun && !this.currentAttack.isPlaying()) {
             this.isAttacking = false;
+            this.isDodging = false;
             this.isFacingLeft = false;
             this.current.stop();
             this.current = this.rightRun;
             this.current.play();
         } else if (animationIndex == AnimationIndex.ATTACK && !this.currentAttack.isPlaying()) {
             this.isAttacking = true;
+            this.isDodging = false;
             this.current.stop();
             this.currentAttack = this.isFacingLeft ? this.leftAttack : this.rightAttack;
             this.current = this.currentAttack;
+            this.current.playOnce();
+        } else if (animationIndex == AnimationIndex.DODGE && !isDodging) {
+            this.isAttacking = false;
+            this.isDodging = true;
+            this.current.stop();
+            this.current = this.isFacingLeft ? this.leftDodge : this.rightDodge;
             this.current.playOnce();
         }
     }
