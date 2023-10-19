@@ -10,7 +10,7 @@ import graphics.Animation;
 
 public abstract class Entity {
     public enum AnimationIndex {
-        STANDING, LEFTRUN, RIGHTRUN, ATTACK, DODGE
+        STANDING, LEFTRUN, RIGHTRUN, ATTACK, DODGERIGHT, DODGELEFT
     };
 
     public Vector2D coordinates;
@@ -30,7 +30,8 @@ public abstract class Entity {
     protected Animation leftAttack;
     protected Animation rightAttack;
 
-    private Animation dodge;
+    private Animation dodgeRight;
+    private Animation dodgeLeft;
 
     /**
      * Get the Vector2D representation of entity position
@@ -100,9 +101,15 @@ public abstract class Entity {
     /**
      * Put the entity into dodge state
      */
-    public void dodge() {
+    public void dodgeRight() {
         if (!this.isDodging) {
-            swapAnimation(AnimationIndex.DODGE);
+            swapAnimation(AnimationIndex.DODGERIGHT);
+        }
+    }
+
+     public void dodgeLeft() {
+        if (!this.isDodging) {
+            swapAnimation(AnimationIndex.DODGELEFT);
         }
     }
 
@@ -124,7 +131,8 @@ public abstract class Entity {
         rightRun = Animation.load("rightrun", Animation.RESOURCES_FOLDER + dir, 10);
         leftAttack = Animation.load("leftattack", Animation.RESOURCES_FOLDER + dir, 30);
         rightAttack = Animation.load("rightattack", Animation.RESOURCES_FOLDER + dir, 30);
-        dodge = Animation.load("dodge", Animation.RESOURCES_FOLDER + dir, 30);
+        dodgeRight = Animation.load("dodgeright", Animation.RESOURCES_FOLDER + dir, 30);
+        dodgeLeft = Animation.load("dodgeleft", Animation.RESOURCES_FOLDER + dir, 30);
         current = standing;
         currentAttack = leftAttack;
         current.play();
@@ -175,11 +183,18 @@ public abstract class Entity {
             this.currentAttack = this.isFacingLeft ? this.leftAttack : this.rightAttack;
             this.current = this.currentAttack;
             this.current.playOnce();
-        } else if (animationIndex == AnimationIndex.DODGE && !this.dodge.isPlaying() && !this.currentAttack.isPlaying()) {
+        } else if (animationIndex == AnimationIndex.DODGERIGHT && !this.dodgeRight.isPlaying() && !this.currentAttack.isPlaying()) {
             this.isAttacking = false;
             this.current.stop();
             this.isDodging = true;
-            this.current = this.dodge;
+            this.current = this.dodgeRight;
+            this.current.playOnce();
+        }
+        else if (animationIndex == AnimationIndex.DODGELEFT && !this.dodgeLeft.isPlaying() && !this.currentAttack.isPlaying()) {
+            this.isAttacking = false;
+            this.current.stop();
+            this.isDodging = true;
+            this.current = this.dodgeLeft;
             this.current.playOnce();
         }
     }

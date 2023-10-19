@@ -74,10 +74,20 @@ public class Canvas extends JPanel {
                 } else {
                     wasReleasedO = true;
                 }
-                if (stack.isPressed("SPACE")) {
+                if (stack.isPressed("SPACE") && stack.isPressed("Q") ) {
                     if (wasReleasedSpace) {
-                        player.dodge();
-                        movement.x -= 128;
+                        player.dodgeRight();
+                        movement.x -= 16;
+                        wasReleasedSpace = false;
+                       
+                    }
+                } else {
+                    wasReleasedSpace = true;
+                }
+                if (stack.isPressed("SPACE") && stack.isPressed("D") ) {
+                    if (wasReleasedSpace) {
+                        player.dodgeLeft();
+                        movement.x += 16;
                         wasReleasedSpace = false;
                        
                     }
