@@ -42,9 +42,19 @@ public class Vector2D {
      * Normalize vector to make norm equals to 1
      */
     public void normalize() {
-        double norm = Math.sqrt(dot(this, this));
-        this.x /= norm;
-        this.y /= norm;
+        if (!isNull()) {
+            double norm = Math.sqrt(dot(this, this));
+            this.x /= norm;
+            this.y /= norm;
+        }
+    }
+
+    /**
+     * Computes Vector norm
+     * @return The 2-norm of the vector
+     */
+    public double norm() {
+        return Math.sqrt(dot(this, this));
     }
 
     public boolean isNull() {
@@ -79,5 +89,10 @@ public class Vector2D {
      */
     public static Vector2D add(Vector2D first, Vector2D second) {
         return new Vector2D(first.x + second.x, first.y + second.y);
+    }
+
+    @Override
+    public String toString() {
+        return x + ";" + y;
     }
 }
