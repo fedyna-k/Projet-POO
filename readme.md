@@ -48,14 +48,14 @@ The game is called **Les chevaliers d'Ether** and the goal is to defeat a big mo
 
 ### Controls
 
-|Action|Key|
-|:-:|:-:|
-|Move up|**Z**|
-|Move down|**S**|
-|Move left|**Q**|
-|Move right|**D**|
-|Dodge|**Space**|
-|Slice|**O**|
+|Action|Key||
+|:-:|:-:|:-:|
+|Move up|**Z**|<img src="https://github.com/fedyna-k/Projet-POO/blob/main/src/main/resources/player/gif%20animations/rightrun.gif?raw=true" width="64px"> <img src="https://github.com/fedyna-k/Projet-POO/blob/main/src/main/resources/player/gif%20animations/leftrun.gif?raw=true" width="64px">|
+|Move down|**S**|<img src="https://github.com/fedyna-k/Projet-POO/blob/main/src/main/resources/player/gif%20animations/rightrun.gif?raw=true" width="64px"> <img src="https://github.com/fedyna-k/Projet-POO/blob/main/src/main/resources/player/gif%20animations/leftrun.gif?raw=true" width="64px">|
+|Move left|**Q**|<img src="https://github.com/fedyna-k/Projet-POO/blob/main/src/main/resources/player/gif%20animations/leftrun.gif?raw=true" width="64px">|
+|Move right|**D**|<img src="https://github.com/fedyna-k/Projet-POO/blob/main/src/main/resources/player/gif%20animations/rightrun.gif?raw=true" width="64px">|
+|Dodge|**Space**|<img src="https://github.com/fedyna-k/Projet-POO/blob/main/src/main/resources/player/gif%20animations/rightdodge.gif?raw=true" width="64px"> <img src="https://github.com/fedyna-k/Projet-POO/blob/main/src/main/resources/player/gif%20animations/leftdodge.gif?raw=true" width="64px">|
+|Slice|**O**|<img src="https://github.com/fedyna-k/Projet-POO/blob/main/src/main/resources/player/gif%20animations/rightattack.gif?raw=true" width="64px"> <img src="https://github.com/fedyna-k/Projet-POO/blob/main/src/main/resources/player/gif%20animations/leftattack.gif?raw=true" width="64px">|
 
 ## 💻 Compiling and launching the game 💻
 
