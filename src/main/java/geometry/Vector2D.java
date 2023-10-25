@@ -47,6 +47,10 @@ public class Vector2D {
         this.y /= norm;
     }
 
+    public boolean isNull() {
+        return this.x == 0 && this.y == 0;
+    }
+
     /**
      * Scale a vector by a real factor
      * @param vector The vector to scale
