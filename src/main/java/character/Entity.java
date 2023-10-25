@@ -20,18 +20,17 @@ public abstract class Entity {
     protected boolean isAttacking;
     protected boolean isFacingLeft;
     protected boolean isDodging;
+    protected Vector2D bufferedMovement;
 
     protected Animation current;
+
     protected Animation standing;
     protected Animation leftRun;
     protected Animation rightRun;
-
-    protected Animation currentAttack;
     protected Animation leftAttack;
     protected Animation rightAttack;
-
-    private Animation rightDodge;
-    private Animation leftDodge;
+    protected Animation rightDodge;
+    protected Animation leftDodge;
 
     /**
      * Get the Vector2D representation of entity position
@@ -53,24 +52,37 @@ public abstract class Entity {
      * @param dy y coordinate of vector
      */
     public void move(double dx, double dy) {
-        // Important ! Or else dodging animation won't ever work
-        if (isDodging) {
-        // Check if dodging animation ended
-        if (!current.isPlaying()) {
-            isDodging = false; // Change state
+        // Dodge state setter
+        if (isDodging && !current.isPlaying()) {
+            isDodging = false;
         }
-    } else {
-        if (dx > 0 || dx == 0 && dy != 0 && !isFacingLeft) {
-            swapAnimation(AnimationIndex.RIGHTRUN);
-        } else if (dx < 0 || dx == 0 && dy != 0 && isFacingLeft) {
-            swapAnimation(AnimationIndex.LEFTRUN);
-        } else {
-            swapAnimation(AnimationIndex.STANDING);
-        }
-    }
 
-        this.coordinates.x += dx;
-        this.coordinates.y += dy;
+        // Attack state setter
+        if (isAttacking && !current.isPlaying()) {
+            isAttacking = false;
+        }
+
+        if (isDodging) {
+            // Apply default movement
+            if (bufferedMovement.isNull()) {
+                dx = isFacingLeft ? -4 : 4;
+            } else {
+                dx = bufferedMovement.x;
+                dy = bufferedMovement.y;
+            }
+        } else {
+            if (dx > 0 || dx == 0 && dy != 0 && !isFacingLeft) {
+                swapAnimation(AnimationIndex.RIGHTRUN);
+            } else if (dx < 0 || dx == 0 && dy != 0 && isFacingLeft) {
+                swapAnimation(AnimationIndex.LEFTRUN);
+            } else {
+                swapAnimation(AnimationIndex.STANDING);
+            }
+        }
+
+        bufferedMovement = new Vector2D(dx, dy);
+        this.coordinates.x += isDodging ? dx * 3 : dx;
+        this.coordinates.y += isDodging ? dy * 3 : dy;
     }
 
     /**
@@ -85,7 +97,8 @@ public abstract class Entity {
      * Put the entity into attack state
      */
     public void attack() {
-        if (!this.isAttacking) {
+        if (!this.isAttacking && !this.isDodging) {
+            isAttacking = true;
             swapAnimation(AnimationIndex.ATTACK);
         }
     }
@@ -102,7 +115,8 @@ public abstract class Entity {
      * Put the entity into dodge state
      */
     public void dodge() {
-        if (!this.isDodging) {
+        if (!this.isDodging && !this.isAttacking) {
+            isDodging = true;
             swapAnimation(AnimationIndex.DODGE);
         }
     }
@@ -133,10 +147,10 @@ public abstract class Entity {
         rightRun = Animation.load("rightrun", Animation.RESOURCES_FOLDER + dir, 10);
         leftAttack = Animation.load("leftattack", Animation.RESOURCES_FOLDER + dir, 30);
         rightAttack = Animation.load("rightattack", Animation.RESOURCES_FOLDER + dir, 30);
-        rightDodge = Animation.load("dodgeright", Animation.RESOURCES_FOLDER + dir, 30);
-        leftDodge = Animation.load("dodgeleft", Animation.RESOURCES_FOLDER + dir, 30);
+        rightDodge = Animation.load("rightdodge", Animation.RESOURCES_FOLDER + dir, 20);
+        leftDodge = Animation.load("leftdodge", Animation.RESOURCES_FOLDER + dir, 20);
+
         current = standing;
-        currentAttack = leftAttack;
         current.play();
     }
 
@@ -162,36 +176,25 @@ public abstract class Entity {
      * @param animationIndex A constant index that describes the type of animation
      */
     public void swapAnimation(AnimationIndex animationIndex) {
-        if (animationIndex == AnimationIndex.STANDING && this.current != this.standing && !this.currentAttack.isPlaying()) {
-            this.isAttacking = false;
-            this.isDodging = false;
+        if (animationIndex == AnimationIndex.STANDING && this.current != this.standing && !isAttacking && !isDodging) {
             this.current.stop();
             this.current = this.standing;
             this.current.play();
-        } else if (animationIndex == AnimationIndex.LEFTRUN && this.current != this.leftRun && !this.currentAttack.isPlaying()) {
-            this.isAttacking = false;
-            this.isDodging = false;
+        } else if (animationIndex == AnimationIndex.LEFTRUN && this.current != this.leftRun && !isAttacking && !isDodging) {
             this.isFacingLeft = true;
             this.current.stop();
             this.current = this.leftRun;
             this.current.play();
-        } else if (animationIndex == AnimationIndex.RIGHTRUN && this.current != this.rightRun && !this.currentAttack.isPlaying()) {
-            this.isAttacking = false;
-            this.isDodging = false;
+        } else if (animationIndex == AnimationIndex.RIGHTRUN && this.current != this.rightRun && !isAttacking && !isDodging) {
             this.isFacingLeft = false;
             this.current.stop();
             this.current = this.rightRun;
             this.current.play();
-        } else if (animationIndex == AnimationIndex.ATTACK && !this.currentAttack.isPlaying()) {
-            this.isAttacking = true;
-            this.isDodging = false;
+        } else if (animationIndex == AnimationIndex.ATTACK) {
             this.current.stop();
-            this.currentAttack = this.isFacingLeft ? this.leftAttack : this.rightAttack;
-            this.current = this.currentAttack;
+            this.current = this.isFacingLeft ? this.leftAttack : this.rightAttack;
             this.current.playOnce();
-        } else if (animationIndex == AnimationIndex.DODGE && !isDodging) {
-            this.isAttacking = false;
-            this.isDodging = true;
+        } else if (animationIndex == AnimationIndex.DODGE) {
             this.current.stop();
             this.current = this.isFacingLeft ? this.leftDodge : this.rightDodge;
             this.current.playOnce();

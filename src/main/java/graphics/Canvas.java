@@ -78,14 +78,9 @@ public class Canvas extends JPanel {
                     if (wasReleasedSpace) {
                         player.dodge();
                         wasReleasedSpace = false;
-                       
                     }
                 } else {
                     wasReleasedSpace = true;
-                }
-
-                if (player.isDodging()) {
-                    movement = Vector2D.scale(movement, 3);
                 }
 
                 player.move(movement);
