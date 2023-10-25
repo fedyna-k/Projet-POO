@@ -57,6 +57,10 @@ public class Vector2D {
         return Math.sqrt(dot(this, this));
     }
 
+    /**
+     * Check if vector is Null vector
+     * @return true if x = y = 0
+     */
     public boolean isNull() {
         return this.x == 0 && this.y == 0;
     }
