@@ -29,6 +29,13 @@
                 </a> <br/>
                 <a title="Game Design" href="">🎮</a>
             </td>
+            <td width="33%" align="center" valign="top">
+                <a href="https://github.com/Agheroo">
+                    <img src="https://avatars.githubusercontent.com/u/118640089" width="100px" style="clip-path: circle(50%)"> <br/>
+                    <b>Renan REAUX</b>
+                </a> <br/>
+                <a title="Composing" href="https://soundcloud.com/rockmaster69/agheroo-7sins">🎼</a>
+            </td>
         </tr>
     </tbody>
 </table>
