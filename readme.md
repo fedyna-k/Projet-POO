@@ -34,7 +34,7 @@
                     <img src="https://avatars.githubusercontent.com/u/118640089" width="100px" style="clip-path: circle(50%)"> <br/>
                     <b>Renan REAUX</b>
                 </a> <br/>
-                <a title="Composing" href="https://soundcloud.com/rockmaster69/agheroo-7sins">🎼</a>
+                <a title="Composing" href="https://soundcloud.com/rockmaster69">🎼</a>
             </td>
         </tr>
     </tbody>
