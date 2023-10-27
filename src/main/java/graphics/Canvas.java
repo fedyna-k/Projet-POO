@@ -23,6 +23,8 @@ public class Canvas extends JPanel {
     private boolean wasReleasedO;
     private boolean wasReleasedSpace;
     private boolean wasReleasedI;
+    private boolean wasReleasedQ;
+    private boolean wasReleasedD;
     // ---------------
 
     public Canvas() {
@@ -41,6 +43,8 @@ public class Canvas extends JPanel {
         this.wasReleasedO = true;
         this.wasReleasedSpace = true;
         this.wasReleasedI = true;
+        this.wasReleasedQ = true;
+        this.wasReleasedD = true;
         stack.listenTo("Z");
         stack.listenTo("S");
         stack.listenTo("Q");
@@ -80,7 +84,8 @@ public class Canvas extends JPanel {
                         // maintien de run + débuter le block
                         movement.x -= 4;
                         player.blockwalk();
-                        wasReleasedI = false;
+                        wasReleasedI = true;
+                        wasReleasedQ = true;
                     } else {
                         movement.x -= 4;
                     }
@@ -91,6 +96,7 @@ public class Canvas extends JPanel {
                         movement.x += 4;
                         player.blockwalk();
                         wasReleasedI = true;
+                        wasReleasedD = true;
                     } else {
                         movement.x += 4;
                     }
@@ -116,10 +122,12 @@ public class Canvas extends JPanel {
                     if (wasReleasedI) {
                         player.block();
                         wasReleasedI = false;
+                        wasReleasedQ = false;
+                        wasReleasedD = false;
                     } else {
-                        player.blockstand();
-
-                        if (stack.isPressed("D") || stack.isPressed("Q")) {
+                        if (!wasReleasedI && wasReleasedQ || wasReleasedD) {
+                            player.blockstand();
+                        } else {
                             player.blockwalk();
                         }
                     }
