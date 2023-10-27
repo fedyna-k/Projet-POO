@@ -8,28 +8,28 @@
 <table align="center">
     <tbody>
         <tr>
-            <td align="center" valign="top">
+            <td width="25%" align="center" valign="top">
                 <a href="https://github.com/fedyna-k">
                     <img src="https://avatars.githubusercontent.com/u/40734890" width="100px" style="clip-path: circle(50%)"> <br/>
                     <b>Kevin FEDYNA</b>
                 </a> <br/>
-                <a title="Code & Documentation" href="https://github.com/fedyna-k/Projet-POO/commits?author=fedyna-k">💻</a> <a title="Game Design" href="">🎮</a> <a title="Artworks" href="src/main/resources/">🖌️</a>
+                <a title="Code & Documentation" href="https://github.com/fedyna-k/Projet-POO/commits?author=fedyna-k">💻</a> <a title="Game Design" href="">🎮</a> <a title="Artworks" href="src/main/resources/">🖌️</a> <a title="Composing" href="">🎼</a>
             </td>
-            <td align="center" valign="top">
+            <td width="25%" align="center" valign="top">
                 <a href="https://github.com/imeneamel">
                     <img src="https://avatars.githubusercontent.com/u/125656250" width="100px" style="clip-path: circle(50%)"> <br/>
                     <b>Imene BOUSMAHA</b>
                 </a> <br/>
                 <a title="Code" href="https://github.com/fedyna-k/Projet-POO/commits?author=imeneamel">💻</a> <a title="Game Design" href="">🎮</a>
             </td>
-            <td align="center" valign="top">
+            <td width="25%" align="center" valign="top">
                 <a href="https://github.com/ARAB-Ryan">
                     <img src="https://avatars.githubusercontent.com/u/102685281" width="100px" style="clip-path: circle(50%)"> <br/>
                     <b>Ryan ARAB</b>
                 </a> <br/>
                 <a title="Game Design" href="">🎮</a>
             </td>
-            <td align="center" valign="top">
+            <td width="25%" align="center" valign="top">
                 <a href="https://github.com/Agheroo">
                     <img src="https://avatars.githubusercontent.com/u/118640089" width="100px" style="clip-path: circle(50%)"> <br/>
                     <b>Renan REAUX</b>
