@@ -1,5 +1,6 @@
 package graphics;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -7,7 +8,6 @@ import character.Entity;
 import geometry.Vector2D;
 
 public class Camera {
-    private static final int TILE_SIZE = 64;
     private static Camera singleton;
     private Entity focused;
     private Canvas canvas;
@@ -97,14 +97,41 @@ public class Camera {
             return;
         }
 
-        // Compute final position components
+        // Get all components
+        Vector2D relativePosition = getRelativePosition(singleton.focused.getPosition().x, singleton.focused.getPosition().y, x, y);
         Vector2D canvasCenter = new Vector2D(singleton.canvas.getWidth() / 2, singleton.canvas.getHeight() / 2);
-        Vector2D imageCenter = new Vector2D(x - TILE_SIZE * scale / 2, y - TILE_SIZE * scale / 2);
-        Vector2D absoluteOffset = singleton.focused.getPosition();
-        absoluteOffset.negate();
+        Vector2D imageCenter = new Vector2D(-scale * width / 2, -scale * height / 2);
+        offset = Vector2D.scale(offset, -scale);
 
-        // Compute position by adding components and draw image
-        Vector2D position = Vector2D.add(canvasCenter, imageCenter, absoluteOffset, Vector2D.scale(offset, scale));
+        Vector2D position = Vector2D.add(relativePosition, canvasCenter, imageCenter, offset);
+
         graph.drawImage(image, (int) position.x, (int) position.y, width, height, singleton.canvas);
+    }
+
+    private Vector2D getRelativePosition(double focusX, double focusY, double x, double y) {
+        return new Vector2D(x - focusX, y - focusY);
+    }
+
+    public void showCam(Graphics g, Entity focus, Entity unfocus) {
+        g.setColor(new Color(255, 0, 0));
+        g.drawRect(1720, 970, 193, 109);
+        g.setColor(new Color(42, 42, 42));
+        g.fillRect(1721, 971, 192, 108);
+        g.setColor(new Color(0, 255, 0));
+        g.fillRect(1721 + 96, 971 + 54, 2, 2); 
+        g.setColor(new Color(255, 0, 0));
+
+
+        Vector2D other = unfocus.getPosition();
+        Vector2D relative = getRelativePosition(focus.getPosition().x, focus.getPosition().y, other.x, other.y);
+
+        if ((1721 + (int)relative.x / 10 + 96) < 1721 || (1721 + (int)relative.x / 10 + 96) > 1913) {
+            return;
+        }
+        if ((971 + (int)relative.y / 10 + 54) < 971 || (971 + (int)relative.y / 10 + 54) > 1079) {
+            return;
+        }
+
+        g.fillRect(1721 + (int)relative.x / 10 + 96, 971 + (int)relative.y / 10 + 54, 2, 2);
     }
 }

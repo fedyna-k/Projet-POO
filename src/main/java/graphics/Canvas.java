@@ -40,8 +40,8 @@ public class Canvas extends JPanel {
         setBackground(new Color(42, 42, 42, 255));
 
         // TESTING PURPOSE
-        this.player = new Player();
-        this.player2 = new Player();
+        this.player = new Player(800, 500);
+        this.player2 = new Player(800, 500);
         this.stack = new KeyStack(this);
         this.wasReleasedO = true;
         this.wasReleasedSpace = true;
@@ -52,7 +52,7 @@ public class Canvas extends JPanel {
         stack.listenTo("O"); 
         stack.listenTo("SPACE");
 
-        this.camera.setFocusOn(player2);
+        this.camera.setFocusOn(player);
         // ---------------
 
         timer = new Timer(0, new ActionListener() {
@@ -132,10 +132,13 @@ public class Canvas extends JPanel {
             }
         }    
 
+
         int SCALE = 2;
 
         this.camera.drawImage(g, this.player2.getSprite(), this.player2.getPosition().x, this.player2.getPosition().y, SCALE, this.player2.getOffset());
         this.camera.drawImage(g, this.player.getSprite(), this.player.getPosition().x, this.player.getPosition().y, SCALE, this.player.getOffset());
+
+        this.camera.showCam(g, player, player2);
         // ---------------
     }
 }
