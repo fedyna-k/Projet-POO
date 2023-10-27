@@ -18,6 +18,7 @@ import geometry.Vector2D;
 public class Canvas extends JPanel {
     private boolean isFullscreen;
     private Timer timer;
+    private Camera camera;
 
     // TESTING PURPOSE
     private Player player;
@@ -34,7 +35,8 @@ public class Canvas extends JPanel {
     public Canvas(boolean isFullscreen) {
         super(true);
         this.isFullscreen = isFullscreen;
-
+        
+        this.camera = Camera.getCamera(this);
         setBackground(new Color(42, 42, 42, 255));
 
         // TESTING PURPOSE
@@ -49,6 +51,8 @@ public class Canvas extends JPanel {
         stack.listenTo("D");
         stack.listenTo("O"); 
         stack.listenTo("SPACE");
+
+        this.camera.setFocusOn(player2);
         // ---------------
 
         timer = new Timer(0, new ActionListener() {
@@ -128,18 +132,10 @@ public class Canvas extends JPanel {
             }
         }    
 
-        // g.setColor(new Color(0, 255, 0));
-        // g.fillRect(350 - (int)this.player.getPosition().x, 350 - (int)this.player.getPosition().y, 50, 50);
-        // g.setColor(new Color(100, 100, 60));
-        // g.fillRect(370 - (int)this.player.getPosition().x, 400 - (int)this.player.getPosition().y, 10, 30);
+        int SCALE = 2;
 
-        g.drawImage(this.player2.getSprite(), (int)(this.getWidth() / 2 - 64 + this.player2.getPosition().x - this.player.getPosition().x), (int)(this.getHeight() / 2 - 64 + this.player2.getPosition().y - this.player.getPosition().y), 128, 128, this);
-
-        final int SCALE = 2;
-
-        int[] dimensions = this.player.getSpriteSize();
-        Vector2D positions = Vector2D.add(new Vector2D(this.getWidth() / 2 - 32 * SCALE, this.getHeight() / 2 - 32 * SCALE), Vector2D.scale(this.player.getOffset(), SCALE));
-        g.drawImage(this.player.getSprite(), (int)positions.x, (int)positions.y, dimensions[0] * SCALE, dimensions[1] * SCALE, this);
+        this.camera.drawImage(g, this.player2.getSprite(), this.player2.getPosition().x, this.player2.getPosition().y, SCALE, this.player2.getOffset());
+        this.camera.drawImage(g, this.player.getSprite(), this.player.getPosition().x, this.player.getPosition().y, SCALE, this.player.getOffset());
         // ---------------
     }
 }
