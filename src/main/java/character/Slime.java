@@ -38,6 +38,30 @@ public class Slime extends Entity{
         this.pointDeVie = pointDeVie;
     }
 
+    // Méthodes d'accès pour obtenir et définir la force d'attaque du Slime
+    public int getForce() {
+        return force;
+    }
+
+    public void setForce(int force) {
+        this.force = force;
+    }
+
+    // Méthode pour simuler l'attaque du Slime
+    public void attaquer() {
+        System.out.println("Le Slime attaque avec une force de " + force);
+    }
+
+    // Méthode pour simuler les dégâts reçus par le Slime et gérer son état en conséquence
+    public void recevoirDegats(int degats) {
+        pointDeVie -= degats;
+        if (pointDeVie <= 0) {
+            System.out.println("Le Slime est vaincu !");
+        } else {
+            System.out.println("Le Slime a maintenant " + pointDeVie + " points de vie");
+        }
+    }
+
     // Méthode abstraite à implémenter pour obtenir le décalage du Slime
     @Override
     public Vector2D getOffset() {
