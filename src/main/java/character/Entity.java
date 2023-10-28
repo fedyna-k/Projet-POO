@@ -13,7 +13,15 @@ public abstract class Entity {
         STANDING, LEFTRUN, RIGHTRUN, ATTACK, DODGE
     };
 
+    // Points de vie de l'entité
     private int pointDeVie;
+
+    // Force de l'entité
+    private int force;
+
+    // Dégâts reçus par l'entité
+    private int degats;
+
     public Vector2D coordinates;
     public int height;
     public int width;
@@ -49,7 +57,26 @@ public abstract class Entity {
     public void setPointDeVie(int pointDeVie) {
         this.pointDeVie = pointDeVie;
     }
-}
+
+    // Méthode pour obtenir la force de l'entité
+    public int getForce() {
+        return force;
+    }
+
+    // Méthode pour définir la force de l'entité
+    public void setForce(int force) {
+        this.force = force;
+    }
+
+    // Méthode pour obtenir les dégâts subis par l'entité
+    public int getDegats() {
+        return degats;
+    }
+
+    // Méthode pour définir les dégâts subis par l'entité
+    public void setDegats(int degats) {
+        this.degats = degats;
+    }
 
     /**
      * Get the Vector2D representation of entity position
