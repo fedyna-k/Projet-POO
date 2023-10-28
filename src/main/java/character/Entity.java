@@ -13,6 +13,7 @@ public abstract class Entity {
         STANDING, LEFTRUN, RIGHTRUN, ATTACK, DODGE
     };
 
+    private int pointDeVie;
     public Vector2D coordinates;
     public int height;
     public int width;
@@ -31,6 +32,24 @@ public abstract class Entity {
     protected Animation rightAttack;
     protected Animation rightDodge;
     protected Animation leftDodge;
+
+
+    /**
+     * Obtient le nombre de points de vie actuels de l'entité.
+     * @return le nombre de points de vie de l'entité.
+     */
+    public int getPointDeVie() {
+        return pointDeVie;
+    }
+
+    /**
+     * Modifie le nombre de points de vie de l'entité.
+     * @param pointDeVie le nouveau nombre de points de vie de l'entité.
+     */
+    public void setPointDeVie(int pointDeVie) {
+        this.pointDeVie = pointDeVie;
+    }
+}
 
     /**
      * Get the Vector2D representation of entity position
