@@ -5,16 +5,15 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import javax.imageio.ImageIO;
 
 public class Reader {
     // Cross functions variables
-    private ArrayList<BufferedImage> tilesets;
-    private LinkedHashMap<Integer, BufferedImage> tilesetsStarts;
+    private LinkedHashMap<Integer, BufferedImage> tilesets;
     private LinkedHashMap<String, int[]> layers;
+    private int height, width, tileSize;
 
     // Constant used to know sections flags
     private final static LinkedHashMap<String, Integer> dataflagDic = new LinkedHashMap<String, Integer>(){{
@@ -30,9 +29,11 @@ public class Reader {
      */
     public Reader(String mapDir) throws IOException {
         // Initial declarations
-        tilesets = new ArrayList<BufferedImage>();
-        tilesetsStarts = new LinkedHashMap<Integer, BufferedImage>();
+        tilesets = new LinkedHashMap<Integer, BufferedImage>();
         layers = new LinkedHashMap<String, int[]>();
+        height = -1;
+        width = -1;
+        tileSize = -1;
 
         // File reader essentials
         BufferedReader mapdataReader = new BufferedReader(new FileReader(mapDir + ".MAPDATA"));
@@ -41,9 +42,6 @@ public class Reader {
         // File validation system
         int currentDataflag = -1;
         int dataflags = 0b111;
-
-        // Map constants we must find
-        int height = -1, width = -1, tileSize = -1;
 
         while ((line = mapdataReader.readLine()) != null) {
             // If blank line, the interpreter just skips it
@@ -110,8 +108,7 @@ public class Reader {
 
         // Load tileset image and store it
         BufferedImage tileset = ImageIO.read(new File(mapDir + tilesetName));
-        tilesets.add(tileset);
-        tilesetsStarts.put(tilesetStart, tileset);
+        tilesets.put(tilesetStart, tileset);
     }
 
     /**
@@ -135,4 +132,34 @@ public class Reader {
         // Add layer
         layers.put(identifier, tilemapProcessed);
     }
+
+    /**
+     * Getter function for tilesets
+     * @return The tilesets
+     */
+    public LinkedHashMap<Integer, BufferedImage> getTilesets() {return tilesets;}
+
+    /**
+     * Getter function for layers
+     * @return The layers
+     */
+    public LinkedHashMap<String, int[]> getLayers() {return layers;}
+
+    /**
+     * Getter function for width
+     * @return Map width
+     */
+    public int getWidth() {return width;}
+
+    /**
+     * Getter function for height
+     * @return Map height
+     */
+    public int getHeight() {return height;}
+
+    /**
+     * Getter function for tile size
+     * @return the tile size
+     */
+    public int getTileSize() {return tileSize;}
 }
