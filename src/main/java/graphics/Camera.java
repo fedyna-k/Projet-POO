@@ -120,17 +120,59 @@ public class Camera {
         return Vector2D.add(singleton.canvas.getCenter(), relativeOffset);
     }
 
+    /**
+     * Draw rectangle based on focused entity and centered on position
+     * @param graph The Graphics object
+     * @param x The rectangle's center's x position in absolute coordinates
+     * @param y The rectangle's center's y position in absolute coordinates
+     * @param w The rectangle's width
+     * @param h The rectangle's height
+     * @param color The rectangle's color
+     */
     public void drawRect(Graphics graph, double x, double y, int w, int h, Color color) {
+        graph.setColor(color);
+
         // If nothing is focused, we draw on given position
         if (singleton.focused == null) {
-            graph.setColor(color);
             graph.drawRect((int) x, (int) y, w, h);
             return;
         }
 
-        
+        // Get all components
+        Vector2D relativePosition = getRelativePosition(singleton.focused.getPosition().x, singleton.focused.getPosition().y, x, y);
+        Vector2D rectangleCenter = new Vector2D(-w / 2, -h / 2);
+
+        Vector2D position = Vector2D.add(relativePosition, rectangleCenter);
+
+        graph.drawRect((int) position.x, (int) position.y, w, h);
     }
 
+    /**
+     * Fill rectangle based on focused entity and centered on position
+     * @param graph The Graphics object
+     * @param x The rectangle's center's x position in absolute coordinates
+     * @param y The rectangle's center's y position in absolute coordinates
+     * @param w The rectangle's width
+     * @param h The rectangle's height
+     * @param color The rectangle's color
+     */
+    public void fillRect(Graphics graph, double x, double y, int w, int h, Color color) {
+        graph.setColor(color);
+
+        // If nothing is focused, we draw on given position
+        if (singleton.focused == null) {
+            graph.fillRect((int) x, (int) y, w, h);
+            return;
+        }
+
+        // Get all components
+        Vector2D relativePosition = getRelativePosition(singleton.focused.getPosition().x, singleton.focused.getPosition().y, x, y);
+        Vector2D rectangleCenter = new Vector2D(-w / 2, -h / 2);
+
+        Vector2D position = Vector2D.add(relativePosition, rectangleCenter);
+
+        graph.fillRect((int) position.x, (int) position.y, w, h);
+    }
 
     public void showCam(Graphics g, Entity focus, Entity unfocus) {
         g.setColor(new Color(255, 0, 0));

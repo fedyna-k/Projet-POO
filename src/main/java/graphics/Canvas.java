@@ -137,7 +137,7 @@ public class Canvas extends JPanel {
 
         this.camera.drawImage(g, this.player2.getSprite(), this.player2.getPosition().x, this.player2.getPosition().y, SCALE, this.player2.getOffset());
         this.camera.drawImage(g, this.player.getSprite(), this.player.getPosition().x, this.player.getPosition().y, SCALE, this.player.getOffset());
-
+        
         // this.camera.showCam(g, player2, player);
         // ---------------
     }
