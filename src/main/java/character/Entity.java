@@ -166,7 +166,7 @@ public abstract class Entity {
      * Get entity sprite size
      * @return The size in the form of {width, height}
      */
-    public int[] getSpriteSize() {
+    public Vector2D getSpriteSize() {
         return current.getSize();
     }
 

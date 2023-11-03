@@ -138,7 +138,15 @@ public class Canvas extends JPanel {
         this.camera.drawImage(g, this.player2.getSprite(), this.player2.getPosition().x, this.player2.getPosition().y, SCALE, this.player2.getOffset());
         this.camera.drawImage(g, this.player.getSprite(), this.player.getPosition().x, this.player.getPosition().y, SCALE, this.player.getOffset());
 
-        this.camera.showCam(g, player, player2);
+        // this.camera.showCam(g, player2, player);
         // ---------------
+    }
+
+    /**
+     * Get Canvas center point
+     * @return A Vector2D containing the point
+     */
+    public Vector2D getCenter() {
+        return new Vector2D(this.getWidth() / 2, this.getHeight() / 2);
     }
 }

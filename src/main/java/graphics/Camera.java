@@ -99,18 +99,38 @@ public class Camera {
 
         // Get all components
         Vector2D relativePosition = getRelativePosition(singleton.focused.getPosition().x, singleton.focused.getPosition().y, x, y);
-        Vector2D canvasCenter = new Vector2D(singleton.canvas.getWidth() / 2, singleton.canvas.getHeight() / 2);
-        Vector2D imageCenter = new Vector2D(-scale * width / 2, -scale * height / 2);
+        Vector2D imageCenter = new Vector2D(-width / 2, -height / 2);
         offset = Vector2D.scale(offset, -scale);
 
-        Vector2D position = Vector2D.add(relativePosition, canvasCenter, imageCenter, offset);
+        Vector2D position = Vector2D.add(relativePosition, imageCenter, offset);
 
         graph.drawImage(image, (int) position.x, (int) position.y, width, height, singleton.canvas);
     }
 
+    /**
+     * Get relative position of point based on focus coordinates
+     * @param focusX The focused entity x position
+     * @param focusY The focused entity y position
+     * @param x The image x position
+     * @param y The image y position
+     * @return The Vector2D corresponding to the shift that has to be made
+     */
     private Vector2D getRelativePosition(double focusX, double focusY, double x, double y) {
-        return new Vector2D(x - focusX, y - focusY);
+        Vector2D relativeOffset = new Vector2D(x - focusX, y - focusY);
+        return Vector2D.add(singleton.canvas.getCenter(), relativeOffset);
     }
+
+    public void drawRect(Graphics graph, double x, double y, int w, int h, Color color) {
+        // If nothing is focused, we draw on given position
+        if (singleton.focused == null) {
+            graph.setColor(color);
+            graph.drawRect((int) x, (int) y, w, h);
+            return;
+        }
+
+        
+    }
+
 
     public void showCam(Graphics g, Entity focus, Entity unfocus) {
         g.setColor(new Color(255, 0, 0));
