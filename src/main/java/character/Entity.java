@@ -13,14 +13,14 @@ public abstract class Entity {
         STANDING, LEFTRUN, RIGHTRUN, ATTACK, DODGE
     };
 
-    // Points de vie de l'entité
-    private int pointDeVie;
+    // Hit points of the entity
+    private int hitPoints;
 
-    // Force de l'entité
+    // Force of the entity
     private int force;
 
-    // Dégâts reçus par l'entité
-    private int degats;
+    // Damage taken by the entity
+    private int damage;
 
     public Vector2D coordinates;
     public int height;
@@ -43,40 +43,43 @@ public abstract class Entity {
 
 
     /**
-     * Obtient le nombre de points de vie actuels de l'entité.
-     * @return le nombre de points de vie de l'entité.
+     * Get the current hit points of the entity.
+     *
+     * @return the hit points of the entity.
      */
-    public int getPointDeVie() {
-        return pointDeVie;
+    public int getHitPoints() {
+        return hitPoints;
     }
 
     /**
-     * Modifie le nombre de points de vie de l'entité.
-     * @param pointDeVie le nouveau nombre de points de vie de l'entité.
+     * Set the hit points of the entity.
+     *
+     * @param hitPoints the new hit points of the entity.
      */
-    public void setPointDeVie(int pointDeVie) {
-        this.pointDeVie = pointDeVie;
+    public void setHitPoints(int hitPoints) {
+        this.hitPoints = hitPoints;
     }
 
-    // Méthode pour obtenir la force de l'entité
+    // Method to get the force of the entity
     public int getForce() {
         return force;
     }
 
-    // Méthode pour définir la force de l'entité
+    // Method to set the force of the entity
     public void setForce(int force) {
         this.force = force;
     }
 
-    // Méthode pour obtenir les dégâts subis par l'entité
-    public int getDegats() {
-        return degats;
+    // Method to get the damage taken by the entity
+    public int getDamage() {
+        return damage;
     }
 
-    // Méthode pour définir les dégâts subis par l'entité
-    public void setDegats(int degats) {
-        this.degats = degats;
+    // Method to set the damage taken by the entity
+    public void setDamage(int damage) {
+        this.damage = damage;
     }
+
 
     /**
      * Get the Vector2D representation of entity position
