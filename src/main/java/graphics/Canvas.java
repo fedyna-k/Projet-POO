@@ -140,7 +140,7 @@ public class Canvas extends JPanel {
         //     }
         // }
 
-        int SCALE = 2;
+        int SCALE = isFullscreen ? 4 : 2;
     
         for (int i = (int)this.player.getPosition().x / (32 * SCALE) - 9 ; i < (int)this.player.getPosition().x / (32 * SCALE) + 10 ; i++) {
             for (int j = (int)this.player.getPosition().y / (32 * SCALE) - 6 ; j < (int)this.player.getPosition().y / (32 * SCALE) + 7 ; j++) {
