@@ -13,7 +13,7 @@
                     <img src="https://avatars.githubusercontent.com/u/40734890" width="100px" style="clip-path: circle(50%)"> <br/>
                     <b>Kevin FEDYNA</b>
                 </a> <br/>
-                <a title="Code & Documentation" href="https://github.com/fedyna-k/Projet-POO/commits?author=fedyna-k">💻</a> <a title="Game Design" href="">🎮</a> <a title="Artworks" href="src/main/resources/">🖌️</a> <a title="Composing" href="">🎼</a>
+                <a title="Code & Documentation" href="https://github.com/fedyna-k/Projet-POO/commits?author=fedyna-k">💻</a> <a title="Game Design" href="">🎮</a> <a title="Artworks" href="src/main/resources/">🖌️</a> <a title="Composing" href="https://github.com/fedyna-k/Projet-POO/blob/main/src/main/resources/music/">🎼</a>
             </td>
             <td width="25%" align="center" valign="top">
                 <a href="https://github.com/imeneamel">
@@ -27,7 +27,7 @@
                     <img src="https://avatars.githubusercontent.com/u/102685281" width="100px" style="clip-path: circle(50%)"> <br/>
                     <b>Ryan ARAB</b>
                 </a> <br/>
-                <a title="Game Design" href="">🎮</a>
+                <a title="Code" href="https://github.com/fedyna-k/Projet-POO/commits?author=ARAB-Ryan">💻</a> <a title="Game Design" href="">🎮</a>
             </td>
             <td width="25%" align="center" valign="top">
                 <a href="https://github.com/Agheroo">
