@@ -86,13 +86,22 @@ public class Vector2D {
     }
 
     /**
-     * Add two vectors
+     * Add two or more vectors
      * @param first The first vector
      * @param second The second vector
+     * @param others The other vectors
      * @return The sum of the two vectors
      */
-    public static Vector2D add(Vector2D first, Vector2D second) {
-        return new Vector2D(first.x + second.x, first.y + second.y);
+    public static Vector2D add(Vector2D first, Vector2D second, Vector2D... others) {
+        double x = first.x + second.x;
+        double y = first.y + second.y;
+
+        for (Vector2D vector : others) {
+            x += vector.x;
+            y += vector.y;
+        }
+
+        return new Vector2D(x, y);
     }
 
     @Override

@@ -14,8 +14,8 @@ public class Player extends Entity {
     }
 
     public Vector2D getOffset() {
-        if (isAttacking && isFacingLeft) {
-            return new Vector2D(-32, 0);
+        if (isAttacking) {
+            return new Vector2D(isFacingLeft ? 16 : -16, 0);
         }
         
         return new Vector2D();

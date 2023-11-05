@@ -10,6 +10,8 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
+import geometry.Vector2D;
+
 
 public class Animation {
     public static final String RESOURCES_FOLDER = "../src/main/resources/";
@@ -125,8 +127,8 @@ public class Animation {
      * Gets the dimension of the current frame
      * @return An array in the form of {width, height}
      */
-    public int[] getSize() {
-        return new int[]{this.frames[this.frameIndex].getWidth(), this.frames[this.frameIndex].getHeight()};
+    public Vector2D getSize() {
+        return new Vector2D(this.frames[this.frameIndex].getWidth(), this.frames[this.frameIndex].getHeight());
     }
 
     /**
