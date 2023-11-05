@@ -204,6 +204,7 @@ public abstract class Entity {
         return this.isFacingLeft;
     }
 
+
     /**
      * Go through all basic animations and load them
      * 
@@ -220,6 +221,7 @@ public abstract class Entity {
         rightBlock = Animation.load("rightblock", Animation.RESOURCES_FOLDER + dir, 30);
         leftBlock = Animation.load("leftblock", Animation.RESOURCES_FOLDER + dir, 30);
         rightBlockStand = Animation.load("rightstandblock", Animation.RESOURCES_FOLDER + dir, 30);
+        leftBlockStand = Animation.load("leftstandblock", Animation.RESOURCES_FOLDER + dir, 30);
         rightBlockWalk = Animation.load("rightwalkblock", Animation.RESOURCES_FOLDER
                 + dir, 30);
         leftBlockWalk = Animation.load("leftwalkblock", Animation.RESOURCES_FOLDER +
@@ -285,7 +287,7 @@ public abstract class Entity {
             this.current.playOnce();
         } else if (animationIndex == AnimationIndex.BLOCKSTAND) {
             this.current.stop();
-            this.current = this.rightBlockStand;
+            this.current = this.isFacingLeft ? this.leftBlockStand : this.rightBlockStand;
             this.current.play();
         } else if (animationIndex == AnimationIndex.BLOCKWALK) {
             this.current.stop();

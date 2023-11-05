@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -23,8 +25,12 @@ public class Canvas extends JPanel {
     private boolean wasReleasedO;
     private boolean wasReleasedSpace;
     private boolean wasReleasedI;
-    private boolean wasReleasedQ;
     private boolean wasReleasedD;
+    private boolean wasReleasedQ;
+    private boolean wasReleasedS;
+    private boolean wasReleasedZ;
+    Set<String> keysPressedWithI = new HashSet<>();
+
     // ---------------
 
     public Canvas() {
@@ -43,8 +49,10 @@ public class Canvas extends JPanel {
         this.wasReleasedO = true;
         this.wasReleasedSpace = true;
         this.wasReleasedI = true;
-        this.wasReleasedQ = true;
         this.wasReleasedD = true;
+        this.wasReleasedQ = true;
+        this.wasReleasedZ = true;
+        this.wasReleasedS = true;
         stack.listenTo("Z");
         stack.listenTo("S");
         stack.listenTo("Q");
@@ -85,18 +93,17 @@ public class Canvas extends JPanel {
                         movement.x -= 4;
                         player.blockwalk();
                         wasReleasedI = true;
-                        wasReleasedQ = true;
                     } else {
                         movement.x -= 4;
                     }
                 }
+
                 if (stack.isPressed("D")) {
                     if (!wasReleasedI && (stack.isPressed("I"))) {
                         // maintien de run + débuter le block
                         movement.x += 4;
                         player.blockwalk();
                         wasReleasedI = true;
-                        wasReleasedD = true;
                     } else {
                         movement.x += 4;
                     }
@@ -119,22 +126,30 @@ public class Canvas extends JPanel {
                 }
 
                 if (stack.isPressed("I")) {
-                    if (wasReleasedI) {
-                        player.block();
-                        wasReleasedI = false;
-                        wasReleasedQ = false;
-                        wasReleasedD = false;
-                    } else {
-                        if (!wasReleasedI && wasReleasedQ || wasReleasedD) {
-                            player.blockstand();
-                        } else {
-                            player.blockwalk();
-                        }
-                    }
+                    // player.blockstand();
+                    wasReleasedI = false;
                 } else {
-                    if (!wasReleasedI && player.isBlocking()) {
+                    if (wasReleasedI && player.isBlocking()) {
                         player.stopBlocking();
                     }
+                    wasReleasedI = true;
+                }
+
+                if (!wasReleasedI && !wasReleasedQ && (stack.isPressedCombination("Q", "I"))) {
+                    player.blockwalk();
+                    wasReleasedQ = true;
+                    wasReleasedI = true;
+                } else if (!wasReleasedI && !wasReleasedD && (stack.isPressedCombination("D", "I"))) {
+                    player.blockwalk();
+                    wasReleasedD = true;
+                    wasReleasedI = true;
+                } else if (!wasReleasedI && !wasReleasedS && (stack.isPressedCombination("S", "I"))) {
+                    player.blockwalk();
+                    wasReleasedS = true;
+                    wasReleasedI = true;
+                } else if (!wasReleasedI && !wasReleasedZ && (stack.isPressedCombination("Z", "I"))) {
+                    player.blockwalk();
+                    wasReleasedZ = true;
                     wasReleasedI = true;
                 }
 
