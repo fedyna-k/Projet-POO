@@ -13,6 +13,7 @@ public class Vector2D {
 
     /**
      * Initialize vector with given values
+     * 
      * @param x The x coordinate
      * @param y The y coordinate
      */
@@ -23,6 +24,7 @@ public class Vector2D {
 
     /**
      * Initialize vector with given vector
+     * 
      * @param initializing_vector The vector to copy
      */
     public Vector2D(Vector2D initializing_vector) {
@@ -42,17 +44,34 @@ public class Vector2D {
      * Normalize vector to make norm equals to 1
      */
     public void normalize() {
-        double norm = Math.sqrt(dot(this, this));
-        this.x /= norm;
-        this.y /= norm;
+        if (!isNull()) {
+            double norm = Math.sqrt(dot(this, this));
+            this.x /= norm;
+            this.y /= norm;
+        }
     }
 
+    /**
+     * Computes Vector norm
+     * 
+     * @return The 2-norm of the vector
+     */
+    public double norm() {
+        return Math.sqrt(dot(this, this));
+    }
+
+    /**
+     * Check if vector is Null vector
+     * 
+     * @return true if x = y = 0
+     */
     public boolean isNull() {
         return this.x == 0 && this.y == 0;
     }
 
     /**
      * Scale a vector by a real factor
+     * 
      * @param vector The vector to scale
      * @param factor The number we use to apply multiplication
      * @return A scaled version of the vector
@@ -63,7 +82,8 @@ public class Vector2D {
 
     /**
      * Computes dot product of two vectors
-     * @param first The first vector
+     * 
+     * @param first  The first vector
      * @param second The second vector
      * @return The dot product between the two vectors
      */
@@ -72,12 +92,27 @@ public class Vector2D {
     }
 
     /**
-     * Add two vectors
-     * @param first The first vector
+     * Add two or more vectors
+     * 
+     * @param first  The first vector
      * @param second The second vector
+     * @param others The other vectors
      * @return The sum of the two vectors
      */
-    public static Vector2D add(Vector2D first, Vector2D second) {
-        return new Vector2D(first.x + second.x, first.y + second.y);
+    public static Vector2D add(Vector2D first, Vector2D second, Vector2D... others) {
+        double x = first.x + second.x;
+        double y = first.y + second.y;
+
+        for (Vector2D vector : others) {
+            x += vector.x;
+            y += vector.y;
+        }
+
+        return new Vector2D(x, y);
+    }
+
+    @Override
+    public String toString() {
+        return x + ";" + y;
     }
 }

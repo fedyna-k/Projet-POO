@@ -1,6 +1,5 @@
 package graphics;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
@@ -10,6 +9,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
+import geometry.Vector2D;
 
 public class Animation {
     public static final String RESOURCES_FOLDER = "../src/main/resources/";
@@ -22,9 +22,11 @@ public class Animation {
 
     /**
      * Helper function to load without returning an error
-     * @param framesName The frame base name. Frames should be named "framesNameX.png" with X starting at 1
-     * @param baseURL The base URL to the folder with frames
-     * @param frameRate The number of frames per seconds
+     * 
+     * @param framesName The frame base name. Frames should be named
+     *                   "framesNameX.png" with X starting at 1
+     * @param baseURL    The base URL to the folder with frames
+     * @param frameRate  The number of frames per seconds
      * @return The new Animation object
      */
     public static Animation load(String framesName, String baseURL, int frameRate) {
@@ -39,9 +41,11 @@ public class Animation {
 
     /**
      * Create animation object with multiple frames
-     * @param framesName The frame base name. Frames should be named "framesNameX.png" with X starting at 1
-     * @param baseURL The base URL to the folder with frames
-     * @param frameRate The number of frames per seconds
+     * 
+     * @param framesName The frame base name. Frames should be named
+     *                   "framesNameX.png" with X starting at 1
+     * @param baseURL    The base URL to the folder with frames
+     * @param frameRate  The number of frames per seconds
      * @throws IOException In case frames couldn't be found
      */
     public Animation(String framesName, String baseURL, int frameRate) throws IOException {
@@ -63,7 +67,7 @@ public class Animation {
 
         // Read all frames
         this.frames = new BufferedImage[this.frameCounter];
-        for (int i = 1 ; i <= this.frameCounter ; i++) {
+        for (int i = 1; i <= this.frameCounter; i++) {
             this.frames[i - 1] = ImageIO.read(new File(baseURL + framesName + i + ".png"));
         }
 
@@ -115,6 +119,7 @@ public class Animation {
 
     /**
      * Get the current frame to display
+     * 
      * @return The current frame
      */
     public BufferedImage getCurrentFrame() {
@@ -123,14 +128,16 @@ public class Animation {
 
     /**
      * Gets the dimension of the current frame
+     * 
      * @return An array in the form of {width, height}
      */
-    public int[] getSize() {
-        return new int[]{this.frames[this.frameIndex].getWidth(), this.frames[this.frameIndex].getHeight()};
+    public Vector2D getSize() {
+        return new Vector2D(this.frames[this.frameIndex].getWidth(), this.frames[this.frameIndex].getHeight());
     }
 
     /**
      * Check if animation is playing
+     * 
      * @return The current state of the animation
      */
     public boolean isPlaying() {

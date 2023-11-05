@@ -204,7 +204,6 @@ public abstract class Entity {
         return this.isFacingLeft;
     }
 
-
     /**
      * Go through all basic animations and load them
      * 
@@ -245,7 +244,7 @@ public abstract class Entity {
      * 
      * @return The size in the form of {width, height}
      */
-    public int[] getSpriteSize() {
+    public Vector2D getSpriteSize() {
         return current.getSize();
     }
 
