@@ -119,7 +119,7 @@ public class Canvas extends JPanel {
                         movement.x += 4;
                     }
                 }
-                if (stack.isPressed("O")) {
+                if (stack.isPressed("O") && !checkCollision(player.getPosition(), false)) {
                     if (wasReleasedO && !player.isDodging()) {
                         player.attack();
                         wasReleasedO = true;
@@ -127,7 +127,7 @@ public class Canvas extends JPanel {
                 } else {
                     wasReleasedO = true;
                 }
-                if (stack.isPressed("SPACE")) {
+                if (stack.isPressed("SPACE") && !checkCollision(player.getPosition(), false)) {
                     if (wasReleasedSpace) {
                         player.dodge();
                         wasReleasedSpace = false;
@@ -166,8 +166,16 @@ public class Canvas extends JPanel {
 
                 repaint();
 
+                // collision
                 Vector2D newPosition = Vector2D.add(player.getPosition(), movement);
                 if (!checkCollision(newPosition)) {
+                    player.move(movement);
+                }
+
+                // Special state
+                boolean isSpecialState = player.isAttacking();
+
+                if (!checkCollision(newPosition, isSpecialState)) {
                     player.move(movement);
                 }
                 // ---------------
@@ -301,6 +309,15 @@ public class Canvas extends JPanel {
             }
         }
         return false;
+    }
+
+    // surcharge aïe
+    private boolean checkCollision(Vector2D newPosition, boolean isSpecialState) {
+        if (isSpecialState) {
+            return false;
+        } else {
+            return checkCollision(newPosition);
+        }
     }
 
 }
