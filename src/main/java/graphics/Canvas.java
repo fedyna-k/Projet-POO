@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 
 import java.awt.Toolkit;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -163,7 +164,12 @@ public class Canvas extends JPanel {
                     wasReleasedI = true;
                 }
 
-                player.move(movement);
+                repaint();
+
+                Vector2D newPosition = Vector2D.add(player.getPosition(), movement);
+                if (!checkCollision(newPosition)) {
+                    player.move(movement);
+                }
                 // ---------------
 
                 Vector2D difference = Vector2D.add(player.getPosition(), Vector2D.scale(player2.getPosition(), -1));
@@ -174,6 +180,7 @@ public class Canvas extends JPanel {
                 } else {
                     player2.move(0, 0);
                 }
+
             }
         });
 
@@ -264,6 +271,36 @@ public class Canvas extends JPanel {
      */
     public Vector2D getCenter() {
         return new Vector2D(this.getWidth() / 2, this.getHeight() / 2);
+    }
+
+    /**
+     * Check if collision occured
+     * 
+     */
+    private boolean checkCollision(Vector2D newPosition) {
+        int SCALE = isFullscreen ? 4 : 2;
+        int tileSize = map.getTileSize() * SCALE;
+        int newPosX = (int) newPosition.x;
+        int newPosY = (int) newPosition.y;
+        int rectWidth = (int) (player.getSprite().getWidth() * SCALE / 1.9);
+        int rectHeight = (int) (player.getSprite().getHeight() * SCALE / 1.5);
+
+        for (int i = 0; i < map.getWidth(); i++) {
+            for (int j = 0; j < map.getHeight(); j++) {
+                if (map.isWall(i, j)) {
+                    int tileX = i * tileSize;
+                    int tileY = j * tileSize;
+
+                    Rectangle tileRect = new Rectangle(tileX, tileY, tileSize, tileSize);
+                    Rectangle playerRect = new Rectangle(newPosX, newPosY, rectWidth, rectHeight);
+
+                    if (playerRect.intersects(tileRect)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
 }
