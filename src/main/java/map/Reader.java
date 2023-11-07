@@ -14,6 +14,7 @@ public class Reader {
     private LinkedHashMap<Integer, BufferedImage> tilesets;
     private LinkedHashMap<String, int[]> layers;
     private int height, width, tileSize;
+    private int[] wallLayer;
 
     // Constant used to know sections flags
     private final static LinkedHashMap<String, Integer> dataflagDic = new LinkedHashMap<String, Integer>() {
@@ -136,6 +137,10 @@ public class Reader {
 
         // Add layer
         layers.put(identifier, tilemapProcessed);
+
+        if (identifier.equals("WALLS")) {
+            wallLayer = tilemapProcessed;
+        }
     }
 
     /**
@@ -181,5 +186,14 @@ public class Reader {
      */
     public int getTileSize() {
         return tileSize;
+    }
+
+    /**
+     * Getter function for the wall layer
+     * 
+     * @return The wall layer
+     */
+    public int[] getWallLayer() {
+        return wallLayer;
     }
 }

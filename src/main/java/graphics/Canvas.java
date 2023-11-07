@@ -212,6 +212,7 @@ public class Canvas extends JPanel {
         // }
 
         int SCALE = isFullscreen ? 4 : 2;
+        int tileSize = map.getTileSize() * SCALE;
 
         for (int i = (int) this.player.getPosition().x / (32 * SCALE) - 9; i < (int) this.player.getPosition().x
                 / (32 * SCALE) + 10; i++) {
@@ -230,6 +231,28 @@ public class Canvas extends JPanel {
         this.camera.drawImage(g, this.player.getSprite(), this.player.getPosition().x, this.player.getPosition().y,
                 SCALE, this.player.getOffset());
 
+        // Different origin --> different placement for the rectangle
+        Vector2D offset = player.getOffset();
+
+        double centerX = player.getPosition().x - offset.x * SCALE;
+        double centerY = player.getPosition().y - offset.y * SCALE;
+
+        int rectWidth = player.getSprite().getWidth(); // reduce hitbox size by note scaling rectangle
+        int rectHeight = player.getSprite().getHeight(); // /!\ see what's better when collisions are done
+
+        camera.drawRect(g, centerX, centerY, rectWidth, rectHeight, Color.RED);
+
+        for (int i = 0; i < map.getWidth(); i++) {
+            for (int j = 0; j < map.getHeight(); j++) {
+                // draw rectangle around walls
+                if (map.isWall(i, j)) {
+                    int tileX = i * tileSize;
+                    int tileY = j * tileSize;
+                    camera.drawRect(g, tileX, tileY, tileSize, tileSize, Color.RED);
+                }
+            }
+        }
+
         // this.camera.showCam(g, player2, player);
         // ---------------
     }
@@ -242,4 +265,5 @@ public class Canvas extends JPanel {
     public Vector2D getCenter() {
         return new Vector2D(this.getWidth() / 2, this.getHeight() / 2);
     }
+
 }
