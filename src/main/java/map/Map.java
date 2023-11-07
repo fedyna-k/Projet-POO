@@ -31,7 +31,9 @@ public class Map {
                 716, 633, 634, 635, 1396, 592, 600, 565, 566, 553, 554, 596, 793, 794, 795, 529, 1599, 1600, 809, 810,
                 811, 1433, 1727, 1441, 570, 1449, 571, 569, 574, 1982, 1983, 1984, 2046, 2047, 2048, 582, 584, 2110,
                 2298, 2112, 2045, 563, 564, 562, 857, 859, 255, 1561, 2053, 865, 867, 1589, 1569, 873, 875, 1391, 589,
-                587, 588, 2111, 583, 591 };
+                587, 588, 2111, 583, 591, 1241, 1242, 1249, 1250, 1338, 1292, 1401, 1480, 1590, 1582, 1389, 1345, 1346,
+                1347, 1402, 1253, 1353, 1354, 1355, 1245, 1305, 1313, 1246, 1247, 1248, 756, 1293, 1405, 1262, 1263,
+                1264, 1395, 1388, 1387 };
 
         for (int id : wallIds) {
             wallTiles.add(id);
@@ -99,22 +101,21 @@ public class Map {
         return tile;
     }
 
-    private int getTileId(int x, int y) {
-        if (x < 0 || y < 0 || x >= mapReader.getWidth() || y >= mapReader.getHeight()) {
-            return -1;
-        }
-        int tileCoordinate = y * mapReader.getWidth() + x;
-        for (int[] layer : mapReader.getLayers().values()) {
-            int tileIdForLayer = layer[tileCoordinate];
-            if (tileIdForLayer != 0) {
-                return tileIdForLayer;
-            }
-        }
-        return 0;
-    }
-
     public boolean isWall(int x, int y) {
-        int tileId = getTileId(x, y);
+        int[] wallsLayer = mapReader.getLayers().get("WALLS");
+
+        if (wallsLayer == null) {
+            return false;
+        }
+
+        int tileIndex = y * mapReader.getWidth() + x;
+
+        if (tileIndex < 0 || tileIndex >= wallsLayer.length) {
+            return false;
+        }
+
+        int tileId = wallsLayer[tileIndex];
+
         return wallTiles.contains(tileId);
     }
 

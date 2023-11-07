@@ -237,8 +237,8 @@ public class Canvas extends JPanel {
         double centerX = player.getPosition().x - offset.x * SCALE;
         double centerY = player.getPosition().y - offset.y * SCALE;
 
-        int rectWidth = player.getSprite().getWidth(); // reduce hitbox size by note scaling rectangle
-        int rectHeight = player.getSprite().getHeight(); // /!\ see what's better when collisions are done
+        int rectWidth = (int) (player.getSprite().getWidth() * SCALE / 1.9); // reduce size of hitbox
+        int rectHeight = (int) (player.getSprite().getHeight() * SCALE / 1.5);
 
         camera.drawRect(g, centerX, centerY, rectWidth, rectHeight, Color.RED);
 
