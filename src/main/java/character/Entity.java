@@ -12,6 +12,14 @@ public abstract class Entity {
     public enum AnimationIndex {
         STANDING, LEFTRUN, RIGHTRUN, ATTACK, DODGE
     };
+    // Hit points of the entity
+    private int hitPoints;
+
+    // Force of the entity
+    private int force;
+
+    // Damage taken by the entity
+    private int damage;
 
     public Vector2D coordinates;
     public int height;
@@ -136,6 +144,45 @@ public abstract class Entity {
     public boolean isFacingLeft() {
         return this.isFacingLeft;
     }
+    /**
+     * Get the current hit points of the entity.
+     *
+     * @return the hit points of the entity.
+     */
+    public int getHitPoints() {
+        return hitPoints;
+    }
+
+    /**
+     * Set the hit points of the entity.
+     *
+     * @param hitPoints the new hit points of the entity.
+     */
+    public void setHitPoints(int hitPoints) {
+        this.hitPoints = hitPoints;
+    }
+
+    // Method to get the force of the entity
+    public int getForce() {
+        return force;
+    }
+
+    // Method to set the force of the entity
+    public void setForce(int force) {
+        this.force = force;
+    }
+
+    // Method to get the damage taken by the entity
+    public int getDamage() {
+        return damage;
+    }
+
+    // Method to set the damage taken by the entity
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+
 
     /**
      * Go through all basic animations and load them
