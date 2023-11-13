@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import character.Player;
+import character.Mage;
 import geometry.Vector2D;
 import map.Map;
 
@@ -25,6 +26,8 @@ public class Canvas extends JPanel {
     // TESTING PURPOSE
     private Player player;
     private Player player2;
+
+    private Mage mage;
     private KeyStack stack;
     private boolean wasReleasedO;
     private boolean wasReleasedSpace;
@@ -45,6 +48,7 @@ public class Canvas extends JPanel {
         // TESTING PURPOSE
         this.player = new Player(0, 0);
         this.player2 = new Player(0, 0);
+        this.mage = new Mage(0, 0);
         this.map = new Map("../src/main/resources/map/");
         this.stack = new KeyStack(this);
         this.wasReleasedO = true;
@@ -94,6 +98,9 @@ public class Canvas extends JPanel {
                 }
 
                 player.move(movement);
+                mage.move(movement);
+
+
                 // ---------------
 
 
@@ -154,7 +161,9 @@ public class Canvas extends JPanel {
 
         this.camera.drawImage(g, this.player2.getSprite(), this.player2.getPosition().x, this.player2.getPosition().y, SCALE, this.player2.getOffset());
         this.camera.drawImage(g, this.player.getSprite(), this.player.getPosition().x, this.player.getPosition().y, SCALE, this.player.getOffset());
-        
+
+        this.camera.drawImage(g, this.mage.getSprite(), this.mage.getPosition().x, this.mage.getPosition().y, SCALE, this.mage.getOffset());
+
         // this.camera.showCam(g, player2, player);
         // ---------------
     }
