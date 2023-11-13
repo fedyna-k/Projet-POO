@@ -2,7 +2,7 @@ package character;
 
 import geometry.Vector2D;
 
-// Class representing a small Fire monster in the game
+// Class representing a small mage in the game
 public class Mage extends Entity {
 
     public Mage() {
@@ -16,14 +16,14 @@ public class Mage extends Entity {
 
 
     /*
-        // Constructor to initialize a Fire monster with a given name, hit points, and force
+        // Constructor to initialize a mage with a given name, hit points, and force
         public mage(String name, int hitPoints, int force) {
             this.name = name;
             setHitPoints(hitPoints); // Using the method from the Entity class to initialize hit points
             setForce(force); // Using the method from the Entity class to initialize force
         }
     
-        // Method to simulate the Fire monster's attack
+        // Method to simulate the mage's attack
         public void attack() {
             System.out.println("The mage attacks with a force of " + getForce());
         }
