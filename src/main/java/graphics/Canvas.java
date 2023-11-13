@@ -1,6 +1,7 @@
 package graphics;
 
 
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -11,6 +12,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import character.Firemonster;
 import character.Player;
 import geometry.Vector2D;
 
@@ -22,6 +24,8 @@ public class Canvas extends JPanel {
     // TESTING PURPOSE
     private Player player;
     private Player player2;
+    private Firemonster firemonster1;
+
     private KeyStack stack;
     private boolean wasReleasedO;
     private boolean wasReleasedSpace;
@@ -40,6 +44,7 @@ public class Canvas extends JPanel {
         // TESTING PURPOSE
         this.player = new Player();
         this.player2 = new Player();
+        this.firemonster1 = new Firemonster();
         this.stack = new KeyStack(this);
         this.wasReleasedO = true;
         this.wasReleasedSpace = true;
@@ -54,6 +59,7 @@ public class Canvas extends JPanel {
         timer = new Timer(0, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
+
                 // TESTING PURPOSE
                 Vector2D movement = new Vector2D();
                 if (stack.isPressed("Z")) {
@@ -141,5 +147,14 @@ public class Canvas extends JPanel {
         Vector2D positions = Vector2D.add(new Vector2D(this.getWidth() / 2 - 32 * SCALE, this.getHeight() / 2 - 32 * SCALE), Vector2D.scale(this.player.getOffset(), SCALE));
         g.drawImage(this.player.getSprite(), (int)positions.x, (int)positions.y, dimensions[0] * SCALE, dimensions[1] * SCALE, this);
         // ---------------
+
+        // Affiche le Firemonster
+        //g.drawImage(this.firemonster1.getSprite(), (int)(this.getWidth() / 2 - 64), (int)(this.getHeight() / 2 - 64), 128, 128, this);
+
+        int[] dimensionsmonster = this.firemonster1.getSpriteSize();
+        Vector2D positionsmonster = Vector2D.add(new Vector2D(this.getWidth() / 2 - 32 * SCALE, this.getHeight() / 2 - 32 * SCALE), Vector2D.scale(this.firemonster1.getOffset(), SCALE));
+        g.drawImage(this.firemonster1.getSprite(), (int)positions.x, (int)positions.y, dimensionsmonster[0] * SCALE, dimensionsmonster[1] * SCALE, this);
+        // ---------------
+
     }
 }

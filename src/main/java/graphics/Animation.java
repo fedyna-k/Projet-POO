@@ -46,6 +46,7 @@ public class Animation {
      */
     public Animation(String framesName, String baseURL, int frameRate) throws IOException {
         // Count all frames with given name
+        System.out.println("baseURL: " + baseURL);
         File[] all_files = new File(baseURL).listFiles();
         this.frameCounter = 0;
         this.isPlaying = false;
