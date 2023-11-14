@@ -25,9 +25,9 @@ public class Mage extends Entity {
 
     /*
         // Constructor to initialize a mage with a given name, hit points, and force
-        public mage(String name, int hitPoints, int force) {
+        public mage(String name, int lifePoints, int force) {
             this.name = name;
-            setHitPoints(hitPoints); // Using the method from the Entity class to initialize hit points
+            setLifePoints(lifePoints); // Using the method from the Entity class to initialize hit points
             setForce(force); // Using the method from the Entity class to initialize force
         }
 
@@ -38,13 +38,13 @@ public class Mage extends Entity {
 
         // Method to simulate the damage received by the mage and manage its state accordingly
         public void receiveDamage(int damage) {
-            int remainingHitPoints = getHitPoints() - damage;
-            if (remainingHitPoints <= 0) {
-                setHitPoints(0); // If the damage exceeds the hit points, the hit points are set to 0
+            int remainingLifePoints = getLifePoints() - damage;
+            if (remainingLifePoints <= 0) {
+                setLifePoints(0); // If the damage exceeds the hit points, the hit points are set to 0
                 System.out.println("The mage is defeated!");
             } else {
-                setHitPoints(remainingHitPoints); // Reduce the hit points based on the received damage
-                System.out.println("The mage now has " + getHitPoints() + " hit points");
+                setLifePoints(remainingLifePoints); // Reduce the hit points based on the received damage
+                System.out.println("The mage now has " + getLifePoints() + " hit points");
             }
         }
     */
