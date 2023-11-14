@@ -12,8 +12,8 @@ public abstract class Entity {
     public enum AnimationIndex {
         STANDING, LEFTRUN, RIGHTRUN, ATTACK, DODGE
     };
-    // Hit points of the entity
-    private int hitPoints;
+    // Life Points of the entity
+    private int lifePoints;
 
     // Force of the entity
     private int force;
@@ -144,40 +144,66 @@ public abstract class Entity {
     public boolean isFacingLeft() {
         return this.isFacingLeft;
     }
+
     /**
-     * Get the current hit points of the entity.
+     * @brief Get the current Life Points of the entity.
      *
-     * @return the hit points of the entity.
+     * @return The Life Points of the entity.
      */
-    public int getHitPoints() {
-        return hitPoints;
+    public int getLifePoints() {
+        return lifePoints;
     }
 
     /**
-     * Set the hit points of the entity.
+     * @brief Set the Life Points of the entity.
      *
-     * @param hitPoints the new hit points of the entity.
+     * @param lifePoints The new Life Points of the entity.
      */
-    public void setHitPoints(int hitPoints) {
-        this.hitPoints = hitPoints;
+    public void setLifePoints(int lifePoints) {
+        this.lifePoints = lifePoints;
     }
 
-    // Method to get the force of the entity
+    /**
+     * @brief Get the force of the entity.
+     *
+     * This method retrieves the force of the entity. Make sure to set the force
+     * using the method @ref setForce before calling this method.
+     *
+     * @return An integer representing the force of the entity.
+     */
     public int getForce() {
         return force;
     }
 
-    // Method to set the force of the entity
+    /**
+     * @brief Set the force of the entity.
+     *
+     * This method sets the force of the entity to the specified value.
+     *
+     * @param force An integer representing the force to be set.
+     */
     public void setForce(int force) {
         this.force = force;
     }
 
-    // Method to get the damage taken by the entity
+    /**
+     * @brief Get the damage taken by the entity.
+     *
+     * This method retrieves the damage taken by the entity.
+     *
+     * @return An integer representing the damage taken by the entity.
+     */
     public int getDamage() {
         return damage;
     }
 
-    // Method to set the damage taken by the entity
+    /**
+     * @brief Set the damage taken by the entity.
+     *
+     * This method sets the damage taken by the entity to the specified value.
+     *
+     * @param damage An integer representing the damage to be set.
+     */
     public void setDamage(int damage) {
         this.damage = damage;
     }
