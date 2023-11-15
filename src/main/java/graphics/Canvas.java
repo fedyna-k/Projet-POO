@@ -119,7 +119,7 @@ public class Canvas extends JPanel {
                         movement.x += 4;
                     }
                 }
-                if (stack.isPressed("O") && !checkCollision(player.getPosition(), false)) {
+                if (stack.isPressed("O") && !checkCollision(player.getPosition())) {
                     if (wasReleasedO && !player.isDodging()) {
                         player.attack();
                         wasReleasedO = true;
@@ -127,7 +127,7 @@ public class Canvas extends JPanel {
                 } else {
                     wasReleasedO = true;
                 }
-                if (stack.isPressed("SPACE") && !checkCollision(player.getPosition(), false)) {
+                if (stack.isPressed("SPACE") && !checkCollision(player.getPosition())) {
                     if (wasReleasedSpace) {
                         player.dodge();
                         wasReleasedSpace = false;
@@ -172,12 +172,6 @@ public class Canvas extends JPanel {
                     player.move(movement);
                 }
 
-                // Special state
-                boolean isSpecialState = player.isAttacking();
-
-                if (!checkCollision(newPosition, isSpecialState)) {
-                    player.move(movement);
-                }
                 // ---------------
 
                 Vector2D difference = Vector2D.add(player.getPosition(), Vector2D.scale(player2.getPosition(), -1));
@@ -246,16 +240,45 @@ public class Canvas extends JPanel {
         this.camera.drawImage(g, this.player.getSprite(), this.player.getPosition().x, this.player.getPosition().y,
                 SCALE, this.player.getOffset());
 
-        // Different origin --> different placement for the rectangle
-        Vector2D offset = player.getOffset();
+        /* Drawing Hitbox */
 
-        double centerX = player.getPosition().x - offset.x * SCALE;
-        double centerY = player.getPosition().y - offset.y * SCALE;
+        // hitbox player
+        double centerX = player.getPosition().x;
+        double centerY = player.getPosition().y;
 
-        int rectWidth = (int) (player.getSprite().getWidth() * SCALE / 1.9); // reduce size of hitbox
-        int rectHeight = (int) (player.getSprite().getHeight() * SCALE / 1.5);
+        int rectWidth = (int) (64 * SCALE / 1.9);
+        int rectHeight = (int) (64 * SCALE / 1.5);
 
         camera.drawRect(g, centerX, centerY, rectWidth, rectHeight, Color.RED);
+
+        // hitbox sword
+        Vector2D offset = player.getOffset();
+        double centerswordX;
+        double centerswordY = player.getPosition().y - offset.y * SCALE;
+
+        int spriteWidth = player.getSprite().getWidth();
+
+        int swordWidth = (int) (spriteWidth / 2);
+        int swordHeight = (int) (player.getSprite().getHeight() * SCALE / 2);
+
+        if (player.isAttacking()) {
+            if (player.isFacingLeft()) {
+                // Sword on the left side attacking
+                centerswordX = player.getPosition().x - offset.x * SCALE - 96;
+                swordWidth = (int) (spriteWidth * 2);
+            } else {
+                // Sword on the right side attacking
+                centerswordX = player.getPosition().x - offset.x * SCALE + 96;
+                swordWidth = (int) (spriteWidth * 2);
+            }
+        } else {
+            // Sword on the right side
+            centerswordX = player.getPosition().x - offset.x * SCALE + 64;
+        }
+
+        camera.drawRect(g, centerswordX, centerswordY, swordWidth, swordHeight, Color.RED);
+
+        camera.drawRect(g, centerswordX, centerswordY, swordWidth, swordHeight, Color.RED);
 
         for (int i = 0; i < map.getWidth(); i++) {
             for (int j = 0; j < map.getHeight(); j++) {
@@ -267,6 +290,8 @@ public class Canvas extends JPanel {
                 }
             }
         }
+
+        /* End of Drawing Hitbox */
 
         // this.camera.showCam(g, player2, player);
         // ---------------
@@ -290,17 +315,48 @@ public class Canvas extends JPanel {
         int tileSize = map.getTileSize() * SCALE;
         int newPosX = (int) newPosition.x;
         int newPosY = (int) newPosition.y;
-        int rectWidth = (int) (player.getSprite().getWidth() * SCALE / 1.9);
-        int rectHeight = (int) (player.getSprite().getHeight() * SCALE / 1.5);
 
+        // Hitbox player
+        int rectWidth = (int) (64 * SCALE / 1.9);
+        int rectHeight = (int) (64 * SCALE / 1.5);
+        Rectangle playerRect = new Rectangle(newPosX, newPosY, rectWidth, rectHeight);
+
+        // Hitbox sword
+        Vector2D offset = player.getOffset();
+        double centerswordX;
+        double centerswordY = newPosY - offset.y * SCALE;
+
+        int spriteWidth = player.getSprite().getWidth();
+        int swordWidth = (int) (spriteWidth / 2);
+        int swordHeight = (int) (player.getSprite().getHeight() * SCALE / 1.5);
+
+        if (player.isAttacking()) {
+            if (player.isFacingLeft()) {
+                // Sword on the left side attacking
+                centerswordX = newPosX - offset.x * SCALE - 96;
+                swordWidth = (int) (spriteWidth * 2);
+            } else {
+                // Sword on the right side attacking
+                centerswordX = newPosX - offset.x * SCALE + 96;
+                swordWidth = (int) (spriteWidth * 2);
+            }
+
+            Rectangle swordRect = new Rectangle((int) centerswordX, (int) centerswordY, swordWidth, swordHeight);
+
+            // Check collision with sword
+            // if (swordRect.intersects(monsterRect)) {
+            // // Handle collision when player is attacking
+            // return true;
+            // }
+        }
+
+        // Check collision with walls
         for (int i = 0; i < map.getWidth(); i++) {
             for (int j = 0; j < map.getHeight(); j++) {
                 if (map.isWall(i, j)) {
                     int tileX = i * tileSize;
                     int tileY = j * tileSize;
-
                     Rectangle tileRect = new Rectangle(tileX, tileY, tileSize, tileSize);
-                    Rectangle playerRect = new Rectangle(newPosX, newPosY, rectWidth, rectHeight);
 
                     if (playerRect.intersects(tileRect)) {
                         return true;
@@ -308,16 +364,8 @@ public class Canvas extends JPanel {
                 }
             }
         }
-        return false;
-    }
 
-    // surcharge aïe
-    private boolean checkCollision(Vector2D newPosition, boolean isSpecialState) {
-        if (isSpecialState) {
-            return false;
-        } else {
-            return checkCollision(newPosition);
-        }
+        return false;
     }
 
 }

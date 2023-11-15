@@ -294,4 +294,5 @@ public abstract class Entity {
             this.current.play();
         }
     }
+
 }

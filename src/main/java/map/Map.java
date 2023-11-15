@@ -78,31 +78,55 @@ public class Map {
         return tile;
     }
 
+    /**
+     * Checks if a specified location contains a wall.
+     *
+     * @param x The x-coordinate of the location.
+     * @param y The y-coordinate of the location.
+     * @return True if the location contains a wall, false otherwise.
+     */
     public boolean isWall(int x, int y) {
         int[] wallsLayer = mapReader.getLayers().get("WALLS");
-        if (wallsLayer == null) {
+        int[] houseLayer = mapReader.getLayers().get("HOUSE");
+        if (wallsLayer == null || houseLayer == null) {
             // layer null
             return false;
         }
 
         int tileIndex = y * mapReader.getWidth() + x;
-        if (tileIndex < 0 || tileIndex >= wallsLayer.length) {
+        if (tileIndex < 0 || tileIndex >= wallsLayer.length || tileIndex >= houseLayer.length) {
             return false;
         }
 
-        int tileId = wallsLayer[tileIndex];
-    
-        return tileId != 0;
+        int wallTileId = wallsLayer[tileIndex];
+        int houseTileId = houseLayer[tileIndex];
+
+        return wallTileId != 0 || houseTileId != 0;
     }
 
+    /**
+     * Gets the tile size.
+     *
+     * @return The tile size.
+     */
     public int getTileSize() {
         return mapReader.getTileSize();
     }
 
+    /**
+     * Gets the width of the map.
+     *
+     * @return The map width.
+     */
     public int getWidth() {
         return mapReader.getWidth();
     }
 
+    /**
+     * Gets the height of the map.
+     *
+     * @return The map height.
+     */
     public int getHeight() {
         return mapReader.getHeight();
     }
