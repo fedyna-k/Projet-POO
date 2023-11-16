@@ -10,7 +10,6 @@ var classgraphics_1_1_camera =
     [ "getCamera", "classgraphics_1_1_camera.html#ac3f83e6be9ab2729d8a06833e6975066", null ],
     [ "getRelativePosition", "classgraphics_1_1_camera.html#a355b3f65e704fd435bd880c92de867e9", null ],
     [ "setFocusOn", "classgraphics_1_1_camera.html#a0486063d82d079910601bfcb0e393f0c", null ],
-    [ "showCam", "classgraphics_1_1_camera.html#aa5cc460af6c3b9f05ee79a51961c8ecd", null ],
     [ "canvas", "classgraphics_1_1_camera.html#a4f97465a55bc92a613dae70d6424e7b8", null ],
     [ "focused", "classgraphics_1_1_camera.html#ae1702aaa6fe748c91f643bc926809e66", null ],
     [ "singleton", "classgraphics_1_1_camera.html#af44c3ef71cc96dc9005977d8d1d5eecf", null ]
