@@ -1,5 +1,5 @@
 /**
- * @brief This file contains the public class KeyStack
+ * @brief This file contains the public class KeyStack and private AddKeyAction and RemoveKeyAction.
  * 
  * @file KeyStack.java
  * @author Kevin Fedyna

@@ -98,6 +98,9 @@ $(document).ready(function(){initNavTree('classgraphics_1_1_window.html',''); in
   <div class="headertitle"><div class="title">graphics.Window Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>This class is the main class for the GUI.  
+ <a href="classgraphics_1_1_window.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for graphics.Window:</div>
 <div class="dyncontent">
@@ -108,16 +111,26 @@ Inheritance diagram for graphics.Window:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a00aa86d946645e078c18d3b5021eeeaf" id="r_a00aa86d946645e078c18d3b5021eeeaf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_window.html#a00aa86d946645e078c18d3b5021eeeaf">Window</a> ()</td></tr>
+<tr class="memdesc:a00aa86d946645e078c18d3b5021eeeaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <br /></td></tr>
 <tr class="separator:a00aa86d946645e078c18d3b5021eeeaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a710f406cc4347982607867f9745e1607" id="r_a710f406cc4347982607867f9745e1607"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_window.html#a710f406cc4347982607867f9745e1607">Window</a> (boolean isFullscreen)</td></tr>
+<tr class="memdesc:a710f406cc4347982607867f9745e1607"><td class="mdescLeft">&#160;</td><td class="mdescRight">Full constructor.  <br /></td></tr>
 <tr class="separator:a710f406cc4347982607867f9745e1607"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a24feab1246193447e296167f0e3a6833" id="r_a24feab1246193447e296167f0e3a6833"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgraphics_1_1_canvas.html">Canvas</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_window.html#a24feab1246193447e296167f0e3a6833">canvas</a></td></tr>
+<tr class="memdesc:a24feab1246193447e296167f0e3a6833"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Canvas where everything is drawn.  <br /></td></tr>
 <tr class="separator:a24feab1246193447e296167f0e3a6833"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This class is the main class for the GUI. </p>
+<dl class="section author"><dt>Author</dt><dd>Kevin Fedyna </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/11/2023</dd></dl>
+<p>It should only be instancied once.</p>
+<dl class="section note"><dt>Note</dt><dd>It can be a standalone for the game. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd>javax.swing.JFrame </dd></dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a00aa86d946645e078c18d3b5021eeeaf" name="a00aa86d946645e078c18d3b5021eeeaf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a00aa86d946645e078c18d3b5021eeeaf">&#9670;&#160;</a></span>Window() <span class="overload">[1/2]</span></h2>
 
@@ -132,6 +145,9 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Default constructor. </p>
+<p>Creates a new Window with fullscreen turned off using the full constructor. </p>
 
 </div>
 </div>
@@ -151,6 +167,16 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Full constructor. </p>
+<p>Create a new Window based on JFrame.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">isFullscreen</td><td>Should the window be fullscreen ? </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd>javax.swing.JFrame </dd></dl>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -165,6 +191,9 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>The Canvas where everything is drawn. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classgraphics_1_1_canvas.html">graphics.Canvas</a> </dd></dl>
 
 </div>
 </div>

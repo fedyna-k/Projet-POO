@@ -1,5 +1,5 @@
 /**
- * @brief This file contains the public class Animation
+ * @brief This file contains the public class Animation.
  * 
  * @file Animation.java
  * @author Kevin Fedyna
