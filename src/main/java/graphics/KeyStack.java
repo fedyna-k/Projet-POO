@@ -1,7 +1,7 @@
 /**
  * @brief This file contains the public class KeyStack
  * 
- * @file Animation.java
+ * @file KeyStack.java
  * @author Kevin Fedyna
  * @date 16/11/2023
  * 
