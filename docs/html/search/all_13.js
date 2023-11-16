@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['wasreleasedo_0',['wasReleasedO',['../classgraphics_1_1_canvas.html#a8de145a173fad68f656af34f598c199e',1,'graphics::Canvas']]],
-  ['wasreleasedspace_1',['wasReleasedSpace',['../classgraphics_1_1_canvas.html#a6377f36e4aff67ebbb69fd3f1a72b8d7',1,'graphics::Canvas']]],
-  ['width_2',['width',['../classcharacter_1_1_entity.html#ae5ed55792826bb904435e31c90a5c1c5',1,'character.Entity.width'],['../classmap_1_1_reader.html#a76cdcf9388db5e50f37a562a96799cef',1,'map.Reader.width']]],
-  ['window_3',['window',['../classgraphics_1_1_window.html',1,'graphics.Window'],['../classgraphics_1_1_window.html#a00aa86d946645e078c18d3b5021eeeaf',1,'graphics.Window.Window()'],['../classgraphics_1_1_window.html#a710f406cc4347982607867f9745e1607',1,'graphics.Window.Window(boolean isFullscreen)']]],
-  ['window_2ejava_4',['Window.java',['../_window_8java.html',1,'']]]
+  ['vector2d_0',['vector2d',['../classgeometry_1_1_vector2_d.html',1,'geometry.Vector2D'],['../classgeometry_1_1_vector2_d.html#a61ad058d2f09b0130fe961c67b95b512',1,'geometry.Vector2D.Vector2D()'],['../classgeometry_1_1_vector2_d.html#ab86f417ad7004bc6912d3a640bb84115',1,'geometry.Vector2D.Vector2D(double x, double y)'],['../classgeometry_1_1_vector2_d.html#a4ff904617e753eb36a945b6af1e11fed',1,'geometry.Vector2D.Vector2D(Vector2D initializing_vector)']]],
+  ['vector2d_2ejava_1',['Vector2D.java',['../_vector2_d_8java.html',1,'']]]
 ];

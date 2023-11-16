@@ -25,6 +25,7 @@
 var NAVTREE =
 [
   [ "Les chevaliers d'Ether", "index.html", [
+    [ "Documentation of \"Les chevaliers d'Ether\".", "index.html", null ],
     [ "Packages", "namespaces.html", [
       [ "Package List", "namespaces.html", "namespaces_dup" ]
     ] ],
