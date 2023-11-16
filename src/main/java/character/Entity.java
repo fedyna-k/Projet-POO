@@ -149,6 +149,25 @@ public abstract class Entity {
     }
 
     /**
+     * @brief Set the dodging state of the player.
+     *
+     *        This method sets the dodging state of the player to the specified
+     *        value.
+     *        When the player is in a dodging state, certain actions or behaviors
+     *        may be
+     *        affected in the game.
+     *
+     * @param dodging The new dodging state for the player.
+     *                - true if the player is in a dodging state.
+     *                - false if the player is not in a dodging state.
+     *
+     * @see isDodging
+     */
+    public void setDodging(boolean dodging) {
+        isDodging = dodging;
+    }
+
+    /**
      * Put the entity into block state
      */
     public void block() {

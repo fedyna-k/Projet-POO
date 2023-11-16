@@ -33,6 +33,9 @@ public class Canvas extends JPanel {
     private boolean wasReleasedQ;
     private boolean wasReleasedS;
     private boolean wasReleasedZ;
+
+    private int previousValidX;
+    private int previousValidY;
     private Map map;
 
     // ---------------
@@ -271,14 +274,14 @@ public class Canvas extends JPanel {
                 centerswordX = player.getPosition().x - offset.x * SCALE + 96;
                 swordWidth = (int) (spriteWidth * 2);
             }
-        } else {
-            // Sword on the right side
-            centerswordX = player.getPosition().x - offset.x * SCALE + 64;
+
+            camera.drawRect(g, centerswordX, centerswordY, swordWidth, swordHeight, Color.RED);
         }
 
-        camera.drawRect(g, centerswordX, centerswordY, swordWidth, swordHeight, Color.RED);
-
-        camera.drawRect(g, centerswordX, centerswordY, swordWidth, swordHeight, Color.RED);
+        // else {
+        // // Sword on the right side
+        // centerswordX = player.getPosition().x - offset.x * SCALE + 64;
+        // }
 
         for (int i = 0; i < map.getWidth(); i++) {
             for (int j = 0; j < map.getHeight(); j++) {
@@ -307,8 +310,17 @@ public class Canvas extends JPanel {
     }
 
     /**
-     * Check if collision occured
-     * 
+     * @brief Checks for collisions with walls and enemies based on the given new
+     *        position.
+     *
+     *        Checks if a collision occurs with walls or enemies at the
+     *        specified position. It considers the player's hitbox and, if
+     *        attacking, the sword's hitbox. The collision is determined by checking
+     *        intersections with the game map's walls and potential enemy hitboxes.
+     *
+     * @param newPosition The new position to check for collisions.
+     * @return True if a collision is detected, indicating the player cannot move to
+     *         the new position; otherwise, false.
      */
     private boolean checkCollision(Vector2D newPosition) {
         int SCALE = isFullscreen ? 4 : 2;
@@ -359,12 +371,20 @@ public class Canvas extends JPanel {
                     Rectangle tileRect = new Rectangle(tileX, tileY, tileSize, tileSize);
 
                     if (playerRect.intersects(tileRect)) {
+                        if (player.isDodging()) {
+                            newPosition.x = previousValidX;
+                            newPosition.y = previousValidY;
+                            player.setDodging(false);
+                            return true;
+                        }
                         return true;
                     }
                 }
             }
         }
 
+        previousValidX = (int) newPosition.x;
+        previousValidY = (int) newPosition.y;
         return false;
     }
 
