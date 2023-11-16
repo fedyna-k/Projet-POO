@@ -128,7 +128,7 @@ public class KeyStack {
      * @author Kevin Fedyna
      * @date 16/11/2023
      * 
-     * @brief Removes a key to the KeyStack on press.
+     * @brief Removes a key to the KeyStack on release.
      * 
      * This class extends AbstractAction with a constructor that allows to
      * remove a specific given key on release from the KeyStack.
