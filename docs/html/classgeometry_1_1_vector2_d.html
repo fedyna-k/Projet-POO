@@ -16,6 +16,16 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -99,31 +109,44 @@ $(document).ready(function(){initNavTree('classgeometry_1_1_vector2_d.html','');
   <div class="headertitle"><div class="title">geometry.Vector2D Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>This class allows to perform mathematical operations on R² vectors.  
+ <a href="classgeometry_1_1_vector2_d.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a61ad058d2f09b0130fe961c67b95b512" id="r_a61ad058d2f09b0130fe961c67b95b512"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeometry_1_1_vector2_d.html#a61ad058d2f09b0130fe961c67b95b512">Vector2D</a> ()</td></tr>
+<tr class="memdesc:a61ad058d2f09b0130fe961c67b95b512"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize null vector.  <br /></td></tr>
 <tr class="separator:a61ad058d2f09b0130fe961c67b95b512"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab86f417ad7004bc6912d3a640bb84115" id="r_ab86f417ad7004bc6912d3a640bb84115"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeometry_1_1_vector2_d.html#ab86f417ad7004bc6912d3a640bb84115">Vector2D</a> (double <a class="el" href="classgeometry_1_1_vector2_d.html#aeeec9dcee08521aadc91bee0773ec862">x</a>, double <a class="el" href="classgeometry_1_1_vector2_d.html#aa1ac0a3b6587aa74bfded880e1c42d02">y</a>)</td></tr>
+<tr class="memdesc:ab86f417ad7004bc6912d3a640bb84115"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize vector with given values.  <br /></td></tr>
 <tr class="separator:ab86f417ad7004bc6912d3a640bb84115"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ff904617e753eb36a945b6af1e11fed" id="r_a4ff904617e753eb36a945b6af1e11fed"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeometry_1_1_vector2_d.html#a4ff904617e753eb36a945b6af1e11fed">Vector2D</a> (<a class="el" href="classgeometry_1_1_vector2_d.html">Vector2D</a> initializing_vector)</td></tr>
+<tr class="memdesc:a4ff904617e753eb36a945b6af1e11fed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create copy of given vector.  <br /></td></tr>
 <tr class="separator:a4ff904617e753eb36a945b6af1e11fed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e98c24960a8e162d22d2d4abc33d761" id="r_a0e98c24960a8e162d22d2d4abc33d761"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeometry_1_1_vector2_d.html#a0e98c24960a8e162d22d2d4abc33d761">negate</a> ()</td></tr>
+<tr class="memdesc:a0e98c24960a8e162d22d2d4abc33d761"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change signs of both coordinates of vector.  <br /></td></tr>
 <tr class="separator:a0e98c24960a8e162d22d2d4abc33d761"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab58b1687aa4ed73f7c21336461150091" id="r_ab58b1687aa4ed73f7c21336461150091"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeometry_1_1_vector2_d.html#ab58b1687aa4ed73f7c21336461150091">normalize</a> ()</td></tr>
+<tr class="memdesc:ab58b1687aa4ed73f7c21336461150091"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make the vector's norm equal to 1.  <br /></td></tr>
 <tr class="separator:ab58b1687aa4ed73f7c21336461150091"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a172aafd21ef1fce8256555c6bbee135f" id="r_a172aafd21ef1fce8256555c6bbee135f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeometry_1_1_vector2_d.html#a172aafd21ef1fce8256555c6bbee135f">norm</a> ()</td></tr>
+<tr class="memdesc:a172aafd21ef1fce8256555c6bbee135f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes Vector norm.  <br /></td></tr>
 <tr class="separator:a172aafd21ef1fce8256555c6bbee135f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3e39ebc744567434364c5e4bc604fa2" id="r_ab3e39ebc744567434364c5e4bc604fa2"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeometry_1_1_vector2_d.html#ab3e39ebc744567434364c5e4bc604fa2">isNull</a> ()</td></tr>
+<tr class="memdesc:ab3e39ebc744567434364c5e4bc604fa2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if vector is Null vector.  <br /></td></tr>
 <tr class="separator:ab3e39ebc744567434364c5e4bc604fa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37ab16522a018fdd67bd1f9b6712963c" id="r_a37ab16522a018fdd67bd1f9b6712963c"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeometry_1_1_vector2_d.html#a37ab16522a018fdd67bd1f9b6712963c">toString</a> ()</td></tr>
+<tr class="memdesc:a37ab16522a018fdd67bd1f9b6712963c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override toString in order to print Vector2D.  <br /></td></tr>
 <tr class="separator:a37ab16522a018fdd67bd1f9b6712963c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:aea84390c8e6cefaf9d8e2967d87aa262" id="r_aea84390c8e6cefaf9d8e2967d87aa262"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgeometry_1_1_vector2_d.html">Vector2D</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeometry_1_1_vector2_d.html#aea84390c8e6cefaf9d8e2967d87aa262">scale</a> (<a class="el" href="classgeometry_1_1_vector2_d.html">Vector2D</a> vector, double factor)</td></tr>
+<tr class="memdesc:aea84390c8e6cefaf9d8e2967d87aa262"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scale a vector by a real factor.  <br /></td></tr>
 <tr class="separator:aea84390c8e6cefaf9d8e2967d87aa262"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac69715f1a381a872b6767ba94f84603a" id="r_ac69715f1a381a872b6767ba94f84603a"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeometry_1_1_vector2_d.html#ac69715f1a381a872b6767ba94f84603a">dot</a> (<a class="el" href="classgeometry_1_1_vector2_d.html">Vector2D</a> first, <a class="el" href="classgeometry_1_1_vector2_d.html">Vector2D</a> second)</td></tr>
+<tr class="memdesc:ac69715f1a381a872b6767ba94f84603a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes dot product of two vectors.  <br /></td></tr>
 <tr class="separator:ac69715f1a381a872b6767ba94f84603a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac75156f138c02d306719e6d88930259d" id="r_ac75156f138c02d306719e6d88930259d"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgeometry_1_1_vector2_d.html">Vector2D</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeometry_1_1_vector2_d.html#ac75156f138c02d306719e6d88930259d">add</a> (<a class="el" href="classgeometry_1_1_vector2_d.html">Vector2D</a> first, <a class="el" href="classgeometry_1_1_vector2_d.html">Vector2D</a> second, Vector2D... others)</td></tr>
 <tr class="separator:ac75156f138c02d306719e6d88930259d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -131,11 +154,17 @@ Static Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:aeeec9dcee08521aadc91bee0773ec862" id="r_aeeec9dcee08521aadc91bee0773ec862"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeometry_1_1_vector2_d.html#aeeec9dcee08521aadc91bee0773ec862">x</a></td></tr>
+<tr class="memdesc:aeeec9dcee08521aadc91bee0773ec862"><td class="mdescLeft">&#160;</td><td class="mdescRight">The first coordinate of the vector.  <br /></td></tr>
 <tr class="separator:aeeec9dcee08521aadc91bee0773ec862"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1ac0a3b6587aa74bfded880e1c42d02" id="r_aa1ac0a3b6587aa74bfded880e1c42d02"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeometry_1_1_vector2_d.html#aa1ac0a3b6587aa74bfded880e1c42d02">y</a></td></tr>
+<tr class="memdesc:aa1ac0a3b6587aa74bfded880e1c42d02"><td class="mdescLeft">&#160;</td><td class="mdescRight">The second coordinate of the vector.  <br /></td></tr>
 <tr class="separator:aa1ac0a3b6587aa74bfded880e1c42d02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This class allows to perform mathematical operations on R² vectors. </p>
+<dl class="section author"><dt>Author</dt><dd>Kevin Fedyna </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/11/2023 </dd></dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a61ad058d2f09b0130fe961c67b95b512" name="a61ad058d2f09b0130fe961c67b95b512"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a61ad058d2f09b0130fe961c67b95b512">&#9670;&#160;</a></span>Vector2D() <span class="overload">[1/3]</span></h2>
 
@@ -150,8 +179,14 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Initialize null vector </p>
 
+<p>Initialize null vector. </p>
+<p class="formulaDsp">
+\[
+     \mathbf{v} := \mathbf{0}
+\]
+</p>
+ 
 </div>
 </div>
 <a id="ab86f417ad7004bc6912d3a640bb84115" name="ab86f417ad7004bc6912d3a640bb84115"></a>
@@ -179,10 +214,17 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Initialize vector with given values </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Initialize vector with given values. </p>
+<p class="formulaDsp">
+\[
+     \mathbf{v} := \left[\begin{array}{c} x \\ y \end{array}\right]
+\]
+</p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">x</td><td>The x coordinate </td></tr>
-    <tr><td class="paramname">y</td><td>The y coordinate </td></tr>
+    <tr><td class="paramname">x</td><td>The x coordinate. </td></tr>
+    <tr><td class="paramname">y</td><td>The y coordinate. </td></tr>
   </table>
   </dd>
 </dl>
@@ -204,9 +246,16 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Initialize vector with given vector </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Create copy of given vector. </p>
+<p class="formulaDsp">
+\[
+     \mathbf{v} := \left[\begin{array}{c} \mathbf{u}_x \\ \mathbf{u}_y \end{array}\right]
+\]
+</p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">initializing_vector</td><td>The vector to copy </td></tr>
+    <tr><td class="paramname">initializing_vector</td><td>The vector to copy. </td></tr>
   </table>
   </dd>
 </dl>
@@ -253,15 +302,21 @@ Public Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Add two or more vectors </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Add two or more vectors.</p>
+<p class="formulaDsp">
+\[
+     \sum \mathbf{v}_i = \left[\begin{array}{c} \sum \mathbf{v}_{i, x} \\ \sum \mathbf{v}_{i, y} \end{array}\right]
+\]
+</p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">first</td><td>The first vector </td></tr>
-    <tr><td class="paramname">second</td><td>The second vector </td></tr>
-    <tr><td class="paramname">others</td><td>The other vectors </td></tr>
+    <tr><td class="paramname">first</td><td>The first vector. </td></tr>
+    <tr><td class="paramname">second</td><td>The second vector. </td></tr>
+    <tr><td class="paramname">others</td><td>The other vectors. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The sum of the two vectors </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The sum of the vectors. </dd></dl>
 
 </div>
 </div>
@@ -298,14 +353,21 @@ Public Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Computes dot product of two vectors </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Computes dot product of two vectors. </p>
+<p class="formulaDsp">
+\[
+     \mathbf{v}\cdot \mathbf{u} = \mathbf{v}_x \mathbf{u}_x + \mathbf{v}_y \mathbf{u}_y
+\]
+</p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">first</td><td>The first vector </td></tr>
-    <tr><td class="paramname">second</td><td>The second vector </td></tr>
+    <tr><td class="paramname">first</td><td>The first vector. </td></tr>
+    <tr><td class="paramname">second</td><td>The second vector. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The dot product between the two vectors </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The dot product between the two vectors. </dd></dl>
 
 </div>
 </div>
@@ -323,7 +385,9 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Check if vector is Null vector </p><dl class="section return"><dt>Returns</dt><dd>true if x = y = 0 </dd></dl>
+
+<p>Check if vector is Null vector. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if \( \mathbf{v} = \mathbf{0} \). </dd></dl>
 
 </div>
 </div>
@@ -341,8 +405,14 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Change signs of both coordinates of vector </p>
 
+<p>Change signs of both coordinates of vector. </p>
+<p class="formulaDsp">
+\[
+     \mathbf{v} := -\mathbf{v}
+\]
+</p>
+ 
 </div>
 </div>
 <a id="a172aafd21ef1fce8256555c6bbee135f" name="a172aafd21ef1fce8256555c6bbee135f"></a>
@@ -359,7 +429,14 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Computes Vector norm </p><dl class="section return"><dt>Returns</dt><dd>The 2-norm of the vector </dd></dl>
+
+<p>Computes Vector norm. </p>
+<p>The norm is given by :  </p><p class="formulaDsp">
+\[
+     \|\mathbf{v}\|_2 = \sqrt{x^2 + y^2} = \sqrt{\mathbf{v}\cdot\mathbf{v}}
+\]
+</p>
+<dl class="section return"><dt>Returns</dt><dd>The 2-norm of the vector. </dd></dl>
 
 </div>
 </div>
@@ -377,7 +454,14 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Normalize vector to make norm equals to 1 </p>
+
+<p>Make the vector's norm equal to 1. </p>
+<p class="formulaDsp">
+\[
+     \mathbf{v} := \frac{\mathbf{v}}{\|\mathbf{v}\|_2}
+\]
+</p>
+<dl class="section note"><dt>Note</dt><dd>It will not raise an error on null vector. </dd></dl>
 
 </div>
 </div>
@@ -414,14 +498,21 @@ Public Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Scale a vector by a real factor </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Scale a vector by a real factor. </p>
+<p class="formulaDsp">
+\[
+     \mathrm{scale}(\mathbf{v}, \lambda) = \lambda \mathbf{v}
+\]
+</p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">vector</td><td>The vector to scale </td></tr>
-    <tr><td class="paramname">factor</td><td>The number we use to apply multiplication </td></tr>
+    <tr><td class="paramname">vector</td><td>The vector to scale. </td></tr>
+    <tr><td class="paramname">factor</td><td>The number we use to apply multiplication. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A scaled version of the vector </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A scaled version of the vector. </dd></dl>
 
 </div>
 </div>
@@ -440,6 +531,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Override toString in order to print Vector2D. </p>
+<dl class="section return"><dt>Returns</dt><dd>A string in the form of <code>"x;y"</code>. </dd></dl>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -455,6 +549,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>The first coordinate of the vector. </p>
+
 </div>
 </div>
 <a id="aa1ac0a3b6587aa74bfded880e1c42d02" name="aa1ac0a3b6587aa74bfded880e1c42d02"></a>
@@ -468,6 +564,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>The second coordinate of the vector. </p>
 
 </div>
 </div>

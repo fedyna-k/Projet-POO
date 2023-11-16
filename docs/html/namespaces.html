@@ -16,6 +16,16 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -101,7 +111,7 @@ $(document).ready(function(){initNavTree('namespaces.html',''); initResizable();
 <tr id="row_0_0_0_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="enumcharacter_1_1_entity_1_1_animation_index.html" target="_self">AnimationIndex</a></td><td class="desc"></td></tr>
 <tr id="row_0_1_" class="odd"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="classcharacter_1_1_player.html" target="_self">Player</a></td><td class="desc"></td></tr>
 <tr id="row_1_" class="even"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_1_" class="arrow" onclick="toggleFolder('1_')">&#9660;</span><span class="icona"><span class="icon">P</span></span><a class="el" href="namespacegeometry.html" target="_self">geometry</a></td><td class="desc"></td></tr>
-<tr id="row_1_0_" class="odd"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="classgeometry_1_1_vector2_d.html" target="_self">Vector2D</a></td><td class="desc"></td></tr>
+<tr id="row_1_0_" class="odd"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="classgeometry_1_1_vector2_d.html" target="_self">Vector2D</a></td><td class="desc">This class allows to perform mathematical operations on R² vectors </td></tr>
 <tr id="row_2_" class="even"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_2_" class="arrow" onclick="toggleFolder('2_')">&#9660;</span><span class="icona"><span class="icon">P</span></span><a class="el" href="namespacegraphics.html" target="_self">graphics</a></td><td class="desc"></td></tr>
 <tr id="row_2_0_" class="odd"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="classgraphics_1_1_animation.html" target="_self">Animation</a></td><td class="desc">This class allows to perform animations based on multiple frames </td></tr>
 <tr id="row_2_1_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="classgraphics_1_1_camera.html" target="_self">Camera</a></td><td class="desc">This class allows to simplify maths for drawing on screen </td></tr>
