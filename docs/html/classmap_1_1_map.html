@@ -109,25 +109,36 @@ $(document).ready(function(){initNavTree('classmap_1_1_map.html',''); initResiza
   <div class="headertitle"><div class="title">map.Map Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>This class allows to read a map directory and get tile on position given.  
+ <a href="classmap_1_1_map.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a6f734061b51e0da8adf965667cc0ef3b" id="r_a6f734061b51e0da8adf965667cc0ef3b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_map.html#a6f734061b51e0da8adf965667cc0ef3b">Map</a> (String mapDir)</td></tr>
+<tr class="memdesc:a6f734061b51e0da8adf965667cc0ef3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map constructor.  <br /></td></tr>
 <tr class="separator:a6f734061b51e0da8adf965667cc0ef3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace436ff7a7301c972526db0eeaa0ac3d" id="r_ace436ff7a7301c972526db0eeaa0ac3d"><td class="memItemLeft" align="right" valign="top">BufferedImage&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_map.html#ace436ff7a7301c972526db0eeaa0ac3d">getTile</a> (int x, int y)</td></tr>
+<tr class="memdesc:ace436ff7a7301c972526db0eeaa0ac3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to get the wanted tile.  <br /></td></tr>
 <tr class="separator:ace436ff7a7301c972526db0eeaa0ac3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:ac43c231c197076b78e2bdb13d6707d4d" id="r_ac43c231c197076b78e2bdb13d6707d4d"><td class="memItemLeft" align="right" valign="top">BufferedImage&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_map.html#ac43c231c197076b78e2bdb13d6707d4d">getTileById</a> (int id)</td></tr>
+<tr class="memdesc:ac43c231c197076b78e2bdb13d6707d4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get tile for given id.  <br /></td></tr>
 <tr class="separator:ac43c231c197076b78e2bdb13d6707d4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a2ecf33dd4f661f6456e1c39b2ea14c7c" id="r_a2ecf33dd4f661f6456e1c39b2ea14c7c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmap_1_1_reader.html">Reader</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_map.html#a2ecf33dd4f661f6456e1c39b2ea14c7c">mapReader</a></td></tr>
+<tr class="memdesc:a2ecf33dd4f661f6456e1c39b2ea14c7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instance of finite state machine that reads the file.  <br /></td></tr>
 <tr class="separator:a2ecf33dd4f661f6456e1c39b2ea14c7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This class allows to read a map directory and get tile on position given. </p>
+<dl class="section author"><dt>Author</dt><dd>Kevin Fedyna </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/11/2023 </dd></dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a6f734061b51e0da8adf965667cc0ef3b" name="a6f734061b51e0da8adf965667cc0ef3b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6f734061b51e0da8adf965667cc0ef3b">&#9670;&#160;</a></span>Map()</h2>
 
@@ -143,6 +154,19 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Map constructor. </p>
+<p>While looking through the map directory, the map should find :</p><ul>
+<li>A <code>.MAPDATA</code> file.</li>
+<li>All tilesets used in the .MAPDATA.</li>
+</ul>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mapDir</td><td>The path to the map directory. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section warning"><dt>Warning</dt><dd>If something is wrong with the map directory, it will log an error but raise it. </dd></dl>
 
 </div>
 </div>
@@ -173,6 +197,17 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Method to get the wanted tile. </p>
+<p>When a tile is asked, it will compute all the layers and return the final tile.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>The x coordinate in the map grid. </td></tr>
+    <tr><td class="paramname">y</td><td>The y coordinate in the map grid. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The computed tile. </dd></dl>
+
 </div>
 </div>
 <a id="ac43c231c197076b78e2bdb13d6707d4d" name="ac43c231c197076b78e2bdb13d6707d4d"></a>
@@ -198,13 +233,15 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Get tile for given id </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Get tile for given id. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">id</td><td>The id of the tile, must be not null </td></tr>
+    <tr><td class="paramname">id</td><td>The id of the tile, must be not null. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The tile in the tileset corresponding to the given id. </dd></dl>
 
 </div>
 </div>
@@ -228,6 +265,8 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Instance of finite state machine that reads the file. </p>
 
 </div>
 </div>

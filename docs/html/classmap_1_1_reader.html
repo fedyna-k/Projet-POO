@@ -110,48 +110,69 @@ $(document).ready(function(){initNavTree('classmap_1_1_reader.html',''); initRes
   <div class="headertitle"><div class="title">map.Reader Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>This class allows to read a map directory and stores all the informations.  
+ <a href="classmap_1_1_reader.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a97cb436c68f23b65b18465b9e2ab1b7f" id="r_a97cb436c68f23b65b18465b9e2ab1b7f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_reader.html#a97cb436c68f23b65b18465b9e2ab1b7f">Reader</a> (String mapDir)  throws IOException </td></tr>
+<tr class="memdesc:a97cb436c68f23b65b18465b9e2ab1b7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read given map directory containing .MAPDATA file and tilesets.  <br /></td></tr>
 <tr class="separator:a97cb436c68f23b65b18465b9e2ab1b7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa1d14fa76c89de84c42fb292624cdbc" id="r_aaa1d14fa76c89de84c42fb292624cdbc"><td class="memItemLeft" align="right" valign="top">LinkedHashMap&lt; Integer, BufferedImage &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_reader.html#aaa1d14fa76c89de84c42fb292624cdbc">getTilesets</a> ()</td></tr>
+<tr class="memdesc:aaa1d14fa76c89de84c42fb292624cdbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter function for tilesets.  <br /></td></tr>
 <tr class="separator:aaa1d14fa76c89de84c42fb292624cdbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a552939a706681752f19307f7f9b5eaf6" id="r_a552939a706681752f19307f7f9b5eaf6"><td class="memItemLeft" align="right" valign="top">LinkedHashMap&lt; String, int[]&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_reader.html#a552939a706681752f19307f7f9b5eaf6">getLayers</a> ()</td></tr>
+<tr class="memdesc:a552939a706681752f19307f7f9b5eaf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter function for layers.  <br /></td></tr>
 <tr class="separator:a552939a706681752f19307f7f9b5eaf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f215db3b6aa3b31d5c6a23de90f795f" id="r_a3f215db3b6aa3b31d5c6a23de90f795f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_reader.html#a3f215db3b6aa3b31d5c6a23de90f795f">getWidth</a> ()</td></tr>
+<tr class="memdesc:a3f215db3b6aa3b31d5c6a23de90f795f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter function for width.  <br /></td></tr>
 <tr class="separator:a3f215db3b6aa3b31d5c6a23de90f795f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb5a2d598e60f4a9c344b4182edf4f93" id="r_acb5a2d598e60f4a9c344b4182edf4f93"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_reader.html#acb5a2d598e60f4a9c344b4182edf4f93">getHeight</a> ()</td></tr>
+<tr class="memdesc:acb5a2d598e60f4a9c344b4182edf4f93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter function for height.  <br /></td></tr>
 <tr class="separator:acb5a2d598e60f4a9c344b4182edf4f93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1ff7fc47ec3674f156f569ec80a41d8" id="r_af1ff7fc47ec3674f156f569ec80a41d8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_reader.html#af1ff7fc47ec3674f156f569ec80a41d8">getTileSize</a> ()</td></tr>
+<tr class="memdesc:af1ff7fc47ec3674f156f569ec80a41d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter function for tile size.  <br /></td></tr>
 <tr class="separator:af1ff7fc47ec3674f156f569ec80a41d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a8e9e051ff65e314409628a2eff1322bd" id="r_a8e9e051ff65e314409628a2eff1322bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_reader.html#a8e9e051ff65e314409628a2eff1322bd">loadTileset</a> (String mapDir, String line)  throws IOException </td></tr>
+<tr class="memdesc:a8e9e051ff65e314409628a2eff1322bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load tileset and starting index associated with it.  <br /></td></tr>
 <tr class="separator:a8e9e051ff65e314409628a2eff1322bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a201398d5d0c0d3aafe2d53bfd18f0b" id="r_a1a201398d5d0c0d3aafe2d53bfd18f0b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_reader.html#a1a201398d5d0c0d3aafe2d53bfd18f0b">loadTileMap</a> (String data)</td></tr>
+<tr class="memdesc:a1a201398d5d0c0d3aafe2d53bfd18f0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load tile map in layer set.  <br /></td></tr>
 <tr class="separator:a1a201398d5d0c0d3aafe2d53bfd18f0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a53933de20b6c06995c2fd59f975af1ce" id="r_a53933de20b6c06995c2fd59f975af1ce"><td class="memItemLeft" align="right" valign="top">LinkedHashMap&lt; Integer, BufferedImage &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_reader.html#a53933de20b6c06995c2fd59f975af1ce">tilesets</a></td></tr>
+<tr class="memdesc:a53933de20b6c06995c2fd59f975af1ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">The tilesets.  <br /></td></tr>
 <tr class="separator:a53933de20b6c06995c2fd59f975af1ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79a7ebb8f67cd767e6590164d977a880" id="r_a79a7ebb8f67cd767e6590164d977a880"><td class="memItemLeft" align="right" valign="top">LinkedHashMap&lt; String, int[]&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_reader.html#a79a7ebb8f67cd767e6590164d977a880">layers</a></td></tr>
+<tr class="memdesc:a79a7ebb8f67cd767e6590164d977a880"><td class="mdescLeft">&#160;</td><td class="mdescRight">The layers.  <br /></td></tr>
 <tr class="separator:a79a7ebb8f67cd767e6590164d977a880"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac839609573c0f15ae54ebcad6ba7952f" id="r_ac839609573c0f15ae54ebcad6ba7952f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_reader.html#ac839609573c0f15ae54ebcad6ba7952f">height</a></td></tr>
+<tr class="memdesc:ac839609573c0f15ae54ebcad6ba7952f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The map height.  <br /></td></tr>
 <tr class="separator:ac839609573c0f15ae54ebcad6ba7952f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76cdcf9388db5e50f37a562a96799cef" id="r_a76cdcf9388db5e50f37a562a96799cef"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_reader.html#a76cdcf9388db5e50f37a562a96799cef">width</a></td></tr>
+<tr class="memdesc:a76cdcf9388db5e50f37a562a96799cef"><td class="mdescLeft">&#160;</td><td class="mdescRight">The map width.  <br /></td></tr>
 <tr class="separator:a76cdcf9388db5e50f37a562a96799cef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a327108bfb1bddf5cd7c437f984e4a8a7" id="r_a327108bfb1bddf5cd7c437f984e4a8a7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_reader.html#a327108bfb1bddf5cd7c437f984e4a8a7">tileSize</a></td></tr>
+<tr class="memdesc:a327108bfb1bddf5cd7c437f984e4a8a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The map tilesize.  <br /></td></tr>
 <tr class="separator:a327108bfb1bddf5cd7c437f984e4a8a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-attribs" name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
 <tr class="memitem:a47ba849155dc987b3c290d847341009c" id="r_a47ba849155dc987b3c290d847341009c"><td class="memItemLeft" align="right" valign="top">static final LinkedHashMap&lt; String, Integer &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_reader.html#a47ba849155dc987b3c290d847341009c">dataflagDic</a></td></tr>
+<tr class="memdesc:a47ba849155dc987b3c290d847341009c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constant used internally to know sections flags.  <br /></td></tr>
 <tr class="separator:a47ba849155dc987b3c290d847341009c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This class allows to read a map directory and stores all the informations. </p>
+<dl class="section author"><dt>Author</dt><dd>Kevin Fedyna </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16/11/2023 </dd></dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a97cb436c68f23b65b18465b9e2ab1b7f" name="a97cb436c68f23b65b18465b9e2ab1b7f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a97cb436c68f23b65b18465b9e2ab1b7f">&#9670;&#160;</a></span>Reader()</h2>
 
@@ -167,7 +188,9 @@ Static Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Read given map directory containing .MAPDATA file and tilesets </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Read given map directory containing .MAPDATA file and tilesets. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">mapDir</td><td>The map directory </td></tr>
   </table>
@@ -197,7 +220,9 @@ Static Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Getter function for height </p><dl class="section return"><dt>Returns</dt><dd>Map height </dd></dl>
+
+<p>Getter function for height. </p>
+<dl class="section return"><dt>Returns</dt><dd>Map height </dd></dl>
 
 </div>
 </div>
@@ -215,7 +240,9 @@ Static Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Getter function for layers </p><dl class="section return"><dt>Returns</dt><dd>The layers </dd></dl>
+
+<p>Getter function for layers. </p>
+<dl class="section return"><dt>Returns</dt><dd>The layers </dd></dl>
 
 </div>
 </div>
@@ -233,7 +260,9 @@ Static Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Getter function for tilesets </p><dl class="section return"><dt>Returns</dt><dd>The tilesets </dd></dl>
+
+<p>Getter function for tilesets. </p>
+<dl class="section return"><dt>Returns</dt><dd>The tilesets </dd></dl>
 
 </div>
 </div>
@@ -251,7 +280,9 @@ Static Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Getter function for tile size </p><dl class="section return"><dt>Returns</dt><dd>the tile size </dd></dl>
+
+<p>Getter function for tile size. </p>
+<dl class="section return"><dt>Returns</dt><dd>the tile size </dd></dl>
 
 </div>
 </div>
@@ -269,7 +300,9 @@ Static Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Getter function for width </p><dl class="section return"><dt>Returns</dt><dd>Map width </dd></dl>
+
+<p>Getter function for width. </p>
+<dl class="section return"><dt>Returns</dt><dd>Map width </dd></dl>
 
 </div>
 </div>
@@ -296,7 +329,9 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Load tile map in layer set </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Load tile map in layer set. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">data</td><td>The data line read in the .MAPDATA file </td></tr>
   </table>
@@ -338,7 +373,9 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Load tileset and starting index associated with it </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Load tileset and starting index associated with it. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">mapDir</td><td>The directory containing map data </td></tr>
     <tr><td class="paramname">line</td><td>The line read by the reader </td></tr>
@@ -380,6 +417,8 @@ Static Private Attributes</h2></td></tr>
 <div class="line">        this.put(<span class="stringliteral">&quot;:MAP-DATA:&quot;</span>, 0b100);</div>
 <div class="line">    }}</div>
 </div><!-- fragment -->
+<p>Constant used internally to know sections flags. </p>
+
 </div>
 </div>
 <a id="ac839609573c0f15ae54ebcad6ba7952f" name="ac839609573c0f15ae54ebcad6ba7952f"></a>
@@ -401,6 +440,8 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>The map height. </p>
 
 </div>
 </div>
@@ -424,6 +465,12 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>The layers. </p>
+<p>The structure is made as follows :</p><ul>
+<li>The <b>key</b> is the string representing the layer name.</li>
+<li>The <b>value</b> is the array that store the layer's tilemap. </li>
+</ul>
+
 </div>
 </div>
 <a id="a53933de20b6c06995c2fd59f975af1ce" name="a53933de20b6c06995c2fd59f975af1ce"></a>
@@ -445,6 +492,12 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>The tilesets. </p>
+<p>The structure is made as follows :</p><ul>
+<li>The <b>key</b> is the integer representing the first index.</li>
+<li>The <b>value</b> is the whole tileset. </li>
+</ul>
 
 </div>
 </div>
@@ -468,6 +521,8 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>The map tilesize. </p>
+
 </div>
 </div>
 <a id="a76cdcf9388db5e50f37a562a96799cef" name="a76cdcf9388db5e50f37a562a96799cef"></a>
@@ -489,6 +544,8 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>The map width. </p>
 
 </div>
 </div>
