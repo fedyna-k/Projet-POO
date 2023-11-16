@@ -1,5 +1,5 @@
 /**
- * @brief This file contains the public class Canvas.
+ * @brief This file contains the public class Vector2D.
  * 
  * @file Vector2D.java
  * @author Kevin Fedyna

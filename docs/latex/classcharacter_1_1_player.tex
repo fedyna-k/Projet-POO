@@ -1,5 +1,10 @@
 \doxysection{character.\+Player Class Reference}
 \hypertarget{classcharacter_1_1_player}{}\label{classcharacter_1_1_player}\index{character.Player@{character.Player}}
+
+
+This class represents the player. It extends Entity.  
+
+
 Inheritance diagram for character.\+Player\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -10,80 +15,96 @@ Inheritance diagram for character.\+Player\+:\begin{figure}[H]
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classcharacter_1_1_player_addf96d54489ab2d327f356ac253332a7}{Player}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classcharacter_1_1_player_ac14e19cf2a4402af9ae335df4eefcaba}{Player}} (double x, double y)
-\item 
+\begin{DoxyCompactList}\small\item\em \doxylink{class_main}{Main} constructor. \end{DoxyCompactList}\item 
 Vector2D \mbox{\hyperlink{classcharacter_1_1_player_a6e11e546335ad7dda96ddc9682fa03a0}{get\+Offset}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Gets the offset depending on animation. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classcharacter_1_1_entity}{character.\+Entity}}}
 \begin{DoxyCompactItemize}
 \item 
 Vector2D \mbox{\hyperlink{classcharacter_1_1_entity_a556404102a812f8957e71771bfebeb6a}{get\+Position}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Get the Vector2D representation of entity position. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classcharacter_1_1_entity_a2287d32a8d8a5af00c623b09d87cec70}{move}} (double dx, double dy)
-\item 
+\begin{DoxyCompactList}\small\item\em Move Entity by a given vector. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classcharacter_1_1_entity_aa3fca5ad5aff028d27a00c744a92523b}{move}} (Vector2D movement)
-\item 
+\begin{DoxyCompactList}\small\item\em Move Entity by a given vector. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classcharacter_1_1_entity_a3918617dafb901349f081368c4cd80cd}{attack}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Put the entity into attack state. \end{DoxyCompactList}\item 
 boolean \mbox{\hyperlink{classcharacter_1_1_entity_a8f733ea1bcaed91d959d32489212e2c6}{is\+Attacking}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Get the attacking state of the entity. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classcharacter_1_1_entity_acf34692aa2cb7927e97fd1b6f8cadbd4}{dodge}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Put the entity into dodge state. \end{DoxyCompactList}\item 
 boolean \mbox{\hyperlink{classcharacter_1_1_entity_a69a282b36cc8512d4900cb398d8a4a81}{is\+Dodging}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Get the dodging state of the entity. \end{DoxyCompactList}\item 
 boolean \mbox{\hyperlink{classcharacter_1_1_entity_a809cc5ecb57547943ccb24c3affb156e}{is\+Facing\+Left}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Get the entity\textquotesingle{}s orientation. \end{DoxyCompactList}\item 
 Buffered\+Image \mbox{\hyperlink{classcharacter_1_1_entity_a2ebbeb658f3d46482f75861beebbedda}{get\+Sprite}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Get entity sprite to display. \end{DoxyCompactList}\item 
 Vector2D \mbox{\hyperlink{classcharacter_1_1_entity_ac3f49661959ccc96f30ab1ba17a43abd}{get\+Sprite\+Size}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Get entity sprite size. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classcharacter_1_1_entity_a28bfab6b4ff0f725051bbe22d013bda5}{swap\+Animation}} (\mbox{\hyperlink{enumcharacter_1_1_entity_1_1_animation_index}{Animation\+Index}} animation\+Index)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Change the animation to display. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Additional Inherited Members}
 \doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classcharacter_1_1_entity}{character.\+Entity}}}
 \begin{DoxyCompactItemize}
 \item 
 Vector2D \mbox{\hyperlink{classcharacter_1_1_entity_a7b76d22fc2f84b550979dd30e0fae687}{coordinates}}
-\item 
+\begin{DoxyCompactList}\small\item\em The coordinates in absolute positions. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classcharacter_1_1_entity_ab98e97310ca85981da90ff9dbfd4035f}{height}}
-\item 
+\begin{DoxyCompactList}\small\item\em The height of the entity. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classcharacter_1_1_entity_ae5ed55792826bb904435e31c90a5c1c5}{width}}
-\item 
+\begin{DoxyCompactList}\small\item\em The width of the entity. \end{DoxyCompactList}\item 
 String \mbox{\hyperlink{classcharacter_1_1_entity_a7d1698374f6e43786f9ef81405626198}{name}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The name of the entity. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classcharacter_1_1_entity}{character.\+Entity}}}
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classcharacter_1_1_entity_aaebac27ea5505a17c97a509c99fd6c38}{set\+Animations}} (String dir)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Go through all basic animations and load them. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classcharacter_1_1_entity}{character.\+Entity}}}
 \begin{DoxyCompactItemize}
 \item 
 boolean \mbox{\hyperlink{classcharacter_1_1_entity_a824044a93399412de9f4c1a32a6dcd6e}{is\+Attacking}}
-\item 
+\begin{DoxyCompactList}\small\item\em State if is attacking. \end{DoxyCompactList}\item 
 boolean \mbox{\hyperlink{classcharacter_1_1_entity_a076efb9e12510cbdaeb28c52e7766e1c}{is\+Facing\+Left}}
-\item 
+\begin{DoxyCompactList}\small\item\em State if is facing left. \end{DoxyCompactList}\item 
 boolean \mbox{\hyperlink{classcharacter_1_1_entity_ae5bb21e84a54cd46ff936c560b7b05df}{is\+Dodging}}
-\item 
+\begin{DoxyCompactList}\small\item\em State if is dodging. \end{DoxyCompactList}\item 
 Vector2D \mbox{\hyperlink{classcharacter_1_1_entity_affb85dd4e2e50c30c643c08b6d29681b}{buffered\+Movement}}
-\item 
+\begin{DoxyCompactList}\small\item\em The last registered movement before dodging. \end{DoxyCompactList}\item 
 Animation \mbox{\hyperlink{classcharacter_1_1_entity_a15fe9214a0c0c7d36dc130bed22b2e6f}{current}}
-\item 
+\begin{DoxyCompactList}\small\item\em The Animation currently playing. \end{DoxyCompactList}\item 
 Animation \mbox{\hyperlink{classcharacter_1_1_entity_adda9fa5453c09b2d7fe02e03ad890d58}{standing}}
-\item 
+\begin{DoxyCompactList}\small\item\em The idle animation. \end{DoxyCompactList}\item 
 Animation \mbox{\hyperlink{classcharacter_1_1_entity_a0ef1666eeca79e487231c318df715924}{left\+Run}}
-\item 
+\begin{DoxyCompactList}\small\item\em The animation when running left. \end{DoxyCompactList}\item 
 Animation \mbox{\hyperlink{classcharacter_1_1_entity_a39e202e43b8c70cd3a35056d8af35ee0}{right\+Run}}
-\item 
+\begin{DoxyCompactList}\small\item\em The animation when running right. \end{DoxyCompactList}\item 
 Animation \mbox{\hyperlink{classcharacter_1_1_entity_ae1b64d590914e3c384041d2c24ec5cf4}{left\+Attack}}
-\item 
+\begin{DoxyCompactList}\small\item\em The animation when attacking left. \end{DoxyCompactList}\item 
 Animation \mbox{\hyperlink{classcharacter_1_1_entity_a5df83d48c434f80977efdb37cff338d4}{right\+Attack}}
-\item 
+\begin{DoxyCompactList}\small\item\em The animation when attacking right. \end{DoxyCompactList}\item 
 Animation \mbox{\hyperlink{classcharacter_1_1_entity_a191d82da193a5a25465af94ce5d00aec}{right\+Dodge}}
-\item 
+\begin{DoxyCompactList}\small\item\em The animation when dodging left. \end{DoxyCompactList}\item 
 Animation \mbox{\hyperlink{classcharacter_1_1_entity_a623ffd1a5f3a208599e95669e65242ab}{left\+Dodge}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The animation when dodging right. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class represents the player. It extends Entity. 
+
+\begin{DoxyAuthor}{Author}
+Kevin Fedyna 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+16/11/2023
+\end{DoxyDate}
+
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classcharacter_1_1_entity}{character.\+Entity} 
+\end{DoxySeeAlso}
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
@@ -93,12 +114,29 @@ Animation \mbox{\hyperlink{classcharacter_1_1_entity_a623ffd1a5f3a208599e95669e6
 \doxysubsubsection{\texorpdfstring{Player()}{Player()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily character.\+Player.\+Player (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\Hypertarget{classcharacter_1_1_player_ac14e19cf2a4402af9ae335df4eefcaba}\label{classcharacter_1_1_player_ac14e19cf2a4402af9ae335df4eefcaba} 
+
+
+Default constructor. 
+
+Create a Player instance at coordinates (0, 0). \Hypertarget{classcharacter_1_1_player_ac14e19cf2a4402af9ae335df4eefcaba}\label{classcharacter_1_1_player_ac14e19cf2a4402af9ae335df4eefcaba} 
 \index{character.Player@{character.Player}!Player@{Player}}
 \index{Player@{Player}!character.Player@{character.Player}}
 \doxysubsubsection{\texorpdfstring{Player()}{Player()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily character.\+Player.\+Player (\begin{DoxyParamCaption}\item[{double}]{x,  }\item[{double}]{y }\end{DoxyParamCaption})}
 
+
+
+\doxylink{class_main}{Main} constructor. 
+
+Create a Player instance at coordinates (x, y).
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The starting x coordinate. \\
+\hline
+{\em y} & The starting y corrdinate. \\
+\hline
+\end{DoxyParams}
 
 
 \doxysubsection{Member Function Documentation}
@@ -108,8 +146,12 @@ Animation \mbox{\hyperlink{classcharacter_1_1_entity_a623ffd1a5f3a208599e95669e6
 \doxysubsubsection{\texorpdfstring{getOffset()}{getOffset()}}
 {\footnotesize\ttfamily Vector2D character.\+Player.\+get\+Offset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Use this function to return offsets depending on contexts and sprites \begin{DoxyReturn}{Returns}
-A Vector2D representing offset to apply (specific to base sprite) 
+
+
+Gets the offset depending on animation. 
+
+\begin{DoxyReturn}{Returns}
+A Vector2D that will be added when image is drawn. 
 \end{DoxyReturn}
 
 

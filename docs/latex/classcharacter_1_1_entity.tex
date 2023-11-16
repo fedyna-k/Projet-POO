@@ -1,5 +1,10 @@
 \doxysection{character.\+Entity Class Reference}
 \hypertarget{classcharacter_1_1_entity}{}\label{classcharacter_1_1_entity}\index{character.Entity@{character.Entity}}
+
+
+This class represents an arbitrary entity. It should be a base for all entities.  
+
+
 Inheritance diagram for character.\+Entity\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -10,77 +15,95 @@ Inheritance diagram for character.\+Entity\+:\begin{figure}[H]
 \begin{DoxyCompactItemize}
 \item 
 enum \mbox{\hyperlink{enumcharacter_1_1_entity_1_1_animation_index}{Animation\+Index}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em All possible animations. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 Vector2D \mbox{\hyperlink{classcharacter_1_1_entity_a556404102a812f8957e71771bfebeb6a}{get\+Position}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Get the Vector2D representation of entity position. \end{DoxyCompactList}\item 
 abstract Vector2D \mbox{\hyperlink{classcharacter_1_1_entity_a5fbe70c0eac66ce03c8fbd5f1ca83e0f}{get\+Offset}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Use this function to return offsets depending on contexts and sprites. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classcharacter_1_1_entity_a2287d32a8d8a5af00c623b09d87cec70}{move}} (double dx, double dy)
-\item 
+\begin{DoxyCompactList}\small\item\em Move Entity by a given vector. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classcharacter_1_1_entity_aa3fca5ad5aff028d27a00c744a92523b}{move}} (Vector2D movement)
-\item 
+\begin{DoxyCompactList}\small\item\em Move Entity by a given vector. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classcharacter_1_1_entity_a3918617dafb901349f081368c4cd80cd}{attack}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Put the entity into attack state. \end{DoxyCompactList}\item 
 boolean \mbox{\hyperlink{classcharacter_1_1_entity_a8f733ea1bcaed91d959d32489212e2c6}{is\+Attacking}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Get the attacking state of the entity. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classcharacter_1_1_entity_acf34692aa2cb7927e97fd1b6f8cadbd4}{dodge}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Put the entity into dodge state. \end{DoxyCompactList}\item 
 boolean \mbox{\hyperlink{classcharacter_1_1_entity_a69a282b36cc8512d4900cb398d8a4a81}{is\+Dodging}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Get the dodging state of the entity. \end{DoxyCompactList}\item 
 boolean \mbox{\hyperlink{classcharacter_1_1_entity_a809cc5ecb57547943ccb24c3affb156e}{is\+Facing\+Left}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Get the entity\textquotesingle{}s orientation. \end{DoxyCompactList}\item 
 Buffered\+Image \mbox{\hyperlink{classcharacter_1_1_entity_a2ebbeb658f3d46482f75861beebbedda}{get\+Sprite}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Get entity sprite to display. \end{DoxyCompactList}\item 
 Vector2D \mbox{\hyperlink{classcharacter_1_1_entity_ac3f49661959ccc96f30ab1ba17a43abd}{get\+Sprite\+Size}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Get entity sprite size. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classcharacter_1_1_entity_a28bfab6b4ff0f725051bbe22d013bda5}{swap\+Animation}} (\mbox{\hyperlink{enumcharacter_1_1_entity_1_1_animation_index}{Animation\+Index}} animation\+Index)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Change the animation to display. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 Vector2D \mbox{\hyperlink{classcharacter_1_1_entity_a7b76d22fc2f84b550979dd30e0fae687}{coordinates}}
-\item 
+\begin{DoxyCompactList}\small\item\em The coordinates in absolute positions. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classcharacter_1_1_entity_ab98e97310ca85981da90ff9dbfd4035f}{height}}
-\item 
+\begin{DoxyCompactList}\small\item\em The height of the entity. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classcharacter_1_1_entity_ae5ed55792826bb904435e31c90a5c1c5}{width}}
-\item 
+\begin{DoxyCompactList}\small\item\em The width of the entity. \end{DoxyCompactList}\item 
 String \mbox{\hyperlink{classcharacter_1_1_entity_a7d1698374f6e43786f9ef81405626198}{name}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The name of the entity. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classcharacter_1_1_entity_aaebac27ea5505a17c97a509c99fd6c38}{set\+Animations}} (String dir)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Go through all basic animations and load them. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
 boolean \mbox{\hyperlink{classcharacter_1_1_entity_a824044a93399412de9f4c1a32a6dcd6e}{is\+Attacking}}
-\item 
+\begin{DoxyCompactList}\small\item\em State if is attacking. \end{DoxyCompactList}\item 
 boolean \mbox{\hyperlink{classcharacter_1_1_entity_a076efb9e12510cbdaeb28c52e7766e1c}{is\+Facing\+Left}}
-\item 
+\begin{DoxyCompactList}\small\item\em State if is facing left. \end{DoxyCompactList}\item 
 boolean \mbox{\hyperlink{classcharacter_1_1_entity_ae5bb21e84a54cd46ff936c560b7b05df}{is\+Dodging}}
-\item 
+\begin{DoxyCompactList}\small\item\em State if is dodging. \end{DoxyCompactList}\item 
 Vector2D \mbox{\hyperlink{classcharacter_1_1_entity_affb85dd4e2e50c30c643c08b6d29681b}{buffered\+Movement}}
-\item 
+\begin{DoxyCompactList}\small\item\em The last registered movement before dodging. \end{DoxyCompactList}\item 
 Animation \mbox{\hyperlink{classcharacter_1_1_entity_a15fe9214a0c0c7d36dc130bed22b2e6f}{current}}
-\item 
+\begin{DoxyCompactList}\small\item\em The Animation currently playing. \end{DoxyCompactList}\item 
 Animation \mbox{\hyperlink{classcharacter_1_1_entity_adda9fa5453c09b2d7fe02e03ad890d58}{standing}}
-\item 
+\begin{DoxyCompactList}\small\item\em The idle animation. \end{DoxyCompactList}\item 
 Animation \mbox{\hyperlink{classcharacter_1_1_entity_a0ef1666eeca79e487231c318df715924}{left\+Run}}
-\item 
+\begin{DoxyCompactList}\small\item\em The animation when running left. \end{DoxyCompactList}\item 
 Animation \mbox{\hyperlink{classcharacter_1_1_entity_a39e202e43b8c70cd3a35056d8af35ee0}{right\+Run}}
-\item 
+\begin{DoxyCompactList}\small\item\em The animation when running right. \end{DoxyCompactList}\item 
 Animation \mbox{\hyperlink{classcharacter_1_1_entity_ae1b64d590914e3c384041d2c24ec5cf4}{left\+Attack}}
-\item 
+\begin{DoxyCompactList}\small\item\em The animation when attacking left. \end{DoxyCompactList}\item 
 Animation \mbox{\hyperlink{classcharacter_1_1_entity_a5df83d48c434f80977efdb37cff338d4}{right\+Attack}}
-\item 
+\begin{DoxyCompactList}\small\item\em The animation when attacking right. \end{DoxyCompactList}\item 
 Animation \mbox{\hyperlink{classcharacter_1_1_entity_a191d82da193a5a25465af94ce5d00aec}{right\+Dodge}}
-\item 
+\begin{DoxyCompactList}\small\item\em The animation when dodging left. \end{DoxyCompactList}\item 
 Animation \mbox{\hyperlink{classcharacter_1_1_entity_a623ffd1a5f3a208599e95669e65242ab}{left\+Dodge}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The animation when dodging right. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class represents an arbitrary entity. It should be a base for all entities. 
+
+\begin{DoxyAuthor}{Author}
+Kevin Fedyna 
+
+Imene Bousmaha 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+16/11/2023
+\end{DoxyDate}
+
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classcharacter_1_1_player}{character.\+Player} 
+\end{DoxySeeAlso}
 
 
 \doxysubsection{Member Function Documentation}
@@ -90,20 +113,32 @@ Animation \mbox{\hyperlink{classcharacter_1_1_entity_a623ffd1a5f3a208599e95669e6
 \doxysubsubsection{\texorpdfstring{attack()}{attack()}}
 {\footnotesize\ttfamily void character.\+Entity.\+attack (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Put the entity into attack state \Hypertarget{classcharacter_1_1_entity_acf34692aa2cb7927e97fd1b6f8cadbd4}\label{classcharacter_1_1_entity_acf34692aa2cb7927e97fd1b6f8cadbd4} 
+
+
+Put the entity into attack state. 
+
+\Hypertarget{classcharacter_1_1_entity_acf34692aa2cb7927e97fd1b6f8cadbd4}\label{classcharacter_1_1_entity_acf34692aa2cb7927e97fd1b6f8cadbd4} 
 \index{character.Entity@{character.Entity}!dodge@{dodge}}
 \index{dodge@{dodge}!character.Entity@{character.Entity}}
 \doxysubsubsection{\texorpdfstring{dodge()}{dodge()}}
 {\footnotesize\ttfamily void character.\+Entity.\+dodge (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Put the entity into dodge state \Hypertarget{classcharacter_1_1_entity_a5fbe70c0eac66ce03c8fbd5f1ca83e0f}\label{classcharacter_1_1_entity_a5fbe70c0eac66ce03c8fbd5f1ca83e0f} 
+
+
+Put the entity into dodge state. 
+
+\Hypertarget{classcharacter_1_1_entity_a5fbe70c0eac66ce03c8fbd5f1ca83e0f}\label{classcharacter_1_1_entity_a5fbe70c0eac66ce03c8fbd5f1ca83e0f} 
 \index{character.Entity@{character.Entity}!getOffset@{getOffset}}
 \index{getOffset@{getOffset}!character.Entity@{character.Entity}}
 \doxysubsubsection{\texorpdfstring{getOffset()}{getOffset()}}
 {\footnotesize\ttfamily abstract Vector2D character.\+Entity.\+get\+Offset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}}
 
-Use this function to return offsets depending on contexts and sprites \begin{DoxyReturn}{Returns}
-A Vector2D representing offset to apply (specific to base sprite) 
+
+
+Use this function to return offsets depending on contexts and sprites. 
+
+\begin{DoxyReturn}{Returns}
+A Vector2D representing offset to apply (specific to base sprite). 
 \end{DoxyReturn}
 
 
@@ -115,8 +150,12 @@ Reimplemented in \mbox{\hyperlink{classcharacter_1_1_player_a6e11e546335ad7dda96
 \doxysubsubsection{\texorpdfstring{getPosition()}{getPosition()}}
 {\footnotesize\ttfamily Vector2D character.\+Entity.\+get\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Get the Vector2D representation of entity position \begin{DoxyReturn}{Returns}
-The position vector of the entity 
+
+
+Get the Vector2D representation of entity position. 
+
+\begin{DoxyReturn}{Returns}
+The position vector of the entity. 
 \end{DoxyReturn}
 \Hypertarget{classcharacter_1_1_entity_a2ebbeb658f3d46482f75861beebbedda}\label{classcharacter_1_1_entity_a2ebbeb658f3d46482f75861beebbedda} 
 \index{character.Entity@{character.Entity}!getSprite@{getSprite}}
@@ -124,8 +163,12 @@ The position vector of the entity
 \doxysubsubsection{\texorpdfstring{getSprite()}{getSprite()}}
 {\footnotesize\ttfamily Buffered\+Image character.\+Entity.\+get\+Sprite (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Get entity sprite to display \begin{DoxyReturn}{Returns}
-Current sprite 
+
+
+Get entity sprite to display. 
+
+\begin{DoxyReturn}{Returns}
+Current sprite. 
 \end{DoxyReturn}
 \Hypertarget{classcharacter_1_1_entity_ac3f49661959ccc96f30ab1ba17a43abd}\label{classcharacter_1_1_entity_ac3f49661959ccc96f30ab1ba17a43abd} 
 \index{character.Entity@{character.Entity}!getSpriteSize@{getSpriteSize}}
@@ -133,8 +176,12 @@ Current sprite
 \doxysubsubsection{\texorpdfstring{getSpriteSize()}{getSpriteSize()}}
 {\footnotesize\ttfamily Vector2D character.\+Entity.\+get\+Sprite\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Get entity sprite size \begin{DoxyReturn}{Returns}
-The size in the form of \{width, height\} 
+
+
+Get entity sprite size. 
+
+\begin{DoxyReturn}{Returns}
+The size in the form of \{width, height\}. 
 \end{DoxyReturn}
 \Hypertarget{classcharacter_1_1_entity_a8f733ea1bcaed91d959d32489212e2c6}\label{classcharacter_1_1_entity_a8f733ea1bcaed91d959d32489212e2c6} 
 \index{character.Entity@{character.Entity}!isAttacking@{isAttacking}}
@@ -142,8 +189,12 @@ The size in the form of \{width, height\}
 \doxysubsubsection{\texorpdfstring{isAttacking()}{isAttacking()}}
 {\footnotesize\ttfamily boolean character.\+Entity.\+is\+Attacking (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Get the attacking state of the entity \begin{DoxyReturn}{Returns}
-The attacking state 
+
+
+Get the attacking state of the entity. 
+
+\begin{DoxyReturn}{Returns}
+The attacking state. 
 \end{DoxyReturn}
 \Hypertarget{classcharacter_1_1_entity_a69a282b36cc8512d4900cb398d8a4a81}\label{classcharacter_1_1_entity_a69a282b36cc8512d4900cb398d8a4a81} 
 \index{character.Entity@{character.Entity}!isDodging@{isDodging}}
@@ -151,8 +202,12 @@ The attacking state
 \doxysubsubsection{\texorpdfstring{isDodging()}{isDodging()}}
 {\footnotesize\ttfamily boolean character.\+Entity.\+is\+Dodging (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Get the dodging state of the entity \begin{DoxyReturn}{Returns}
-The dodging state 
+
+
+Get the dodging state of the entity. 
+
+\begin{DoxyReturn}{Returns}
+The dodging state. 
 \end{DoxyReturn}
 \Hypertarget{classcharacter_1_1_entity_a809cc5ecb57547943ccb24c3affb156e}\label{classcharacter_1_1_entity_a809cc5ecb57547943ccb24c3affb156e} 
 \index{character.Entity@{character.Entity}!isFacingLeft@{isFacingLeft}}
@@ -160,8 +215,12 @@ The dodging state
 \doxysubsubsection{\texorpdfstring{isFacingLeft()}{isFacingLeft()}}
 {\footnotesize\ttfamily boolean character.\+Entity.\+is\+Facing\+Left (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Get the entity\textquotesingle{}s orientation \begin{DoxyReturn}{Returns}
-true if facing left 
+
+
+Get the entity\textquotesingle{}s orientation. 
+
+\begin{DoxyReturn}{Returns}
+true if facing left. 
 \end{DoxyReturn}
 \Hypertarget{classcharacter_1_1_entity_a2287d32a8d8a5af00c623b09d87cec70}\label{classcharacter_1_1_entity_a2287d32a8d8a5af00c623b09d87cec70} 
 \index{character.Entity@{character.Entity}!move@{move}}
@@ -169,11 +228,15 @@ true if facing left
 \doxysubsubsection{\texorpdfstring{move()}{move()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily void character.\+Entity.\+move (\begin{DoxyParamCaption}\item[{double}]{dx,  }\item[{double}]{dy }\end{DoxyParamCaption})}
 
-Move Entity by a given vector 
+
+
+Move Entity by a given vector. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em dx} & x coordinate of vector \\
+{\em dx} & x coordinate of vector. \\
 \hline
-{\em dy} & y coordinate of vector \\
+{\em dy} & y coordinate of vector. \\
 \hline
 \end{DoxyParams}
 \Hypertarget{classcharacter_1_1_entity_aa3fca5ad5aff028d27a00c744a92523b}\label{classcharacter_1_1_entity_aa3fca5ad5aff028d27a00c744a92523b} 
@@ -182,9 +245,13 @@ Move Entity by a given vector
 \doxysubsubsection{\texorpdfstring{move()}{move()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily void character.\+Entity.\+move (\begin{DoxyParamCaption}\item[{Vector2D}]{movement }\end{DoxyParamCaption})}
 
-Move Entity by a given vector 
+
+
+Move Entity by a given vector. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em movement} & The \mbox{[}dx, dy\mbox{]} vector \\
+{\em movement} & The \mbox{[}dx, dy\mbox{]} vector. \\
 \hline
 \end{DoxyParams}
 \Hypertarget{classcharacter_1_1_entity_aaebac27ea5505a17c97a509c99fd6c38}\label{classcharacter_1_1_entity_aaebac27ea5505a17c97a509c99fd6c38} 
@@ -193,9 +260,13 @@ Move Entity by a given vector
 \doxysubsubsection{\texorpdfstring{setAnimations()}{setAnimations()}}
 {\footnotesize\ttfamily void character.\+Entity.\+set\+Animations (\begin{DoxyParamCaption}\item[{String}]{dir }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
-Go through all basic animations and load them 
+
+
+Go through all basic animations and load them. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em dir} & The folder contaning all frames \\
+{\em dir} & The folder contaning all frames. \\
 \hline
 \end{DoxyParams}
 \Hypertarget{classcharacter_1_1_entity_a28bfab6b4ff0f725051bbe22d013bda5}\label{classcharacter_1_1_entity_a28bfab6b4ff0f725051bbe22d013bda5} 
@@ -204,9 +275,15 @@ Go through all basic animations and load them
 \doxysubsubsection{\texorpdfstring{swapAnimation()}{swapAnimation()}}
 {\footnotesize\ttfamily void character.\+Entity.\+swap\+Animation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{enumcharacter_1_1_entity_1_1_animation_index}{Animation\+Index}}}]{animation\+Index }\end{DoxyParamCaption})}
 
-Change the animation to display If the animation is the same than before, no change is made 
+
+
+Change the animation to display. 
+
+If the animation is the same than before, no change is made.
+
+
 \begin{DoxyParams}{Parameters}
-{\em animation\+Index} & A constant index that describes the type of animation \\
+{\em animation\+Index} & A constant index that describes the type of animation. \\
 \hline
 \end{DoxyParams}
 
@@ -218,11 +295,19 @@ Change the animation to display If the animation is the same than before, no cha
 \doxysubsubsection{\texorpdfstring{bufferedMovement}{bufferedMovement}}
 {\footnotesize\ttfamily Vector2D character.\+Entity.\+buffered\+Movement\hspace{0.3cm}{\ttfamily [protected]}}
 
+
+
+The last registered movement before dodging. 
+
 \Hypertarget{classcharacter_1_1_entity_a7b76d22fc2f84b550979dd30e0fae687}\label{classcharacter_1_1_entity_a7b76d22fc2f84b550979dd30e0fae687} 
 \index{character.Entity@{character.Entity}!coordinates@{coordinates}}
 \index{coordinates@{coordinates}!character.Entity@{character.Entity}}
 \doxysubsubsection{\texorpdfstring{coordinates}{coordinates}}
 {\footnotesize\ttfamily Vector2D character.\+Entity.\+coordinates}
+
+
+
+The coordinates in absolute positions. 
 
 \Hypertarget{classcharacter_1_1_entity_a15fe9214a0c0c7d36dc130bed22b2e6f}\label{classcharacter_1_1_entity_a15fe9214a0c0c7d36dc130bed22b2e6f} 
 \index{character.Entity@{character.Entity}!current@{current}}
@@ -230,11 +315,19 @@ Change the animation to display If the animation is the same than before, no cha
 \doxysubsubsection{\texorpdfstring{current}{current}}
 {\footnotesize\ttfamily Animation character.\+Entity.\+current\hspace{0.3cm}{\ttfamily [protected]}}
 
+
+
+The Animation currently playing. 
+
 \Hypertarget{classcharacter_1_1_entity_ab98e97310ca85981da90ff9dbfd4035f}\label{classcharacter_1_1_entity_ab98e97310ca85981da90ff9dbfd4035f} 
 \index{character.Entity@{character.Entity}!height@{height}}
 \index{height@{height}!character.Entity@{character.Entity}}
 \doxysubsubsection{\texorpdfstring{height}{height}}
 {\footnotesize\ttfamily int character.\+Entity.\+height}
+
+
+
+The height of the entity. 
 
 \Hypertarget{classcharacter_1_1_entity_a824044a93399412de9f4c1a32a6dcd6e}\label{classcharacter_1_1_entity_a824044a93399412de9f4c1a32a6dcd6e} 
 \index{character.Entity@{character.Entity}!isAttacking@{isAttacking}}
@@ -242,11 +335,19 @@ Change the animation to display If the animation is the same than before, no cha
 \doxysubsubsection{\texorpdfstring{isAttacking}{isAttacking}}
 {\footnotesize\ttfamily boolean character.\+Entity.\+is\+Attacking\hspace{0.3cm}{\ttfamily [protected]}}
 
+
+
+State if is attacking. 
+
 \Hypertarget{classcharacter_1_1_entity_ae5bb21e84a54cd46ff936c560b7b05df}\label{classcharacter_1_1_entity_ae5bb21e84a54cd46ff936c560b7b05df} 
 \index{character.Entity@{character.Entity}!isDodging@{isDodging}}
 \index{isDodging@{isDodging}!character.Entity@{character.Entity}}
 \doxysubsubsection{\texorpdfstring{isDodging}{isDodging}}
 {\footnotesize\ttfamily boolean character.\+Entity.\+is\+Dodging\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+State if is dodging. 
 
 \Hypertarget{classcharacter_1_1_entity_a076efb9e12510cbdaeb28c52e7766e1c}\label{classcharacter_1_1_entity_a076efb9e12510cbdaeb28c52e7766e1c} 
 \index{character.Entity@{character.Entity}!isFacingLeft@{isFacingLeft}}
@@ -254,11 +355,19 @@ Change the animation to display If the animation is the same than before, no cha
 \doxysubsubsection{\texorpdfstring{isFacingLeft}{isFacingLeft}}
 {\footnotesize\ttfamily boolean character.\+Entity.\+is\+Facing\+Left\hspace{0.3cm}{\ttfamily [protected]}}
 
+
+
+State if is facing left. 
+
 \Hypertarget{classcharacter_1_1_entity_ae1b64d590914e3c384041d2c24ec5cf4}\label{classcharacter_1_1_entity_ae1b64d590914e3c384041d2c24ec5cf4} 
 \index{character.Entity@{character.Entity}!leftAttack@{leftAttack}}
 \index{leftAttack@{leftAttack}!character.Entity@{character.Entity}}
 \doxysubsubsection{\texorpdfstring{leftAttack}{leftAttack}}
 {\footnotesize\ttfamily Animation character.\+Entity.\+left\+Attack\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The animation when attacking left. 
 
 \Hypertarget{classcharacter_1_1_entity_a623ffd1a5f3a208599e95669e65242ab}\label{classcharacter_1_1_entity_a623ffd1a5f3a208599e95669e65242ab} 
 \index{character.Entity@{character.Entity}!leftDodge@{leftDodge}}
@@ -266,11 +375,19 @@ Change the animation to display If the animation is the same than before, no cha
 \doxysubsubsection{\texorpdfstring{leftDodge}{leftDodge}}
 {\footnotesize\ttfamily Animation character.\+Entity.\+left\+Dodge\hspace{0.3cm}{\ttfamily [protected]}}
 
+
+
+The animation when dodging right. 
+
 \Hypertarget{classcharacter_1_1_entity_a0ef1666eeca79e487231c318df715924}\label{classcharacter_1_1_entity_a0ef1666eeca79e487231c318df715924} 
 \index{character.Entity@{character.Entity}!leftRun@{leftRun}}
 \index{leftRun@{leftRun}!character.Entity@{character.Entity}}
 \doxysubsubsection{\texorpdfstring{leftRun}{leftRun}}
 {\footnotesize\ttfamily Animation character.\+Entity.\+left\+Run\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The animation when running left. 
 
 \Hypertarget{classcharacter_1_1_entity_a7d1698374f6e43786f9ef81405626198}\label{classcharacter_1_1_entity_a7d1698374f6e43786f9ef81405626198} 
 \index{character.Entity@{character.Entity}!name@{name}}
@@ -278,11 +395,19 @@ Change the animation to display If the animation is the same than before, no cha
 \doxysubsubsection{\texorpdfstring{name}{name}}
 {\footnotesize\ttfamily String character.\+Entity.\+name}
 
+
+
+The name of the entity. 
+
 \Hypertarget{classcharacter_1_1_entity_a5df83d48c434f80977efdb37cff338d4}\label{classcharacter_1_1_entity_a5df83d48c434f80977efdb37cff338d4} 
 \index{character.Entity@{character.Entity}!rightAttack@{rightAttack}}
 \index{rightAttack@{rightAttack}!character.Entity@{character.Entity}}
 \doxysubsubsection{\texorpdfstring{rightAttack}{rightAttack}}
 {\footnotesize\ttfamily Animation character.\+Entity.\+right\+Attack\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The animation when attacking right. 
 
 \Hypertarget{classcharacter_1_1_entity_a191d82da193a5a25465af94ce5d00aec}\label{classcharacter_1_1_entity_a191d82da193a5a25465af94ce5d00aec} 
 \index{character.Entity@{character.Entity}!rightDodge@{rightDodge}}
@@ -290,11 +415,19 @@ Change the animation to display If the animation is the same than before, no cha
 \doxysubsubsection{\texorpdfstring{rightDodge}{rightDodge}}
 {\footnotesize\ttfamily Animation character.\+Entity.\+right\+Dodge\hspace{0.3cm}{\ttfamily [protected]}}
 
+
+
+The animation when dodging left. 
+
 \Hypertarget{classcharacter_1_1_entity_a39e202e43b8c70cd3a35056d8af35ee0}\label{classcharacter_1_1_entity_a39e202e43b8c70cd3a35056d8af35ee0} 
 \index{character.Entity@{character.Entity}!rightRun@{rightRun}}
 \index{rightRun@{rightRun}!character.Entity@{character.Entity}}
 \doxysubsubsection{\texorpdfstring{rightRun}{rightRun}}
 {\footnotesize\ttfamily Animation character.\+Entity.\+right\+Run\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The animation when running right. 
 
 \Hypertarget{classcharacter_1_1_entity_adda9fa5453c09b2d7fe02e03ad890d58}\label{classcharacter_1_1_entity_adda9fa5453c09b2d7fe02e03ad890d58} 
 \index{character.Entity@{character.Entity}!standing@{standing}}
@@ -302,11 +435,19 @@ Change the animation to display If the animation is the same than before, no cha
 \doxysubsubsection{\texorpdfstring{standing}{standing}}
 {\footnotesize\ttfamily Animation character.\+Entity.\+standing\hspace{0.3cm}{\ttfamily [protected]}}
 
+
+
+The idle animation. 
+
 \Hypertarget{classcharacter_1_1_entity_ae5ed55792826bb904435e31c90a5c1c5}\label{classcharacter_1_1_entity_ae5ed55792826bb904435e31c90a5c1c5} 
 \index{character.Entity@{character.Entity}!width@{width}}
 \index{width@{width}!character.Entity@{character.Entity}}
 \doxysubsubsection{\texorpdfstring{width}{width}}
 {\footnotesize\ttfamily int character.\+Entity.\+width}
+
+
+
+The width of the entity. 
 
 
 
