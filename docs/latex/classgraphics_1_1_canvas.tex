@@ -1,0 +1,154 @@
+\doxysection{graphics.\+Canvas Class Reference}
+\hypertarget{classgraphics_1_1_canvas}{}\label{classgraphics_1_1_canvas}\index{graphics.Canvas@{graphics.Canvas}}
+Inheritance diagram for graphics.\+Canvas\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classgraphics_1_1_canvas}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgraphics_1_1_canvas_ac44b5e55e635b38c3f393dc45bf10bcf}{Canvas}} ()
+\item 
+\mbox{\hyperlink{classgraphics_1_1_canvas_a81ee3442398153350af065c9407626c1}{Canvas}} (boolean \mbox{\hyperlink{classgraphics_1_1_canvas_a0ff2c64ef0866e60614e6cd130a6cd62}{is\+Fullscreen}})
+\item 
+Dimension \mbox{\hyperlink{classgraphics_1_1_canvas_afe167860f8ed4b0cc819334622945b47}{get\+Preferred\+Size}} ()
+\item 
+void \mbox{\hyperlink{classgraphics_1_1_canvas_a8292b012b2cb105b2924688d394b13d4}{update}} (Graphics g)
+\item 
+Vector2D \mbox{\hyperlink{classgraphics_1_1_canvas_aad20479667dc27e2104a3a26502b2753}{get\+Center}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classgraphics_1_1_canvas_a5502dd13c1c84b9af48da467f15f56d7}{paint\+Component}} (Graphics g)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+boolean \mbox{\hyperlink{classgraphics_1_1_canvas_a0ff2c64ef0866e60614e6cd130a6cd62}{is\+Fullscreen}}
+\item 
+Timer \mbox{\hyperlink{classgraphics_1_1_canvas_a1a80626fb9dbc8a965b43d01b8fefe8c}{timer}}
+\item 
+\mbox{\hyperlink{classgraphics_1_1_camera}{Camera}} \mbox{\hyperlink{classgraphics_1_1_canvas_a1985d48d8f8ceed866a06d3cedfcf01d}{camera}}
+\item 
+Player \mbox{\hyperlink{classgraphics_1_1_canvas_a528c10919254bfcb159f77ee956be088}{player}}
+\item 
+Player \mbox{\hyperlink{classgraphics_1_1_canvas_a8bad2f809137d663118429948ef98ac7}{player2}}
+\item 
+\mbox{\hyperlink{classgraphics_1_1_key_stack}{Key\+Stack}} \mbox{\hyperlink{classgraphics_1_1_canvas_a6cb6c8447eea02a0e1bcdd2d6ed3ea07}{stack}}
+\item 
+boolean \mbox{\hyperlink{classgraphics_1_1_canvas_a8de145a173fad68f656af34f598c199e}{was\+ReleasedO}}
+\item 
+boolean \mbox{\hyperlink{classgraphics_1_1_canvas_a6377f36e4aff67ebbb69fd3f1a72b8d7}{was\+Released\+Space}}
+\item 
+Map \mbox{\hyperlink{classgraphics_1_1_canvas_ab03655da6af1c020355409402765c664}{map}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classgraphics_1_1_canvas_ac44b5e55e635b38c3f393dc45bf10bcf}\label{classgraphics_1_1_canvas_ac44b5e55e635b38c3f393dc45bf10bcf} 
+\index{graphics.Canvas@{graphics.Canvas}!Canvas@{Canvas}}
+\index{Canvas@{Canvas}!graphics.Canvas@{graphics.Canvas}}
+\doxysubsubsection{\texorpdfstring{Canvas()}{Canvas()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily graphics.\+Canvas.\+Canvas (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classgraphics_1_1_canvas_a81ee3442398153350af065c9407626c1}\label{classgraphics_1_1_canvas_a81ee3442398153350af065c9407626c1} 
+\index{graphics.Canvas@{graphics.Canvas}!Canvas@{Canvas}}
+\index{Canvas@{Canvas}!graphics.Canvas@{graphics.Canvas}}
+\doxysubsubsection{\texorpdfstring{Canvas()}{Canvas()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily graphics.\+Canvas.\+Canvas (\begin{DoxyParamCaption}\item[{boolean}]{is\+Fullscreen }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classgraphics_1_1_canvas_aad20479667dc27e2104a3a26502b2753}\label{classgraphics_1_1_canvas_aad20479667dc27e2104a3a26502b2753} 
+\index{graphics.Canvas@{graphics.Canvas}!getCenter@{getCenter}}
+\index{getCenter@{getCenter}!graphics.Canvas@{graphics.Canvas}}
+\doxysubsubsection{\texorpdfstring{getCenter()}{getCenter()}}
+{\footnotesize\ttfamily Vector2D graphics.\+Canvas.\+get\+Center (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get Canvas center point \begin{DoxyReturn}{Returns}
+A Vector2D containing the point 
+\end{DoxyReturn}
+\Hypertarget{classgraphics_1_1_canvas_afe167860f8ed4b0cc819334622945b47}\label{classgraphics_1_1_canvas_afe167860f8ed4b0cc819334622945b47} 
+\index{graphics.Canvas@{graphics.Canvas}!getPreferredSize@{getPreferredSize}}
+\index{getPreferredSize@{getPreferredSize}!graphics.Canvas@{graphics.Canvas}}
+\doxysubsubsection{\texorpdfstring{getPreferredSize()}{getPreferredSize()}}
+{\footnotesize\ttfamily Dimension graphics.\+Canvas.\+get\+Preferred\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classgraphics_1_1_canvas_a5502dd13c1c84b9af48da467f15f56d7}\label{classgraphics_1_1_canvas_a5502dd13c1c84b9af48da467f15f56d7} 
+\index{graphics.Canvas@{graphics.Canvas}!paintComponent@{paintComponent}}
+\index{paintComponent@{paintComponent}!graphics.Canvas@{graphics.Canvas}}
+\doxysubsubsection{\texorpdfstring{paintComponent()}{paintComponent()}}
+{\footnotesize\ttfamily void graphics.\+Canvas.\+paint\+Component (\begin{DoxyParamCaption}\item[{Graphics}]{g }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classgraphics_1_1_canvas_a8292b012b2cb105b2924688d394b13d4}\label{classgraphics_1_1_canvas_a8292b012b2cb105b2924688d394b13d4} 
+\index{graphics.Canvas@{graphics.Canvas}!update@{update}}
+\index{update@{update}!graphics.Canvas@{graphics.Canvas}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void graphics.\+Canvas.\+update (\begin{DoxyParamCaption}\item[{Graphics}]{g }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classgraphics_1_1_canvas_a1985d48d8f8ceed866a06d3cedfcf01d}\label{classgraphics_1_1_canvas_a1985d48d8f8ceed866a06d3cedfcf01d} 
+\index{graphics.Canvas@{graphics.Canvas}!camera@{camera}}
+\index{camera@{camera}!graphics.Canvas@{graphics.Canvas}}
+\doxysubsubsection{\texorpdfstring{camera}{camera}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classgraphics_1_1_camera}{Camera}} graphics.\+Canvas.\+camera\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classgraphics_1_1_canvas_a0ff2c64ef0866e60614e6cd130a6cd62}\label{classgraphics_1_1_canvas_a0ff2c64ef0866e60614e6cd130a6cd62} 
+\index{graphics.Canvas@{graphics.Canvas}!isFullscreen@{isFullscreen}}
+\index{isFullscreen@{isFullscreen}!graphics.Canvas@{graphics.Canvas}}
+\doxysubsubsection{\texorpdfstring{isFullscreen}{isFullscreen}}
+{\footnotesize\ttfamily boolean graphics.\+Canvas.\+is\+Fullscreen\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classgraphics_1_1_canvas_ab03655da6af1c020355409402765c664}\label{classgraphics_1_1_canvas_ab03655da6af1c020355409402765c664} 
+\index{graphics.Canvas@{graphics.Canvas}!map@{map}}
+\index{map@{map}!graphics.Canvas@{graphics.Canvas}}
+\doxysubsubsection{\texorpdfstring{map}{map}}
+{\footnotesize\ttfamily Map graphics.\+Canvas.\+map\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classgraphics_1_1_canvas_a528c10919254bfcb159f77ee956be088}\label{classgraphics_1_1_canvas_a528c10919254bfcb159f77ee956be088} 
+\index{graphics.Canvas@{graphics.Canvas}!player@{player}}
+\index{player@{player}!graphics.Canvas@{graphics.Canvas}}
+\doxysubsubsection{\texorpdfstring{player}{player}}
+{\footnotesize\ttfamily Player graphics.\+Canvas.\+player\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classgraphics_1_1_canvas_a8bad2f809137d663118429948ef98ac7}\label{classgraphics_1_1_canvas_a8bad2f809137d663118429948ef98ac7} 
+\index{graphics.Canvas@{graphics.Canvas}!player2@{player2}}
+\index{player2@{player2}!graphics.Canvas@{graphics.Canvas}}
+\doxysubsubsection{\texorpdfstring{player2}{player2}}
+{\footnotesize\ttfamily Player graphics.\+Canvas.\+player2\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classgraphics_1_1_canvas_a6cb6c8447eea02a0e1bcdd2d6ed3ea07}\label{classgraphics_1_1_canvas_a6cb6c8447eea02a0e1bcdd2d6ed3ea07} 
+\index{graphics.Canvas@{graphics.Canvas}!stack@{stack}}
+\index{stack@{stack}!graphics.Canvas@{graphics.Canvas}}
+\doxysubsubsection{\texorpdfstring{stack}{stack}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classgraphics_1_1_key_stack}{Key\+Stack}} graphics.\+Canvas.\+stack\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classgraphics_1_1_canvas_a1a80626fb9dbc8a965b43d01b8fefe8c}\label{classgraphics_1_1_canvas_a1a80626fb9dbc8a965b43d01b8fefe8c} 
+\index{graphics.Canvas@{graphics.Canvas}!timer@{timer}}
+\index{timer@{timer}!graphics.Canvas@{graphics.Canvas}}
+\doxysubsubsection{\texorpdfstring{timer}{timer}}
+{\footnotesize\ttfamily Timer graphics.\+Canvas.\+timer\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classgraphics_1_1_canvas_a8de145a173fad68f656af34f598c199e}\label{classgraphics_1_1_canvas_a8de145a173fad68f656af34f598c199e} 
+\index{graphics.Canvas@{graphics.Canvas}!wasReleasedO@{wasReleasedO}}
+\index{wasReleasedO@{wasReleasedO}!graphics.Canvas@{graphics.Canvas}}
+\doxysubsubsection{\texorpdfstring{wasReleasedO}{wasReleasedO}}
+{\footnotesize\ttfamily boolean graphics.\+Canvas.\+was\+ReleasedO\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classgraphics_1_1_canvas_a6377f36e4aff67ebbb69fd3f1a72b8d7}\label{classgraphics_1_1_canvas_a6377f36e4aff67ebbb69fd3f1a72b8d7} 
+\index{graphics.Canvas@{graphics.Canvas}!wasReleasedSpace@{wasReleasedSpace}}
+\index{wasReleasedSpace@{wasReleasedSpace}!graphics.Canvas@{graphics.Canvas}}
+\doxysubsubsection{\texorpdfstring{wasReleasedSpace}{wasReleasedSpace}}
+{\footnotesize\ttfamily boolean graphics.\+Canvas.\+was\+Released\+Space\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/graphics/\mbox{\hyperlink{_canvas_8java}{Canvas.\+java}}\end{DoxyCompactItemize}

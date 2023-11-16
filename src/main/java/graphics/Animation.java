@@ -1,5 +1,5 @@
 /**
- * @brief This file contains the public class @ref Animation
+ * @brief This file contains the public class Animation
  * 
  * @file Animation.java
  * @author Kevin Fedyna
@@ -39,11 +39,17 @@ public class Animation {
      */
     public static final String RESOURCES_FOLDER = "../src/main/resources/";
     
+    /** @brief An array containing the frames. */
     private BufferedImage[] frames;
+    /** @brief Timer used for the loop. */
     private Timer frameTimer;
+    /** @brief Timer used for the playOnce method. */
     private Timer frameOnceTimer;
+    /** @brief The total number of frames. */
     private int frameCounter;
+    /** @brief The index of the current frame. */
     private int frameIndex;
+    /** @brief A boolean describing if the animation is playing. */
     private boolean isPlaying;
 
     /**

@@ -1,0 +1,122 @@
+\doxysection{character.\+Player Class Reference}
+\hypertarget{classcharacter_1_1_player}{}\label{classcharacter_1_1_player}\index{character.Player@{character.Player}}
+Inheritance diagram for character.\+Player\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcharacter_1_1_player}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcharacter_1_1_player_addf96d54489ab2d327f356ac253332a7}{Player}} ()
+\item 
+\mbox{\hyperlink{classcharacter_1_1_player_ac14e19cf2a4402af9ae335df4eefcaba}{Player}} (double x, double y)
+\item 
+Vector2D \mbox{\hyperlink{classcharacter_1_1_player_a6e11e546335ad7dda96ddc9682fa03a0}{get\+Offset}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classcharacter_1_1_entity}{character.\+Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+Vector2D \mbox{\hyperlink{classcharacter_1_1_entity_a556404102a812f8957e71771bfebeb6a}{get\+Position}} ()
+\item 
+void \mbox{\hyperlink{classcharacter_1_1_entity_a2287d32a8d8a5af00c623b09d87cec70}{move}} (double dx, double dy)
+\item 
+void \mbox{\hyperlink{classcharacter_1_1_entity_aa3fca5ad5aff028d27a00c744a92523b}{move}} (Vector2D movement)
+\item 
+void \mbox{\hyperlink{classcharacter_1_1_entity_a3918617dafb901349f081368c4cd80cd}{attack}} ()
+\item 
+boolean \mbox{\hyperlink{classcharacter_1_1_entity_a8f733ea1bcaed91d959d32489212e2c6}{is\+Attacking}} ()
+\item 
+void \mbox{\hyperlink{classcharacter_1_1_entity_acf34692aa2cb7927e97fd1b6f8cadbd4}{dodge}} ()
+\item 
+boolean \mbox{\hyperlink{classcharacter_1_1_entity_a69a282b36cc8512d4900cb398d8a4a81}{is\+Dodging}} ()
+\item 
+boolean \mbox{\hyperlink{classcharacter_1_1_entity_a809cc5ecb57547943ccb24c3affb156e}{is\+Facing\+Left}} ()
+\item 
+Buffered\+Image \mbox{\hyperlink{classcharacter_1_1_entity_a2ebbeb658f3d46482f75861beebbedda}{get\+Sprite}} ()
+\item 
+Vector2D \mbox{\hyperlink{classcharacter_1_1_entity_ac3f49661959ccc96f30ab1ba17a43abd}{get\+Sprite\+Size}} ()
+\item 
+void \mbox{\hyperlink{classcharacter_1_1_entity_a28bfab6b4ff0f725051bbe22d013bda5}{swap\+Animation}} (\mbox{\hyperlink{enumcharacter_1_1_entity_1_1_animation_index}{Animation\+Index}} animation\+Index)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classcharacter_1_1_entity}{character.\+Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+Vector2D \mbox{\hyperlink{classcharacter_1_1_entity_a7b76d22fc2f84b550979dd30e0fae687}{coordinates}}
+\item 
+int \mbox{\hyperlink{classcharacter_1_1_entity_ab98e97310ca85981da90ff9dbfd4035f}{height}}
+\item 
+int \mbox{\hyperlink{classcharacter_1_1_entity_ae5ed55792826bb904435e31c90a5c1c5}{width}}
+\item 
+String \mbox{\hyperlink{classcharacter_1_1_entity_a7d1698374f6e43786f9ef81405626198}{name}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classcharacter_1_1_entity}{character.\+Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classcharacter_1_1_entity_aaebac27ea5505a17c97a509c99fd6c38}{set\+Animations}} (String dir)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classcharacter_1_1_entity}{character.\+Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+boolean \mbox{\hyperlink{classcharacter_1_1_entity_a824044a93399412de9f4c1a32a6dcd6e}{is\+Attacking}}
+\item 
+boolean \mbox{\hyperlink{classcharacter_1_1_entity_a076efb9e12510cbdaeb28c52e7766e1c}{is\+Facing\+Left}}
+\item 
+boolean \mbox{\hyperlink{classcharacter_1_1_entity_ae5bb21e84a54cd46ff936c560b7b05df}{is\+Dodging}}
+\item 
+Vector2D \mbox{\hyperlink{classcharacter_1_1_entity_affb85dd4e2e50c30c643c08b6d29681b}{buffered\+Movement}}
+\item 
+Animation \mbox{\hyperlink{classcharacter_1_1_entity_a15fe9214a0c0c7d36dc130bed22b2e6f}{current}}
+\item 
+Animation \mbox{\hyperlink{classcharacter_1_1_entity_adda9fa5453c09b2d7fe02e03ad890d58}{standing}}
+\item 
+Animation \mbox{\hyperlink{classcharacter_1_1_entity_a0ef1666eeca79e487231c318df715924}{left\+Run}}
+\item 
+Animation \mbox{\hyperlink{classcharacter_1_1_entity_a39e202e43b8c70cd3a35056d8af35ee0}{right\+Run}}
+\item 
+Animation \mbox{\hyperlink{classcharacter_1_1_entity_ae1b64d590914e3c384041d2c24ec5cf4}{left\+Attack}}
+\item 
+Animation \mbox{\hyperlink{classcharacter_1_1_entity_a5df83d48c434f80977efdb37cff338d4}{right\+Attack}}
+\item 
+Animation \mbox{\hyperlink{classcharacter_1_1_entity_a191d82da193a5a25465af94ce5d00aec}{right\+Dodge}}
+\item 
+Animation \mbox{\hyperlink{classcharacter_1_1_entity_a623ffd1a5f3a208599e95669e65242ab}{left\+Dodge}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcharacter_1_1_player_addf96d54489ab2d327f356ac253332a7}\label{classcharacter_1_1_player_addf96d54489ab2d327f356ac253332a7} 
+\index{character.Player@{character.Player}!Player@{Player}}
+\index{Player@{Player}!character.Player@{character.Player}}
+\doxysubsubsection{\texorpdfstring{Player()}{Player()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily character.\+Player.\+Player (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classcharacter_1_1_player_ac14e19cf2a4402af9ae335df4eefcaba}\label{classcharacter_1_1_player_ac14e19cf2a4402af9ae335df4eefcaba} 
+\index{character.Player@{character.Player}!Player@{Player}}
+\index{Player@{Player}!character.Player@{character.Player}}
+\doxysubsubsection{\texorpdfstring{Player()}{Player()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily character.\+Player.\+Player (\begin{DoxyParamCaption}\item[{double}]{x,  }\item[{double}]{y }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcharacter_1_1_player_a6e11e546335ad7dda96ddc9682fa03a0}\label{classcharacter_1_1_player_a6e11e546335ad7dda96ddc9682fa03a0} 
+\index{character.Player@{character.Player}!getOffset@{getOffset}}
+\index{getOffset@{getOffset}!character.Player@{character.Player}}
+\doxysubsubsection{\texorpdfstring{getOffset()}{getOffset()}}
+{\footnotesize\ttfamily Vector2D character.\+Player.\+get\+Offset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Use this function to return offsets depending on contexts and sprites \begin{DoxyReturn}{Returns}
+A Vector2D representing offset to apply (specific to base sprite) 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classcharacter_1_1_entity_a5fbe70c0eac66ce03c8fbd5f1ca83e0f}{character.\+Entity}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/character/\mbox{\hyperlink{_player_8java}{Player.\+java}}\end{DoxyCompactItemize}
