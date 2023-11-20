@@ -1,3 +1,15 @@
+/**
+ * @brief This file contains the public class Entity.
+ * 
+ * @file Entity.java
+ * @author Kevin Fedyna
+ * @author Imene Bousmaha
+ * @date 16/11/2023
+ * 
+ * Part of the `character` package.
+ * It contains a class that represents an arbitrary entity.
+ */
+
 package character;
 
 
@@ -7,49 +19,75 @@ import geometry.Vector2D;
 
 import graphics.Animation;
 
-
+/**
+ * @class Entity
+ * @author Kevin Fedyna
+ * @author Imene Bousmaha
+ * @date 16/11/2023
+ * 
+ * @brief This class represents an arbitrary entity. It should be a base for all entities.
+ * 
+ * @see character.Player
+ */
 public abstract class Entity {
+    /** @brief All possible animations */
     public enum AnimationIndex {
         STANDING, LEFTRUN, RIGHTRUN, ATTACK, DODGE
     };
 
+    /** @brief The coordinates in absolute positions */
     public Vector2D coordinates;
+    /** @brief The height of the entity */
     public int height;
+    /** @brief The width of the entity */
     public int width;
+    /** @brief The name of the entity */
     public String name;
+    /** @brief State if is attacking */
     protected boolean isAttacking;
+    /** @brief State if is facing left */
     protected boolean isFacingLeft;
+    /** @brief State if is dodging */
     protected boolean isDodging;
+    /** @brief The last registered movement before dodging */
     protected Vector2D bufferedMovement;
 
+    /** @brief The Animation currently playing */
     protected Animation current;
 
+    /** @brief The idle animation */
     protected Animation standing;
+    /** @brief The animation when running left */
     protected Animation leftRun;
+    /** @brief The animation when running right */
     protected Animation rightRun;
+    /** @brief The animation when attacking left */
     protected Animation leftAttack;
+    /** @brief The animation when attacking right */
     protected Animation rightAttack;
+    /** @brief The animation when dodging left */
     protected Animation rightDodge;
+    /** @brief The animation when dodging right */
     protected Animation leftDodge;
 
     /**
-     * Get the Vector2D representation of entity position
-     * @return The position vector of the entity
+     * @brief Get the Vector2D representation of entity position.
+     * @return The position vector of the entity.
      */
     public Vector2D getPosition() {
         return this.coordinates;
     }
 
     /**
-     * Use this function to return offsets depending on contexts and sprites
-     * @return A Vector2D representing offset to apply (specific to base sprite)
+     * @brief Use this function to return offsets depending on contexts and sprites.
+     * @return A Vector2D representing offset to apply (specific to base sprite).
      */
     abstract public Vector2D getOffset();
 
     /**
-     * Move Entity by a given vector
-     * @param dx x coordinate of vector
-     * @param dy y coordinate of vector
+     * @brief Move Entity by a given vector.
+     * @param dx x coordinate of vector.
+     * @param dy y coordinate of vector.
      */
     public void move(double dx, double dy) {
         // Dodge state setter
@@ -86,15 +124,15 @@ public abstract class Entity {
     }
 
     /**
-     * Move Entity by a given vector
-     * @param movement The [dx, dy] vector
+     * @brief Move Entity by a given vector.
+     * @param movement The [dx, dy] vector.
      */
     public void move(Vector2D movement) {
         this.move(movement.x, movement.y);
     }
 
     /**
-     * Put the entity into attack state
+     * @brief Put the entity into attack state.
      */
     public void attack() {
         if (!this.isAttacking && !this.isDodging) {
@@ -104,15 +142,15 @@ public abstract class Entity {
     }
 
     /**
-     * Get the attacking state of the entity
-     * @return The attacking state
+     * @brief Get the attacking state of the entity.
+     * @return The attacking state.
      */
     public boolean isAttacking() {
         return this.isAttacking;
     }
 
     /**
-     * Put the entity into dodge state
+     * @brief Put the entity into dodge state.
      */
     public void dodge() {
         if (!this.isDodging && !this.isAttacking) {
@@ -122,24 +160,24 @@ public abstract class Entity {
     }
 
     /**
-     * Get the dodging state of the entity
-     * @return The dodging state
+     * @brief Get the dodging state of the entity.
+     * @return The dodging state.
      */
     public boolean isDodging() {
         return this.isDodging;
     }
 
     /**
-     * Get the entity's orientation
-     * @return true if facing left
+     * @brief Get the entity's orientation.
+     * @return true if facing left.
      */
     public boolean isFacingLeft() {
         return this.isFacingLeft;
     }
 
     /**
-     * Go through all basic animations and load them
-     * @param dir The folder contaning all frames
+     * @brief Go through all basic animations and load them.
+     * @param dir The folder contaning all frames.
      */
     protected void setAnimations(String dir) {
         standing = Animation.load("standing", Animation.RESOURCES_FOLDER + dir, 10);
@@ -155,25 +193,27 @@ public abstract class Entity {
     }
 
     /**
-     * Get entity sprite to display
-     * @return Current sprite
+     * @brief Get entity sprite to display.
+     * @return Current sprite.
      */
     public BufferedImage getSprite() {
         return current.getCurrentFrame();
     }
 
     /**
-     * Get entity sprite size
-     * @return The size in the form of {width, height}
+     * @brief Get entity sprite size.
+     * @return The size in the form of {width, height}.
      */
     public Vector2D getSpriteSize() {
         return current.getSize();
     }
 
     /**
-     * Change the animation to display
-     * If the animation is the same than before, no change is made
-     * @param animationIndex A constant index that describes the type of animation
+     * @brief Change the animation to display.
+     * 
+     * If the animation is the same than before, no change is made.
+     * 
+     * @param animationIndex A constant index that describes the type of animation.
      */
     public void swapAnimation(AnimationIndex animationIndex) {
         if (animationIndex == AnimationIndex.STANDING && this.current != this.standing && !isAttacking && !isDodging) {

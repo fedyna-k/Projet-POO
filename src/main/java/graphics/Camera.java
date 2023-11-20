@@ -1,4 +1,14 @@
-package graphics;
+/**
+ * @brief This file contains the public class Camera.
+ * 
+ * @file Camera.java
+ * @author Kevin Fedyna
+ * @date 16/11/2023
+ * 
+ * Part of the `graphics` package. It contains a class that allow to simplify maths for drawing.
+ */
+
+ package graphics;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -7,9 +17,24 @@ import java.awt.image.BufferedImage;
 import character.Entity;
 import geometry.Vector2D;
 
+/**
+ * @class Camera
+ * @author Kevin Fedyna
+ * @date 16/11/2023
+ * 
+ * @brief This class allows to simplify maths for drawing on screen.
+ * 
+ * The class uses the Singleton design pattern.
+ */
 public class Camera {
+    /** @brief The instance of the singleton. */
     private static Camera singleton;
+    /**
+     * @brief The Entity the camera focuses.
+     * @see character.Entity
+     */
     private Entity focused;
+    /** @brief The canvas associated to the camera. */
     private Canvas canvas;
 
     private Camera(Canvas canvas) {
@@ -17,9 +42,12 @@ public class Camera {
     }
 
     /**
-     * Get the Camera
-     * @param canvas The canvas the camera will watch
-     * @return The Camera
+     * @brief Get the Camera.
+     * 
+     * @note In this case, the camera will focus on point (0, 0) in absolute positions.
+     * 
+     * @param canvas The canvas the camera will watch.
+     * @return The Camera.
      */
     public static Camera getCamera(Canvas canvas) {
         // If singleton hasn't been create, create Camera
@@ -31,10 +59,10 @@ public class Camera {
     }
 
     /**
-     * Get the Camera focused on given entity
-     * @param canvas The canvas the camera will watch
-     * @param entity The entity to focus on
-     * @return The Camera
+     * @brief Get the Camera focused on given entity.
+     * @param canvas The canvas the camera will watch.
+     * @param entity The entity to focus on.
+     * @return The Camera.
      */
     public static Camera getCamera(Canvas canvas, Entity entity) {
         // If singleton hasn't been create, create Camera
@@ -47,44 +75,54 @@ public class Camera {
     }
 
     /**
-     * Set focus on Entity
-     * @param entity The entity to focus on
+     * @brief Set focus on Entity.
+     * @param entity The entity to focus on.
+     * @note If null is passed, the camera will focus on point (0, 0) in absolute positions.
      */
     public void setFocusOn(Entity entity) {
         singleton.focused = entity;
     }
 
     /**
-     * Draw image on screen based on focused point
-     * @param graph The Graphics object
-     * @param image The Image we want to draw
-     * @param x The x position in absolute coordinates
-     * @param y The y position in absolute coordinates
+     * @brief Draw image on screen based on focused point.
+     * 
+     * The image will be drawn with a scale of 1 and no offset.
+     * 
+     * @param graph The Graphics object.
+     * @param image The Image we want to draw.
+     * @param x The x position in absolute coordinates.
+     * @param y The y position in absolute coordinates.
      */
     public void drawImage(Graphics graph, BufferedImage image, double x, double y) {
         drawImage(graph, image, x, y, 1, new Vector2D());
     }
 
     /**
-     * Draw image on screen based on focused point
-     * @param graph The Graphics object
-     * @param image The Image we want to draw
-     * @param x The x position in absolute coordinates
-     * @param y The y position in absolute coordinates
-     * @param scale Scale factor for the image width and height
+     * @brief Draw image on screen based on focused point.
+     * 
+     * The image will be drawn with no offset.
+     * 
+     * @param graph The Graphics object.
+     * @param image The Image we want to draw.
+     * @param x The x position in absolute coordinates.
+     * @param y The y position in absolute coordinates.
+     * @param scale Scale factor for the image width and height.
      */
     public void drawImage(Graphics graph, BufferedImage image, double x, double y, double scale) {
         drawImage(graph, image, x, y, scale, new Vector2D());
     }
 
     /**
-     * Draw image on screen based on focused point
-     * @param graph The Graphics object
-     * @param image The Image we want to draw
-     * @param x The x position in absolute coordinates
-     * @param y The y position in absolute coordinates
-     * @param scale Scale factor for the image width and height
-     * @param offset The offset on image (without scaling)
+     * @brief Draw image on screen based on focused point.
+     * 
+     * The most complete version of this method.
+     * 
+     * @param graph The Graphics object.
+     * @param image The Image we want to draw.
+     * @param x The x position in absolute coordinates.
+     * @param y The y position in absolute coordinates.
+     * @param scale Scale factor for the image width and height.
+     * @param offset The offset on image (without scaling).
      */
     public void drawImage(Graphics graph, BufferedImage image, double x, double y, double scale, Vector2D offset) {      
         // Get image size after scaling
@@ -108,12 +146,12 @@ public class Camera {
     }
 
     /**
-     * Get relative position of point based on focus coordinates
-     * @param focusX The focused entity x position
-     * @param focusY The focused entity y position
-     * @param x The image x position
-     * @param y The image y position
-     * @return The Vector2D corresponding to the shift that has to be made
+     * @brief Get relative position of point based on focus coordinates.
+     * @param focusX The focused entity x position.
+     * @param focusY The focused entity y position.
+     * @param x The image x position.
+     * @param y The image y position.
+     * @return The Vector2D corresponding to the shift that has to be made.
      */
     private Vector2D getRelativePosition(double focusX, double focusY, double x, double y) {
         Vector2D relativeOffset = new Vector2D(x - focusX, y - focusY);
@@ -121,13 +159,13 @@ public class Camera {
     }
 
     /**
-     * Draw rectangle based on focused entity and centered on position
-     * @param graph The Graphics object
-     * @param x The rectangle's center's x position in absolute coordinates
-     * @param y The rectangle's center's y position in absolute coordinates
-     * @param w The rectangle's width
-     * @param h The rectangle's height
-     * @param color The rectangle's color
+     * @brief Draw rectangle based on focused entity and centered on position.
+     * @param graph The Graphics object.
+     * @param x The rectangle's center's x position in absolute coordinates.
+     * @param y The rectangle's center's y position in absolute coordinates.
+     * @param w The rectangle's width.
+     * @param h The rectangle's height.
+     * @param color The rectangle's color.
      */
     public void drawRect(Graphics graph, double x, double y, int w, int h, Color color) {
         graph.setColor(color);
@@ -148,13 +186,13 @@ public class Camera {
     }
 
     /**
-     * Fill rectangle based on focused entity and centered on position
-     * @param graph The Graphics object
-     * @param x The rectangle's center's x position in absolute coordinates
-     * @param y The rectangle's center's y position in absolute coordinates
-     * @param w The rectangle's width
-     * @param h The rectangle's height
-     * @param color The rectangle's color
+     * @brief Fill rectangle based on focused entity and centered on position.
+     * @param graph The Graphics object.
+     * @param x The rectangle's center's x position in absolute coordinates.
+     * @param y The rectangle's center's y position in absolute coordinates.
+     * @param w The rectangle's width.
+     * @param h The rectangle's height.
+     * @param color The rectangle's color.
      */
     public void fillRect(Graphics graph, double x, double y, int w, int h, Color color) {
         graph.setColor(color);
@@ -172,28 +210,5 @@ public class Camera {
         Vector2D position = Vector2D.add(relativePosition, rectangleCenter);
 
         graph.fillRect((int) position.x, (int) position.y, w, h);
-    }
-
-    public void showCam(Graphics g, Entity focus, Entity unfocus) {
-        g.setColor(new Color(255, 0, 0));
-        g.drawRect(1720, 970, 193, 109);
-        g.setColor(new Color(42, 42, 42));
-        g.fillRect(1721, 971, 192, 108);
-        g.setColor(new Color(0, 255, 0));
-        g.fillRect(1721 + 96, 971 + 54, 2, 2); 
-        g.setColor(new Color(255, 0, 0));
-
-
-        Vector2D other = unfocus.getPosition();
-        Vector2D relative = getRelativePosition(focus.getPosition().x, focus.getPosition().y, other.x, other.y);
-
-        if ((1721 + (int)relative.x / 10 + 96) < 1721 || (1721 + (int)relative.x / 10 + 96) > 1913) {
-            return;
-        }
-        if ((971 + (int)relative.y / 10 + 54) < 971 || (971 + (int)relative.y / 10 + 54) > 1079) {
-            return;
-        }
-
-        g.fillRect(1721 + (int)relative.x / 10 + 96, 971 + (int)relative.y / 10 + 54, 2, 2);
     }
 }
