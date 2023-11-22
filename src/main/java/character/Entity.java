@@ -40,6 +40,10 @@ public abstract class Entity {
     protected Animation rightBlockWalk;
     protected Animation leftBlockWalk;
 
+    public static boolean isMonster(Entity entity) {
+        return entity instanceof Monster;
+    }
+
     /**
      * Get the Vector2D representation of entity position
      * 
@@ -244,7 +248,6 @@ public abstract class Entity {
                 + dir, 30);
         leftBlockWalk = Animation.load("leftwalkblock", Animation.RESOURCES_FOLDER +
                 dir, 30);
-
         current = standing;
         current.play();
     }
