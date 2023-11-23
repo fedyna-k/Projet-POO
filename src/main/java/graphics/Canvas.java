@@ -29,10 +29,6 @@ public class Canvas extends JPanel {
     private boolean wasReleasedO;
     private boolean wasReleasedSpace;
     private boolean wasReleasedI;
-    private boolean wasReleasedD;
-    private boolean wasReleasedQ;
-    private boolean wasReleasedS;
-    private boolean wasReleasedZ;
 
     private int previousValidX;
     private int previousValidY;
@@ -60,10 +56,6 @@ public class Canvas extends JPanel {
         this.wasReleasedO = true;
         this.wasReleasedSpace = true;
         this.wasReleasedI = true;
-        this.wasReleasedD = true;
-        this.wasReleasedQ = true;
-        this.wasReleasedZ = true;
-        this.wasReleasedS = true;
 
         stack.listenTo("Z");
         stack.listenTo("S");
@@ -82,45 +74,17 @@ public class Canvas extends JPanel {
                 // TESTING PURPOSE
                 Vector2D movement = new Vector2D();
                 if (stack.isPressed("Z")) {
-                    if (!wasReleasedI && (stack.isPressed("I"))) {
-                        // maintien de run + débuter le block
-                        movement.y -= 4;
-                        player.blockwalk();
-                        wasReleasedI = true;
-                    } else {
-                        movement.y -= 4;
-                    }
+                    movement.y -= 4;
                 }
                 if (stack.isPressed("S")) {
-                    if (!wasReleasedI && (stack.isPressed("I"))) {
-                        // maintien de run + débuter le block
-                        movement.y += 4;
-                        player.blockwalk();
-                        wasReleasedI = true;
-                    } else {
-                        movement.y += 4;
-                    }
+                    movement.y += 4;
                 }
                 if (stack.isPressed("Q")) {
-                    if (!wasReleasedI && (stack.isPressed("I"))) {
-                        // maintien de run + débuter le block
-                        movement.x -= 4;
-                        player.blockwalk();
-                        wasReleasedI = true;
-                    } else {
-                        movement.x -= 4;
-                    }
+                    movement.x -= 4;
                 }
 
                 if (stack.isPressed("D")) {
-                    if (!wasReleasedI && (stack.isPressed("I"))) {
-                        // maintien de run + débuter le block
-                        movement.x += 4;
-                        player.blockwalk();
-                        wasReleasedI = true;
-                    } else {
-                        movement.x += 4;
-                    }
+                    movement.x += 4;
                 }
                 if (stack.isPressed("O") && !checkCollision(player.getPosition())) {
                     if (wasReleasedO && !player.isDodging()) {
@@ -139,31 +103,13 @@ public class Canvas extends JPanel {
                     wasReleasedSpace = true;
                 }
 
-                if (stack.isPressed("I")) {
-                    // player.blockstand();
+                if (stack.isPressed("I") && wasReleasedI) {
+                    player.block();
                     wasReleasedI = false;
-                } else {
-                    if (wasReleasedI && player.isBlocking()) {
-                        player.stopBlocking();
-                    }
-                    wasReleasedI = true;
                 }
 
-                if (!wasReleasedI && !wasReleasedQ && (stack.isPressedCombination("Q", "I"))) {
-                    player.blockwalk();
-                    wasReleasedQ = true;
-                    wasReleasedI = true;
-                } else if (!wasReleasedI && !wasReleasedD && (stack.isPressedCombination("D", "I"))) {
-                    player.blockwalk();
-                    wasReleasedD = true;
-                    wasReleasedI = true;
-                } else if (!wasReleasedI && !wasReleasedS && (stack.isPressedCombination("S", "I"))) {
-                    player.blockwalk();
-                    wasReleasedS = true;
-                    wasReleasedI = true;
-                } else if (!wasReleasedI && !wasReleasedZ && (stack.isPressedCombination("Z", "I"))) {
-                    player.blockwalk();
-                    wasReleasedZ = true;
+                if (!stack.isPressed("I") && !wasReleasedI) {
+                    player.stopBlocking();
                     wasReleasedI = true;
                 }
 

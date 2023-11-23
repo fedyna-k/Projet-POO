@@ -19,6 +19,7 @@ public abstract class Entity {
     protected boolean isFacingLeft;
     protected boolean isDodging;
     protected boolean isBlocking;
+    protected boolean isInitiatingBlock;
     protected Vector2D bufferedMovement;
 
     protected Animation current;
@@ -74,8 +75,13 @@ public abstract class Entity {
         }
 
         // Block state setter
-        if (isBlocking && !current.isPlaying()) {
+        if (isBlocking && !current.isPlaying() && !isInitiatingBlock) {
             isBlocking = false;
+        }
+        
+        // Block state setter
+        if (isInitiatingBlock && !current.isPlaying()) {
+            isInitiatingBlock = false;
         }
 
         if (isDodging) {
@@ -85,6 +91,12 @@ public abstract class Entity {
             } else {
                 dx = bufferedMovement.x;
                 dy = bufferedMovement.y;
+            }
+        } else if (isBlocking && !isInitiatingBlock) {
+            if (dx != 0 || dy != 0) {
+                swapAnimation(AnimationIndex.BLOCKWALK);
+            } else {
+                swapAnimation(AnimationIndex.BLOCKSTAND);
             }
         } else {
             if (dx > 0 || dx == 0 && dy != 0 && !isFacingLeft) {
@@ -172,31 +184,12 @@ public abstract class Entity {
      */
     public void block() {
         if (!this.isBlocking) {
+            isInitiatingBlock = true;
             isBlocking = true;
             swapAnimation(AnimationIndex.BLOCK);
         }
     }
-
-    /**
-     * Put the entity into block + walk state
-     */
-    public void blockwalk() {
-        if (!this.isBlocking) {
-            isBlocking = true;
-            swapAnimation(AnimationIndex.BLOCKWALK);
-        }
-    }
-
-    /**
-     * Put the entity into block + stand state
-     */
-    public void blockstand() {
-        if (!this.isBlocking) {
-            isBlocking = true;
-            swapAnimation(AnimationIndex.BLOCKSTAND);
-        }
-    }
-
+    
     /**
      * Get the blocking state of the entity
      * 
@@ -211,7 +204,6 @@ public abstract class Entity {
      */
     public void stopBlocking() {
         isBlocking = false;
-        swapAnimation(AnimationIndex.STANDING);
     }
 
     /**
@@ -238,12 +230,10 @@ public abstract class Entity {
         leftDodge = Animation.load("leftdodge", Animation.RESOURCES_FOLDER + dir, 20);
         rightBlock = Animation.load("rightblock", Animation.RESOURCES_FOLDER + dir, 30);
         leftBlock = Animation.load("leftblock", Animation.RESOURCES_FOLDER + dir, 30);
-        rightBlockStand = Animation.load("rightstandblock", Animation.RESOURCES_FOLDER + dir, 30);
-        leftBlockStand = Animation.load("leftstandblock", Animation.RESOURCES_FOLDER + dir, 30);
-        rightBlockWalk = Animation.load("rightwalkblock", Animation.RESOURCES_FOLDER
-                + dir, 30);
-        leftBlockWalk = Animation.load("leftwalkblock", Animation.RESOURCES_FOLDER +
-                dir, 30);
+        rightBlockStand = Animation.load("rightstandblock", Animation.RESOURCES_FOLDER + dir, 10);
+        leftBlockStand = Animation.load("leftstandblock", Animation.RESOURCES_FOLDER + dir, 10);
+        rightBlockWalk = Animation.load("rightwalkblock", Animation.RESOURCES_FOLDER + dir, 10);
+        leftBlockWalk = Animation.load("leftwalkblock", Animation.RESOURCES_FOLDER + dir, 10);
 
         current = standing;
         current.play();
@@ -303,11 +293,11 @@ public abstract class Entity {
             this.current.stop();
             this.current = this.isFacingLeft ? this.leftBlock : this.rightBlock;
             this.current.playOnce();
-        } else if (animationIndex == AnimationIndex.BLOCKSTAND) {
+        } else if (animationIndex == AnimationIndex.BLOCKSTAND && this.current != this.leftBlockStand && this.current != this.rightBlockStand) {
             this.current.stop();
             this.current = this.isFacingLeft ? this.leftBlockStand : this.rightBlockStand;
             this.current.play();
-        } else if (animationIndex == AnimationIndex.BLOCKWALK) {
+        } else if (animationIndex == AnimationIndex.BLOCKWALK && this.current != this.leftBlockWalk && this.current != this.rightBlockWalk) {
             this.current.stop();
             this.current = this.isFacingLeft ? this.leftBlockWalk : this.rightBlockWalk;
             this.current.play();
