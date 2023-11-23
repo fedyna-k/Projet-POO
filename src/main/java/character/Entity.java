@@ -8,7 +8,7 @@ import graphics.Animation;
 
 public abstract class Entity {
     public enum AnimationIndex {
-        STANDING, LEFTRUN, RIGHTRUN, ATTACK, DODGE, BLOCK, BLOCKWALK, BLOCKSTAND
+        STANDING, LEFTRUN, RIGHTRUN, ATTACK, DODGE, BLOCK, BLOCKWALK, BLOCKSTAND, DAMAGE
     };
 
     public Vector2D coordinates;
@@ -39,6 +39,9 @@ public abstract class Entity {
     protected Animation leftBlockStand;
     protected Animation rightBlockWalk;
     protected Animation leftBlockWalk;
+
+    protected Animation leftTakesDamage;
+    protected Animation rightTakesDamage;
 
     public static boolean isMonster(Entity entity) {
         return entity instanceof Monster;
@@ -172,6 +175,14 @@ public abstract class Entity {
     }
 
     /**
+     * Goes back to normal state from dodging state
+     */
+    public void stopDodging() {
+        isDodging = false;
+        swapAnimation(AnimationIndex.STANDING);
+    }
+
+    /**
      * Put the entity into block state
      */
     public void block() {
@@ -228,6 +239,33 @@ public abstract class Entity {
     }
 
     /**
+     * The entity takes damages
+     */
+    public void getDamage() {
+        if (!this.isBlocking) {
+            swapAnimation(AnimationIndex.DAMAGE);
+        }
+    }
+
+    /**
+     * The entity goes back to standing state
+     */
+    public void isStanding() {
+        swapAnimation(AnimationIndex.STANDING);
+    }
+
+    /**
+     * Set the position of the entity
+     * 
+     * @param x The new x-coordinate
+     * @param y The new y-coordinate
+     */
+    public void setPosition(double x, double y) {
+        this.coordinates.x = x;
+        this.coordinates.y = y;
+    }
+
+    /**
      * Go through all basic animations and load them
      * 
      * @param dir The folder contaning all frames
@@ -247,6 +285,8 @@ public abstract class Entity {
         rightBlockWalk = Animation.load("rightwalkblock", Animation.RESOURCES_FOLDER
                 + dir, 30);
         leftBlockWalk = Animation.load("leftwalkblock", Animation.RESOURCES_FOLDER +
+                dir, 30);
+        rightTakesDamage = Animation.load("righttakesdamage", Animation.RESOURCES_FOLDER +
                 dir, 30);
         current = standing;
         current.play();
@@ -313,6 +353,10 @@ public abstract class Entity {
         } else if (animationIndex == AnimationIndex.BLOCKWALK) {
             this.current.stop();
             this.current = this.isFacingLeft ? this.leftBlockWalk : this.rightBlockWalk;
+            this.current.play();
+        } else if (animationIndex == AnimationIndex.DAMAGE) {
+            this.current.stop();
+            this.current = this.isFacingLeft ? this.leftTakesDamage : this.rightTakesDamage;
             this.current.play();
         }
     }

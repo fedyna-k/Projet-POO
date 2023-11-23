@@ -38,6 +38,8 @@ public class Canvas extends JPanel {
 
     private int previousValidX;
     private int previousValidY;
+    private int previousValidMonsterX;
+    private int previousValidMonsterY;
     private Map map;
 
     // ---------------
@@ -55,7 +57,7 @@ public class Canvas extends JPanel {
 
         // TESTING PURPOSE
         this.player = new Player(0, 0);
-        this.badguy = new Monster(0, 0);
+        this.badguy = new Monster(100, 300);
         this.map = new Map("../src/main/resources/map/");
 
         this.stack = new KeyStack(this);
@@ -124,7 +126,7 @@ public class Canvas extends JPanel {
                         movement.x += 4;
                     }
                 }
-                if (stack.isPressed("O") && !checkCollision(player.getPosition())) {
+                if (stack.isPressed("O")) {
                     if (wasReleasedO && !player.isDodging()) {
                         player.attack();
                         wasReleasedO = true;
@@ -132,7 +134,7 @@ public class Canvas extends JPanel {
                 } else {
                     wasReleasedO = true;
                 }
-                if (stack.isPressed("SPACE") && !checkCollision(player.getPosition())) {
+                if (stack.isPressed("SPACE")) {
                     if (wasReleasedSpace) {
                         player.dodge();
                         wasReleasedSpace = false;
@@ -181,15 +183,21 @@ public class Canvas extends JPanel {
 
                 // mouvement monstre & aggro
                 Vector2D difference = Vector2D.subtract(player.getPosition(), badguy.getPosition());
+                Vector2D newPositionMonster;
+
                 double aggroRange = 500;
 
                 if (difference.norm() < aggroRange) {
-                    System.out.println("Following player");
                     difference.normalize();
-                    badguy.move(Vector2D.scale(difference, 3));
+                    newPositionMonster = Vector2D.add(badguy.getPosition(), Vector2D.scale(difference, 3));
                 } else {
-                    System.out.println("Lost aggro");
-                    badguy.randMovement();
+                    // Generate a new random movement
+                    newPositionMonster = badguy.RandomMovement(badguy.getPosition());
+                }
+
+                // Check for collision
+                if (!checkCollision(newPositionMonster)) {
+                    badguy.move(Vector2D.subtract(newPositionMonster, badguy.getPosition()));
                 }
 
             }
@@ -261,14 +269,23 @@ public class Canvas extends JPanel {
 
         camera.drawRect(g, centerX, centerY, rectWidth, rectHeight, Color.RED);
 
+        // hitbox bad guy
+        double centerXBG = badguy.getPosition().x;
+        double centerYBG = badguy.getPosition().y;
+
+        int rectWidthBG = (int) (64 * SCALE / 1.9);
+        int rectHeightBG = (int) (64 * SCALE / 1.5);
+
+        camera.drawRect(g, centerXBG, centerYBG, rectWidthBG, rectHeightBG, Color.RED);
+
         // hitbox sword
         Vector2D offset = player.getOffset();
         double centerswordX;
-        double centerswordY = player.getPosition().y - offset.y * SCALE;
+        double centerswordY = player.getPosition().y - offset.y * SCALE + 30;
 
         int spriteWidth = player.getSprite().getWidth();
 
-        int swordWidth = (int) (spriteWidth / 2);
+        int swordWidth = (int) (spriteWidth / 1.8);
         int swordHeight = (int) (player.getSprite().getHeight() * SCALE / 2);
 
         if (player.isAttacking()) {
@@ -284,11 +301,6 @@ public class Canvas extends JPanel {
 
             camera.drawRect(g, centerswordX, centerswordY, swordWidth, swordHeight, Color.RED);
         }
-
-        // else {
-        // // Sword on the right side
-        // centerswordX = player.getPosition().x - offset.x * SCALE + 64;
-        // }
 
         for (int i = 0; i < map.getWidth(); i++) {
             for (int j = 0; j < map.getHeight(); j++) {
@@ -333,6 +345,13 @@ public class Canvas extends JPanel {
         return new Rectangle((int) newPosition.x, (int) newPosition.y, rectWidth, rectHeight);
     }
 
+    private Rectangle getMonsterHitbox(Vector2D newPosition) {
+        int SCALE = isFullscreen ? 4 : 2;
+        int rectWidth = (int) (badguy.getSpriteSize().x * SCALE / 1.9);
+        int rectHeight = (int) (badguy.getSpriteSize().y * SCALE / 1.5);
+        return new Rectangle((int) newPosition.x, (int) newPosition.y, rectWidth, rectHeight);
+    }
+
     /**
      * @brief Retrieves the hitbox for the player's sword at the specified position.
      *
@@ -346,18 +365,19 @@ public class Canvas extends JPanel {
      * @return A Rectangle representing the sword's hitbox at the specified
      *         position, or null if the player is not currently attacking.
      */
-    private Rectangle getSwordHitbox(Player player, Vector2D newPosition) {
+    private Rectangle getSwordHitbox(Entity entity, Vector2D newPosition) {
         int SCALE = isFullscreen ? 4 : 2;
-        Vector2D offset = player.getOffset();
-        double centerswordY = newPosition.y - offset.y * SCALE;
+        Vector2D offset = entity.getOffset();
+        double centerswordX;
+        double centerswordY = player.getPosition().y - offset.y * SCALE + 30;
 
         int spriteWidth = player.getSprite().getWidth();
-        int swordWidth = (int) (spriteWidth / 2);
-        int swordHeight = (int) (player.getSprite().getHeight() * SCALE / 1.8);
 
-        double centerswordX;
-        if (player.isAttacking()) {
-            if (player.isFacingLeft()) {
+        int swordWidth = (int) (spriteWidth / 1.8);
+        int swordHeight = (int) (player.getSprite().getHeight() * SCALE / 2);
+
+        if (entity.isAttacking()) {
+            if (entity.isFacingLeft()) {
                 // Sword on the left side attacking
                 centerswordX = newPosition.x - offset.x * SCALE - 96;
                 swordWidth = (int) (spriteWidth * 2);
@@ -390,23 +410,6 @@ public class Canvas extends JPanel {
         int tileY = j * tileSize;
         return new Rectangle(tileX, tileY, tileSize, tileSize);
     }
-
-    // private boolean checkCollisionWithEntities(Rectangle playerRect, Rectangle
-    // swordRect, Entity entity) {
-    // // Check collision with sword
-    // if (player.isAttacking() && swordRect != null) {
-    // if (swordRect.intersects(entityRect) && isMonster(entity)) {
-    // // Handle collision when player attacks a monster
-    // Monster monster = (Monster) entity;
-    // monster.reduceHP(player.getDamage());
-    // } else if (swordRect.intersects(playerRect) && !Entity.isMonster(entity)) {
-    // // Handle collision when a monster attacks the player
-    // Player attackedPlayer = (Player) entity;
-    // attackedPlayer.reduceHP(monster.getDamage());
-    // }
-    // }
-    // return false;
-    // }
 
     /**
      * @brief Checks for collisions between the player and a wall tile.
@@ -444,16 +447,11 @@ public class Canvas extends JPanel {
         int tileSize = map.getTileSize() * SCALE;
 
         Rectangle playerRect = getPlayerHitbox(newPosition);
-        Rectangle swordRect = getSwordHitbox(player, newPosition);
+        Rectangle monsterRect = getMonsterHitbox(newPosition);
 
-        // // Check collision with entities
-        // for (Entity entity : entities) {
-        // Rectangle entityRect = getEntityHitbox(entity);
-
-        // if (checkCollisionWithEntities(playerRect, swordRect, entity)) {
-        // return true;
-        // }
-        // }
+        if (checkCollisionWithEntities(player, badguy, newPosition)) {
+            return true;
+        }
 
         // Check collision with walls
         for (int i = 0; i < map.getWidth(); i++) {
@@ -464,13 +462,71 @@ public class Canvas extends JPanel {
                     if (checkCollisionWithWalls(playerRect, tileRect, player, newPosition)) {
                         return true;
                     }
+                    if (checkCollisionWithWalls(monsterRect, tileRect, badguy, newPosition)) {
+                        return true;
+                    }
                 }
             }
         }
 
+        // if (checkCollisionWithWalls(playerRect, monsterRect, player, newPosition)) {
+        // System.out.println("aïe");
+        // return true;
+        // }
+
         previousValidX = (int) newPosition.x;
         previousValidY = (int) newPosition.y;
         return false;
+    }
+
+    private boolean checkCollisionWithEntities(Entity player, Entity monster, Vector2D newPosition) {
+        Rectangle playerRect = getPlayerHitbox(newPosition);
+        Rectangle monsterRect = getMonsterHitbox(newPosition);
+        Rectangle swordPlayerRect = getSwordHitbox(player, newPosition);
+        Rectangle swordMonsterRect = getSwordHitbox(badguy, newPosition);
+
+        // if (playerRect.intersects(monsterRect)) {
+        // player.setPosition(previousValidX, previousValidY);
+        // badguy.setPosition(previousValidMonsterX, previousValidMonsterY);
+
+        // return true;
+        // }
+
+        // previousValidMonsterX = (int) monster.getPosition().x;
+        // previousValidMonsterY = (int) monster.getPosition().y;
+
+        // Check sword collision between player and monster
+        if (swordPlayerRect != null && monsterRect != null) {
+            if (swordPlayerRect.intersects(monsterRect)) {
+                if (player.isAttacking() && !monster.isBlocking()) {
+                    if (Entity.isMonster(monster)) {
+                        monster.getDamage();
+                        // resetEntities(player, monster);
+                    }
+                }
+                return true;
+            }
+        }
+
+        // Check sword collision between monster and player
+        if (swordMonsterRect != null && playerRect != null) {
+            if (swordMonsterRect.intersects(playerRect)) {
+                if (monster.isAttacking() && !player.isBlocking()) {
+                    player.getDamage();
+                    // resetEntities(player, monster);
+                }
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void resetEntities(Entity entity1, Entity entity2) {
+        // gérer l'intersection des rectangles
+        // puis remise à 0
+        entity1.isStanding();
+        entity2.isStanding();
     }
 
 }

@@ -21,14 +21,14 @@ public class Monster extends Entity {
         return new Vector2D();
     }
 
-    public void randMovement() {
+    public Vector2D RandomMovement(Vector2D currentPosition) {
         double range = 1000;
         double randomX = (Math.random() * (20 * range)) - range;
         double randomY = (Math.random() * (20 * range)) - range;
 
         Vector2D randomMovement = new Vector2D(randomX, randomY);
-
         randomMovement.normalize();
-        move(Vector2D.scale(randomMovement, 2));
+
+        return Vector2D.add(currentPosition, randomMovement);
     }
 }
