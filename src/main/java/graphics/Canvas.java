@@ -118,7 +118,7 @@ public class Canvas extends JPanel {
                 // collision
                 Vector2D playerNewPosition = Vector2D.add(player.getPosition(), movement);
 
-                if (!checkCollision(playerNewPosition)) {
+                if (!checkCollision(player, playerNewPosition)) {
                     player.move(movement);
                 }
 
@@ -148,7 +148,7 @@ public class Canvas extends JPanel {
                 }
 
                 // Check for collision
-                if (!checkCollision(newPositionMonster)) {
+                if (!checkCollision(badguy, newPositionMonster)) {
                     badguy.move(Vector2D.subtract(newPositionMonster, badguy.getPosition()));
                 }
 
@@ -192,7 +192,8 @@ public class Canvas extends JPanel {
         int SCALE = isFullscreen ? 4 : 2;
         int tileSize = map.getTileSize() * SCALE;
         Vector2D movement = new Vector2D();
-        Vector2D newPosition = Vector2D.add(player.getPosition(), movement);
+        Vector2D newPositionPlayer = Vector2D.add(player.getPosition(), movement);
+        Vector2D newPositionMonster = Vector2D.add(badguy.getPosition(), movement);
 
         for (int i = (int) this.player.getPosition().x / (32 * SCALE) - 9; i < (int) this.player.getPosition().x
                 / (32 * SCALE) + 10; i++) {
@@ -215,7 +216,7 @@ public class Canvas extends JPanel {
         /* Drawing Hitbox */
 
         // hitbox player
-        Rectangle playerHitbox = getPlayerHitbox(player, newPosition);
+        Rectangle playerHitbox = getPlayerHitbox(player, newPositionPlayer);
         if (playerHitbox != null) {
             camera.drawRect(g, playerHitbox.getX(), playerHitbox.getY(),
                     (int) playerHitbox.getWidth(), (int) playerHitbox.getHeight(), Color.RED);
@@ -229,7 +230,7 @@ public class Canvas extends JPanel {
         }
 
         // hitbox bad guy
-        Rectangle monsterHitbox = getMonsterHitbox(badguy, newPosition);
+        Rectangle monsterHitbox = getMonsterHitbox(badguy, newPositionMonster);
         if (monsterHitbox != null) {
             camera.drawRect(g, monsterHitbox.getX(), monsterHitbox.getY(),
                     (int) monsterHitbox.getWidth(), (int) monsterHitbox.getHeight(), Color.RED);
@@ -357,12 +358,12 @@ public class Canvas extends JPanel {
         return false;
     }
 
-    private boolean checkCollision(Vector2D newPosition) {
+    private boolean checkCollision(Entity entity, Vector2D newPosition) {
         int SCALE = isFullscreen ? 4 : 2;
         int tileSize = map.getTileSize() * SCALE;
 
-        Rectangle playerRect = getPlayerHitbox(player, newPosition);
-        Rectangle monsterRect = getMonsterHitbox(badguy, newPosition);
+        Rectangle rect = Entity.isMonster(entity) ? getMonsterHitbox(entity, newPosition)
+                : getPlayerHitbox(entity, newPosition);
 
         // Check collision with walls
         for (int i = 0; i < map.getWidth(); i++) {
@@ -370,10 +371,7 @@ public class Canvas extends JPanel {
                 if (map.isWall(i, j)) {
                     Rectangle tileRect = getTileHitbox(i, j, tileSize);
 
-                    if (checkCollisionWithWalls(playerRect, tileRect, player, newPosition)) {
-                        return true;
-                    }
-                    if (checkCollisionWithWalls(monsterRect, tileRect, badguy, newPosition)) {
+                    if (checkCollisionWithWalls(rect, tileRect, entity, newPosition)) {
                         return true;
                     }
                 }
