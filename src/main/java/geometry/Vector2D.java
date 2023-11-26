@@ -117,6 +117,14 @@ public class Vector2D {
         return new Vector2D(newX, newY);
     }
 
+    public double getX() {
+        return x;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
     @Override
     public String toString() {
         return x + ";" + y;

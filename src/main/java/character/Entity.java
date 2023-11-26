@@ -85,7 +85,7 @@ public abstract class Entity {
         if (isBlocking && !current.isPlaying() && !isInitiatingBlock) {
             isBlocking = false;
         }
-        
+
         // Block state setter
         if (isInitiatingBlock && !current.isPlaying()) {
             isInitiatingBlock = false;
@@ -204,7 +204,7 @@ public abstract class Entity {
             swapAnimation(AnimationIndex.BLOCK);
         }
     }
-    
+
     /**
      * Get the blocking state of the entity
      * 
@@ -234,9 +234,9 @@ public abstract class Entity {
      * The entity takes damages
      */
     public void getDamage() {
-        if (!this.isBlocking) {
-            swapAnimation(AnimationIndex.DAMAGE);
-        }
+        System.out.println("okok");
+        swapAnimation(AnimationIndex.DAMAGE);
+
     }
 
     /**
@@ -276,6 +276,8 @@ public abstract class Entity {
         leftBlockStand = Animation.load("leftstandblock", Animation.RESOURCES_FOLDER + dir, 10);
         rightBlockWalk = Animation.load("rightwalkblock", Animation.RESOURCES_FOLDER + dir, 10);
         leftBlockWalk = Animation.load("leftwalkblock", Animation.RESOURCES_FOLDER + dir, 10);
+        leftTakesDamage = Animation.load("leftattack", Animation.RESOURCES_FOLDER + dir, 10);
+        rightTakesDamage = Animation.load("leftattack", Animation.RESOURCES_FOLDER + dir, 10);
         current = standing;
         current.play();
     }
@@ -334,11 +336,13 @@ public abstract class Entity {
             this.current.stop();
             this.current = this.isFacingLeft ? this.leftBlock : this.rightBlock;
             this.current.playOnce();
-        } else if (animationIndex == AnimationIndex.BLOCKSTAND && this.current != this.leftBlockStand && this.current != this.rightBlockStand) {
+        } else if (animationIndex == AnimationIndex.BLOCKSTAND && this.current != this.leftBlockStand
+                && this.current != this.rightBlockStand) {
             this.current.stop();
             this.current = this.isFacingLeft ? this.leftBlockStand : this.rightBlockStand;
             this.current.play();
-        } else if (animationIndex == AnimationIndex.BLOCKWALK && this.current != this.leftBlockWalk && this.current != this.rightBlockWalk) {
+        } else if (animationIndex == AnimationIndex.BLOCKWALK && this.current != this.leftBlockWalk
+                && this.current != this.rightBlockWalk) {
             this.current.stop();
             this.current = this.isFacingLeft ? this.leftBlockWalk : this.rightBlockWalk;
             this.current.play();
