@@ -15,7 +15,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -195,11 +194,7 @@ public class Canvas extends JPanel {
     
         for (int i = (int)this.player.getPosition().x / (32 * SCALE) - 9 ; i < (int)this.player.getPosition().x / (32 * SCALE) + 10 ; i++) {
             for (int j = (int)this.player.getPosition().y / (32 * SCALE) - 6 ; j < (int)this.player.getPosition().y / (32 * SCALE) + 7 ; j++) {
-                BufferedImage tile = map.getTile(i, j);
-
-                if (tile != null) {
-                    this.camera.drawImage(g, map.getTile(i, j), i * 32 * SCALE, j * 32 * SCALE, SCALE);
-                }
+                this.map.drawTile(this.camera, g, i, j, SCALE);
             }
         }
 

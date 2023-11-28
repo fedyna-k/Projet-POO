@@ -11,10 +11,12 @@
 
 package map;
 
-import java.awt.Graphics2D;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.LinkedHashMap;
+
+import graphics.Camera;
 
 
 /**
@@ -99,31 +101,29 @@ public class Map {
      * When a tile is asked, it will compute all the layers and return
      * the final tile.
      * 
+     * @param cam The camera on which to draw the tile.
+     * @param g The graphics object on which to draw tile.
      * @param x The x coordinate in the map grid.
      * @param y The y coordinate in the map grid.
+     * @param scale The scale of the drawn tile.
      * @return The computed tile.
      */
-    public BufferedImage getTile(int x, int y) {
+    public boolean drawTile(Camera cam, Graphics g, int x, int y, double scale) {
         // Check if coordinates are ok
         if (x >= width || y >= height || x < 0 || y < 0) {
-            return null;
+            return false;
         }
         int tileCoordinate = y * width + x;
-        
-        // Create tile and painter
-        BufferedImage finalTile = new BufferedImage(tileSize, tileSize, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D painter = finalTile.createGraphics();
         
         // Get all layers done
         for (int[] layer : layers.values()) {
             int tileIdForLayer = layer[tileCoordinate];
             if (tileIdForLayer != 0) {
-                painter.drawImage(getTileById(tileIdForLayer), null, 0, 0);
+                cam.drawImage(g, getTileById(tileIdForLayer), x * this.tileSize * scale, y * this.tileSize * scale, scale);
             }
         }
 
-        painter.dispose();
-        return finalTile;
+        return true;
     }
 
     /**
