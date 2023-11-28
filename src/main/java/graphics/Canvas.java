@@ -31,6 +31,7 @@ public class Canvas extends JPanel {
     private boolean wasReleasedO;
     private boolean wasReleasedSpace;
     private boolean wasReleasedI;
+    private int attackCooldown = 0;
 
     private Map map;
 
@@ -48,8 +49,8 @@ public class Canvas extends JPanel {
         setBackground(new Color(42, 42, 42, 255));
 
         // TESTING PURPOSE
-        this.player = new Player(0, 0);
-        this.badguy = new Monster(100, 300);
+        this.player = new Player(10500, 1500);
+        this.badguy = new Monster(this, 11000, 3000);
         this.map = new Map("../src/main/resources/map/");
 
         this.stack = new KeyStack(this);
@@ -115,41 +116,46 @@ public class Canvas extends JPanel {
 
                 repaint();
 
-                // collision
-                Vector2D playerNewPosition = Vector2D.add(player.getPosition(), movement);
-
-                if (!checkCollision(player, playerNewPosition)) {
-                    player.move(movement);
-                }
-
-                if (checkCollisionWithEntities(player, badguy, playerNewPosition)) {
-                    if (player.isAttacking() && !badguy.isBlocking()) {
-                        System.out.println("Collision detected during attack");
-                        badguy.getDamage();
-                    } else if (badguy.isAttacking() && !player.isBlocking()) {
-                        player.getDamage();
-                    }
-                }
-
                 // ---------------
 
                 // movement monster & aggro
                 Vector2D difference = Vector2D.subtract(player.getPosition(), badguy.getPosition());
-                Vector2D newPositionMonster;
+                Vector2D monsterNewPosition;
+                Vector2D playerNewPosition = Vector2D.add(player.getPosition(), movement);
 
                 double aggroRange = 500;
 
                 if (difference.norm() < aggroRange) {
                     difference.normalize();
-                    newPositionMonster = Vector2D.add(badguy.getPosition(), Vector2D.scale(difference, 3));
+                    monsterNewPosition = Vector2D.add(badguy.getPosition(), Vector2D.scale(difference, 3));
                 } else {
                     // Generate a new random movement
-                    newPositionMonster = badguy.RandomMovement(badguy.getPosition());
+                    monsterNewPosition = badguy.RandomMovement(badguy, badguy.getPosition());
                 }
 
                 // Check for collision
-                if (!checkCollision(badguy, newPositionMonster)) {
-                    badguy.move(Vector2D.subtract(newPositionMonster, badguy.getPosition()));
+                if (!checkCollision(player, playerNewPosition)
+                        && !checkCollisionWithEntities(player, badguy, playerNewPosition, monsterNewPosition)) {
+                    player.move(movement);
+                }
+
+                if (!checkCollision(badguy, monsterNewPosition)
+                        && !checkCollisionWithEntities(player, badguy, playerNewPosition, monsterNewPosition)) {
+                    badguy.move(Vector2D.subtract(monsterNewPosition, badguy.getPosition()));
+                }
+
+                if (checkAttack(player, badguy, playerNewPosition, monsterNewPosition)) {
+                    if (player.isAttacking() && !badguy.isBlocking()) {
+                        attackCooldown++;
+                        System.out.println("Collision attack");
+                        badguy.getDamage();
+                        if (attackCooldown >= 15) {
+                            player.stopAttacking();
+                            attackCooldown = 0;
+                        }
+                    } else if (badguy.isAttacking() && !player.isBlocking()) {
+                        player.getDamage();
+                    }
                 }
 
             }
@@ -193,7 +199,7 @@ public class Canvas extends JPanel {
         int tileSize = map.getTileSize() * SCALE;
         Vector2D movement = new Vector2D();
         Vector2D newPositionPlayer = Vector2D.add(player.getPosition(), movement);
-        Vector2D newPositionMonster = Vector2D.add(badguy.getPosition(), movement);
+        Vector2D monsterNewPosition = Vector2D.add(badguy.getPosition(), movement);
 
         for (int i = (int) this.player.getPosition().x / (32 * SCALE) - 9; i < (int) this.player.getPosition().x
                 / (32 * SCALE) + 10; i++) {
@@ -230,7 +236,7 @@ public class Canvas extends JPanel {
         }
 
         // hitbox bad guy
-        Rectangle monsterHitbox = getMonsterHitbox(badguy, newPositionMonster);
+        Rectangle monsterHitbox = getMonsterHitbox(badguy, monsterNewPosition);
         if (monsterHitbox != null) {
             camera.drawRect(g, monsterHitbox.getX(), monsterHitbox.getY(),
                     (int) monsterHitbox.getWidth(), (int) monsterHitbox.getHeight(), Color.RED);
@@ -284,8 +290,8 @@ public class Canvas extends JPanel {
 
     private Rectangle getMonsterHitbox(Entity entity, Vector2D newPosition) {
         int SCALE = isFullscreen ? 4 : 2;
-        int rectWidth = (int) (badguy.getSpriteSize().x * SCALE / 1.9);
-        int rectHeight = (int) (badguy.getSpriteSize().y * SCALE / 1.5);
+        int rectWidth = (int) (entity.getSpriteSize().x * SCALE / 1.9);
+        int rectHeight = (int) (entity.getSpriteSize().y * SCALE / 1.5);
         return new Rectangle((int) newPosition.x, (int) newPosition.y, rectWidth, rectHeight);
     }
 
@@ -350,7 +356,11 @@ public class Canvas extends JPanel {
         if (entityRect.intersects(tileRect)) {
             if (entity.isDodging()) {
                 entity.stopDodging();
-                entity.move(-10, 0);
+                if (entity.isFacingLeft()) {
+                    entity.move(10, 0);
+                } else {
+                    entity.move(-10, 0);
+                }
                 return true;
             }
             return true;
@@ -358,7 +368,7 @@ public class Canvas extends JPanel {
         return false;
     }
 
-    private boolean checkCollision(Entity entity, Vector2D newPosition) {
+    public boolean checkCollision(Entity entity, Vector2D newPosition) {
         int SCALE = isFullscreen ? 4 : 2;
         int tileSize = map.getTileSize() * SCALE;
 
@@ -377,24 +387,41 @@ public class Canvas extends JPanel {
                 }
             }
         }
+
         return false;
     }
 
-    private boolean checkCollisionWithEntities(Entity entity1, Entity entity2, Vector2D newPosition) {
-        Rectangle rect1 = Entity.isMonster(entity1) ? getMonsterHitbox(entity1, newPosition)
-                : getPlayerHitbox(entity1, newPosition);
-        Rectangle rect2 = Entity.isMonster(entity2) ? getMonsterHitbox(entity2, newPosition)
-                : getPlayerHitbox(entity2, newPosition);
+    private boolean checkAttack(Entity entity1, Entity entity2, Vector2D newPosition1,
+            Vector2D newPosition2) {
+        Rectangle entityrect1 = Entity.isMonster(entity1) ? getMonsterHitbox(entity1, newPosition1)
+                : getPlayerHitbox(entity1, newPosition1);
+        Rectangle entityrect2 = Entity.isMonster(entity2) ? getMonsterHitbox(entity2, newPosition2)
+                : getPlayerHitbox(entity2, newPosition2);
 
         Rectangle swordEntity1 = getSwordHitbox(entity1);
         Rectangle swordEntity2 = getSwordHitbox(entity2);
 
-        if ((swordEntity1 != null && rect2 != null && swordEntity1.intersects(rect2)) ||
-                (swordEntity2 != null && rect1 != null && swordEntity2.intersects(rect1))) {
+        if ((swordEntity1 != null && entityrect2 != null && swordEntity1.intersects(entityrect2)) ||
+                (swordEntity2 != null && entityrect1 != null && swordEntity2.intersects(entityrect1))) {
             return true;
         }
 
-        return rect1 != null && rect2 != null && rect1.intersects(rect2);
+        return false;
+    }
+
+    private boolean checkCollisionWithEntities(Entity entity1, Entity entity2, Vector2D newPosition1,
+            Vector2D newPosition2) {
+        Rectangle entityrect1 = Entity.isMonster(entity1) ? getMonsterHitbox(entity1, newPosition1)
+                : getPlayerHitbox(entity1, newPosition1);
+        Rectangle entityrect2 = Entity.isMonster(entity2) ? getMonsterHitbox(entity2, newPosition2)
+                : getPlayerHitbox(entity2, newPosition2);
+
+        if (entityrect1.intersects(entityrect2)) {
+            System.out.println("collision persos");
+            return true;
+        }
+
+        return false;
     }
 
     // private void preventOverlap(Entity entity1, Entity entity2, Rectangle rect1,

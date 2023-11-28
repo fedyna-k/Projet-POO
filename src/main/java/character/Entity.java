@@ -20,6 +20,8 @@ public abstract class Entity {
     protected boolean isDodging;
     protected boolean isBlocking;
     protected boolean isInitiatingBlock;
+    protected boolean isAttackAnimating = false;
+
     protected Vector2D bufferedMovement;
 
     protected Animation current;
@@ -148,6 +150,10 @@ public abstract class Entity {
         return this.isAttacking;
     }
 
+    public void stopAttacking() {
+        isAttacking = false;
+    }
+
     /**
      * Put the entity into dodge state
      */
@@ -234,9 +240,7 @@ public abstract class Entity {
      * The entity takes damages
      */
     public void getDamage() {
-        System.out.println("okok");
         swapAnimation(AnimationIndex.DAMAGE);
-
     }
 
     /**
@@ -276,8 +280,8 @@ public abstract class Entity {
         leftBlockStand = Animation.load("leftstandblock", Animation.RESOURCES_FOLDER + dir, 10);
         rightBlockWalk = Animation.load("rightwalkblock", Animation.RESOURCES_FOLDER + dir, 10);
         leftBlockWalk = Animation.load("leftwalkblock", Animation.RESOURCES_FOLDER + dir, 10);
-        leftTakesDamage = Animation.load("leftattack", Animation.RESOURCES_FOLDER + dir, 10);
-        rightTakesDamage = Animation.load("leftattack", Animation.RESOURCES_FOLDER + dir, 10);
+        leftTakesDamage = Animation.load("lefttakesdamage", Animation.RESOURCES_FOLDER + dir, 10);
+        rightTakesDamage = Animation.load("righttakesdamage", Animation.RESOURCES_FOLDER + dir, 10);
         current = standing;
         current.play();
     }
