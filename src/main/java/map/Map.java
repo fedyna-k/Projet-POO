@@ -134,4 +134,12 @@ public class Map {
     private BufferedImage getTileById(int id) {
         return tiles[id - 1];
     }
+
+    /**
+     * @brief Getter function for the tile size.
+     * @return The tile size in pixel units.
+     */
+    public int getTileSize() {
+        return tileSize;
+    }
 }

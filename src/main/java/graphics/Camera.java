@@ -84,6 +84,14 @@ public class Camera {
     }
 
     /**
+     * @brief Get the focused Entity.
+     * @return The focused Entity object.
+     */
+    public Entity getFocused() {
+        return singleton.focused;
+    }
+
+    /**
      * @brief Draw image on screen based on focused point.
      * 
      * The image will be drawn with a scale of 1 and no offset.
