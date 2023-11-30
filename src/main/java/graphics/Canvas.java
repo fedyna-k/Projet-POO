@@ -9,6 +9,7 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -31,7 +32,13 @@ public class Canvas extends JPanel {
     private boolean wasReleasedO;
     private boolean wasReleasedSpace;
     private boolean wasReleasedI;
+
+    boolean entitiesCollision = false;
+
     private int attackCooldown = 0;
+    static final double PROBABILITY_OF_ATTACK = 5.0;
+    static final double AGGRO_RANGE = 500.0;
+    Random random = new Random();
 
     private Map map;
 
@@ -49,7 +56,7 @@ public class Canvas extends JPanel {
         setBackground(new Color(42, 42, 42, 255));
 
         // TESTING PURPOSE
-        this.player = new Player(10500, 1500);
+        this.player = new Player(10500, 3000);
         this.badguy = new Monster(this, 11000, 3000);
         this.map = new Map("../src/main/resources/map/");
 
@@ -74,6 +81,7 @@ public class Canvas extends JPanel {
             public void actionPerformed(ActionEvent event) {
                 // TESTING PURPOSE
                 Vector2D movement = new Vector2D();
+                Vector2D movementMonster = new Vector2D();
                 if (stack.isPressed("Z")) {
                     movement.y -= 4;
                 }
@@ -118,43 +126,36 @@ public class Canvas extends JPanel {
 
                 // ---------------
 
-                // movement monster & aggro
+                // movement
                 Vector2D difference = Vector2D.subtract(player.getPosition(), badguy.getPosition());
-                Vector2D monsterNewPosition;
+                Vector2D monsterNewPosition = Vector2D.add(badguy.getPosition(), movementMonster);
                 Vector2D playerNewPosition = Vector2D.add(player.getPosition(), movement);
 
-                double aggroRange = 500;
-
-                if (difference.norm() < aggroRange) {
-                    difference.normalize();
-                    monsterNewPosition = Vector2D.add(badguy.getPosition(), Vector2D.scale(difference, 3));
-                } else {
-                    // Generate a new random movement
-                    monsterNewPosition = badguy.RandomMovement(badguy, badguy.getPosition());
-                }
-
-                // Check for collision
-                if (!checkCollision(player, playerNewPosition)
+                // Vérifier si le personnage peut bouger
+                if (checkCollision(player, playerNewPosition)
                         && !checkCollisionWithEntities(player, badguy, playerNewPosition, monsterNewPosition)) {
                     player.move(movement);
                 }
 
+                double attackRadius = 2.0;
+
                 if (!checkCollision(badguy, monsterNewPosition)
                         && !checkCollisionWithEntities(player, badguy, playerNewPosition, monsterNewPosition)) {
-                    badguy.move(Vector2D.subtract(monsterNewPosition, badguy.getPosition()));
-                }
+                    player.move(movement);
+                    if (difference.norm() < AGGRO_RANGE) {
+                        difference.normalize();
+                        badguy.move(difference);
 
-                if (checkAttack(player, badguy, playerNewPosition, monsterNewPosition)) {
-                    if (player.isAttacking() && !badguy.isBlocking()) {
-                        attackCooldown++;
-                        System.out.println("Collision attack");
-                        badguy.getDamage();
-                        if (attackCooldown >= 15) {
-                            player.stopAttacking();
-                            attackCooldown = 0;
+                        // Probabilité d'attaque
+                        double randomValue = random.nextDouble() * 100;
+                        if (randomValue < PROBABILITY_OF_ATTACK && difference.norm() < attackRadius) {
+                            badguy.attack();
                         }
-                    } else if (badguy.isAttacking() && !player.isBlocking()) {
-                        player.getDamage();
+                        if (checkAttack(player, badguy, monsterNewPosition, playerNewPosition)) {
+                            handleAttack(player, badguy, monsterNewPosition, playerNewPosition);
+                        }
+                    } else {
+                        badguy.randMovement();
                     }
                 }
 
@@ -228,7 +229,7 @@ public class Canvas extends JPanel {
                     (int) playerHitbox.getWidth(), (int) playerHitbox.getHeight(), Color.RED);
         }
 
-        // sword hitbox for the player
+        // sword hitbox for player
         Rectangle swordHitboxPlayer = getSwordHitbox(player);
         if (swordHitboxPlayer != null) {
             camera.drawRect(g, swordHitboxPlayer.getX(), swordHitboxPlayer.getY(),
@@ -240,6 +241,13 @@ public class Canvas extends JPanel {
         if (monsterHitbox != null) {
             camera.drawRect(g, monsterHitbox.getX(), monsterHitbox.getY(),
                     (int) monsterHitbox.getWidth(), (int) monsterHitbox.getHeight(), Color.RED);
+        }
+
+        // sword hitbox for bad guy
+        Rectangle swordHitboxMonster = getSwordHitboxMonster(badguy);
+        if (swordHitboxMonster != null) {
+            camera.drawRect(g, swordHitboxMonster.getX(), swordHitboxMonster.getY(),
+                    (int) swordHitboxMonster.getWidth(), (int) swordHitboxMonster.getHeight(), Color.RED);
         }
 
         // hitbox walls
@@ -288,29 +296,54 @@ public class Canvas extends JPanel {
         return new Rectangle((int) newPosition.x, (int) newPosition.y, rectWidth, rectHeight);
     }
 
+    /**
+     * @brief Retrieves the hitbox for the monster at the specified position.
+     *
+     *        This method calculates and returns the hitbox for the monster based on
+     *        the given position.
+     *
+     * @param newPosition The position at which to calculate the player's hitbox.
+     * @return A Rectangle representing the monster's hitbox at the specified
+     *         position.
+     */
     private Rectangle getMonsterHitbox(Entity entity, Vector2D newPosition) {
         int SCALE = isFullscreen ? 4 : 2;
-        int rectWidth = (int) (entity.getSpriteSize().x * SCALE / 1.9);
-        int rectHeight = (int) (entity.getSpriteSize().y * SCALE / 1.5);
+        int rectWidth = (int) (64 * SCALE / 1.9);
+        int rectHeight = (int) (64 * SCALE / 1.5);
         return new Rectangle((int) newPosition.x, (int) newPosition.y, rectWidth, rectHeight);
     }
 
     private Rectangle getSwordHitbox(Entity entity) {
         int SCALE = isFullscreen ? 4 : 2;
         Vector2D offset = entity.getOffset();
-        double centerswordX;
-        double centerswordY = entity.getPosition().y - offset.y * SCALE + 30;
-
+        double directionMultiplier = entity.isFacingLeft() ? -1 : 1;
         int spriteWidth = entity.getSprite().getWidth();
 
         int swordHeight = (int) (entity.getSprite().getHeight() * SCALE / 2);
 
         if (entity.isAttacking()) {
-            double directionMultiplier = entity.isFacingLeft() ? -1 : 1;
-            centerswordX = entity.getPosition().x - offset.x * SCALE + directionMultiplier * 96;
+            double centerswordY = entity.getPosition().y - offset.y * SCALE + 30;
+            double centerswordX = entity.getPosition().x - offset.x * SCALE + directionMultiplier * 96;
             int swordWidth = (int) (spriteWidth * 2);
-
             return new Rectangle((int) centerswordX, (int) centerswordY, swordWidth, swordHeight);
+        }
+
+        return null;
+    }
+
+    private Rectangle getSwordHitboxMonster(Entity entity) {
+        int SCALE = isFullscreen ? 4 : 2;
+        double directionMultiplier = entity.isFacingLeft() ? -1 : 1;
+        int spriteWidth = 64;
+
+        int swordHeight = (int) (entity.getSprite().getHeight() * SCALE / 2);
+
+        if (entity.isAttacking()) {
+            double centerswordY = entity.getPosition().y * SCALE;
+            double centerswordX = entity.getPosition().x * SCALE + directionMultiplier;
+            int swordWidth = (int) (spriteWidth);
+            return new Rectangle((int) centerswordX, (int) centerswordY, swordWidth, swordHeight);
+
         }
 
         return null;
@@ -409,6 +442,32 @@ public class Canvas extends JPanel {
         return false;
     }
 
+    private void handleAttack(Entity entity1, Entity entity2, Vector2D newPosition1,
+            Vector2D newPosition2) {
+        attackCooldown++;
+
+        if (entity1.isAttacking() && !entity1.isBeingHit() && !entity2.isBlocking() && !entity2.isDodging()
+                && !entity2.isAttacking()) {
+            entity2.getDamage();
+            if (attackCooldown >= 15) {
+                entity1.stopAttacking();
+                resetAfterDamage(entity2);
+            }
+        } else if (entity2.isAttacking() && !entity2.isBeingHit() && !entity1.isBlocking() && !entity1.isDodging()
+                && !entity1.isAttacking()) {
+            entity1.getDamage();
+            if (attackCooldown >= 15) {
+                entity2.stopAttacking();
+                resetAfterDamage(entity1);
+            }
+        }
+    }
+
+    private void resetAfterDamage(Entity entity) {
+        attackCooldown = 0;
+        entity.stopGettingDamage();
+    }
+
     private boolean checkCollisionWithEntities(Entity entity1, Entity entity2, Vector2D newPosition1,
             Vector2D newPosition2) {
         Rectangle entityrect1 = Entity.isMonster(entity1) ? getMonsterHitbox(entity1, newPosition1)
@@ -416,28 +475,26 @@ public class Canvas extends JPanel {
         Rectangle entityrect2 = Entity.isMonster(entity2) ? getMonsterHitbox(entity2, newPosition2)
                 : getPlayerHitbox(entity2, newPosition2);
 
-        if (entityrect1.intersects(entityrect2)) {
-            System.out.println("collision persos");
-            return true;
+        // Utilisez une variable temporaire pour suivre l'état de collision entre les
+        // entités
+        boolean collisionDetected = entityrect1.intersects(entityrect2);
+
+        // Modifiez entitiesCollision uniquement si une collision doit empêcher le
+        // mouvement
+        if (collisionDetected && entity1.isDodging()) {
+            entity1.stopDodging();
+            if (entity1.isFacingLeft()) {
+                entity1.move(10, 0);
+            } else {
+                entity1.move(-10, 0);
+            }
+            entitiesCollision = true;
+        } else {
+            entitiesCollision = collisionDetected;
         }
 
-        return false;
+        // Retournez la valeur de la collision
+        return entitiesCollision;
     }
-
-    // private void preventOverlap(Entity entity1, Entity entity2, Rectangle rect1,
-    // Rectangle rect2) {
-    // double overlapX = (rect1.width + rect2.width) / 2.0 -
-    // Math.abs(rect1.getCenterX() - rect2.getCenterX());
-    // double overlapY = (rect1.height + rect2.height) / 2.0 -
-    // Math.abs(rect1.getCenterY() - rect2.getCenterY());
-
-    // double signX = Math.signum(entity1.getPosition().x -
-    // entity2.getPosition().x);
-    // double signY = Math.signum(entity1.getPosition().y -
-    // entity2.getPosition().y);
-
-    // entity1.move(new Vector2D(signX * overlapX, signY * overlapY));
-    // entity2.move(new Vector2D(-signX * overlapX, -signY * overlapY));
-    // }
 
 }

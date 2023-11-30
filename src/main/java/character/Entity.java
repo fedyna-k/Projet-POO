@@ -21,6 +21,7 @@ public abstract class Entity {
     protected boolean isBlocking;
     protected boolean isInitiatingBlock;
     protected boolean isAttackAnimating = false;
+    protected boolean isBeingHit;
 
     protected Vector2D bufferedMovement;
 
@@ -240,7 +241,20 @@ public abstract class Entity {
      * The entity takes damages
      */
     public void getDamage() {
+        isBeingHit = true;
         swapAnimation(AnimationIndex.DAMAGE);
+    }
+
+    /**
+     * The entity takes damages
+     */
+    public void stopGettingDamage() {
+        isBeingHit = false;
+        swapAnimation(AnimationIndex.STANDING);
+    }
+
+    public boolean isBeingHit() {
+        return this.isBeingHit;
     }
 
     /**
