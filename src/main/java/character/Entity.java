@@ -47,12 +47,35 @@ public abstract class Entity {
     protected Animation leftTakesDamage;
     protected Animation rightTakesDamage;
 
+    /**
+     * @brief Checks if the given entity is an instance of the Monster class.
+     *
+     *        This method determines whether the provided entity is a Monster by
+     *        checking
+     *        its type using the instanceof operator.
+     *
+     * @param entity The entity to be checked.
+     * @return True if the entity is a Monster; otherwise, false.
+     */
     public static boolean isMonster(Entity entity) {
         return entity instanceof Monster;
     }
 
+    /**
+     * @brief Enumeration representing the different states of an entity.
+     * 
+     *        This enum defines the possible states an entity can be in, such as
+     *        NORMAL and HITSTUN.
+     */
     public enum EntityState {
+        /**
+         * The normal state of an entity.
+         */
         NORMAL,
+
+        /**
+         * The hit stun state of an entity.
+         */
         HITSTUN,
     }
 
@@ -244,16 +267,31 @@ public abstract class Entity {
         return this.isFacingLeft;
     }
 
+    /**
+     * Inflicts damage on the entity, putting it in a hit stun state.
+     * This method changes the entity's state to EntityState.HITSTUN and
+     * swaps its animation to a damage animation.
+     */
     public void getDamage() {
         currentState = EntityState.HITSTUN;
         swapAnimation(AnimationIndex.DAMAGE);
     }
 
+    /**
+     * Stops the entity from being in a hit stun state.
+     * This method changes the entity's state back to EntityState.NORMAL
+     * and swaps its animation to a standing animation.
+     */
     public void stopGettingDamage() {
         currentState = EntityState.NORMAL;
         swapAnimation(AnimationIndex.STANDING);
     }
 
+    /**
+     * Checks if the entity is currently in a hit stun state.
+     *
+     * @return True if the entity is being hit (in hit stun); otherwise, false.
+     */
     public boolean isBeingHit() {
         return this.isBeingHit;
     }

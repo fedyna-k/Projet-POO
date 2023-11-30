@@ -306,7 +306,7 @@ public class Canvas extends JPanel {
      *        This method calculates and returns the hitbox for the monster based on
      *        the given position.
      *
-     * @param newPosition The position at which to calculate the player's hitbox.
+     * @param newPosition The position at which to calculate the monster's hitbox.
      * @return A Rectangle representing the monster's hitbox at the specified
      *         position.
      */
@@ -317,6 +317,20 @@ public class Canvas extends JPanel {
         return new Rectangle((int) newPosition.x, (int) newPosition.y, rectWidth, rectHeight);
     }
 
+    /**
+     * @brief Retrieves the hitbox for the entity's sword during an attack.
+     *
+     *        This method calculates and returns the hitbox for the entity's sword
+     *        during
+     *        an attack. The hitbox dimensions are determined by scaling the
+     *        entity's sprite
+     *        and positioning the sword based on the entity's facing direction.
+     *
+     * @param entity The entity initiating the attack.
+     * @return A Rectangle representing the hitbox of the entity's sword during an
+     *         attack,
+     *         or null if the entity is not currently attacking.
+     */
     private Rectangle getSwordHitbox(Entity entity) {
         int SCALE = isFullscreen ? 4 : 2;
         Vector2D offset = entity.getOffset();
@@ -335,6 +349,22 @@ public class Canvas extends JPanel {
         return null;
     }
 
+    /**
+     * @brief Retrieves the hitbox for a monster entity's sword during an attack.
+     *
+     *        This method calculates and returns the hitbox for a monster entity's
+     *        sword
+     *        during an attack. The hitbox dimensions are determined by scaling a
+     *        fixed
+     *        sprite width for monsters and positioning the sword based on the
+     *        entity's
+     *        facing direction.
+     *
+     * @param entity The monster entity initiating the attack.
+     * @return A Rectangle representing the hitbox of the monster entity's sword
+     *         during
+     *         an attack, or null if the entity is not currently attacking.
+     */
     private Rectangle getSwordHitboxMonster(Entity entity) {
         int SCALE = isFullscreen ? 4 : 2;
         Vector2D offset = entity.getOffset();
@@ -406,6 +436,24 @@ public class Canvas extends JPanel {
         return false;
     }
 
+    /**
+     * @brief Checks for collisions of an entity with walls and other entities.
+     *
+     *        This method determines if an entity, represented by its hitbox at the
+     *        specified
+     *        new position, collides with walls on the game map or other entities.
+     *        It considers
+     *        the entity type (player or monster) to calculate the correct hitbox.
+     *        The method
+     *        iterates through the map's tiles, checking for collisions with walls
+     *        using the
+     *        checkCollisionWithWalls function.
+     *
+     * @param entity      The entity for which to check collisions.
+     * @param newPosition The intended new position of the entity.
+     * @return True if a collision is detected with walls or other entities;
+     *         otherwise, false.
+     */
     public boolean checkCollision(Entity entity, Vector2D newPosition) {
         int SCALE = isFullscreen ? 4 : 2;
         int tileSize = map.getTileSize() * SCALE;
@@ -429,6 +477,22 @@ public class Canvas extends JPanel {
         return false;
     }
 
+    /**
+     * @brief Checks if the player's attack collides with a monster.
+     *
+     *        This method determines if the player's sword, represented by its
+     *        hitbox,
+     *        intersects with the hitbox of a monster. It is used to check if the
+     *        player's
+     *        attack successfully collides with a monster during the game.
+     *
+     * @param player             The player initiating the attack.
+     * @param monster            The monster being attacked.
+     * @param newPositionPlayer  The intended new position of the player.
+     * @param newPositionMonster The intended new position of the monster.
+     * @return True if the player's attack collides with the monster; otherwise,
+     *         false.
+     */
     private boolean checkPlayerAttack(Player player, Monster monster, Vector2D newPositionPlayer,
             Vector2D newPositionMonster) {
         Rectangle monsterHitbox = getMonsterHitbox(monster, newPositionMonster);
@@ -437,6 +501,22 @@ public class Canvas extends JPanel {
         return playerSwordHitbox != null && monsterHitbox != null && playerSwordHitbox.intersects(monsterHitbox);
     }
 
+    /**
+     * @brief Checks if the monster's attack collides with the player.
+     *
+     *        This method determines if the monster's sword, represented by its
+     *        hitbox,
+     *        intersects with the hitbox of the player. It is used to check if the
+     *        monster's
+     *        attack successfully collides with the player during the game.
+     *
+     * @param monster            The monster initiating the attack.
+     * @param player             The player being attacked.
+     * @param newPositionMonster The intended new position of the monster.
+     * @param newPositionPlayer  The intended new position of the player.
+     * @return True if the monster's attack collides with the player; otherwise,
+     *         false.
+     */
     private boolean checkMonsterAttack(Monster monster, Player player, Vector2D newPositionMonster,
             Vector2D newPositionPlayer) {
         Rectangle playerHitbox = getPlayerHitbox(player, newPositionPlayer);
@@ -445,6 +525,23 @@ public class Canvas extends JPanel {
         return monsterSwordHitbox != null && playerHitbox != null && monsterSwordHitbox.intersects(playerHitbox);
     }
 
+    /**
+     * @brief Handles the attack behavior of the player towards a monster.
+     *
+     *        This method manages the attack behavior of the player towards a
+     *        monster. It
+     *        includes tracking attack cooldown and damage cooldown, checking for
+     *        valid attack
+     *        conditions, and applying damage to the monster if a successful attack
+     *        is detected.
+     *        The method also ensures that the attack and damage cooldowns are
+     *        properly managed.
+     *
+     * @param player             The player character initiating the attack.
+     * @param monster            The monster being attacked.
+     * @param newPositionPlayer  The intended new position of the player.
+     * @param newPositionMonster The intended new position of the monster.
+     */
     private void handlePlayerAttack(Player player, Monster monster, Vector2D newPositionPlayer,
             Vector2D newPositionMonster) {
         attackCooldown++;
@@ -466,6 +563,23 @@ public class Canvas extends JPanel {
         }
     }
 
+    /**
+     * @brief Handles the attack behavior of a monster towards the player.
+     *
+     *        This method manages the attack behavior of a monster towards the
+     *        player. It
+     *        includes tracking attack cooldown and damage cooldown, checking for
+     *        valid attack
+     *        conditions, and applying damage to the player if a successful attack
+     *        is detected.
+     *        The method also ensures that the attack and damage cooldowns are
+     *        properly managed.
+     *
+     * @param monster            The monster initiating the attack.
+     * @param player             The player character being attacked.
+     * @param newPositionMonster The intended new position of the monster.
+     * @param newPositionPlayer  The intended new position of the player.
+     */
     private void handleMonsterAttack(Monster monster, Player player, Vector2D newPositionMonster,
             Vector2D newPositionPlayer) {
         attackCooldown++;
@@ -487,6 +601,28 @@ public class Canvas extends JPanel {
         }
     }
 
+    /**
+     * @brief Checks for collisions between two entities.
+     *
+     *        This method determines if a collision occurs between two entities,
+     *        each
+     *        represented by an entity object, their respective hitboxes, and
+     *        intended
+     *        new positions. The collision is detected by checking the intersection
+     *        of
+     *        the hitboxes of the two entities. If a collision is detected and the
+     *        first
+     *        entity is currently dodging, it stops dodging and adjusts its position
+     *        to
+     *        avoid the collision.
+     *
+     * @param entity1      The first entity involved in the collision.
+     * @param entity2      The second entity involved in the collision.
+     * @param newPosition1 The intended new position of the first entity.
+     * @param newPosition2 The intended new position of the second entity.
+     * @return True if a collision is detected and handled, indicating that the
+     *         entities cannot move to their new positions; otherwise, false.
+     */
     private boolean checkCollisionWithEntities(Entity entity1, Entity entity2, Vector2D newPosition1,
             Vector2D newPosition2) {
         Rectangle entityrect1 = Entity.isMonster(entity1) ? getMonsterHitbox(entity1, newPosition1)
