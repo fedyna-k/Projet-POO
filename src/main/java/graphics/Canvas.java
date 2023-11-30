@@ -16,6 +16,7 @@ import javax.swing.Timer;
 
 import character.Player;
 import character.Entity;
+import character.Entity.EntityState;
 import character.Monster;
 import geometry.Vector2D;
 import map.Map;
@@ -29,6 +30,8 @@ public class Canvas extends JPanel {
     private Player player;
     private Monster badguy;
     private KeyStack stack;
+    private EntityState currentState;
+    private EntityState currentStateMonster;
     private boolean wasReleasedO;
     private boolean wasReleasedSpace;
     private boolean wasReleasedI;
@@ -36,6 +39,7 @@ public class Canvas extends JPanel {
     boolean entitiesCollision = false;
 
     private int attackCooldown = 0;
+    private int damageCooldown = 0;
     static final double PROBABILITY_OF_ATTACK = 5.0;
     static final double AGGRO_RANGE = 500.0;
     Random random = new Random();
@@ -131,15 +135,9 @@ public class Canvas extends JPanel {
                 Vector2D monsterNewPosition = Vector2D.add(badguy.getPosition(), movementMonster);
                 Vector2D playerNewPosition = Vector2D.add(player.getPosition(), movement);
 
-                // Vérifier si le personnage peut bouger
-                if (checkCollision(player, playerNewPosition)
-                        && !checkCollisionWithEntities(player, badguy, playerNewPosition, monsterNewPosition)) {
-                    player.move(movement);
-                }
+                double attackRadius = 20.0;
 
-                double attackRadius = 2.0;
-
-                if (!checkCollision(badguy, monsterNewPosition)
+                if (!checkCollision(badguy, monsterNewPosition) && !checkCollision(player, playerNewPosition)
                         && !checkCollisionWithEntities(player, badguy, playerNewPosition, monsterNewPosition)) {
                     player.move(movement);
                     if (difference.norm() < AGGRO_RANGE) {
@@ -148,14 +146,19 @@ public class Canvas extends JPanel {
 
                         // Probabilité d'attaque
                         double randomValue = random.nextDouble() * 100;
-                        if (randomValue < PROBABILITY_OF_ATTACK && difference.norm() < attackRadius) {
+                        if (randomValue < PROBABILITY_OF_ATTACK && difference.norm() <= attackRadius) {
                             badguy.attack();
-                        }
-                        if (checkAttack(player, badguy, monsterNewPosition, playerNewPosition)) {
-                            handleAttack(player, badguy, monsterNewPosition, playerNewPosition);
                         }
                     } else {
                         badguy.randMovement();
+                    }
+                    // Handle attacks
+                    if (checkPlayerAttack(player, badguy, playerNewPosition, monsterNewPosition)) {
+                        handlePlayerAttack(player, badguy, playerNewPosition, monsterNewPosition);
+                    }
+
+                    if (checkMonsterAttack(badguy, player, monsterNewPosition, playerNewPosition)) {
+                        handleMonsterAttack(badguy, player, monsterNewPosition, playerNewPosition);
                     }
                 }
 
@@ -240,14 +243,15 @@ public class Canvas extends JPanel {
         Rectangle monsterHitbox = getMonsterHitbox(badguy, monsterNewPosition);
         if (monsterHitbox != null) {
             camera.drawRect(g, monsterHitbox.getX(), monsterHitbox.getY(),
-                    (int) monsterHitbox.getWidth(), (int) monsterHitbox.getHeight(), Color.RED);
+                    (int) monsterHitbox.getWidth(), (int) monsterHitbox.getHeight(), Color.GREEN);
         }
 
         // sword hitbox for bad guy
         Rectangle swordHitboxMonster = getSwordHitboxMonster(badguy);
         if (swordHitboxMonster != null) {
+            System.out.println("Monster Sword Hitbox: " + swordHitboxMonster);
             camera.drawRect(g, swordHitboxMonster.getX(), swordHitboxMonster.getY(),
-                    (int) swordHitboxMonster.getWidth(), (int) swordHitboxMonster.getHeight(), Color.RED);
+                    (int) swordHitboxMonster.getWidth(), (int) swordHitboxMonster.getHeight(), Color.GREEN);
         }
 
         // hitbox walls
@@ -333,20 +337,21 @@ public class Canvas extends JPanel {
 
     private Rectangle getSwordHitboxMonster(Entity entity) {
         int SCALE = isFullscreen ? 4 : 2;
+        Vector2D offset = entity.getOffset();
         double directionMultiplier = entity.isFacingLeft() ? -1 : 1;
         int spriteWidth = 64;
 
         int swordHeight = (int) (entity.getSprite().getHeight() * SCALE / 2);
 
         if (entity.isAttacking()) {
-            double centerswordY = entity.getPosition().y * SCALE;
-            double centerswordX = entity.getPosition().x * SCALE + directionMultiplier;
-            int swordWidth = (int) (spriteWidth);
+            double centerswordY = entity.getPosition().y - offset.y * SCALE + 30;
+            double centerswordX = entity.getPosition().x - offset.x * SCALE + directionMultiplier * 96;
+            int swordWidth = (int) (spriteWidth * 2);
             return new Rectangle((int) centerswordX, (int) centerswordY, swordWidth, swordHeight);
-
+        } else {
+            return null;
         }
 
-        return null;
     }
 
     /**
@@ -424,48 +429,62 @@ public class Canvas extends JPanel {
         return false;
     }
 
-    private boolean checkAttack(Entity entity1, Entity entity2, Vector2D newPosition1,
-            Vector2D newPosition2) {
-        Rectangle entityrect1 = Entity.isMonster(entity1) ? getMonsterHitbox(entity1, newPosition1)
-                : getPlayerHitbox(entity1, newPosition1);
-        Rectangle entityrect2 = Entity.isMonster(entity2) ? getMonsterHitbox(entity2, newPosition2)
-                : getPlayerHitbox(entity2, newPosition2);
+    private boolean checkPlayerAttack(Player player, Monster monster, Vector2D newPositionPlayer,
+            Vector2D newPositionMonster) {
+        Rectangle monsterHitbox = getMonsterHitbox(monster, newPositionMonster);
+        Rectangle playerSwordHitbox = getSwordHitbox(player);
 
-        Rectangle swordEntity1 = getSwordHitbox(entity1);
-        Rectangle swordEntity2 = getSwordHitbox(entity2);
-
-        if ((swordEntity1 != null && entityrect2 != null && swordEntity1.intersects(entityrect2)) ||
-                (swordEntity2 != null && entityrect1 != null && swordEntity2.intersects(entityrect1))) {
-            return true;
-        }
-
-        return false;
+        return playerSwordHitbox != null && monsterHitbox != null && playerSwordHitbox.intersects(monsterHitbox);
     }
 
-    private void handleAttack(Entity entity1, Entity entity2, Vector2D newPosition1,
-            Vector2D newPosition2) {
+    private boolean checkMonsterAttack(Monster monster, Player player, Vector2D newPositionMonster,
+            Vector2D newPositionPlayer) {
+        Rectangle playerHitbox = getPlayerHitbox(player, newPositionPlayer);
+        Rectangle monsterSwordHitbox = getSwordHitboxMonster(monster);
+
+        return monsterSwordHitbox != null && playerHitbox != null && monsterSwordHitbox.intersects(playerHitbox);
+    }
+
+    private void handlePlayerAttack(Player player, Monster monster, Vector2D newPositionPlayer,
+            Vector2D newPositionMonster) {
         attackCooldown++;
+        damageCooldown++;
 
-        if (entity1.isAttacking() && !entity1.isBeingHit() && !entity2.isBlocking() && !entity2.isDodging()
-                && !entity2.isAttacking()) {
-            entity2.getDamage();
-            if (attackCooldown >= 15) {
-                entity1.stopAttacking();
-                resetAfterDamage(entity2);
-            }
-        } else if (entity2.isAttacking() && !entity2.isBeingHit() && !entity1.isBlocking() && !entity1.isDodging()
-                && !entity1.isAttacking()) {
-            entity1.getDamage();
-            if (attackCooldown >= 15) {
-                entity2.stopAttacking();
-                resetAfterDamage(entity1);
+        if (currentState != EntityState.HITSTUN) {
+            if (getSwordHitbox(player) != null) {
+                if (player.isAttacking() && !player.isBeingHit() && !monster.isBlocking() && !monster.isDodging()
+                        && !monster.isAttacking()) {
+                    monster.getDamage();
+                    if (attackCooldown >= 300) {
+                        player.stopAttacking();
+                    }
+                    if (damageCooldown >= 300) {
+                        monster.stopGettingDamage();
+                    }
+                }
             }
         }
     }
 
-    private void resetAfterDamage(Entity entity) {
-        attackCooldown = 0;
-        entity.stopGettingDamage();
+    private void handleMonsterAttack(Monster monster, Player player, Vector2D newPositionMonster,
+            Vector2D newPositionPlayer) {
+        attackCooldown++;
+        damageCooldown++;
+
+        if (currentStateMonster != EntityState.HITSTUN) {
+            if (getSwordHitboxMonster(monster) != null) {
+                if (monster.isAttacking() && !monster.isBeingHit() && !player.isBlocking() && !player.isDodging()
+                        && !player.isAttacking()) {
+                    player.getDamage();
+                    if (attackCooldown >= 300) {
+                        monster.stopAttacking();
+                    }
+                    if (damageCooldown >= 300) {
+                        player.stopGettingDamage();
+                    }
+                }
+            }
+        }
     }
 
     private boolean checkCollisionWithEntities(Entity entity1, Entity entity2, Vector2D newPosition1,
@@ -475,12 +494,8 @@ public class Canvas extends JPanel {
         Rectangle entityrect2 = Entity.isMonster(entity2) ? getMonsterHitbox(entity2, newPosition2)
                 : getPlayerHitbox(entity2, newPosition2);
 
-        // Utilisez une variable temporaire pour suivre l'état de collision entre les
-        // entités
         boolean collisionDetected = entityrect1.intersects(entityrect2);
 
-        // Modifiez entitiesCollision uniquement si une collision doit empêcher le
-        // mouvement
         if (collisionDetected && entity1.isDodging()) {
             entity1.stopDodging();
             if (entity1.isFacingLeft()) {
@@ -493,7 +508,6 @@ public class Canvas extends JPanel {
             entitiesCollision = collisionDetected;
         }
 
-        // Retournez la valeur de la collision
         return entitiesCollision;
     }
 

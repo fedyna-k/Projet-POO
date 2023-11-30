@@ -51,6 +51,13 @@ public abstract class Entity {
         return entity instanceof Monster;
     }
 
+    public enum EntityState {
+        NORMAL,
+        HITSTUN,
+    }
+
+    protected EntityState currentState;
+
     /**
      * Get the Vector2D representation of entity position
      * 
@@ -237,19 +244,13 @@ public abstract class Entity {
         return this.isFacingLeft;
     }
 
-    /**
-     * The entity takes damages
-     */
     public void getDamage() {
-        isBeingHit = true;
+        currentState = EntityState.HITSTUN;
         swapAnimation(AnimationIndex.DAMAGE);
     }
 
-    /**
-     * The entity takes damages
-     */
     public void stopGettingDamage() {
-        isBeingHit = false;
+        currentState = EntityState.NORMAL;
         swapAnimation(AnimationIndex.STANDING);
     }
 
@@ -294,8 +295,8 @@ public abstract class Entity {
         leftBlockStand = Animation.load("leftstandblock", Animation.RESOURCES_FOLDER + dir, 10);
         rightBlockWalk = Animation.load("rightwalkblock", Animation.RESOURCES_FOLDER + dir, 10);
         leftBlockWalk = Animation.load("leftwalkblock", Animation.RESOURCES_FOLDER + dir, 10);
-        leftTakesDamage = Animation.load("lefttakesdamage", Animation.RESOURCES_FOLDER + dir, 10);
-        rightTakesDamage = Animation.load("righttakesdamage", Animation.RESOURCES_FOLDER + dir, 10);
+        leftTakesDamage = Animation.load("righttakesdamage", Animation.RESOURCES_FOLDER + dir, 60);
+        rightTakesDamage = Animation.load("lefttakesdamage", Animation.RESOURCES_FOLDER + dir, 60);
         current = standing;
         current.play();
     }
