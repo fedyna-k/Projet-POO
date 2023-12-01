@@ -6,9 +6,9 @@ TILESIZE - 64
 
 :INDEX-DATA:
 
-1 - tiles/AGrass_pipo.tsx
-529 - tiles/BaseBaseChip_pipo.tsx
-1593 - tiles/AWater_pipo.tsx
+1 - Grass.png
+529 - Tileset.png
+1593 - Water.png
 
 :MAP-DATA:
 
