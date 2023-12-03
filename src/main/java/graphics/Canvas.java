@@ -15,7 +15,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -189,20 +188,25 @@ public class Canvas extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        // TESTING PURPOSE
+        int SCALE = 2;
+        
+        // Get focused coordinates
+        int focusX = this.camera.getFocused() != null ? (int)this.camera.getFocused().getPosition().x : 0;
+        int focusY = this.camera.getFocused() != null ? (int)this.camera.getFocused().getPosition().y : 0;
 
-        int SCALE = isFullscreen ? 4 : 2;
-    
-        for (int i = (int)this.player.getPosition().x / (32 * SCALE) - 9 ; i < (int)this.player.getPosition().x / (32 * SCALE) + 10 ; i++) {
-            for (int j = (int)this.player.getPosition().y / (32 * SCALE) - 6 ; j < (int)this.player.getPosition().y / (32 * SCALE) + 7 ; j++) {
-                BufferedImage tile = map.getTile(i, j);
+        // Get tile infos for screen
+        int width = getPreferredSize().width / (this.map.getTileSize() * SCALE);
+        int height = getPreferredSize().height / (this.map.getTileSize() * SCALE);
 
-                if (tile != null) {
-                    this.camera.drawImage(g, map.getTile(i, j), i * 32 * SCALE, j * 32 * SCALE, SCALE);
-                }
+        // Draw map based on coordinates
+        for (int i = focusX / (this.map.getTileSize() * SCALE) - width / 2 - 1 ; i < focusX / (this.map.getTileSize() * SCALE) + width / 2 + 2 ; i++) {
+            for (int j = focusY / (this.map.getTileSize() * SCALE) - height / 2 - 1 ; j < focusY / (this.map.getTileSize() * SCALE) + height / 2 + 2 ; j++) {
+                this.map.drawTile(this.camera, g, i, j, SCALE);
             }
         }
 
+        // TESTING PURPOSE
+        
         this.camera.drawImage(g, this.player2.getSprite(), this.player2.getPosition().x, this.player2.getPosition().y, SCALE, this.player2.getOffset());
         this.camera.drawImage(g, this.player.getSprite(), this.player.getPosition().x, this.player.getPosition().y, SCALE, this.player.getOffset());
         

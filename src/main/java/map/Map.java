@@ -11,9 +11,12 @@
 
 package map;
 
-import java.awt.Graphics2D;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.LinkedHashMap;
+
+import graphics.Camera;
 
 
 /**
@@ -24,8 +27,22 @@ import java.io.IOException;
  * @brief This class allows to read a map directory and get tile on position given.
  */
 public class Map {
-    /** @brief Instance of finite state machine that reads the file. */
-    private Reader mapReader;
+    /** @brief Stores all tiles */
+    private BufferedImage[] tiles;
+    /** @brief The map tiles size */
+    private int tileSize;
+    /** @brief The map width in tile unit (tu) */
+    private int width;
+    /** @brief The map height in tile unit (tu) */
+    private int height;
+    /**
+     * @brief The layers.
+     *
+     * The structure is made as follows :
+     * - The **key** is the string representing the layer name.
+     * - The **value** is the array that store the layer's tilemap.
+     */
+    private LinkedHashMap<String, int[]> layers;
 
     /**
      * @brief Map constructor.
@@ -38,12 +55,43 @@ public class Map {
      * @warning If something is wrong with the map directory, it will log an error but raise it.
      */
     public Map(String mapDir) {
+        Reader mapReader;
         // Load map using reader class
         try {
             mapReader = new Reader(mapDir);
         } catch (IOException e) {
             System.out.println(e);
             return;
+        }
+
+        // Get all basic info
+        tileSize = mapReader.getTileSize();
+        width = mapReader.getWidth();
+        height = mapReader.getHeight();
+        layers = mapReader.getLayers();
+
+        // ---- Split tilesets ----
+
+        // Get number of tiles and create array
+        int last_index = mapReader.getTilesets().lastEntry().getKey();
+        int last_height = mapReader.getTilesets().lastEntry().getValue().getHeight();
+        int last_width = mapReader.getTilesets().lastEntry().getValue().getWidth();
+
+        tiles = new BufferedImage[last_index + last_height * last_width / (tileSize * tileSize) - 1];
+
+        // Loop through all tilesets
+        for (var entry : mapReader.getTilesets().entrySet()) {
+            // Define array initial index
+            int k = entry.getKey() - 1;
+            
+            // Loop through current tileset
+            for (int i = 0 ; i < entry.getValue().getHeight() / tileSize ; i++) {
+                for (int j = 0 ; j < entry.getValue().getWidth() / tileSize ; j++) {
+                    // Add tile to tile array
+                    tiles[k] = entry.getValue().getSubimage(j * tileSize, i * tileSize, tileSize, tileSize);
+                    k++;
+                }
+            }
         }
     }
 
@@ -53,31 +101,29 @@ public class Map {
      * When a tile is asked, it will compute all the layers and return
      * the final tile.
      * 
+     * @param cam The camera on which to draw the tile.
+     * @param g The graphics object on which to draw tile.
      * @param x The x coordinate in the map grid.
      * @param y The y coordinate in the map grid.
+     * @param scale The scale of the drawn tile.
      * @return The computed tile.
      */
-    public BufferedImage getTile(int x, int y) {
+    public boolean drawTile(Camera cam, Graphics g, int x, int y, double scale) {
         // Check if coordinates are ok
-        if (x >= mapReader.getWidth() || y >= mapReader.getHeight() || x < 0 || y < 0) {
-            return null;
+        if (x >= width || y >= height || x < 0 || y < 0) {
+            return false;
         }
-        int tileCoordinate = y * mapReader.getWidth() + x;
-        
-        // Create tile and painter
-        BufferedImage finalTile = new BufferedImage(mapReader.getTileSize(), mapReader.getTileSize(), BufferedImage.TYPE_INT_ARGB);
-        Graphics2D painter = finalTile.createGraphics();
+        int tileCoordinate = y * width + x;
         
         // Get all layers done
-        for (int[] layer : mapReader.getLayers().values()) {
+        for (int[] layer : layers.values()) {
             int tileIdForLayer = layer[tileCoordinate];
             if (tileIdForLayer != 0) {
-                painter.drawImage(getTileById(tileIdForLayer), null, 0, 0);
+                cam.drawImage(g, getTileById(tileIdForLayer), x * this.tileSize * scale, y * this.tileSize * scale, scale);
             }
         }
 
-        painter.dispose();
-        return finalTile;
+        return true;
     }
 
     /**
@@ -86,32 +132,14 @@ public class Map {
      * @return The tile in the tileset corresponding to the given id.
      */
     private BufferedImage getTileById(int id) {
-        int actualIndex = 0;
-        BufferedImage tileset = null;
+        return tiles[id - 1];
+    }
 
-        // Check all tilesets
-        for (var entry : mapReader.getTilesets().entrySet()) {
-            // 
-            if (entry.getKey() < id) {
-                actualIndex = id - entry.getKey();
-                tileset = entry.getValue();
-            } else {
-                break;
-            }
-        }
-
-        // Compute coordinate on tileset
-        int x = actualIndex % (tileset.getWidth() / mapReader.getTileSize());
-        int y = actualIndex / (tileset.getWidth() / mapReader.getTileSize());
-
-        // Get tile
-        BufferedImage tile = null;
-
-        try {
-            tile = tileset.getSubimage(x * mapReader.getTileSize(), y * mapReader.getTileSize(), mapReader.getTileSize(), mapReader.getTileSize());
-        } catch (Exception e) {
-        }
-
-        return tile;
+    /**
+     * @brief Getter function for the tile size.
+     * @return The tile size in pixel units.
+     */
+    public int getTileSize() {
+        return tileSize;
     }
 }
