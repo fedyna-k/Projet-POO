@@ -132,13 +132,13 @@ public class Canvas extends JPanel {
 
                 // movement
                 Vector2D difference = Vector2D.subtract(player.getPosition(), badguy.getPosition());
-                Vector2D monsterNewPosition = Vector2D.add(badguy.getPosition(), movementMonster);
+                Vector2D newPositionMonster = Vector2D.add(badguy.getPosition(), movementMonster);
                 Vector2D playerNewPosition = Vector2D.add(player.getPosition(), movement);
 
                 double attackRadius = 20.0;
 
-                if (!checkCollision(badguy, monsterNewPosition) && !checkCollision(player, playerNewPosition)
-                        && !checkCollisionWithEntities(player, badguy, playerNewPosition, monsterNewPosition)) {
+                if (!checkCollision(badguy, newPositionMonster) && !checkCollision(player, playerNewPosition)
+                        && !checkCollisionWithEntities(player, badguy, playerNewPosition, newPositionMonster)) {
                     player.move(movement);
                     if (difference.norm() < AGGRO_RANGE) {
                         difference.normalize();
@@ -153,12 +153,12 @@ public class Canvas extends JPanel {
                         badguy.randMovement();
                     }
                     // Handle attacks
-                    if (checkPlayerAttack(player, badguy, playerNewPosition, monsterNewPosition)) {
-                        handlePlayerAttack(player, badguy, playerNewPosition, monsterNewPosition);
+                    if (checkPlayerAttack(player, badguy, playerNewPosition, newPositionMonster)) {
+                        handlePlayerAttack(player, badguy, playerNewPosition, newPositionMonster);
                     }
 
-                    if (checkMonsterAttack(badguy, player, monsterNewPosition, playerNewPosition)) {
-                        handleMonsterAttack(badguy, player, monsterNewPosition, playerNewPosition);
+                    if (checkMonsterAttack(badguy, player, newPositionMonster, playerNewPosition)) {
+                        handleMonsterAttack(badguy, player, newPositionMonster, playerNewPosition);
                     }
                 }
 
@@ -202,8 +202,9 @@ public class Canvas extends JPanel {
         int SCALE = isFullscreen ? 4 : 2;
         int tileSize = map.getTileSize() * SCALE;
         Vector2D movement = new Vector2D();
+        Vector2D movementMonster = new Vector2D();
         Vector2D newPositionPlayer = Vector2D.add(player.getPosition(), movement);
-        Vector2D monsterNewPosition = Vector2D.add(badguy.getPosition(), movement);
+        Vector2D newPositionMonster = Vector2D.add(badguy.getPosition(), movementMonster);
 
         for (int i = (int) this.player.getPosition().x / (32 * SCALE) - 9; i < (int) this.player.getPosition().x
                 / (32 * SCALE) + 10; i++) {
@@ -240,7 +241,7 @@ public class Canvas extends JPanel {
         }
 
         // hitbox bad guy
-        Rectangle monsterHitbox = getMonsterHitbox(badguy, monsterNewPosition);
+        Rectangle monsterHitbox = getMonsterHitbox(badguy, newPositionMonster);
         if (monsterHitbox != null) {
             camera.drawRect(g, monsterHitbox.getX(), monsterHitbox.getY(),
                     (int) monsterHitbox.getWidth(), (int) monsterHitbox.getHeight(), Color.GREEN);
@@ -249,7 +250,6 @@ public class Canvas extends JPanel {
         // sword hitbox for bad guy
         Rectangle swordHitboxMonster = getSwordHitboxMonster(badguy);
         if (swordHitboxMonster != null) {
-            System.out.println("Monster Sword Hitbox: " + swordHitboxMonster);
             camera.drawRect(g, swordHitboxMonster.getX(), swordHitboxMonster.getY(),
                     (int) swordHitboxMonster.getWidth(), (int) swordHitboxMonster.getHeight(), Color.GREEN);
         }
