@@ -54,7 +54,8 @@ public class Player extends Entity {
         if (isAttacking) {
             return new Vector2D(isFacingLeft ? 16 : -16, 0);
         }
-        
+
         return new Vector2D();
     }
+
 }

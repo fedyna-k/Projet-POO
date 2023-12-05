@@ -8,7 +8,7 @@
  * Part of the `graphics` package. It contains a class that allow to simplify maths for drawing.
  */
 
- package graphics;
+package graphics;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -154,7 +154,7 @@ public class Camera {
     }
 
     /**
-     * @brief Get relative position of point based on focus coordinates.
+     * @brief Get relaentity1tive position of point based on focus coordinates.
      * @param focusX The focused entity x position.
      * @param focusY The focused entity y position.
      * @param x The image x position.

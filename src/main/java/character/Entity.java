@@ -12,7 +12,6 @@
 
 package character;
 
-
 import java.awt.image.BufferedImage;
 
 import geometry.Vector2D;
@@ -32,7 +31,7 @@ import graphics.Animation;
 public abstract class Entity {
     /** @brief All possible animations */
     public enum AnimationIndex {
-        STANDING, LEFTRUN, RIGHTRUN, ATTACK, DODGE
+        STANDING, LEFTRUN, RIGHTRUN, ATTACK, DODGE, BLOCK, BLOCKWALK, BLOCKSTAND, DAMAGE
     };
 
     /** @brief The coordinates in absolute positions */
@@ -49,6 +48,13 @@ public abstract class Entity {
     protected boolean isFacingLeft;
     /** @brief State if is dodging */
     protected boolean isDodging;
+    /** @brief State if is blocking */
+    protected boolean isBlocking;
+    /** @brief Used in block loading */
+    protected boolean isInitiatingBlock;
+    /** @brief Used for damage taking */
+    protected boolean isBeingHit;
+  
     /** @brief The last registered movement before dodging */
     protected Vector2D bufferedMovement;
 
@@ -61,14 +67,60 @@ public abstract class Entity {
     protected Animation leftRun;
     /** @brief The animation when running right */
     protected Animation rightRun;
+
     /** @brief The animation when attacking left */
     protected Animation leftAttack;
     /** @brief The animation when attacking right */
     protected Animation rightAttack;
+
     /** @brief The animation when dodging left */
     protected Animation rightDodge;
     /** @brief The animation when dodging right */
     protected Animation leftDodge;
+
+    protected Animation rightBlock;
+    protected Animation leftBlock;
+    protected Animation rightBlockStand;
+    protected Animation leftBlockStand;
+    protected Animation rightBlockWalk;
+    protected Animation leftBlockWalk;
+
+    protected Animation leftTakesDamage;
+    protected Animation rightTakesDamage;
+
+    /**
+     * @brief Checks if the given entity is an instance of the Monster class.
+     *
+     *        This method determines whether the provided entity is a Monster by
+     *        checking
+     *        its type using the instanceof operator.
+     *
+     * @param entity The entity to be checked.
+     * @return True if the entity is a Monster; otherwise, false.
+     */
+    public static boolean isMonster(Entity entity) {
+        return entity instanceof Monster;
+    }
+
+    /**
+     * @brief Enumeration representing the different states of an entity.
+     * 
+     *        This enum defines the possible states an entity can be in, such as
+     *        NORMAL and HITSTUN.
+     */
+    public enum EntityState {
+        /**
+         * The normal state of an entity.
+         */
+        NORMAL,
+
+        /**
+         * The hit stun state of an entity.
+         */
+        HITSTUN,
+    }
+
+    protected EntityState currentState;
 
     /**
      * @brief Get the Vector2D representation of entity position.
@@ -100,6 +152,16 @@ public abstract class Entity {
             isAttacking = false;
         }
 
+        // Block state setter
+        if (isBlocking && !current.isPlaying() && !isInitiatingBlock) {
+            isBlocking = false;
+        }
+
+        // Block state setter
+        if (isInitiatingBlock && !current.isPlaying()) {
+            isInitiatingBlock = false;
+        }
+
         if (isDodging) {
             // Apply default movement
             if (bufferedMovement.isNull()) {
@@ -107,6 +169,12 @@ public abstract class Entity {
             } else {
                 dx = bufferedMovement.x;
                 dy = bufferedMovement.y;
+            }
+        } else if (isBlocking && !isInitiatingBlock) {
+            if (dx != 0 || dy != 0) {
+                swapAnimation(AnimationIndex.BLOCKWALK);
+            } else {
+                swapAnimation(AnimationIndex.BLOCKSTAND);
             }
         } else {
             if (dx > 0 || dx == 0 && dy != 0 && !isFacingLeft) {
@@ -149,6 +217,10 @@ public abstract class Entity {
         return this.isAttacking;
     }
 
+    public void stopAttacking() {
+        isAttacking = false;
+    }
+
     /**
      * @brief Put the entity into dodge state.
      */
@@ -168,11 +240,94 @@ public abstract class Entity {
     }
 
     /**
+     * @brief Set the dodging state of the player.
+     *
+     *        This method sets the dodging state of the player to the specified
+     *        value.
+     *        When the player is in a dodging state, certain actions or behaviors
+     *        may be
+     *        affected in the game.
+     *
+     * @param dodging The new dodging state for the player.
+     *                - true if the player is in a dodging state.
+     *                - false if the player is not in a dodging state.
+     *
+     * @see isDodging
+     */
+    public void setDodging(boolean dodging) {
+        isDodging = dodging;
+    }
+
+    /**
+     * Goes back to normal state from dodging state
+     */
+    public void stopDodging() {
+        isDodging = false;
+        swapAnimation(AnimationIndex.STANDING);
+    }
+
+    /**
+     * Put the entity into block state
+     */
+    public void block() {
+        if (!this.isBlocking) {
+            isInitiatingBlock = true;
+            isBlocking = true;
+            swapAnimation(AnimationIndex.BLOCK);
+        }
+    }
+
+    /**
+     * Get the blocking state of the entity
+     * 
+     * @return The blocking state
+     */
+    public boolean isBlocking() {
+        return this.isBlocking;
+    }
+
+    /**
+     * Goes back to normal state from blocking state
+     */
+    public void stopBlocking() {
+        isBlocking = false;
+    }
+
+    /**
      * @brief Get the entity's orientation.
      * @return true if facing left.
      */
     public boolean isFacingLeft() {
         return this.isFacingLeft;
+    }
+
+    /**
+     * Inflicts damage on the entity, putting it in a hit stun state.
+     * This method changes the entity's state to EntityState.HITSTUN and
+     * swaps its animation to a damage animation.
+     */
+    public void getDamage() {
+        currentState = EntityState.HITSTUN;
+        swapAnimation(AnimationIndex.DAMAGE);
+    }
+
+    /**
+     * Stops the entity from being in a hit stun state.
+     * This method changes the entity's state back to EntityState.NORMAL
+     * and swaps its animation to a standing animation.
+     */
+    public void stopGettingDamage() {
+        currentState = EntityState.NORMAL;
+        swapAnimation(AnimationIndex.STANDING);
+    }
+
+    /**
+     * Checks if the entity is currently in a hit stun state.
+     *
+     * @return True if the entity is being hit (in hit stun); otherwise, false.
+     */
+    public boolean isBeingHit() {
+        return this.isBeingHit;
     }
 
     /**
@@ -187,7 +342,14 @@ public abstract class Entity {
         rightAttack = Animation.load("rightattack", Animation.RESOURCES_FOLDER + dir, 30);
         rightDodge = Animation.load("rightdodge", Animation.RESOURCES_FOLDER + dir, 20);
         leftDodge = Animation.load("leftdodge", Animation.RESOURCES_FOLDER + dir, 20);
-
+        rightBlock = Animation.load("rightblock", Animation.RESOURCES_FOLDER + dir, 30);
+        leftBlock = Animation.load("leftblock", Animation.RESOURCES_FOLDER + dir, 30);
+        rightBlockStand = Animation.load("rightstandblock", Animation.RESOURCES_FOLDER + dir, 10);
+        leftBlockStand = Animation.load("leftstandblock", Animation.RESOURCES_FOLDER + dir, 10);
+        rightBlockWalk = Animation.load("rightwalkblock", Animation.RESOURCES_FOLDER + dir, 10);
+        leftBlockWalk = Animation.load("leftwalkblock", Animation.RESOURCES_FOLDER + dir, 10);
+        leftTakesDamage = Animation.load("righttakesdamage", Animation.RESOURCES_FOLDER + dir, 60);
+        rightTakesDamage = Animation.load("lefttakesdamage", Animation.RESOURCES_FOLDER + dir, 60);
         current = standing;
         current.play();
     }
@@ -216,16 +378,19 @@ public abstract class Entity {
      * @param animationIndex A constant index that describes the type of animation.
      */
     public void swapAnimation(AnimationIndex animationIndex) {
-        if (animationIndex == AnimationIndex.STANDING && this.current != this.standing && !isAttacking && !isDodging) {
+        if (animationIndex == AnimationIndex.STANDING && this.current != this.standing && !isAttacking && !isDodging
+                && !isBlocking) {
             this.current.stop();
             this.current = this.standing;
             this.current.play();
-        } else if (animationIndex == AnimationIndex.LEFTRUN && this.current != this.leftRun && !isAttacking && !isDodging) {
+        } else if (animationIndex == AnimationIndex.LEFTRUN && this.current != this.leftRun && !isAttacking
+                && !isDodging && !isBlocking) {
             this.isFacingLeft = true;
             this.current.stop();
             this.current = this.leftRun;
             this.current.play();
-        } else if (animationIndex == AnimationIndex.RIGHTRUN && this.current != this.rightRun && !isAttacking && !isDodging) {
+        } else if (animationIndex == AnimationIndex.RIGHTRUN && this.current != this.rightRun && !isAttacking
+                && !isDodging && !isBlocking) {
             this.isFacingLeft = false;
             this.current.stop();
             this.current = this.rightRun;
@@ -238,6 +403,25 @@ public abstract class Entity {
             this.current.stop();
             this.current = this.isFacingLeft ? this.leftDodge : this.rightDodge;
             this.current.playOnce();
+        } else if (animationIndex == AnimationIndex.BLOCK) {
+            this.current.stop();
+            this.current = this.isFacingLeft ? this.leftBlock : this.rightBlock;
+            this.current.playOnce();
+        } else if (animationIndex == AnimationIndex.BLOCKSTAND && this.current != this.leftBlockStand
+                && this.current != this.rightBlockStand) {
+            this.current.stop();
+            this.current = this.isFacingLeft ? this.leftBlockStand : this.rightBlockStand;
+            this.current.play();
+        } else if (animationIndex == AnimationIndex.BLOCKWALK && this.current != this.leftBlockWalk
+                && this.current != this.rightBlockWalk) {
+            this.current.stop();
+            this.current = this.isFacingLeft ? this.leftBlockWalk : this.rightBlockWalk;
+            this.current.play();
+        } else if (animationIndex == AnimationIndex.DAMAGE) {
+            this.current.stop();
+            this.current = this.isFacingLeft ? this.leftTakesDamage : this.rightTakesDamage;
+            this.current.play();
         }
     }
+
 }

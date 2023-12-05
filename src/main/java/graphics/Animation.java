@@ -11,7 +11,6 @@
 
 package graphics;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
@@ -104,7 +103,7 @@ public class Animation {
 
         // Read all frames
         this.frames = new BufferedImage[this.frameCounter];
-        for (int i = 1 ; i <= this.frameCounter ; i++) {
+        for (int i = 1; i <= this.frameCounter; i++) {
             this.frames[i - 1] = ImageIO.read(new File(baseURL + framesName + i + ".png"));
         }
 

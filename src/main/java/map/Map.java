@@ -136,10 +136,54 @@ public class Map {
     }
 
     /**
-     * @brief Getter function for the tile size.
-     * @return The tile size in pixel units.
+     * @brief Gets the tile size.
+     *
+     * @return The tile size.
      */
     public int getTileSize() {
         return tileSize;
+    }
+
+    /**
+     * @brief Gets the width of the map.
+     *
+     * @return The map width.
+     */
+    public int getWidth() {
+        return width;
+    }
+
+    /**
+     * @brief Gets the height of the map.
+     *
+     * @return The map height.
+     */
+    public int getHeight() {
+        return height;
+  
+    /**
+     * Checks if a specified location contains a wall.
+     *
+     * @param x The x-coordinate of the location.
+     * @param y The y-coordinate of the location.
+     * @return True if the location contains a wall, false otherwise.
+     */
+    public boolean isWall(int x, int y) {
+        int[] wallsLayer = layers.get("WALLS");
+        int[] houseLayer = layers.get("HOUSE");
+        if (wallsLayer == null || houseLayer == null) {
+            // layer null
+            return false;
+        }
+
+        int tileIndex = y * width + x;
+        if (tileIndex < 0 || tileIndex >= wallsLayer.length || tileIndex >= houseLayer.length) {
+            return false;
+        }
+
+        int wallTileId = wallsLayer[tileIndex];
+        int houseTileId = houseLayer[tileIndex];
+
+        return wallTileId != 0 || houseTileId != 0;
     }
 }

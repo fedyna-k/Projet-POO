@@ -20,7 +20,6 @@ import java.util.LinkedHashMap;
 
 import javax.imageio.ImageIO;
 
-
 /**
  * @class Reader
  * @author Kevin Fedyna
@@ -77,7 +76,7 @@ public class Reader {
         // File reader essentials
         BufferedReader mapdataReader = new BufferedReader(new FileReader(mapDir + ".MAPDATA"));
         String line;
-        
+
         // File validation system
         int currentDataflag = -1;
         int dataflags = 0b111;
@@ -127,7 +126,7 @@ public class Reader {
         }
 
         mapdataReader.close();
-        
+
         // The file was not correct
         if (dataflags != 0 || height == -1 || width == -1 || tileSize == -1) {
             throw new IOException("The given file doesn't respect file specifications.");
@@ -163,7 +162,7 @@ public class Reader {
 
         String[] tilemapRaw = data.split(",");
         int[] tilemapProcessed = new int[tilemapRaw.length];
-
+      
         for (int i = 0 ; i < tilemapRaw.length ; i++) {
             tilemapProcessed[i] = Integer.parseInt(tilemapRaw[i]);
         }
