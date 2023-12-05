@@ -1,3 +1,14 @@
+/**
+ * @brief This file contains the public class Reader.
+ * 
+ * @file Reader.java
+ * @author Kevin Fedyna
+ * @date 16/11/2023
+ * 
+ * Part of the `map` package.
+ * It contains a class that allows to read a map directory and stores all the informations.
+ */
+
 package map;
 
 import java.awt.image.BufferedImage;
@@ -9,25 +20,48 @@ import java.util.LinkedHashMap;
 
 import javax.imageio.ImageIO;
 
+/**
+ * @class Reader
+ * @author Kevin Fedyna
+ * @date 16/11/2023
+ * 
+ * @brief This class allows to read a map directory and stores all the informations.
+ */
 public class Reader {
     // Cross functions variables
-    private LinkedHashMap<Integer, BufferedImage> tilesets;
-    private LinkedHashMap<String, int[]> layers;
-    private int height, width, tileSize;
-    private int[] wallLayer;
-
-    // Constant used to know sections flags
-    private final static LinkedHashMap<String, Integer> dataflagDic = new LinkedHashMap<String, Integer>() {
-        {
-            this.put(":INDEX-DATA:", 0b001);
-            this.put(":META-DATA:", 0b010);
-            this.put(":MAP-DATA:", 0b100);
-        }
-    };
 
     /**
-     * Read given map directory containing .MAPDATA file and tilesets
-     * 
+     * @brief The tilesets.
+     *
+     * The structure is made as follows :
+     * - The **key** is the integer representing the first index.
+     * - The **value** is the whole tileset.
+     */
+    private LinkedHashMap<Integer, BufferedImage> tilesets;
+    /**
+     * @brief The layers.
+     *
+     * The structure is made as follows :
+     * - The **key** is the string representing the layer name.
+     * - The **value** is the array that store the layer's tilemap.
+     */
+    private LinkedHashMap<String, int[]> layers;
+    /** @brief The map height */
+    private int height;
+    /** @brief The map width */
+    private int width;
+    /** @brief The map tilesize */
+    private int tileSize;
+
+    /** @brief Constant used internally to know sections flags. */
+    private final static LinkedHashMap<String, Integer> dataflagDic = new LinkedHashMap<String, Integer>(){{
+        this.put(":INDEX-DATA:", 0b001);
+        this.put(":META-DATA:", 0b010);
+        this.put(":MAP-DATA:", 0b100);
+    }};
+
+    /**
+     * @brief Read given map directory containing .MAPDATA file and tilesets
      * @param mapDir The map directory
      * @throws IOException If .MAPDATA is invalid or if files are missing
      */
@@ -100,13 +134,12 @@ public class Reader {
     }
 
     /**
-     * Load tileset and starting index associated with it
-     * 
+     * @brief Load tileset and starting index associated with it
      * @param mapDir The directory containing map data
-     * @param line   The line read by the reader
+     * @param line The line read by the reader
      * @throws IOException If tileset cannot be found
      */
-    private void loadTileset(String mapDir, String line) throws IOException {
+    private void loadTileset (String mapDir, String line) throws IOException {
         // Get tileset informations
         int tilesetStart = Integer.parseInt(line.split(" - ")[0]);
         String tilesetName = line.split(" - ")[1];
@@ -117,11 +150,10 @@ public class Reader {
     }
 
     /**
-     * Load tile map in layer set
-     * 
+     * @brief Load tile map in layer set
      * @param data The data line read in the .MAPDATA file
      */
-    private void loadTileMap(String data) {
+    private void loadTileMap (String data) {
         int identifierEnd = data.indexOf("#", 1);
         String identifier = data.substring(1, identifierEnd);
 
@@ -130,70 +162,42 @@ public class Reader {
 
         String[] tilemapRaw = data.split(",");
         int[] tilemapProcessed = new int[tilemapRaw.length];
-
-        for (int i = 0; i < tilemapRaw.length; i++) {
+      
+        for (int i = 0 ; i < tilemapRaw.length ; i++) {
             tilemapProcessed[i] = Integer.parseInt(tilemapRaw[i]);
         }
 
         // Add layer
         layers.put(identifier, tilemapProcessed);
-
-        if (identifier.equals("WALLS")) {
-            wallLayer = tilemapProcessed;
-        }
     }
 
     /**
-     * Getter function for tilesets
-     * 
+     * @brief Getter function for tilesets
      * @return The tilesets
      */
-    public LinkedHashMap<Integer, BufferedImage> getTilesets() {
-        return tilesets;
-    }
+    public LinkedHashMap<Integer, BufferedImage> getTilesets() {return tilesets;}
 
     /**
-     * Getter function for layers
-     * 
+     * @brief Getter function for layers
      * @return The layers
      */
-    public LinkedHashMap<String, int[]> getLayers() {
-        return layers;
-    }
+    public LinkedHashMap<String, int[]> getLayers() {return layers;}
 
     /**
-     * Getter function for width
-     * 
+     * @brief Getter function for width
      * @return Map width
      */
-    public int getWidth() {
-        return width;
-    }
+    public int getWidth() {return width;}
 
     /**
-     * Getter function for height
-     * 
+     * @brief Getter function for height
      * @return Map height
      */
-    public int getHeight() {
-        return height;
-    }
+    public int getHeight() {return height;}
 
     /**
-     * Getter function for tile size
-     * 
+     * @brief Getter function for tile size
      * @return the tile size
      */
-    public int getTileSize() {
-        return tileSize;
-    }
-
-    /**
-     * Getter function for the wall layer
-     * 
-     * @return The wall layer
-     */
-    public int[] getWallLayer() {
-        return wallLayer;
-    }
+    public int getTileSize() {return tileSize;}
 }

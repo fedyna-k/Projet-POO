@@ -1,3 +1,13 @@
+/**
+ * @brief This file contains the public class Canvas.
+ * 
+ * @file Canvas.java
+ * @author Kevin Fedyna
+ * @date 16/11/2023
+ * 
+ * Part of the `graphics` package. It contains a class that allow to draw on screen.
+ */
+
 package graphics;
 
 import java.awt.Color;
@@ -21,9 +31,25 @@ import character.Monster;
 import geometry.Vector2D;
 import map.Map;
 
+/**
+ * @class Canvas
+ * @author Kevin Fedyna
+ * @date 16/11/2023
+ * 
+ * @brief This class allows to draw on screen.
+ * 
+ * It should only be instancied once per Window.
+ * 
+ * The instanciation takes place inside the Window class.
+ * 
+ * @see graphics.Window
+ */
 public class Canvas extends JPanel {
+    /** @brief Tells if the window is in fullscreen. */
     private boolean isFullscreen;
+    /** @brief The main timer that refreshes the screen. */
     private Timer timer;
+    /** @brief The camera that follows the player. */
     private Camera camera;
 
     // TESTING PURPOSE
@@ -45,17 +71,31 @@ public class Canvas extends JPanel {
     Random random = new Random();
 
     private Map map;
-
     // ---------------
 
+    /**
+     * @brief The default constructor.
+     * 
+     * Calls the main constructor with fullscreen set to false.
+     */
     public Canvas() {
         this(false);
     }
 
+    /**
+     * @brief The main constructor.
+     * 
+     * First starts by constructing a JFrame with double buffer.
+     * 
+     * The timer is set here, so if you want to add things to the main loop
+     * you should edit this.
+     * 
+     * @param isFullscreen Is the screen in fullscreen mode ?
+     * @see javax.swing.JPanel
+     */
     public Canvas(boolean isFullscreen) {
         super(true);
         this.isFullscreen = isFullscreen;
-
         this.camera = Camera.getCamera(this);
         setBackground(new Color(42, 42, 42, 255));
 
@@ -63,7 +103,6 @@ public class Canvas extends JPanel {
         this.player = new Player(10500, 3000);
         this.badguy = new Monster(this, 11000, 3000);
         this.map = new Map("../src/main/resources/map/");
-
         this.stack = new KeyStack(this);
         this.wasReleasedO = true;
         this.wasReleasedSpace = true;
@@ -80,95 +119,102 @@ public class Canvas extends JPanel {
         this.camera.setFocusOn(player);
         // ---------------
 
-        timer = new Timer(0, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                // TESTING PURPOSE
-                Vector2D movement = new Vector2D();
-                Vector2D movementMonster = new Vector2D();
-                if (stack.isPressed("Z")) {
-                    movement.y -= 4;
-                }
-                if (stack.isPressed("S")) {
-                    movement.y += 4;
-                }
-                if (stack.isPressed("Q")) {
-                    movement.x -= 4;
-                }
-
-                if (stack.isPressed("D")) {
-                    movement.x += 4;
-                }
-                if (stack.isPressed("O")) {
-                    if (wasReleasedO && !player.isDodging() && !player.isBlocking()) {
-                        player.attack();
-                        wasReleasedO = true;
-                    }
-                } else {
-                    wasReleasedO = true;
-                }
-                if (stack.isPressed("SPACE")) {
-                    if (wasReleasedSpace) {
-                        player.dodge();
-                        wasReleasedSpace = false;
-                    }
-                } else {
-                    wasReleasedSpace = true;
-                }
-
-                if (stack.isPressed("I") && wasReleasedI) {
-                    player.block();
-                    wasReleasedI = false;
-                }
-
-                if (!stack.isPressed("I") && !wasReleasedI) {
-                    player.stopBlocking();
-                    wasReleasedI = true;
-                }
-
-                repaint();
-
-                // ---------------
-
-                // movement
-                Vector2D difference = Vector2D.subtract(player.getPosition(), badguy.getPosition());
-                Vector2D newPositionMonster = Vector2D.add(badguy.getPosition(), movementMonster);
-                Vector2D playerNewPosition = Vector2D.add(player.getPosition(), movement);
-
-                double attackRadius = 20.0;
-
-                if (!checkCollision(badguy, newPositionMonster) && !checkCollision(player, playerNewPosition)
-                        && !checkCollisionWithEntities(player, badguy, playerNewPosition, newPositionMonster)) {
-                    player.move(movement);
-                    if (difference.norm() < AGGRO_RANGE) {
-                        difference.normalize();
-                        badguy.move(difference);
-
-                        // Probabilité d'attaque
-                        double randomValue = random.nextDouble() * 100;
-                        if (randomValue < PROBABILITY_OF_ATTACK && difference.norm() <= attackRadius) {
-                            badguy.attack();
-                        }
-                    } else {
-                        badguy.randMovement();
-                    }
-                    // Handle attacks
-                    if (checkPlayerAttack(player, badguy, playerNewPosition, newPositionMonster)) {
-                        handlePlayerAttack(player, badguy, playerNewPosition, newPositionMonster);
-                    }
-
-                    if (checkMonsterAttack(badguy, player, newPositionMonster, playerNewPosition)) {
-                        handleMonsterAttack(badguy, player, newPositionMonster, playerNewPosition);
-                    }
-                }
-
+        timer = new Timer(0, event -> {
+            // TESTING PURPOSE
+            Vector2D movement = new Vector2D();
+            Vector2D movementMonster = new Vector2D();
+            if (stack.isPressed("Z")) {
+                movement.y -= 4;
             }
+            if (stack.isPressed("S")) {
+                movement.y += 4;
+            }
+            if (stack.isPressed("Q")) {
+                movement.x -= 4;
+            }
+            if (stack.isPressed("D")) {
+                movement.x += 4;
+            }
+            if (stack.isPressed("O")) {
+                if (wasReleasedO && !player.isDodging() && !player.isBlocking()) {
+                    player.attack();
+                    wasReleasedO = false;
+                }
+            } else {
+                wasReleasedO = true;
+            }
+            if (stack.isPressed("SPACE")) {
+                if (wasReleasedSpace) {
+                    player.dodge();
+                    wasReleasedSpace = false;
+                }
+            } else {
+                wasReleasedSpace = true;
+            }
+
+            if (stack.isPressed("I") && wasReleasedI) {
+                player.block();
+                wasReleasedI = false;
+            }
+
+            if (!stack.isPressed("I") && !wasReleasedI) {
+                player.stopBlocking();
+                wasReleasedI = true;
+            }
+
+            // ---------------
+
+            // movement
+            Vector2D difference = Vector2D.subtract(player.getPosition(), badguy.getPosition());
+            Vector2D newPositionMonster = Vector2D.add(badguy.getPosition(), movementMonster);
+            Vector2D playerNewPosition = Vector2D.add(player.getPosition(), movement);
+
+            double attackRadius = 20.0;
+
+            if (!checkCollision(badguy, newPositionMonster) && !checkCollision(player, playerNewPosition)
+                    && !checkCollisionWithEntities(player, badguy, playerNewPosition, newPositionMonster)) {
+                // Move if not colliding
+                player.move(movement);
+
+                // Compute monster movement based on aggro range
+                if (difference.norm() < AGGRO_RANGE) {
+                    difference.normalize();
+                    badguy.move(difference);
+
+                    // Probabilité d'attaque
+                    double randomValue = random.nextDouble() * 100;
+                    if (randomValue < PROBABILITY_OF_ATTACK && difference.norm() <= attackRadius) {
+                        badguy.attack();
+                    }
+                } else {
+                    badguy.randMovement();
+                }
+
+                // Handle player attack
+                if (checkPlayerAttack(player, badguy, playerNewPosition, newPositionMonster)) {
+                    handlePlayerAttack(player, badguy, playerNewPosition, newPositionMonster);
+                }
+
+                // Handle monster attack
+                if (checkMonsterAttack(badguy, player, newPositionMonster, playerNewPosition)) {
+                    handleMonsterAttack(badguy, player, newPositionMonster, playerNewPosition);
+                }
+            }
+
         });
 
         timer.addActionListener(e -> repaint());
         timer.start();
     }
 
+    /**
+     * @brief Return the size of the window for cpu/gpu handle.
+     * 
+     * The default size of the window is 800x600 (in pixels).
+     * 
+     * @return The size depending on the mode.
+     * @warning It will take the dimensions of the main screen, the game could be on portrait mode and get glitchy.
+     */
     @Override
     public Dimension getPreferredSize() {
         if (isFullscreen) {
@@ -178,6 +224,26 @@ public class Canvas extends JPanel {
         }
     }
 
+    /**
+     * @brief Redefined for optimizing.
+     * 
+     * @param g The objects that stores informations that will be drawn.
+     * @warning Do not edit this.
+     */
+    @Override
+    public void update(Graphics g) {
+        paint(g);
+    }
+
+    /**
+     * @brief Where we draw everything.
+     * 
+     * You should use the Camera class to draw as it computes all the evil maths
+     * behind the conversion between absolute and canvas-relative positions.
+     * 
+     * @param g The objects that stores informations that will be drawn.
+     * @warning If too much is drawn, it can lag quite much.
+     */
     @Override
     public void update(Graphics g) {
         paint(g);
@@ -188,33 +254,26 @@ public class Canvas extends JPanel {
         super.paintComponent(g);
 
         // TESTING PURPOSE
-        // g.setColor(new Color(56, 56, 56));
-        // for (int i = -this.getWidth() / 256 ; i < 3 * this.getWidth() / 256 ; i ++) {
-        // for (int j = -this.getHeight() / 256 ; j < 3 * this.getHeight() / 256 ; j++)
-        // {
-        // if ((i + j) % 2 == 0) {
-        // g.fillRect(i * 128 - (int)this.player.getPosition().x, j * 128 -
-        // (int)this.player.getPosition().y, 128, 128);
-        // }
-        // }
-        // }
 
-        int SCALE = isFullscreen ? 4 : 2;
+        int SCALE = 2;
         int tileSize = map.getTileSize() * SCALE;
         Vector2D movement = new Vector2D();
         Vector2D movementMonster = new Vector2D();
         Vector2D newPositionPlayer = Vector2D.add(player.getPosition(), movement);
         Vector2D newPositionMonster = Vector2D.add(badguy.getPosition(), movementMonster);
 
-        for (int i = (int) this.player.getPosition().x / (32 * SCALE) - 9; i < (int) this.player.getPosition().x
-                / (32 * SCALE) + 10; i++) {
-            for (int j = (int) this.player.getPosition().y / (32 * SCALE) - 6; j < (int) this.player.getPosition().y
-                    / (32 * SCALE) + 7; j++) {
-                BufferedImage tile = map.getTile(i, j);
+        // Get focused coordinates
+        int focusX = this.camera.getFocused() != null ? (int)this.camera.getFocused().getPosition().x : 0;
+        int focusY = this.camera.getFocused() != null ? (int)this.camera.getFocused().getPosition().y : 0;
 
-                if (tile != null) {
-                    this.camera.drawImage(g, map.getTile(i, j), i * 32 * SCALE, j * 32 * SCALE, SCALE);
-                }
+        // Get tile infos for screen
+        int width = getPreferredSize().width / (this.map.getTileSize() * SCALE);
+        int height = getPreferredSize().height / (this.map.getTileSize() * SCALE);
+
+        // Draw map based on coordinates
+        for (int i = focusX / (this.map.getTileSize() * SCALE) - width / 2 - 1 ; i < focusX / (this.map.getTileSize() * SCALE) + width / 2 + 2 ; i++) {
+            for (int j = focusY / (this.map.getTileSize() * SCALE) - height / 2 - 1 ; j < focusY / (this.map.getTileSize() * SCALE) + height / 2 + 2 ; j++) {
+                this.map.drawTile(this.camera, g, i, j, SCALE);
             }
         }
 
@@ -229,28 +288,28 @@ public class Canvas extends JPanel {
         // hitbox player
         Rectangle playerHitbox = getPlayerHitbox(player, newPositionPlayer);
         if (playerHitbox != null) {
-            camera.drawRect(g, playerHitbox.getX(), playerHitbox.getY(),
+            camera.drawRect(g, playerHitbox.x, playerHitbox.y,
                     (int) playerHitbox.getWidth(), (int) playerHitbox.getHeight(), Color.RED);
         }
 
         // sword hitbox for player
         Rectangle swordHitboxPlayer = getSwordHitbox(player);
         if (swordHitboxPlayer != null) {
-            camera.drawRect(g, swordHitboxPlayer.getX(), swordHitboxPlayer.getY(),
+            camera.drawRect(g, swordHitboxPlayer.x, swordHitboxPlayer.y,
                     (int) swordHitboxPlayer.getWidth(), (int) swordHitboxPlayer.getHeight(), Color.RED);
         }
 
         // hitbox bad guy
         Rectangle monsterHitbox = getMonsterHitbox(badguy, newPositionMonster);
         if (monsterHitbox != null) {
-            camera.drawRect(g, monsterHitbox.getX(), monsterHitbox.getY(),
+            camera.drawRect(g, monsterHitbox.x, monsterHitbox.y,
                     (int) monsterHitbox.getWidth(), (int) monsterHitbox.getHeight(), Color.GREEN);
         }
 
         // sword hitbox for bad guy
         Rectangle swordHitboxMonster = getSwordHitboxMonster(badguy);
         if (swordHitboxMonster != null) {
-            camera.drawRect(g, swordHitboxMonster.getX(), swordHitboxMonster.getY(),
+            camera.drawRect(g, swordHitboxMonster.x, swordHitboxMonster.y,
                     (int) swordHitboxMonster.getWidth(), (int) swordHitboxMonster.getHeight(), Color.GREEN);
         }
 
@@ -261,7 +320,7 @@ public class Canvas extends JPanel {
                 if (map.isWall(i, j)) {
                     Rectangle tileHitbox = getTileHitbox(i, j, tileSize);
                     if (tileHitbox != null) {
-                        camera.drawRect(g, tileHitbox.getX(), tileHitbox.getY(),
+                        camera.drawRect(g, tileHitbox.x, tileHitbox.y,
                                 (int) tileHitbox.getWidth(), (int) tileHitbox.getHeight(), Color.RED);
                     }
                 }
@@ -270,14 +329,12 @@ public class Canvas extends JPanel {
 
         /* End of Drawing Hitbox */
 
-        // this.camera.showCam(g, badguy, player);
         // ---------------
     }
 
     /**
-     * Get Canvas center point
-     * 
-     * @return A Vector2D containing the point
+     * @brief Get Canvas center point.
+     * @return A Vector2D containing the points coordinates.
      */
     public Vector2D getCenter() {
         return new Vector2D(this.getWidth() / 2, this.getHeight() / 2);
