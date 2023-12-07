@@ -24,7 +24,7 @@ import geometry.Vector2D;
  * 
  * @brief This class allows to simplify maths for drawing on screen.
  * 
- * The class uses the Singleton design pattern.
+ *        The class uses the Singleton design pattern.
  */
 public class Camera {
     /** @brief The instance of the singleton. */
@@ -44,7 +44,8 @@ public class Camera {
     /**
      * @brief Get the Camera.
      * 
-     * @note In this case, the camera will focus on point (0, 0) in absolute positions.
+     * @note In this case, the camera will focus on point (0, 0) in absolute
+     *       positions.
      * 
      * @param canvas The canvas the camera will watch.
      * @return The Camera.
@@ -77,7 +78,8 @@ public class Camera {
     /**
      * @brief Set focus on Entity.
      * @param entity The entity to focus on.
-     * @note If null is passed, the camera will focus on point (0, 0) in absolute positions.
+     * @note If null is passed, the camera will focus on point (0, 0) in absolute
+     *       positions.
      */
     public void setFocusOn(Entity entity) {
         singleton.focused = entity;
@@ -94,12 +96,12 @@ public class Camera {
     /**
      * @brief Draw image on screen based on focused point.
      * 
-     * The image will be drawn with a scale of 1 and no offset.
+     *        The image will be drawn with a scale of 1 and no offset.
      * 
      * @param graph The Graphics object.
      * @param image The Image we want to draw.
-     * @param x The x position in absolute coordinates.
-     * @param y The y position in absolute coordinates.
+     * @param x     The x position in absolute coordinates.
+     * @param y     The y position in absolute coordinates.
      */
     public void drawImage(Graphics graph, BufferedImage image, double x, double y) {
         drawImage(graph, image, x, y, 1, new Vector2D());
@@ -108,12 +110,12 @@ public class Camera {
     /**
      * @brief Draw image on screen based on focused point.
      * 
-     * The image will be drawn with no offset.
+     *        The image will be drawn with no offset.
      * 
      * @param graph The Graphics object.
      * @param image The Image we want to draw.
-     * @param x The x position in absolute coordinates.
-     * @param y The y position in absolute coordinates.
+     * @param x     The x position in absolute coordinates.
+     * @param y     The y position in absolute coordinates.
      * @param scale Scale factor for the image width and height.
      */
     public void drawImage(Graphics graph, BufferedImage image, double x, double y, double scale) {
@@ -123,16 +125,16 @@ public class Camera {
     /**
      * @brief Draw image on screen based on focused point.
      * 
-     * The most complete version of this method.
+     *        The most complete version of this method.
      * 
-     * @param graph The Graphics object.
-     * @param image The Image we want to draw.
-     * @param x The x position in absolute coordinates.
-     * @param y The y position in absolute coordinates.
-     * @param scale Scale factor for the image width and height.
+     * @param graph  The Graphics object.
+     * @param image  The Image we want to draw.
+     * @param x      The x position in absolute coordinates.
+     * @param y      The y position in absolute coordinates.
+     * @param scale  Scale factor for the image width and height.
      * @param offset The offset on image (without scaling).
      */
-    public void drawImage(Graphics graph, BufferedImage image, double x, double y, double scale, Vector2D offset) {      
+    public void drawImage(Graphics graph, BufferedImage image, double x, double y, double scale, Vector2D offset) {
         // Get image size after scaling
         int width = (int) Math.floor(image.getWidth() * scale);
         int height = (int) Math.floor(image.getHeight() * scale);
@@ -144,7 +146,8 @@ public class Camera {
         }
 
         // Get all components
-        Vector2D relativePosition = getRelativePosition(singleton.focused.getPosition().x, singleton.focused.getPosition().y, x, y);
+        Vector2D relativePosition = getRelativePosition(singleton.focused.getPosition().x,
+                singleton.focused.getPosition().y, x, y);
         Vector2D imageCenter = new Vector2D(-width / 2, -height / 2);
         offset = Vector2D.scale(offset, -scale);
 
@@ -154,11 +157,11 @@ public class Camera {
     }
 
     /**
-     * @brief Get relaentity1tive position of point based on focus coordinates.
+     * @brief Get relative position of point based on focus coordinates.
      * @param focusX The focused entity x position.
      * @param focusY The focused entity y position.
-     * @param x The image x position.
-     * @param y The image y position.
+     * @param x      The image x position.
+     * @param y      The image y position.
      * @return The Vector2D corresponding to the shift that has to be made.
      */
     private Vector2D getRelativePosition(double focusX, double focusY, double x, double y) {
@@ -169,10 +172,10 @@ public class Camera {
     /**
      * @brief Draw rectangle based on focused entity and centered on position.
      * @param graph The Graphics object.
-     * @param x The rectangle's center's x position in absolute coordinates.
-     * @param y The rectangle's center's y position in absolute coordinates.
-     * @param w The rectangle's width.
-     * @param h The rectangle's height.
+     * @param x     The rectangle's center's x position in absolute coordinates.
+     * @param y     The rectangle's center's y position in absolute coordinates.
+     * @param w     The rectangle's width.
+     * @param h     The rectangle's height.
      * @param color The rectangle's color.
      */
     public void drawRect(Graphics graph, double x, double y, int w, int h, Color color) {
@@ -185,7 +188,8 @@ public class Camera {
         }
 
         // Get all components
-        Vector2D relativePosition = getRelativePosition(singleton.focused.getPosition().x, singleton.focused.getPosition().y, x, y);
+        Vector2D relativePosition = getRelativePosition(singleton.focused.getPosition().x,
+                singleton.focused.getPosition().y, x, y);
         Vector2D rectangleCenter = new Vector2D(-w / 2, -h / 2);
 
         Vector2D position = Vector2D.add(relativePosition, rectangleCenter);
@@ -196,10 +200,10 @@ public class Camera {
     /**
      * @brief Fill rectangle based on focused entity and centered on position.
      * @param graph The Graphics object.
-     * @param x The rectangle's center's x position in absolute coordinates.
-     * @param y The rectangle's center's y position in absolute coordinates.
-     * @param w The rectangle's width.
-     * @param h The rectangle's height.
+     * @param x     The rectangle's center's x position in absolute coordinates.
+     * @param y     The rectangle's center's y position in absolute coordinates.
+     * @param w     The rectangle's width.
+     * @param h     The rectangle's height.
      * @param color The rectangle's color.
      */
     public void fillRect(Graphics graph, double x, double y, int w, int h, Color color) {
@@ -212,7 +216,8 @@ public class Camera {
         }
 
         // Get all components
-        Vector2D relativePosition = getRelativePosition(singleton.focused.getPosition().x, singleton.focused.getPosition().y, x, y);
+        Vector2D relativePosition = getRelativePosition(singleton.focused.getPosition().x,
+                singleton.focused.getPosition().y, x, y);
         Vector2D rectangleCenter = new Vector2D(-w / 2, -h / 2);
 
         Vector2D position = Vector2D.add(relativePosition, rectangleCenter);
