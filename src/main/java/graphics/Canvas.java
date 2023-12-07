@@ -342,8 +342,8 @@ public class Canvas extends JPanel {
      */
     private Rectangle getPlayerHitbox(Entity entity, Vector2D newPosition) {
         int SCALE = isFullscreen ? 4 : 2;
-        int rectWidth = (int) (64 * SCALE / 1.9);
-        int rectHeight = (int) (64 * SCALE / 1.5);
+        int rectWidth = (int) (64 * SCALE / 4.5);
+        int rectHeight = (int) (64 * SCALE / 3.2);
         return new Rectangle((int) newPosition.x, (int) newPosition.y, rectWidth, rectHeight);
     }
 
@@ -359,8 +359,8 @@ public class Canvas extends JPanel {
      */
     private Rectangle getMonsterHitbox(Entity entity, Vector2D newPosition) {
         int SCALE = isFullscreen ? 4 : 2;
-        int rectWidth = (int) (64 * SCALE / 1.9);
-        int rectHeight = (int) (64 * SCALE / 1.5);
+        int rectWidth = (int) (64 * SCALE / 4.5);
+        int rectHeight = (int) (64 * SCALE / 3.2);
         return new Rectangle((int) newPosition.x, (int) newPosition.y, rectWidth, rectHeight);
     }
 
@@ -384,12 +384,12 @@ public class Canvas extends JPanel {
         double directionMultiplier = entity.isFacingLeft() ? -1 : 1;
         int spriteWidth = entity.getSprite().getWidth();
 
-        int swordHeight = (int) (entity.getSprite().getHeight() * SCALE / 2);
+        int swordHeight = (int) (entity.getSprite().getHeight() * SCALE / 4);
 
         if (entity.isAttacking()) {
-            double centerswordY = entity.getPosition().y - offset.y * SCALE + 30;
-            double centerswordX = entity.getPosition().x - offset.x * SCALE + directionMultiplier * 96;
-            int swordWidth = (int) (spriteWidth * 2);
+            double centerswordY = entity.getPosition().y - offset.y * SCALE + 10;
+            double centerswordX = entity.getPosition().x - offset.x + directionMultiplier * 64;
+            int swordWidth = (int) (spriteWidth);
             return new Rectangle((int) centerswordX, (int) centerswordY, swordWidth, swordHeight);
         }
 
@@ -418,12 +418,12 @@ public class Canvas extends JPanel {
         double directionMultiplier = entity.isFacingLeft() ? -1 : 1;
         int spriteWidth = 64;
 
-        int swordHeight = (int) (entity.getSprite().getHeight() * SCALE / 2);
+        int swordHeight = (int) (entity.getSprite().getHeight() * SCALE / 4);
 
         if (entity.isAttacking()) {
-            double centerswordY = entity.getPosition().y - offset.y * SCALE + 30;
-            double centerswordX = entity.getPosition().x - offset.x * SCALE + directionMultiplier * 96;
-            int swordWidth = (int) (spriteWidth * 2);
+            double centerswordY = entity.getPosition().y - offset.y * SCALE + 10;
+            double centerswordX = entity.getPosition().x - offset.x + directionMultiplier * 45;
+            int swordWidth = (int) (spriteWidth / 2);
             return new Rectangle((int) centerswordX, (int) centerswordY, swordWidth, swordHeight);
         } else {
             return null;
