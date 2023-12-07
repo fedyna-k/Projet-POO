@@ -16,9 +16,6 @@ import java.awt.Graphics;
 
 import java.awt.Toolkit;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.util.Random;
 
 import javax.swing.JPanel;
@@ -38,9 +35,9 @@ import map.Map;
  * 
  * @brief This class allows to draw on screen.
  * 
- * It should only be instancied once per Window.
+ *        It should only be instancied once per Window.
  * 
- * The instanciation takes place inside the Window class.
+ *        The instanciation takes place inside the Window class.
  * 
  * @see graphics.Window
  */
@@ -76,7 +73,7 @@ public class Canvas extends JPanel {
     /**
      * @brief The default constructor.
      * 
-     * Calls the main constructor with fullscreen set to false.
+     *        Calls the main constructor with fullscreen set to false.
      */
     public Canvas() {
         this(false);
@@ -85,10 +82,10 @@ public class Canvas extends JPanel {
     /**
      * @brief The main constructor.
      * 
-     * First starts by constructing a JFrame with double buffer.
+     *        First starts by constructing a JFrame with double buffer.
      * 
-     * The timer is set here, so if you want to add things to the main loop
-     * you should edit this.
+     *        The timer is set here, so if you want to add things to the main loop
+     *        you should edit this.
      * 
      * @param isFullscreen Is the screen in fullscreen mode ?
      * @see javax.swing.JPanel
@@ -210,10 +207,11 @@ public class Canvas extends JPanel {
     /**
      * @brief Return the size of the window for cpu/gpu handle.
      * 
-     * The default size of the window is 800x600 (in pixels).
+     *        The default size of the window is 800x600 (in pixels).
      * 
      * @return The size depending on the mode.
-     * @warning It will take the dimensions of the main screen, the game could be on portrait mode and get glitchy.
+     * @warning It will take the dimensions of the main screen, the game could be on
+     *          portrait mode and get glitchy.
      */
     @Override
     public Dimension getPreferredSize() {
@@ -225,21 +223,11 @@ public class Canvas extends JPanel {
     }
 
     /**
-     * @brief Redefined for optimizing.
-     * 
-     * @param g The objects that stores informations that will be drawn.
-     * @warning Do not edit this.
-     */
-    @Override
-    public void update(Graphics g) {
-        paint(g);
-    }
-
-    /**
      * @brief Where we draw everything.
      * 
-     * You should use the Camera class to draw as it computes all the evil maths
-     * behind the conversion between absolute and canvas-relative positions.
+     *        You should use the Camera class to draw as it computes all the evil
+     *        maths
+     *        behind the conversion between absolute and canvas-relative positions.
      * 
      * @param g The objects that stores informations that will be drawn.
      * @warning If too much is drawn, it can lag quite much.
@@ -263,16 +251,18 @@ public class Canvas extends JPanel {
         Vector2D newPositionMonster = Vector2D.add(badguy.getPosition(), movementMonster);
 
         // Get focused coordinates
-        int focusX = this.camera.getFocused() != null ? (int)this.camera.getFocused().getPosition().x : 0;
-        int focusY = this.camera.getFocused() != null ? (int)this.camera.getFocused().getPosition().y : 0;
+        int focusX = this.camera.getFocused() != null ? (int) this.camera.getFocused().getPosition().x : 0;
+        int focusY = this.camera.getFocused() != null ? (int) this.camera.getFocused().getPosition().y : 0;
 
         // Get tile infos for screen
         int width = getPreferredSize().width / (this.map.getTileSize() * SCALE);
         int height = getPreferredSize().height / (this.map.getTileSize() * SCALE);
 
         // Draw map based on coordinates
-        for (int i = focusX / (this.map.getTileSize() * SCALE) - width / 2 - 1 ; i < focusX / (this.map.getTileSize() * SCALE) + width / 2 + 2 ; i++) {
-            for (int j = focusY / (this.map.getTileSize() * SCALE) - height / 2 - 1 ; j < focusY / (this.map.getTileSize() * SCALE) + height / 2 + 2 ; j++) {
+        for (int i = focusX / (this.map.getTileSize() * SCALE) - width / 2
+                - 1; i < focusX / (this.map.getTileSize() * SCALE) + width / 2 + 2; i++) {
+            for (int j = focusY / (this.map.getTileSize() * SCALE) - height / 2
+                    - 1; j < focusY / (this.map.getTileSize() * SCALE) + height / 2 + 2; j++) {
                 this.map.drawTile(this.camera, g, i, j, SCALE);
             }
         }
