@@ -155,32 +155,47 @@ public class Canvas extends JPanel {
             // ---------------
 
             // movement
+
+            // Save the current positions before movement to revert in case of collision
+            Vector2D playerPositionBeforeMove = new Vector2D(player.getPosition().x, player.getPosition().y);
+            Vector2D badguyPositionBeforeMove = new Vector2D(badguy.getPosition().x, badguy.getPosition().y);
+
+            // Calculate the vector representing the distance between player and monster
             Vector2D difference = Vector2D.subtract(player.getPosition(), badguy.getPosition());
 
+            // The minimum distance required between player and monster
             double minDistance = 70.0;
+
+            // Cooldown time for monster attacks
             double cooldown = 3.0;
 
+            // Check if there is no collision before moving entities
             if (!Collision.checkCollision(badguy, player.getPosition())
                     && !Collision.checkCollision(player, player.getPosition())
                     && !Collision.checkCollisionWithEntities(player, badguy, player.getPosition(),
                             badguy.getPosition())) {
-                // Move if not colliding
+
+                // Move the player if there is no collision
                 player.move(movement);
 
                 // Compute monster movement based on aggro range
                 if (difference.norm() < AGGRO_RANGE) {
                     if (difference.norm() > minDistance) {
+                        // Normalize the vector to set the direction
                         difference.normalize();
                         badguy.move(difference);
                     } else if (difference.norm() <= minDistance) {
+                        // Stop monster movement and attempt an attack
                         badguy.stopMoving();
                         Monster.tryAttack(badguy, player, difference, PROBABILITY_OF_ATTACK, cooldown);
+
                         // Handle monster attack
                         if (Collision.checkMonsterAttack(badguy, player, badguy.getPosition(), player.getPosition())) {
                             Collision.handleMonsterAttack(badguy, player, badguy.getPosition(), player.getPosition());
                         }
                     }
                 } else {
+                    // If outside aggro range, make the monster move randomly
                     badguy.randMovement();
                 }
 
@@ -189,8 +204,17 @@ public class Canvas extends JPanel {
                     Collision.handlePlayerAttack(player, badguy, player.getPosition(), badguy.getPosition());
                 }
 
-            }
+                // Check for collisions after movement
+                if (Collision.checkCollision(badguy, player.getPosition())
+                        || Collision.checkCollision(player, player.getPosition())
+                        || Collision.checkCollisionWithEntities(player, badguy, player.getPosition(),
+                                badguy.getPosition())) {
 
+                    // Collision detected, revert movements
+                    player.setPosition(playerPositionBeforeMove.x, playerPositionBeforeMove.y);
+                    badguy.setPosition(badguyPositionBeforeMove.x, badguyPositionBeforeMove.y);
+                }
+            }
         });
 
         timer.addActionListener(e -> repaint());

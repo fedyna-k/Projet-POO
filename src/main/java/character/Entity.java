@@ -337,6 +337,16 @@ public abstract class Entity {
     }
 
     /**
+     * @brief Set the position of the entity.
+     * 
+     * @param x The new x-coordinate.
+     * @param y The new y-coordinate.
+     */
+    public void setPosition(double x, double y) {
+        this.coordinates = new Vector2D(x, y);
+    }
+
+    /**
      * @brief Go through all basic animations and load them.
      * @param dir The folder contaning all frames.
      */

@@ -175,39 +175,6 @@ public class Collision {
     }
 
     /**
-     * @brief Checks for collisions between the player and a wall tile.
-     *
-     *        This method determines if a collision occurs between the player and a
-     *        wall tile, represented by the given player and tile rectangles. If a
-     *        collision is detected and the player is currently dodging, the
-     *        player's position is reset to the previous valid coordinates, and the
-     *        dodging state is reset.
-     *
-     * @param entityRect  The rectangle representing the hitbox of the entity.
-     * @param tileRect    The rectangle representing the hitbox of the wall tile.
-     * @param entity      The entity object involved in the collision.
-     * @param newPosition The intended new position of the player.
-     * @return True if a collision is detected and handled, indicating the player
-     *         cannot move to the new position; otherwise, false.
-     */
-    public static boolean checkCollisionWithWalls(Rectangle entityRect, Rectangle tileRect, Entity entity,
-            Vector2D newPosition) {
-        if (entityRect.intersects(tileRect)) {
-            if (entity.isDodging()) {
-                entity.stopDodging();
-                if (entity.isFacingLeft()) {
-                    entity.move(10, 0);
-                } else {
-                    entity.move(-10, 0);
-                }
-                return true;
-            }
-            return true;
-        }
-        return false;
-    }
-
-    /**
      * @brief Checks for collisions of an entity with walls and other entities.
      *
      *        This method determines if an entity, represented by its hitbox at the
@@ -245,6 +212,85 @@ public class Collision {
         }
 
         return false;
+    }
+
+    /**
+     * @brief Checks for collisions between the player and a wall tile.
+     *
+     *        This method determines if a collision occurs between the player and a
+     *        wall tile, represented by the given player and tile rectangles. If a
+     *        collision is detected and the player is currently dodging, the
+     *        player's position is reset to the previous valid coordinates, and the
+     *        dodging state is reset.
+     *
+     * @param entityRect  The rectangle representing the hitbox of the entity.
+     * @param tileRect    The rectangle representing the hitbox of the wall tile.
+     * @param entity      The entity object involved in the collision.
+     * @param newPosition The intended new position of the player.
+     * @return True if a collision is detected and handled, indicating the player
+     *         cannot move to the new position; otherwise, false.
+     */
+    public static boolean checkCollisionWithWalls(Rectangle entityRect, Rectangle tileRect, Entity entity,
+            Vector2D newPosition) {
+        if (entityRect.intersects(tileRect)) {
+            if (entity.isDodging()) {
+                entity.stopDodging();
+                if (entity.isFacingLeft()) {
+                    entity.move(10, 0);
+                } else {
+                    entity.move(-10, 0);
+                }
+                return true;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @brief Checks for collisions between two entities.
+     *
+     *        This method determines if a collision occurs between two entities,
+     *        each
+     *        represented by an entity object, their respective hitboxes, and
+     *        intended
+     *        new positions. The collision is detected by checking the intersection
+     *        of
+     *        the hitboxes of the two entities. If a collision is detected and the
+     *        first
+     *        entity is currently dodging, it stops dodging and adjusts its position
+     *        to
+     *        avoid the collision.
+     *
+     * @param entity1      The first entity involved in the collision.
+     * @param entity2      The second entity involved in the collision.
+     * @param newPosition1 The intended new position of the first entity.
+     * @param newPosition2 The intended new position of the second entity.
+     * @return True if a collision is detected and handled, indicating that the
+     *         entities cannot move to their new positions; otherwise, false.
+     */
+    public static boolean checkCollisionWithEntities(Entity entity1, Entity entity2, Vector2D newPosition1,
+            Vector2D newPosition2) {
+        Rectangle entityrect1 = Entity.isMonster(entity1) ? getMonsterHitbox(entity1, newPosition1)
+                : getPlayerHitbox(entity1, newPosition1);
+        Rectangle entityrect2 = Entity.isMonster(entity2) ? getMonsterHitbox(entity2, newPosition2)
+                : getPlayerHitbox(entity2, newPosition2);
+
+        boolean collisionDetected = entityrect1.intersects(entityrect2);
+
+        if (collisionDetected && entity1.isDodging()) {
+            entity1.stopDodging();
+            if (entity1.isFacingLeft()) {
+                entity1.move(10, 0);
+            } else {
+                entity1.move(-10, 0);
+            }
+            entitiesCollision = true;
+        } else {
+            entitiesCollision = collisionDetected;
+        }
+
+        return entitiesCollision;
     }
 
     /**
@@ -369,51 +415,4 @@ public class Collision {
             }
         }
     }
-
-    /**
-     * @brief Checks for collisions between two entities.
-     *
-     *        This method determines if a collision occurs between two entities,
-     *        each
-     *        represented by an entity object, their respective hitboxes, and
-     *        intended
-     *        new positions. The collision is detected by checking the intersection
-     *        of
-     *        the hitboxes of the two entities. If a collision is detected and the
-     *        first
-     *        entity is currently dodging, it stops dodging and adjusts its position
-     *        to
-     *        avoid the collision.
-     *
-     * @param entity1      The first entity involved in the collision.
-     * @param entity2      The second entity involved in the collision.
-     * @param newPosition1 The intended new position of the first entity.
-     * @param newPosition2 The intended new position of the second entity.
-     * @return True if a collision is detected and handled, indicating that the
-     *         entities cannot move to their new positions; otherwise, false.
-     */
-    public static boolean checkCollisionWithEntities(Entity entity1, Entity entity2, Vector2D newPosition1,
-            Vector2D newPosition2) {
-        Rectangle entityrect1 = Entity.isMonster(entity1) ? getMonsterHitbox(entity1, newPosition1)
-                : getPlayerHitbox(entity1, newPosition1);
-        Rectangle entityrect2 = Entity.isMonster(entity2) ? getMonsterHitbox(entity2, newPosition2)
-                : getPlayerHitbox(entity2, newPosition2);
-
-        boolean collisionDetected = entityrect1.intersects(entityrect2);
-
-        if (collisionDetected && entity1.isDodging()) {
-            entity1.stopDodging();
-            if (entity1.isFacingLeft()) {
-                entity1.move(10, 0);
-            } else {
-                entity1.move(-10, 0);
-            }
-            entitiesCollision = true;
-        } else {
-            entitiesCollision = collisionDetected;
-        }
-
-        return entitiesCollision;
-    }
-
 }
