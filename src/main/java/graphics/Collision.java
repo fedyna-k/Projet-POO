@@ -10,19 +10,51 @@ import map.Map;
 import java.awt.Rectangle;
 import java.util.Random;
 
+/**
+ * @brief Represents a collision handling utility.
+ *
+ *        This class provides methods for handling collisions between entities
+ *        in the game.
+ */
 public class Collision {
+    /**
+     * @brief The map used for collision detection.
+     */
     private static Map map = new Map("../src/main/resources/map/");
-    private static EntityState currentState;
-    private static EntityState currentStateMonster;
-    private static double attackCooldownTimer = 0;
 
+    /**
+     * @brief The current state of the player entity.
+     */
+    private static EntityState currentState;
+
+    /**
+     * @brief The current state of the monster entity.
+     */
+    private static EntityState currentStateMonster;
+
+    /**
+     * @brief The cooldown for player attacks.
+     */
     private static int attackCooldown = 0;
+
+    /**
+     * @brief The cooldown for damage application.
+     */
     private static int damageCooldown = 0;
 
+    /**
+     * @brief Flag indicating whether entities are colliding.
+     */
     static boolean entitiesCollision = false;
 
+    /**
+     * @brief The scaling factor for collision calculations.
+     */
     static int SCALE = 4;
 
+    /**
+     * @brief A random number generator for various uses.
+     */
     static Random random = new Random();
 
     /**
@@ -31,6 +63,7 @@ public class Collision {
      *        This method calculates and returns the hitbox for the player based on
      *        the given position.
      *
+     * @param entity      The player entity.
      * @param newPosition The position at which to calculate the player's hitbox.
      * @return A Rectangle representing the player's hitbox at the specified
      *         position.
@@ -47,6 +80,7 @@ public class Collision {
      *        This method calculates and returns the hitbox for the monster based on
      *        the given position.
      *
+     * @param entity      The monster entity.
      * @param newPosition The position at which to calculate the monster's hitbox.
      * @return A Rectangle representing the monster's hitbox at the specified
      *         position.
@@ -61,15 +95,13 @@ public class Collision {
      * @brief Retrieves the hitbox for the entity's sword during an attack.
      *
      *        This method calculates and returns the hitbox for the entity's sword
-     *        during
-     *        an attack. The hitbox dimensions are determined by scaling the
-     *        entity's sprite
-     *        and positioning the sword based on the entity's facing direction.
+     *        during an attack. The hitbox dimensions are determined by scaling the
+     *        entity's sprite and positioning the sword based on the entity's facing
+     *        direction.
      *
      * @param entity The entity initiating the attack.
      * @return A Rectangle representing the hitbox of the entity's sword during an
-     *         attack,
-     *         or null if the entity is not currently attacking.
+     *         attack, or null if the entity is not currently attacking.
      */
     public static Rectangle getSwordHitbox(Entity entity) {
 
@@ -148,9 +180,8 @@ public class Collision {
      *        This method determines if a collision occurs between the player and a
      *        wall tile, represented by the given player and tile rectangles. If a
      *        collision is detected and the player is currently dodging, the
-     *        player's position is
-     *        reset to the previous valid coordinates, and the dodging state is
-     *        reset.
+     *        player's position is reset to the previous valid coordinates, and the
+     *        dodging state is reset.
      *
      * @param entityRect  The rectangle representing the hitbox of the entity.
      * @param tileRect    The rectangle representing the hitbox of the wall tile.
@@ -180,14 +211,13 @@ public class Collision {
      * @brief Checks for collisions of an entity with walls and other entities.
      *
      *        This method determines if an entity, represented by its hitbox at the
-     *        specified
-     *        new position, collides with walls on the game map or other entities.
-     *        It considers
-     *        the entity type (player or monster) to calculate the correct hitbox.
-     *        The method
-     *        iterates through the map's tiles, checking for collisions with walls
-     *        using the
-     *        checkCollisionWithWalls function.
+     *        specified new position, collides with walls on the game map or other
+     *        entities.
+     *        It considers the entity type (player or monster) to calculate the
+     *        correct hitbox.
+     *        The method iterates through the map's tiles, checking for collisions
+     *        with walls
+     *        using the checkCollisionWithWalls function.
      *
      * @param entity      The entity for which to check collisions.
      * @param newPosition The intended new position of the entity.
@@ -223,8 +253,7 @@ public class Collision {
      *        This method determines if the player's sword, represented by its
      *        hitbox,
      *        intersects with the hitbox of a monster. It is used to check if the
-     *        player's
-     *        attack successfully collides with a monster during the game.
+     *        player's attack successfully collides with a monster during the game.
      *
      * @param player             The player initiating the attack.
      * @param monster            The monster being attacked.
@@ -247,8 +276,8 @@ public class Collision {
      *        This method determines if the monster's sword, represented by its
      *        hitbox,
      *        intersects with the hitbox of the player. It is used to check if the
-     *        monster's
-     *        attack successfully collides with the player during the game.
+     *        monster's attack successfully collides with the player during the
+     *        game.
      *
      * @param monster            The monster initiating the attack.
      * @param player             The player being attacked.
@@ -385,22 +414,6 @@ public class Collision {
         }
 
         return entitiesCollision;
-    }
-
-    public static void tryAttack(Monster monster, Player player, Vector2D difference, double attackProbability,
-            double cooldown) {
-        double attackRadius = 150.0;
-
-        if (attackCooldownTimer <= 0 && difference.norm() <= attackRadius) {
-            double randomValue = Math.random() * 100;
-            if (randomValue < attackProbability) {
-                monster.attack();
-                attackCooldownTimer = cooldown;
-            }
-        }
-        if (attackCooldownTimer > 0) {
-            attackCooldownTimer--;
-        }
     }
 
 }

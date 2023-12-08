@@ -174,7 +174,7 @@ public class Canvas extends JPanel {
                         badguy.move(difference);
                     } else if (difference.norm() <= minDistance) {
                         badguy.stopMoving();
-                        Collision.tryAttack(badguy, player, difference, PROBABILITY_OF_ATTACK, cooldown);
+                        Monster.tryAttack(badguy, player, difference, PROBABILITY_OF_ATTACK, cooldown);
                         // Handle monster attack
                         if (Collision.checkMonsterAttack(badguy, player, badguy.getPosition(), player.getPosition())) {
                             Collision.handleMonsterAttack(badguy, player, badguy.getPosition(), player.getPosition());
@@ -266,10 +266,8 @@ public class Canvas extends JPanel {
 
         // hitbox player
         Rectangle playerHitbox = Collision.getPlayerHitbox(player, player.getPosition());
-        if (playerHitbox != null) {
-            camera.drawRect(g, playerHitbox.x, playerHitbox.y,
-                    (int) playerHitbox.getWidth(), (int) playerHitbox.getHeight(), Color.RED);
-        }
+        camera.drawRect(g, playerHitbox.x, playerHitbox.y,
+                (int) playerHitbox.getWidth(), (int) playerHitbox.getHeight(), Color.RED);
 
         // sword hitbox for player
         Rectangle swordHitboxPlayer = Collision.getSwordHitbox(player);
