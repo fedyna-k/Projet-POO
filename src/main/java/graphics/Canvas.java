@@ -100,8 +100,8 @@ public class Canvas extends JPanel {
         setBackground(new Color(42, 42, 42, 255));
 
         // TESTING PURPOSE
-        this.player = new Player(10500, 3000);
-        this.badguy = new Monster(this, 11000, 3000);
+        this.player = new Player(0, 0);
+        this.badguy = new Monster(this, 400, 0);
         this.map = new Map("../src/main/resources/map/");
         this.stack = new KeyStack(this);
         this.wasReleasedO = true;
@@ -124,16 +124,16 @@ public class Canvas extends JPanel {
             Vector2D movement = new Vector2D();
             Vector2D movementMonster = new Vector2D();
             if (stack.isPressed("Z")) {
-                movement.y -= 4;
+                movement.y -= 1;
             }
             if (stack.isPressed("S")) {
-                movement.y += 4;
+                movement.y += 1;
             }
             if (stack.isPressed("Q")) {
-                movement.x -= 4;
+                movement.x -= 1;
             }
             if (stack.isPressed("D")) {
-                movement.x += 4;
+                movement.x += 1;
             }
             if (stack.isPressed("O")) {
                 if (wasReleasedO && !player.isDodging() && !player.isBlocking()) {
@@ -222,17 +222,6 @@ public class Canvas extends JPanel {
         } else {
             return new Dimension(800, 600);
         }
-    }
-
-    /**
-     * @brief Redefined for optimizing.
-     * 
-     * @param g The objects that stores informations that will be drawn.
-     * @warning Do not edit this.
-     */
-    @Override
-    public void update(Graphics g) {
-        paint(g);
     }
 
     /**

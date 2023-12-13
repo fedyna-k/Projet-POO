@@ -160,7 +160,8 @@ public class Map {
      */
     public int getHeight() {
         return height;
-  
+    }
+
     /**
      * Checks if a specified location contains a wall.
      *

@@ -55,7 +55,6 @@ public class KeyStack {
      */
     public KeyStack(Canvas binding) {
         this.allPressedKeys = new HashSet<String>();
-        this.specificKeys = new HashSet<String>();
         this.inputs = binding.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         this.actions = binding.getActionMap();
     }
