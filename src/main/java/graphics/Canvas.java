@@ -1,10 +1,10 @@
 /**
  * @brief This file contains the public class Canvas.
- * 
+ *
  * @file Canvas.java
  * @author Kevin Fedyna
  * @date 16/11/2023
- * 
+ *
  * Part of the `graphics` package. It contains a class that allow to draw on screen.
  */
 
@@ -30,13 +30,13 @@ import map.Map;
  * @class Canvas
  * @author Kevin Fedyna
  * @date 16/11/2023
- * 
+ *
  * @brief This class allows to draw on screen.
- * 
+ *
  *        It should only be instancied once per Window.
- * 
+ *
  *        The instanciation takes place inside the Window class.
- * 
+ *
  * @see graphics.Window
  */
 public class Canvas extends JPanel {
@@ -66,7 +66,7 @@ public class Canvas extends JPanel {
 
     /**
      * @brief The default constructor.
-     * 
+     *
      *        Calls the main constructor with fullscreen set to false.
      */
     public Canvas() {
@@ -75,12 +75,12 @@ public class Canvas extends JPanel {
 
     /**
      * @brief The main constructor.
-     * 
+     *
      *        First starts by constructing a JFrame with double buffer.
-     * 
+     *
      *        The timer is set here, so if you want to add things to the main loop
      *        you should edit this.
-     * 
+     *
      * @param isFullscreen Is the screen in fullscreen mode ?
      * @see javax.swing.JPanel
      */
@@ -156,18 +156,11 @@ public class Canvas extends JPanel {
 
             // movement
 
-            // Save the current positions before movement to revert in case of collision
-            Vector2D playerPositionBeforeMove = new Vector2D(player.getPosition().x, player.getPosition().y);
-            Vector2D badguyPositionBeforeMove = new Vector2D(badguy.getPosition().x, badguy.getPosition().y);
-
-            // Calculate the vector representing the distance between player and monster
-            Vector2D difference = Vector2D.subtract(player.getPosition(), badguy.getPosition());
-
             // The minimum distance required between player and monster
             double minDistance = 70.0;
 
             // Cooldown time for monster attacks
-            double cooldown = 3.0;
+            double cooldown = 60.0;
 
             // Check if there is no collision before moving entities
             if (!Collision.checkCollision(badguy, player.getPosition())
@@ -175,6 +168,12 @@ public class Canvas extends JPanel {
                     && !Collision.checkCollisionWithEntities(player, badguy, player.getPosition(),
                             badguy.getPosition())) {
 
+                // Save the current positions before movement to revert in case of collision
+                Vector2D playerPositionBeforeMove = new Vector2D(player.getPosition().x, player.getPosition().y);
+                Vector2D badguyPositionBeforeMove = new Vector2D(badguy.getPosition().x, badguy.getPosition().y);
+
+                // Calculate the vector representing the distance between player and monster
+                Vector2D difference = Vector2D.subtract(player.getPosition(), badguy.getPosition());
                 // Move the player if there is no collision
                 player.move(movement);
 
@@ -223,9 +222,9 @@ public class Canvas extends JPanel {
 
     /**
      * @brief Return the size of the window for cpu/gpu handle.
-     * 
+     *
      *        The default size of the window is 800x600 (in pixels).
-     * 
+     *
      * @return The size depending on the mode.
      * @warning It will take the dimensions of the main screen, the game could be on
      *          portrait mode and get glitchy.
@@ -241,11 +240,11 @@ public class Canvas extends JPanel {
 
     /**
      * @brief Where we draw everything.
-     * 
+     *
      *        You should use the Camera class to draw as it computes all the evil
      *        maths
      *        behind the conversion between absolute and canvas-relative positions.
-     * 
+     *
      * @param g The objects that stores informations that will be drawn.
      * @warning If too much is drawn, it can lag quite much.
      */

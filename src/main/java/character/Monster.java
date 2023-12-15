@@ -84,7 +84,7 @@ public class Monster extends Entity {
         move(Vector2D.scale(randomMovement, 2));
     }
 
-    private static double attackCooldownTimer = 0;
+    private static double attackCooldownTimer;
 
     /**
      * @brief Tries to perform an attack based on specified conditions.

@@ -43,6 +43,16 @@ public class Collision {
     private static int damageCooldown = 0;
 
     /**
+     * @brief The cooldown for player attacks.
+     */
+    private static int monsterattackCooldown = 0;
+
+    /**
+     * @brief The cooldown for damage application.
+     */
+    private static int monsterdamageCooldown = 0;
+
+    /**
      * @brief Flag indicating whether entities are colliding.
      */
     static boolean entitiesCollision = false;
@@ -367,11 +377,13 @@ public class Collision {
                 if (player.isAttacking() && !player.isBeingHit() && !monster.isBlocking() && !monster.isDodging()
                         && !monster.isAttacking()) {
                     monster.getDamage();
-                    if (attackCooldown >= 300) {
+                    if (attackCooldown >= 60) {
                         player.stopAttacking();
+                        attackCooldown = 0;
                     }
-                    if (damageCooldown >= 300) {
+                    if (damageCooldown >= 60) {
                         monster.stopGettingDamage();
+                        damageCooldown = 0;
                     }
                 }
             }
@@ -397,19 +409,21 @@ public class Collision {
      */
     public static void handleMonsterAttack(Monster monster, Player player, Vector2D newPositionMonster,
             Vector2D newPositionPlayer) {
-        attackCooldown++;
-        damageCooldown++;
+        monsterattackCooldown++;
+        monsterdamageCooldown++;
 
         if (currentStateMonster != EntityState.HITSTUN) {
             if (getSwordHitboxMonster(monster) != null) {
                 if (monster.isAttacking() && !monster.isBeingHit() && !player.isBlocking() && !player.isDodging()
                         && !player.isAttacking()) {
                     player.getDamage();
-                    if (attackCooldown >= 300) {
+                    if (monsterattackCooldown >= 60) {
                         monster.stopAttacking();
+                        monsterattackCooldown = 0;
                     }
-                    if (damageCooldown >= 300) {
+                    if (monsterdamageCooldown >= 60) {
                         player.stopGettingDamage();
+                        monsterdamageCooldown = 0;
                     }
                 }
             }
