@@ -60,7 +60,7 @@ public class Canvas extends JPanel {
         stack.listenTo("O"); 
         stack.listenTo("SPACE");
 
-        this.camera.setFocusOn(player);
+        this.camera.setFocusOn(mage);
         // ---------------
 
         timer = new Timer(0, new ActionListener() {
@@ -81,8 +81,8 @@ public class Canvas extends JPanel {
                     movement.x += 4;
                 }
                 if (stack.isPressed("O")) {
-                    if (wasReleasedO && !player.isDodging()) {
-                        player.attack();
+                    if (wasReleasedO && !mage.isDodging()) {
+                        mage.attack();
                         wasReleasedO = false;
                     }
                 } else {
@@ -90,7 +90,7 @@ public class Canvas extends JPanel {
                 }
                 if (stack.isPressed("SPACE")) {
                     if (wasReleasedSpace) {
-                        player.dodge();
+                        mage.dodge();
                         wasReleasedSpace = false;
                     }
                 } else {
