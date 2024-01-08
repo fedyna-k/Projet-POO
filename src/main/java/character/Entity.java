@@ -24,7 +24,8 @@ import graphics.Animation;
  * @author Imene Bousmaha
  * @date 16/11/2023
  * 
- * @brief This class represents an arbitrary entity. It should be a base for all entities.
+ * @brief This class represents an arbitrary entity. It should be a base for all
+ *        entities.
  * 
  * @see character.Player
  */
@@ -54,7 +55,7 @@ public abstract class Entity {
     protected boolean isInitiatingBlock;
     /** @brief Used for damage taking */
     protected boolean isBeingHit;
-  
+
     /** @brief The last registered movement before dodging */
     protected Vector2D bufferedMovement;
 
@@ -199,6 +200,11 @@ public abstract class Entity {
         this.move(movement.x, movement.y);
     }
 
+    public void stopMoving() {
+        move(new Vector2D(0, 0));
+        swapAnimation(AnimationIndex.STANDING);
+    }
+
     /**
      * @brief Put the entity into attack state.
      */
@@ -331,6 +337,16 @@ public abstract class Entity {
     }
 
     /**
+     * @brief Set the position of the entity.
+     * 
+     * @param x The new x-coordinate.
+     * @param y The new y-coordinate.
+     */
+    public void setPosition(double x, double y) {
+        this.coordinates = new Vector2D(x, y);
+    }
+
+    /**
      * @brief Go through all basic animations and load them.
      * @param dir The folder contaning all frames.
      */
@@ -373,7 +389,7 @@ public abstract class Entity {
     /**
      * @brief Change the animation to display.
      * 
-     * If the animation is the same than before, no change is made.
+     *        If the animation is the same than before, no change is made.
      * 
      * @param animationIndex A constant index that describes the type of animation.
      */
