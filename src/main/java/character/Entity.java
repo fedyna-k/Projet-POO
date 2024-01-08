@@ -141,8 +141,9 @@ public abstract class Entity {
      * @brief Move Entity by a given vector.
      * @param dx x coordinate of vector.
      * @param dy y coordinate of vector.
+     * @param speed Set a custom speed to the character.
      */
-    public void move(double dx, double dy) {
+    public void move(double dx, double dy, double speed) {
         // Dodge state setter
         if (isDodging && !current.isPlaying()) {
             isDodging = false;
@@ -166,7 +167,7 @@ public abstract class Entity {
         if (isDodging) {
             // Apply default movement
             if (bufferedMovement.isNull()) {
-                dx = isFacingLeft ? -4 : 4;
+                dx = isFacingLeft ? -1 : 1;
             } else {
                 dx = bufferedMovement.x;
                 dy = bufferedMovement.y;
@@ -188,8 +189,11 @@ public abstract class Entity {
         }
 
         bufferedMovement = new Vector2D(dx, dy);
-        this.coordinates.x += isDodging ? dx * 3 : dx;
-        this.coordinates.y += isDodging ? dy * 3 : dy;
+        bufferedMovement.normalize();
+        bufferedMovement = Vector2D.scale(bufferedMovement, speed);
+
+        this.coordinates.x += isDodging ? bufferedMovement.x * 3 : bufferedMovement.x;
+        this.coordinates.y += isDodging ? bufferedMovement.y * 3 : bufferedMovement.y;
     }
 
     /**
@@ -197,7 +201,25 @@ public abstract class Entity {
      * @param movement The [dx, dy] vector.
      */
     public void move(Vector2D movement) {
-        this.move(movement.x, movement.y);
+        this.move(movement.x, movement.y, 1);
+    }
+
+    /**
+     * @brief Move Entity by a given vector.
+     * @param movement The [dx, dy] vector.
+     * @param speed Set a custom speed to the character.
+     */
+    public void move(Vector2D movement, double speed) {
+        this.move(movement.x, movement.y, speed);
+    }
+
+    /**
+     * @brief Move Entity by a given vector.
+     * @param dx x coordinate of vector.
+     * @param dy y coordinate of vector.
+     */
+    public void move(double dx, double dy) {
+        this.move(dx, dy, 1);
     }
 
     public void stopMoving() {

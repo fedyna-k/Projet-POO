@@ -110,7 +110,7 @@ public class Canvas extends JPanel {
         this.camera.setFocusOn(player);
         // ---------------
 
-        timer = new Timer(0, event -> {
+        timer = new Timer(4, event -> {
             // TESTING PURPOSE
             Vector2D movement = new Vector2D();
             if (stack.isPressed("Z")) {

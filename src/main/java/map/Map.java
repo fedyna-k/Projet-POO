@@ -96,10 +96,9 @@ public class Map {
     }
 
     /**
-     * @brief Method to get the wanted tile.
+     * @brief Method to draw the wanted tile.
      * 
-     * When a tile is asked, it will compute all the layers and return
-     * the final tile.
+     * By passing the camera object, we draw directly onto it and save time.
      * 
      * @param cam The camera on which to draw the tile.
      * @param g The graphics object on which to draw tile.

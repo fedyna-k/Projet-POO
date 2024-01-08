@@ -74,14 +74,13 @@ public class Monster extends Entity {
      *        position.
      */
     public void randMovement() {
-        double range = 1000;
-        double randomX = (Math.random() * (20 * range)) - range;
-        double randomY = (Math.random() * (20 * range)) - range;
+        double randomX = Math.random() - 0.5;
+        double randomY = Math.random() - 0.5;
 
-        Vector2D randomMovement = new Vector2D(randomX, randomY);
-
-        randomMovement.normalize();
-        move(Vector2D.scale(randomMovement, 2));
+        Vector2D delta = new Vector2D(randomX * 0.25, randomY * 0.25);
+        Vector2D randomMovement = Vector2D.add(bufferedMovement, delta);
+        
+        move(randomMovement, 0.5);
     }
 
     private static double attackCooldownTimer;
