@@ -208,13 +208,17 @@ public class Collision {
         Rectangle rect = Entity.isMonster(entity) ? getMonsterHitbox(entity, newPosition)
                 : getPlayerHitbox(entity, newPosition);
 
+
+        int topLeftIndexX = ((int)newPosition.x - tileSize * 3) / tileSize;        
+        int topLeftIndexY = ((int)newPosition.y - tileSize * 3) / tileSize;
+
         // Check collision with walls
-        for (int i = 0; i < map.getWidth(); i++) {
-            for (int j = 0; j < map.getHeight(); j++) {
+        for (int i = topLeftIndexX; i < topLeftIndexX + 6; i++) {
+            for (int j = topLeftIndexY; j < topLeftIndexY + 6; j++) {
                 if (map.isWall(i, j)) {
                     Rectangle tileRect = getTileHitbox(i, j, tileSize);
 
-                    if (checkCollisionWithWalls(rect, tileRect, entity, newPosition)) {
+                    if (rect.intersects(tileRect)) {
                         return true;
                     }
                 }
