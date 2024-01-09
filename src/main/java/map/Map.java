@@ -35,6 +35,9 @@ public class Map {
     private int width;
     /** @brief The map height in tile unit (tu) */
     private int height;
+    /** @brief The map wall layers names */
+    private String[] walls;
+    
     /**
      * @brief The layers.
      *
@@ -68,6 +71,7 @@ public class Map {
         tileSize = mapReader.getTileSize();
         width = mapReader.getWidth();
         height = mapReader.getHeight();
+        walls = mapReader.getWalls();
         layers = mapReader.getLayers();
 
         // ---- Split tilesets ----
@@ -169,21 +173,24 @@ public class Map {
      * @return True if the location contains a wall, false otherwise.
      */
     public boolean isWall(int x, int y) {
-        int[] wallsLayer = layers.get("WALLS");
-        int[] houseLayer = layers.get("HOUSE");
-        if (wallsLayer == null || houseLayer == null) {
-            // layer null
-            return false;
+        // Out of boundary IS like wall
+        if (x >= width || y >= height || x < 0 || y < 0) {
+            return true;
         }
 
-        int tileIndex = y * width + x;
-        if (tileIndex < 0 || tileIndex >= wallsLayer.length || tileIndex >= houseLayer.length) {
-            return false;
+        int tileCoordinate = y * width + x;
+        boolean isWallOnTile = false;
+
+        for (String wall : walls) {
+            if (!layers.containsKey(wall)) {
+                continue;
+            }
+            
+            if (layers.get(wall)[tileCoordinate] != 0) {
+                isWallOnTile = true;
+            }
         }
 
-        int wallTileId = wallsLayer[tileIndex];
-        int houseTileId = houseLayer[tileIndex];
-
-        return wallTileId != 0 || houseTileId != 0;
+        return isWallOnTile;
     }
 }

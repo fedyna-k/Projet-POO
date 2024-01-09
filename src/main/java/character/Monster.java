@@ -1,7 +1,6 @@
 package character;
 
 import geometry.Vector2D;
-import graphics.Canvas;
 
 /**
  * @brief Represents a Monster entity in the game.
@@ -28,27 +27,15 @@ public class Monster extends Entity {
      *        animations
      *        and facing direction.
      *
-     * @param canvas The canvas for rendering.
      * @param x      The x-coordinate of the Monster.
      * @param y      The y-coordinate of the Monster.
      */
-    public Monster(Canvas canvas, double x, double y) {
+    public Monster(double x, double y) {
         this.setAnimations("monster/");
         this.coordinates = new Vector2D(x, y);
         this.isFacingLeft = false;
     }
 
-    /**
-     * @brief Constructor for Monster with specified coordinates.
-     *
-     *        Initializes a Monster at the specified coordinates without specifying
-     *        animations and facing direction.
-     *
-     * @param i Unused parameter.
-     * @param j Unused parameter.
-     */
-    public Monster(int i, int j) {
-    }
 
     /**
      * @brief Gets the offset for rendering based on the attack state.

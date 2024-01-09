@@ -92,7 +92,7 @@ public class Canvas extends JPanel {
 
         // TESTING PURPOSE
         this.player = new Player(0, 0);
-        this.badguy = new Monster(this, 400, 0);
+        this.badguy = new Monster(400, 0);
         this.map = new Map("../src/main/resources/map/");
         this.stack = new KeyStack(this);
         this.wasReleasedO = true;
@@ -276,6 +276,14 @@ public class Canvas extends JPanel {
             for (int j = focusY / (this.map.getTileSize() * SCALE) - height / 2
                     - 1; j < focusY / (this.map.getTileSize() * SCALE) + height / 2 + 2; j++) {
                 this.map.drawTile(this.camera, g, i, j, SCALE);
+
+                if (this.map.isWall(i, j)) {
+                    Rectangle tileHitbox = Collision.getTileHitbox(i, j, tileSize);
+                    if (tileHitbox != null) {
+                        camera.drawRect(g, tileHitbox.x, tileHitbox.y,
+                                (int) tileHitbox.getWidth(), (int) tileHitbox.getHeight(), Color.RED);
+                    }
+                }
             }
         }
 
@@ -311,20 +319,6 @@ public class Canvas extends JPanel {
         if (badguy.isAttacking()) {
             camera.drawRect(g, swordHitboxMonster.x, swordHitboxMonster.y,
                     (int) swordHitboxMonster.getWidth(), (int) swordHitboxMonster.getHeight(), Color.GREEN);
-        }
-
-        // hitbox walls
-        for (int i = 0; i < map.getWidth(); i++) {
-            for (int j = 0; j < map.getHeight(); j++) {
-                // draw rectangle around walls
-                if (map.isWall(i, j)) {
-                    Rectangle tileHitbox = Collision.getTileHitbox(i, j, tileSize);
-                    if (tileHitbox != null) {
-                        camera.drawRect(g, tileHitbox.x, tileHitbox.y,
-                                (int) tileHitbox.getWidth(), (int) tileHitbox.getHeight(), Color.RED);
-                    }
-                }
-            }
         }
 
         /* End of Drawing Hitbox */

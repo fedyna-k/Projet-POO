@@ -60,7 +60,7 @@ public class Collision {
     /**
      * @brief The scaling factor for collision calculations.
      */
-    static int SCALE = 4;
+    static int SCALE = 2;
 
     /**
      * @brief A random number generator for various uses.
@@ -79,8 +79,8 @@ public class Collision {
      *         position.
      */
     public static Rectangle getPlayerHitbox(Entity entity, Vector2D newPosition) {
-        int rectWidth = (int) (64 * SCALE / 4.5);
-        int rectHeight = (int) (64 * SCALE / 3.2);
+        int rectWidth = (int) (64 * SCALE / 2.25);
+        int rectHeight = (int) (64 * SCALE / 1.6);
         return new Rectangle((int) newPosition.x, (int) newPosition.y, rectWidth, rectHeight);
     }
 
@@ -96,8 +96,8 @@ public class Collision {
      *         position.
      */
     public static Rectangle getMonsterHitbox(Entity entity, Vector2D newPosition) {
-        int rectWidth = (int) (64 * SCALE / 4.5);
-        int rectHeight = (int) (64 * SCALE / 3.2);
+        int rectWidth = (int) (64 * SCALE / 2.25);
+        int rectHeight = (int) (64 * SCALE / 1.6);
         return new Rectangle((int) newPosition.x, (int) newPosition.y, rectWidth, rectHeight);
     }
 
