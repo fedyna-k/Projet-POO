@@ -47,9 +47,11 @@ public class Canvas extends JPanel {
     /** @brief The camera that follows the player. */
     private Camera camera;
 
-    // TESTING PURPOSE
+    /** @brief The map object */
     private Map map;
+    /** @brief The player */
     private Player player;
+    /** @brief Monster pool */
     private Monster badguy;
     private KeyStack stack;
     private boolean wasReleasedO;
@@ -103,8 +105,8 @@ public class Canvas extends JPanel {
         stack.listenTo("S");
         stack.listenTo("Q");
         stack.listenTo("D");
-        stack.listenTo("O");
         stack.listenTo("SPACE");
+        stack.listenTo("O");
         stack.listenTo("I");
 
         this.camera.setFocusOn(player);
@@ -161,6 +163,8 @@ public class Canvas extends JPanel {
 
             // Cooldown time for monster attacks
             double cooldown = 60.0;
+
+            
 
             // Check if there is no collision before moving entities
             if (!Collision.checkCollision(badguy, player.getPosition())
@@ -260,7 +264,6 @@ public class Canvas extends JPanel {
         // TESTING PURPOSE
 
         int SCALE = 2;
-        int tileSize = map.getTileSize() * SCALE;
 
         // Get focused coordinates
         int focusX = this.camera.getFocused() != null ? (int) this.camera.getFocused().getPosition().x : 0;
@@ -270,58 +273,45 @@ public class Canvas extends JPanel {
         int width = getPreferredSize().width / (this.map.getTileSize() * SCALE);
         int height = getPreferredSize().height / (this.map.getTileSize() * SCALE);
 
-        // Draw map based on coordinates
-        for (int i = focusX / (this.map.getTileSize() * SCALE) - width / 2
-                - 1; i < focusX / (this.map.getTileSize() * SCALE) + width / 2 + 2; i++) {
-            for (int j = focusY / (this.map.getTileSize() * SCALE) - height / 2
-                    - 1; j < focusY / (this.map.getTileSize() * SCALE) + height / 2 + 2; j++) {
-                this.map.drawTile(this.camera, g, i, j, SCALE);
+        // Draw map based on coordinates and clamped
 
-                if (this.map.isWall(i, j)) {
-                    Rectangle tileHitbox = Collision.getTileHitbox(i, j, tileSize);
-                    if (tileHitbox != null) {
-                        camera.drawRect(g, tileHitbox.x, tileHitbox.y,
-                                (int) tileHitbox.getWidth(), (int) tileHitbox.getHeight(), Color.RED);
-                    }
-                }
+        int lowerTileIndexX = focusX / (this.map.getTileSize() * SCALE) - width / 2 - 1;
+        int lowerTileIndexY = focusY / (this.map.getTileSize() * SCALE) - height / 2 - 1;
+
+        int upperTileIndexX = focusX / (this.map.getTileSize() * SCALE) + width / 2 + 2;
+        int upperTileIndexY = focusY / (this.map.getTileSize() * SCALE) + height / 2 + 2;
+
+        if (lowerTileIndexX < 0) {
+            upperTileIndexX -= lowerTileIndexX;
+            lowerTileIndexX = 0;
+        }
+
+        if (lowerTileIndexY < 0) {
+            upperTileIndexY -= lowerTileIndexY;
+            lowerTileIndexY = 0;
+        }
+
+        if (upperTileIndexX >= map.getWidth()) {
+            lowerTileIndexX -= upperTileIndexX - map.getWidth();
+            upperTileIndexX -= upperTileIndexX - map.getWidth();
+        }
+
+        if (upperTileIndexY >= map.getHeight()) {
+            lowerTileIndexY -= upperTileIndexY - map.getHeight();
+            upperTileIndexY -= upperTileIndexY - map.getHeight();
+        }
+
+        for (int i = lowerTileIndexX; i < upperTileIndexX; i++) {
+            for (int j = lowerTileIndexY; j < upperTileIndexY; j++) {
+                this.map.drawTile(this.camera, g, i, j, SCALE);
             }
         }
 
-        this.camera.drawImage(g, this.badguy.getSprite(), this.badguy.getPosition().x,
+        this.camera.drawImageClamped(g, this.map, this.badguy.getSprite(), this.badguy.getPosition().x,
                 this.badguy.getPosition().y,
                 SCALE, this.badguy.getOffset());
-        this.camera.drawImage(g, this.player.getSprite(), this.player.getPosition().x, this.player.getPosition().y,
+        this.camera.drawImageClamped(g, this.map, this.player.getSprite(), this.player.getPosition().x, this.player.getPosition().y,
                 SCALE, this.player.getOffset());
-
-        /* Drawing Hitbox */
-
-        // hitbox player
-        Rectangle playerHitbox = Collision.getPlayerHitbox(player, player.getPosition());
-        camera.drawRect(g, playerHitbox.x, playerHitbox.y,
-                (int) playerHitbox.getWidth(), (int) playerHitbox.getHeight(), Color.RED);
-
-        // sword hitbox for player
-        Rectangle swordHitboxPlayer = Collision.getSwordHitbox(player);
-        if (player.isAttacking()) {
-            camera.drawRect(g, swordHitboxPlayer.x, swordHitboxPlayer.y,
-                    (int) swordHitboxPlayer.getWidth(), (int) swordHitboxPlayer.getHeight(), Color.RED);
-        }
-
-        // hitbox bad guy
-        Rectangle monsterHitbox = Collision.getMonsterHitbox(badguy, badguy.getPosition());
-        if (monsterHitbox != null) {
-            camera.drawRect(g, monsterHitbox.x, monsterHitbox.y,
-                    (int) monsterHitbox.getWidth(), (int) monsterHitbox.getHeight(), Color.GREEN);
-        }
-
-        // sword hitbox for bad guy
-        Rectangle swordHitboxMonster = Collision.getSwordHitboxMonster(badguy);
-        if (badguy.isAttacking()) {
-            camera.drawRect(g, swordHitboxMonster.x, swordHitboxMonster.y,
-                    (int) swordHitboxMonster.getWidth(), (int) swordHitboxMonster.getHeight(), Color.GREEN);
-        }
-
-        /* End of Drawing Hitbox */
 
         // ---------------
     }

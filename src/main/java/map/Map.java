@@ -122,7 +122,7 @@ public class Map {
         for (int[] layer : layers.values()) {
             int tileIdForLayer = layer[tileCoordinate];
             if (tileIdForLayer != 0) {
-                cam.drawImage(g, getTileById(tileIdForLayer), x * this.tileSize * scale, y * this.tileSize * scale, scale);
+                cam.drawImageClamped(g, this, getTileById(tileIdForLayer), x * this.tileSize * scale, y * this.tileSize * scale, scale);
             }
         }
 

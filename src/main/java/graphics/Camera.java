@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
 
 import character.Entity;
 import geometry.Vector2D;
+import map.Map;
 
 /**
  * @class Camera
@@ -154,6 +155,83 @@ public class Camera {
         Vector2D position = Vector2D.add(relativePosition, imageCenter, offset);
 
         graph.drawImage(image, (int) position.x, (int) position.y, width, height, singleton.canvas);
+    }
+
+    /**
+     * @brief Draw tile on screen based on focused point.
+     * 
+     *        The tile will be drawn with a scale of 1 and no offset.
+     *        It will be clamped to the map.
+     * 
+     * @param graph The Graphics object.
+     * @param map   The Map object.
+     * @param image The Image we want to draw.
+     * @param x     The x position in absolute coordinates.
+     * @param y     The y position in absolute coordinates.
+     */
+    public void drawImageClamped(Graphics graph, Map map, BufferedImage image, double x, double y) {
+        drawImageClamped(graph, map, image, x, y, 1, new Vector2D());
+    }
+
+    /**
+     * @brief Draw tile on screen based on focused point.
+     * 
+     *        The tile will be drawn with no offset.
+     *        It will be clamped to the map.
+     * 
+     * @param graph The Graphics object.
+     * @param map   The Map object.
+     * @param image The Image we want to draw.
+     * @param x     The x position in absolute coordinates.
+     * @param y     The y position in absolute coordinates.
+     * @param scale Scale factor on width and height.
+     */
+    public void drawImageClamped(Graphics graph, Map map, BufferedImage image, double x, double y, double scale) {
+        drawImageClamped(graph, map, image, x, y, scale, new Vector2D());
+    }
+
+    /**
+     * @brief Draw tile on screen based on focused point.
+     * 
+     *        It will be clamped to the map.
+     * 
+     * @param graph The Graphics object.
+     * @param map   The Map object.
+     * @param image The Image we want to draw.
+     * @param x     The x position in absolute coordinates.
+     * @param y     The y position in absolute coordinates.
+     * @param scale Scale factor on width and height.
+     * @param offset The offset on image (without scaling).
+     */
+    public void drawImageClamped(Graphics graph, Map map, BufferedImage image, double x, double y, double scale, Vector2D offset) {
+        // Get image size after scaling
+        int width = (int) Math.floor(image.getWidth() * scale);
+        int height = (int) Math.floor(image.getHeight() * scale);
+
+        // If nothing is focused, we simply draw image on given position
+        if (singleton.focused == null) {
+            graph.drawImage(image, (int) x, (int) y, width, height, singleton.canvas);
+            return;
+        }
+
+        // Compute clamped focus
+        double mapHeight = map.getHeight() * map.getTileSize() * scale;
+        double mapWidth = map.getWidth() * map.getTileSize() * scale;
+        Vector2D canvasRadii = singleton.canvas.getCenter();
+        double focusX = singleton.focused.getPosition().x;
+        double focusY = singleton.focused.getPosition().y;
+
+        double clampedFocusX = Math.min(Math.max(focusX, canvasRadii.x), mapWidth - canvasRadii.x - map.getTileSize());
+        double clampedFocusY = Math.min(Math.max(focusY, canvasRadii.y), mapHeight - canvasRadii.y - map.getTileSize());
+
+        // Get all components
+        Vector2D relativePosition = getRelativePosition(clampedFocusX, clampedFocusY, x, y);
+        Vector2D imageCenter = new Vector2D(-width / 2, -height / 2);
+        offset = Vector2D.scale(offset, -scale);
+
+        Vector2D position = Vector2D.add(relativePosition, imageCenter, offset);
+
+        graph.drawImage(image, (int) position.x, (int) position.y, width, height, singleton.canvas); 
     }
 
     /**

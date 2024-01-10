@@ -17,6 +17,7 @@ import java.awt.image.BufferedImage;
 import geometry.Vector2D;
 
 import graphics.Animation;
+import graphics.Collision;
 
 /**
  * @class Entity
@@ -43,6 +44,8 @@ public abstract class Entity {
     public int width;
     /** @brief The name of the entity */
     public String name;
+    /** @brief The entity stats */
+    protected EntityStats stats;
     /** @brief State if is attacking */
     protected boolean isAttacking;
     /** @brief State if is facing left */
@@ -192,6 +195,17 @@ public abstract class Entity {
         bufferedMovement.normalize();
         bufferedMovement = Vector2D.scale(bufferedMovement, speed);
 
+        Vector2D horizontalMovement = new Vector2D(coordinates.x + bufferedMovement.x, coordinates.y);
+        Vector2D verticalMovement = new Vector2D(coordinates.x, coordinates.y + bufferedMovement.y);
+
+        if (Collision.checkCollision(this, horizontalMovement)) {
+            bufferedMovement.x = 0;
+        }
+
+        if (Collision.checkCollision(this, verticalMovement)) {
+            bufferedMovement.y = 0;
+        }
+
         this.coordinates.x += isDodging ? bufferedMovement.x * 3 : bufferedMovement.x;
         this.coordinates.y += isDodging ? bufferedMovement.y * 3 : bufferedMovement.y;
     }
@@ -222,6 +236,17 @@ public abstract class Entity {
         this.move(dx, dy, 1);
     }
 
+    /**
+     * @brief Tells if the entity is dead or not
+     * @return true if dead.
+     */
+    public boolean isDead() {
+        return stats.isDead();
+    }
+
+    /**
+     * @brief Stops the moving animation
+     */
     public void stopMoving() {
         move(new Vector2D(0, 0));
         swapAnimation(AnimationIndex.STANDING);

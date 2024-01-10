@@ -44,6 +44,7 @@ public class Player extends Entity {
         this.setAnimations("player/");
         this.coordinates = new Vector2D(x, y);
         this.isFacingLeft = false;
+        this.stats = new EntityStats(100, 100, 1, 1, 1, 1);
     }
 
     /**

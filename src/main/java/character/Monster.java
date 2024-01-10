@@ -34,6 +34,7 @@ public class Monster extends Entity {
         this.setAnimations("monster/");
         this.coordinates = new Vector2D(x, y);
         this.isFacingLeft = false;
+        this.stats = new EntityStats(100, 100, 1, 1, 1, 1);
     }
 
 
