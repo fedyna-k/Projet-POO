@@ -3,7 +3,8 @@
  *
  * @file Canvas.java
  * @author Kevin Fedyna
- * @date 16/11/2023
+ * @author Imene Bousmaha
+ * @date 10/01/2024
  *
  * Part of the `graphics` package. It contains a class that allow to draw on screen.
  */
@@ -15,6 +16,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.function.Function;
 
@@ -22,6 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import character.Player;
+import character.Entity;
 import character.Monster;
 import geometry.Vector2D;
 import map.Map;
@@ -29,7 +32,8 @@ import map.Map;
 /**
  * @class Canvas
  * @author Kevin Fedyna
- * @date 16/11/2023
+ * @author Imene Bousmaha
+ * @date 10/01/2024
  *
  * @brief This class allows to draw on screen.
  *
@@ -40,9 +44,6 @@ import map.Map;
  * @see graphics.Window
  */
 public class Canvas extends JPanel {
-
-    private int counter = 0;
-
     /** @brief Tells if the window is in fullscreen. */
     private boolean isFullscreen;
     /** @brief The main timer that refreshes the screen. */
@@ -57,11 +58,14 @@ public class Canvas extends JPanel {
     /** @brief The player */
     private Player player;
     /** @brief Monster pool */
-    private Monster badguy;
+    private ArrayList<Monster> badguys;
+    /** @brief All entities */
+    private ArrayList<Entity> allEntities;
     private KeyStack stack;
     private boolean wasReleasedO;
     private boolean wasReleasedSpace;
     private boolean wasReleasedI;
+    private boolean wasReleasedP;
 
     boolean entitiesCollision = false;
 
@@ -98,8 +102,12 @@ public class Canvas extends JPanel {
         setBackground(new Color(42, 42, 42, 255));
 
         // TESTING PURPOSE
-        this.player = new Player(0, 0);
-        this.badguy = new Monster(400, 0);
+        this.player = new Player(10, 10);
+        this.allEntities = new ArrayList<>(); 
+        this.badguys = new ArrayList<>();
+
+        this.allEntities.add(player);
+
         this.map = new Map("../src/main/resources/map/");
         this.stack = new KeyStack(this);
         this.wasReleasedO = true;
@@ -113,19 +121,17 @@ public class Canvas extends JPanel {
         stack.listenTo("SPACE");
         stack.listenTo("O");
         stack.listenTo("I");
+        stack.listenTo("P");
 
         this.camera.setFocusOn(player);
         // ---------------
 
         Function<Void, Void> loop = e -> {
-            counter++;
-            if (counter == 100) {
-                counter = 0;
-                System.out.print("OK\n");
-            }
-
             // TESTING PURPOSE
             Vector2D movement = new Vector2D();
+            if (stack.isPressed("C")) {
+                movement.y -= 1;
+            }
             if (stack.isPressed("Z")) {
                 movement.y -= 1;
             }
@@ -155,6 +161,19 @@ public class Canvas extends JPanel {
                 wasReleasedSpace = true;
             }
 
+            // ---- debug
+            if (stack.isPressed("P")) {
+                if (wasReleasedP) {
+                    Monster newMonster = new Monster(player.getPosition().x + 100, player.getPosition().y);
+                    this.allEntities.add(newMonster);
+                    this.badguys.add(newMonster);
+                    wasReleasedP = false;
+                }
+            } else {
+                wasReleasedP = true;
+            }
+            // ---- debug
+
             if (stack.isPressed("I") && wasReleasedI) {
                 player.block();
                 wasReleasedI = false;
@@ -175,29 +194,18 @@ public class Canvas extends JPanel {
             // Cooldown time for monster attacks
             double cooldown = 60.0;
 
-            
+            ArrayList<Monster> deadguys = new ArrayList<>();
 
-            // Check if there is no collision before moving entities
-            if (!Collision.checkCollision(badguy, player.getPosition())
-                    && !Collision.checkCollision(player, player.getPosition())
-                    && !Collision.checkCollisionWithEntities(player, badguy, player.getPosition(),
-                            badguy.getPosition())) {
+            player.move(movement, player.getStats().getSpeed() / 10 + 0.5, allEntities);
 
-                // Save the current positions before movement to revert in case of collision
-                Vector2D playerPositionBeforeMove = new Vector2D(player.getPosition().x, player.getPosition().y);
-                Vector2D badguyPositionBeforeMove = new Vector2D(badguy.getPosition().x, badguy.getPosition().y);
-
-                // Calculate the vector representing the distance between player and monster
+            for (Monster badguy : badguys) {
                 Vector2D difference = Vector2D.subtract(player.getPosition(), badguy.getPosition());
-                // Move the player if there is no collision
-                player.move(movement);
 
-                // Compute monster movement based on aggro range
                 if (difference.norm() < AGGRO_RANGE) {
                     if (difference.norm() > minDistance) {
                         // Normalize the vector to set the direction
                         difference.normalize();
-                        badguy.move(difference);
+                        badguy.move(difference, allEntities);
                     } else if (difference.norm() <= minDistance) {
                         // Stop monster movement and attempt an attack
                         badguy.stopMoving();
@@ -210,7 +218,7 @@ public class Canvas extends JPanel {
                     }
                 } else {
                     // If outside aggro range, make the monster move randomly
-                    badguy.randMovement();
+                    badguy.randMovement(allEntities);
                 }
 
                 // Handle player attack
@@ -218,16 +226,14 @@ public class Canvas extends JPanel {
                     Collision.handlePlayerAttack(player, badguy, player.getPosition(), badguy.getPosition());
                 }
 
-                // Check for collisions after movement
-                if (Collision.checkCollision(badguy, player.getPosition())
-                        || Collision.checkCollision(player, player.getPosition())
-                        || Collision.checkCollisionWithEntities(player, badguy, player.getPosition(),
-                                badguy.getPosition())) {
-
-                    // Collision detected, revert movements
-                    player.setPosition(playerPositionBeforeMove.x, playerPositionBeforeMove.y);
-                    badguy.setPosition(badguyPositionBeforeMove.x, badguyPositionBeforeMove.y);
+                if (badguy.isDead()) {
+                    deadguys.add(badguy);
                 }
+            }
+
+            for (Monster deadguy : deadguys) {
+                badguys.remove(deadguy);
+                allEntities.remove(deadguy);
             }
 
             return null;
@@ -323,9 +329,18 @@ public class Canvas extends JPanel {
             }
         }
 
-        this.camera.drawImageClamped(g, this.map, this.badguy.getSprite(), this.badguy.getPosition().x,
-                this.badguy.getPosition().y,
-                SCALE, this.badguy.getOffset());
+        for (Entity badguy : badguys) {
+            this.camera.drawImageClamped(g, this.map, badguy.getSprite(), badguy.getPosition().x,
+                    badguy.getPosition().y,
+                    SCALE, badguy.getOffset());
+
+            int healthLength = (int)(badguy.getSpriteSize().x * badguy.getStats().getHealth().getPercent());
+            int healthOffset = (int)(badguy.getSpriteSize().x * (1 - badguy.getStats().getHealth().getPercent()) / 2);
+                        
+            this.camera.fillRectClamped(g, this.map, badguy.getPosition().x, badguy.getPosition().y - (int)(badguy.getSpriteSize().y / 1.5), (int)badguy.getSpriteSize().x, 3 * SCALE, Color.red);
+            this.camera.fillRectClamped(g, this.map, badguy.getPosition().x - healthOffset, badguy.getPosition().y - (int)(badguy.getSpriteSize().y / 1.5), healthLength, 3 * SCALE, Color.green);
+        }
+
         this.camera.drawImageClamped(g, this.map, this.player.getSprite(), this.player.getPosition().x, this.player.getPosition().y,
                 SCALE, this.player.getOffset());
 

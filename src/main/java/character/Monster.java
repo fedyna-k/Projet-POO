@@ -1,5 +1,7 @@
 package character;
 
+import java.util.ArrayList;
+
 import geometry.Vector2D;
 
 /**
@@ -60,15 +62,17 @@ public class Monster extends Entity {
      *
      *        Generates a random movement vector and applies it to the Monster's
      *        position.
+     * 
+     * @param others Set of other entities that will be collided.
      */
-    public void randMovement() {
+    public void randMovement(ArrayList<Entity> others) {
         double randomX = Math.random() - 0.5;
         double randomY = Math.random() - 0.5;
 
         Vector2D delta = new Vector2D(randomX * 0.25, randomY * 0.25);
         Vector2D randomMovement = Vector2D.add(bufferedMovement, delta);
         
-        move(randomMovement, 0.5);
+        move(randomMovement, 0.5, others);
     }
 
     private static double attackCooldownTimer;

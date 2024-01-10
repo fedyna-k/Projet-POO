@@ -68,7 +68,7 @@ public class Animation {
         try {
             return new Animation(framesName, baseURL, frameRate);
         } catch (IOException e) {
-            System.err.println("Couldn't load animation named \"" + framesName + "\" : " + e);
+            // System.err.println("Couldn't load animation named \"" + framesName + "\" : " + e);
         }
 
         return null;

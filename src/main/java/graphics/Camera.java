@@ -302,4 +302,80 @@ public class Camera {
 
         graph.fillRect((int) position.x, (int) position.y, w, h);
     }
+
+    /**
+     * @brief Draw rectangle based on focused entity and centered on position.
+     * @param graph The Graphics object.
+     * @param map   The Map object to use for clamping.
+     * @param x     The rectangle's center's x position in absolute coordinates.
+     * @param y     The rectangle's center's y position in absolute coordinates.
+     * @param w     The rectangle's width.
+     * @param h     The rectangle's height.
+     * @param color The rectangle's color.
+     */
+    public void drawRectClamped(Graphics graph, Map map,double x, double y, int w, int h, Color color) {
+        graph.setColor(color);
+
+        // If nothing is focused, we draw on given position
+        if (singleton.focused == null) {
+            graph.drawRect((int) x, (int) y, w, h);
+            return;
+        }
+
+        // Compute clamped focus
+        double mapHeight = map.getHeight() * map.getTileSize();
+        double mapWidth = map.getWidth() * map.getTileSize();
+        Vector2D canvasRadii = singleton.canvas.getCenter();
+        double focusX = singleton.focused.getPosition().x;
+        double focusY = singleton.focused.getPosition().y;
+
+        double clampedFocusX = Math.min(Math.max(focusX, canvasRadii.x), mapWidth - canvasRadii.x - map.getTileSize());
+        double clampedFocusY = Math.min(Math.max(focusY, canvasRadii.y), mapHeight - canvasRadii.y - map.getTileSize());
+
+        // Get all components
+        Vector2D relativePosition = getRelativePosition(clampedFocusX, clampedFocusY, x, y);
+        Vector2D rectangleCenter = new Vector2D(-w / 2, -h / 2);
+
+        Vector2D position = Vector2D.add(relativePosition, rectangleCenter);
+
+        graph.drawRect((int) position.x, (int) position.y, w, h);
+    }
+
+    /**
+     * @brief Fill rectangle based on focused entity and centered on position.
+     * @param graph The Graphics object. 
+     * @param map   The Map object to use for clamping.
+     * @param x     The rectangle's center's x position in absolute coordinates.
+     * @param y     The rectangle's center's y position in absolute coordinates.
+     * @param w     The rectangle's width.
+     * @param h     The rectangle's height.
+     * @param color The rectangle's color.
+     */
+    public void fillRectClamped(Graphics graph, Map map,double x, double y, int w, int h, Color color) {
+        graph.setColor(color);
+
+        // If nothing is focused, we draw on given position
+        if (singleton.focused == null) {
+            graph.fillRect((int) x, (int) y, w, h);
+            return;
+        }
+
+        // Compute clamped focus
+        double mapHeight = map.getHeight() * map.getTileSize();
+        double mapWidth = map.getWidth() * map.getTileSize();
+        Vector2D canvasRadii = singleton.canvas.getCenter();
+        double focusX = singleton.focused.getPosition().x;
+        double focusY = singleton.focused.getPosition().y;
+
+        double clampedFocusX = Math.min(Math.max(focusX, canvasRadii.x), mapWidth - canvasRadii.x - map.getTileSize());
+        double clampedFocusY = Math.min(Math.max(focusY, canvasRadii.y), mapHeight - canvasRadii.y - map.getTileSize());
+
+        // Get all components
+        Vector2D relativePosition = getRelativePosition(clampedFocusX, clampedFocusY, x, y);
+        Vector2D rectangleCenter = new Vector2D(-w / 2, -h / 2);
+
+        Vector2D position = Vector2D.add(relativePosition, rectangleCenter);
+
+        graph.fillRect((int) position.x, (int) position.y, w, h);
+    }
 }

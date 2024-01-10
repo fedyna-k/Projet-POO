@@ -13,6 +13,9 @@
 package character;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
+import javax.swing.Timer;
 
 import geometry.Vector2D;
 
@@ -48,6 +51,16 @@ public abstract class Entity {
     protected EntityStats stats;
     /** @brief State if is attacking */
     protected boolean isAttacking;
+    /** @brief State if is attacking */
+    protected boolean canAttack = true;
+    /** @brief State if is attacking */
+    protected int attackCooldown = 0;
+    /** @brief State if is attacking */
+    protected Timer attackTimer;
+    /** @brief State if is attacking */
+    protected int hitstunCooldown = 0;
+    /** @brief State if is attacking */
+    protected Timer hitstunTimer;
     /** @brief State if is facing left */
     protected boolean isFacingLeft;
     /** @brief State if is dodging */
@@ -57,7 +70,7 @@ public abstract class Entity {
     /** @brief Used in block loading */
     protected boolean isInitiatingBlock;
     /** @brief Used for damage taking */
-    protected boolean isBeingHit;
+    protected boolean isBeingHit = false;
 
     /** @brief The last registered movement before dodging */
     protected Vector2D bufferedMovement;
@@ -145,8 +158,9 @@ public abstract class Entity {
      * @param dx x coordinate of vector.
      * @param dy y coordinate of vector.
      * @param speed Set a custom speed to the character.
+     * @param others Set of other entities that will be collided.
      */
-    public void move(double dx, double dy, double speed) {
+    public void move(double dx, double dy, double speed, ArrayList<Entity> others) {
         // Dodge state setter
         if (isDodging && !current.isPlaying()) {
             isDodging = false;
@@ -195,14 +209,14 @@ public abstract class Entity {
         bufferedMovement.normalize();
         bufferedMovement = Vector2D.scale(bufferedMovement, speed);
 
-        Vector2D horizontalMovement = new Vector2D(coordinates.x + bufferedMovement.x, coordinates.y);
-        Vector2D verticalMovement = new Vector2D(coordinates.x, coordinates.y + bufferedMovement.y);
+        Vector2D horizontalMovement = new Vector2D(coordinates.x + (isDodging ? bufferedMovement.x * 3 : bufferedMovement.x), coordinates.y);
+        Vector2D verticalMovement = new Vector2D(coordinates.x, coordinates.y + (isDodging ? bufferedMovement.y * 3 : bufferedMovement.y));
 
-        if (Collision.checkCollision(this, horizontalMovement)) {
+        if (Collision.checkCollision(this, horizontalMovement, others)) {
             bufferedMovement.x = 0;
         }
 
-        if (Collision.checkCollision(this, verticalMovement)) {
+        if (Collision.checkCollision(this, verticalMovement, others)) {
             bufferedMovement.y = 0;
         }
 
@@ -213,27 +227,30 @@ public abstract class Entity {
     /**
      * @brief Move Entity by a given vector.
      * @param movement The [dx, dy] vector.
+     * @param others Set of other entities that will be collided.
      */
-    public void move(Vector2D movement) {
-        this.move(movement.x, movement.y, 1);
+    public void move(Vector2D movement, ArrayList<Entity> others) {
+        this.move(movement.x, movement.y, 1, others);
     }
 
     /**
      * @brief Move Entity by a given vector.
      * @param movement The [dx, dy] vector.
      * @param speed Set a custom speed to the character.
+     * @param others Set of other entities that will be collided.
      */
-    public void move(Vector2D movement, double speed) {
-        this.move(movement.x, movement.y, speed);
+    public void move(Vector2D movement, double speed, ArrayList<Entity> others) {
+        this.move(movement.x, movement.y, speed, others);
     }
 
     /**
      * @brief Move Entity by a given vector.
      * @param dx x coordinate of vector.
      * @param dy y coordinate of vector.
+     * @param others Set of other entities that will be collided.
      */
-    public void move(double dx, double dy) {
-        this.move(dx, dy, 1);
+    public void move(double dx, double dy, ArrayList<Entity> others) {
+        this.move(dx, dy, 1, others);
     }
 
     /**
@@ -245,10 +262,18 @@ public abstract class Entity {
     }
 
     /**
+     * @brief Get all entity stats
+     * @return The stats
+     */
+    public EntityStats getStats() {
+        return stats;
+    }
+
+    /**
      * @brief Stops the moving animation
      */
     public void stopMoving() {
-        move(new Vector2D(0, 0));
+        move(new Vector2D(0, 0), null);
         swapAnimation(AnimationIndex.STANDING);
     }
 
@@ -256,8 +281,19 @@ public abstract class Entity {
      * @brief Put the entity into attack state.
      */
     public void attack() {
-        if (!this.isAttacking && !this.isDodging) {
+        if (!this.isAttacking && !this.isDodging && this.canAttack) {
+            attackTimer = new Timer(0, e -> {
+                this.attackCooldown++;
+    
+                if (this.attackCooldown > 1000 - this.stats.getSpeed() * 80) {
+                    attackCooldown = 0;
+                    this.canAttack = true;
+                    this.attackTimer.stop();
+                }
+            });
             isAttacking = true;
+            this.canAttack = false;
+            attackTimer.start();
             swapAnimation(AnimationIndex.ATTACK);
         }
     }
@@ -270,15 +306,11 @@ public abstract class Entity {
         return this.isAttacking;
     }
 
-    public void stopAttacking() {
-        isAttacking = false;
-    }
-
     /**
      * @brief Put the entity into dodge state.
      */
     public void dodge() {
-        if (!this.isDodging && !this.isAttacking) {
+        if (!this.isDodging && !this.isAttacking && !isBeingHit) {
             isDodging = true;
             swapAnimation(AnimationIndex.DODGE);
         }
@@ -359,19 +391,27 @@ public abstract class Entity {
      * This method changes the entity's state to EntityState.HITSTUN and
      * swaps its animation to a damage animation.
      */
-    public void getDamage() {
-        currentState = EntityState.HITSTUN;
-        swapAnimation(AnimationIndex.DAMAGE);
-    }
+    public void getDamage(Entity attacker) {
+        if (this.isBeingHit == false) {
+            this.isBeingHit = true;
+            int amount = EntityStats.computeDamage(attacker.stats.getAttack(), stats.getDefence());
+            this.stats.takeDamage(amount);
 
-    /**
-     * Stops the entity from being in a hit stun state.
-     * This method changes the entity's state back to EntityState.NORMAL
-     * and swaps its animation to a standing animation.
-     */
-    public void stopGettingDamage() {
-        currentState = EntityState.NORMAL;
-        swapAnimation(AnimationIndex.STANDING);
+            this.hitstunTimer = new Timer(0, e -> {
+                this.hitstunCooldown++;
+
+                if (this.hitstunCooldown > 80) {
+                    this.hitstunCooldown = 0;
+                    this.isBeingHit = false;
+                    this.currentState = EntityState.NORMAL;
+                    this.hitstunTimer.stop();
+                }
+            });
+            this.hitstunTimer.start();
+        }
+
+        this.currentState = EntityState.HITSTUN;
+        swapAnimation(AnimationIndex.DAMAGE);
     }
 
     /**
@@ -441,6 +481,10 @@ public abstract class Entity {
      * @param animationIndex A constant index that describes the type of animation.
      */
     public void swapAnimation(AnimationIndex animationIndex) {
+        if (isBeingHit && animationIndex != AnimationIndex.DAMAGE) {
+            return;
+        }
+
         if (animationIndex == AnimationIndex.STANDING && this.current != this.standing && !isAttacking && !isDodging
                 && !isBlocking) {
             this.current.stop();
