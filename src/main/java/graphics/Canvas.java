@@ -15,8 +15,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 
 import java.awt.Toolkit;
-import java.awt.Rectangle;
 import java.util.Random;
+import java.util.function.Function;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -40,10 +40,15 @@ import map.Map;
  * @see graphics.Window
  */
 public class Canvas extends JPanel {
+
+    private int counter = 0;
+
     /** @brief Tells if the window is in fullscreen. */
     private boolean isFullscreen;
     /** @brief The main timer that refreshes the screen. */
-    private Timer timer;
+    private Timer paintTimer;
+    /** @brief Timer that does not depend on EDT, handles all computations. */
+    private TrueTimer mainTimer;
     /** @brief The camera that follows the player. */
     private Camera camera;
 
@@ -112,7 +117,13 @@ public class Canvas extends JPanel {
         this.camera.setFocusOn(player);
         // ---------------
 
-        timer = new Timer(4, event -> {
+        Function<Void, Void> loop = e -> {
+            counter++;
+            if (counter == 100) {
+                counter = 0;
+                System.out.print("OK\n");
+            }
+
             // TESTING PURPOSE
             Vector2D movement = new Vector2D();
             if (stack.isPressed("Z")) {
@@ -218,10 +229,15 @@ public class Canvas extends JPanel {
                     badguy.setPosition(badguyPositionBeforeMove.x, badguyPositionBeforeMove.y);
                 }
             }
-        });
 
-        timer.addActionListener(e -> repaint());
-        timer.start();
+            return null;
+        };
+
+        mainTimer = new TrueTimer(4, loop);
+        mainTimer.execute();
+
+        paintTimer = new Timer(4, e -> repaint());
+        paintTimer.start();
     }
 
     /**
