@@ -51,6 +51,9 @@ public class Canvas extends JPanel {
     // TESTING PURPOSE
     private Map map;
     private Mage mage;
+    private Crystal blueCrystal;
+
+    private Crystal purpleCrystal;
     private Monster badguy;
     private KeyStack stack;
     private boolean wasReleasedO;
@@ -63,7 +66,6 @@ public class Canvas extends JPanel {
     static final double AGGRO_RANGE = 500.0;
     Random random = new Random();
 
-    //private Mage mage;
 
     // ---------------
 
@@ -95,6 +97,8 @@ public class Canvas extends JPanel {
 
         // TESTING PURPOSE
         this.mage = new Mage(0, 0);
+        this.blueCrystal = new Crystal(40, 0, "blue");
+        this.purpleCrystal = new Crystal(80, 0, "purple");
         this.badguy = new Monster(this, 400, 0);
         this.map = new Map("../src/main/resources/map/");
         this.stack = new KeyStack(this);
@@ -288,15 +292,38 @@ public class Canvas extends JPanel {
                 SCALE, this.badguy.getOffset());
         this.camera.drawImage(g, this.mage.getSprite(), this.mage.getPosition().x, this.mage.getPosition().y,
                 SCALE, this.mage.getOffset());
+        this.camera.drawImage(g, this.blueCrystal.getSprite(), this.blueCrystal.getPosition().x, this.blueCrystal.getPosition().y,
+                SCALE, this.blueCrystal.getOffset());
+        this.camera.drawImage(g, this.purpleCrystal.getSprite(), this.purpleCrystal.getPosition().x, this.purpleCrystal.getPosition().y,
+                SCALE, this.purpleCrystal.getOffset());
 
         /* Drawing Hitbox */
+        // hitbox crystal
+        Rectangle crystalBlueHitbox = Collision.getPlayerHitbox(blueCrystal, blueCrystal.getPosition());
+        camera.drawRect(
+                g, crystalBlueHitbox.x,
+                crystalBlueHitbox.y,
+                (int) crystalBlueHitbox.getWidth(),
+                (int) crystalBlueHitbox.getHeight(),
+                Color.BLUE
+        );
 
-        // hitbox player
+        Rectangle crystalPurpleHitbox = Collision.getPlayerHitbox(blueCrystal, blueCrystal.getPosition());
+        camera.drawRect(
+                g, crystalPurpleHitbox.x,
+                crystalPurpleHitbox.y,
+                (int) crystalPurpleHitbox.getWidth(),
+                (int) crystalPurpleHitbox.getHeight(),
+                Color.BLUE
+        );
+
+
+        // hitbox mage
         Rectangle playerHitbox = Collision.getPlayerHitbox(mage, mage.getPosition());
         camera.drawRect(g, playerHitbox.x, playerHitbox.y,
                 (int) playerHitbox.getWidth(), (int) playerHitbox.getHeight(), Color.RED);
 
-        // sword hitbox for player
+        // sword hitbox for mage
         Rectangle swordHitboxPlayer = Collision.getSwordHitbox(mage);
         if (mage.isAttacking()) {
             camera.drawRect(g, swordHitboxPlayer.x, swordHitboxPlayer.y,
