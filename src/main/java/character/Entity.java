@@ -76,7 +76,7 @@ public abstract class Entity {
     protected Vector2D bufferedMovement;
 
     /** @brief The Animation currently playing */
-    protected Animation current;
+    public Animation current;
 
     /** @brief The idle animation */
     protected Animation standing;
@@ -281,7 +281,7 @@ public abstract class Entity {
      * @brief Put the entity into attack state.
      */
     public void attack() {
-        if (!this.isAttacking && !this.isDodging && this.canAttack) {
+        if (!this.isAttacking && !this.isDodging && this.canAttack && !this.isBeingHit) {
             attackTimer = new Timer(0, e -> {
                 this.attackCooldown++;
     
@@ -395,7 +395,7 @@ public abstract class Entity {
         if (this.isBeingHit == false) {
             this.isBeingHit = true;
             int amount = EntityStats.computeDamage(attacker.stats.getAttack(), stats.getDefence());
-            this.stats.takeDamage(amount);
+            this.stats.takeDamage(isBlocking ? amount / 2 : amount);
 
             this.hitstunTimer = new Timer(0, e -> {
                 this.hitstunCooldown++;

@@ -183,6 +183,8 @@ public class EntityStats {
         attack -= DOWN;
         power -= DOWN;
         defence -= DOWN;
+
+        setMaxHealth(70 + (int)(10 * defence));
     }
 
     /**
@@ -193,6 +195,8 @@ public class EntityStats {
         speed -= DOWN;
         power -= DOWN;
         defence -= DOWN;
+
+        setMaxHealth(70 + (int)(10 * defence));
     }
 
     /**
@@ -203,6 +207,8 @@ public class EntityStats {
         attack -= DOWN;
         speed -= DOWN;
         defence -= DOWN;
+
+        setMaxHealth(70 + (int)(10 * defence));
     }
 
     /**
@@ -213,6 +219,8 @@ public class EntityStats {
         attack -= DOWN;
         power -= DOWN;
         speed -= DOWN;
+
+        setMaxHealth(70 + (int)(10 * defence));
     }
 
     /**

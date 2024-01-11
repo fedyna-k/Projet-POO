@@ -12,6 +12,7 @@ import geometry.Vector2D;
  *        Monster entities, such as random movement and attacking.
  */
 public class Monster extends Entity {
+    public int xp;
 
     /**
      * @brief Default constructor for Monster.
@@ -36,7 +37,8 @@ public class Monster extends Entity {
         this.setAnimations("monster/");
         this.coordinates = new Vector2D(x, y);
         this.isFacingLeft = false;
-        this.stats = new EntityStats(100, 100, 1, 1, 1, 1);
+        this.stats = new EntityStats(100, 100, 10, 1, 1, 1);
+        this.xp = 100;
     }
 
 
@@ -72,7 +74,7 @@ public class Monster extends Entity {
         Vector2D delta = new Vector2D(randomX * 0.25, randomY * 0.25);
         Vector2D randomMovement = Vector2D.add(bufferedMovement, delta);
         
-        move(randomMovement, 0.5, others);
+        move(randomMovement, stats.getSpeed() / 10 + 0.5, others);
     }
 
     private static double attackCooldownTimer;

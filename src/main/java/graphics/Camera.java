@@ -11,8 +11,10 @@
 package graphics;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 import character.Entity;
 import geometry.Vector2D;
@@ -28,6 +30,7 @@ import map.Map;
  *        The class uses the Singleton design pattern.
  */
 public class Camera {
+    private static Font font;
     /** @brief The instance of the singleton. */
     private static Camera singleton;
     /**
@@ -39,6 +42,10 @@ public class Camera {
     private Canvas canvas;
 
     private Camera(Canvas canvas) {
+        try {
+            Camera.font = Font.createFont(Font.TRUETYPE_FONT, new File("../src/main/resources/PrStart.ttf"));
+        } catch (Exception e) {}
+
         this.canvas = canvas;
     }
 
@@ -377,5 +384,38 @@ public class Camera {
         Vector2D position = Vector2D.add(relativePosition, rectangleCenter);
 
         graph.fillRect((int) position.x, (int) position.y, w, h);
+    }
+
+    public void drawTextClamped(Graphics graph, Map map, int x, int y, String text, int size, Color color) {
+        graph.setFont(Camera.font.deriveFont((float)size));
+        graph.setColor(color);
+
+        // If nothing is focused, we draw on given position
+        if (singleton.focused == null) {
+            graph.drawString(text, x, y);
+            return;
+        }
+
+        // Compute clamped focus
+        double mapHeight = map.getHeight() * map.getTileSize() * 2;
+        double mapWidth = map.getWidth() * map.getTileSize() * 2;
+        Vector2D canvasRadii = singleton.canvas.getCenter();
+        double focusX = singleton.focused.getPosition().x;
+        double focusY = singleton.focused.getPosition().y;
+
+        double clampedFocusX = Math.min(Math.max(focusX, canvasRadii.x), mapWidth - canvasRadii.x - map.getTileSize());
+        double clampedFocusY = Math.min(Math.max(focusY, canvasRadii.y), mapHeight - canvasRadii.y - map.getTileSize());
+
+        // Get all components
+        Vector2D position = getRelativePosition(clampedFocusX, clampedFocusY, x, y);
+
+        graph.drawString(text, (int) position.x, (int) position.y);
+    }
+
+    public void drawTextFixed(Graphics graph, int x, int y, String text, int size, Color color) {
+        graph.setFont(Camera.font.deriveFont((float)size));
+        graph.setColor(color);
+
+        graph.drawString(text, x, y);
     }
 }

@@ -14,7 +14,6 @@ package graphics;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Random;
@@ -57,6 +56,7 @@ public class Canvas extends JPanel {
     private Map map;
     /** @brief The player */
     private Player player;
+    private int lastHit = 0;
     /** @brief Monster pool */
     private ArrayList<Monster> badguys;
     /** @brief All entities */
@@ -66,6 +66,9 @@ public class Canvas extends JPanel {
     private boolean wasReleasedSpace;
     private boolean wasReleasedI;
     private boolean wasReleasedP;
+    private boolean wasReleasedK;
+    private boolean wasReleasedL;
+    private boolean wasReleasedM;
 
     boolean entitiesCollision = false;
 
@@ -101,7 +104,6 @@ public class Canvas extends JPanel {
         this.camera = Camera.getCamera(this);
         setBackground(new Color(42, 42, 42, 255));
 
-        // TESTING PURPOSE
         this.player = new Player(10, 10);
         this.allEntities = new ArrayList<>(); 
         this.badguys = new ArrayList<>();
@@ -113,20 +115,39 @@ public class Canvas extends JPanel {
         this.wasReleasedO = true;
         this.wasReleasedSpace = true;
         this.wasReleasedI = true;
+        this.wasReleasedK = true;
+        this.wasReleasedL = true;
+        this.wasReleasedM = true;
 
         stack.listenTo("Z");
         stack.listenTo("S");
         stack.listenTo("Q");
         stack.listenTo("D");
         stack.listenTo("SPACE");
+        stack.listenTo("ENTER");
         stack.listenTo("O");
         stack.listenTo("I");
         stack.listenTo("P");
+        stack.listenTo("K");
+        stack.listenTo("L");
+        stack.listenTo("M");
 
         this.camera.setFocusOn(player);
         // ---------------
 
         Function<Void, Void> loop = e -> {
+
+            if (player.isDead()) {
+                if (stack.isPressed("ENTER")) {
+                    this.player = new Player(10, 10);
+                    this.allEntities = new ArrayList<>(); 
+                    this.badguys = new ArrayList<>();
+                    this.camera.setFocusOn(player);
+                }
+
+                return null;
+            }
+
             // TESTING PURPOSE
             Vector2D movement = new Vector2D();
             if (stack.isPressed("C")) {
@@ -159,6 +180,36 @@ public class Canvas extends JPanel {
                 }
             } else {
                 wasReleasedSpace = true;
+            }
+
+            if (stack.isPressed("K")) {
+                if (wasReleasedK && player.skillPoints > 0) {
+                    player.getStats().upgradeAttack();
+                    player.skillPoints--;
+                    wasReleasedK = false;
+                }
+            } else {
+                wasReleasedK = true;
+            }
+
+            if (stack.isPressed("L")) {
+                if (wasReleasedL && player.skillPoints > 0) {
+                    player.getStats().upgradeDefence();
+                    player.skillPoints--;
+                    wasReleasedL = false;
+                }
+            } else {
+                wasReleasedL = true;
+            }
+
+            if (stack.isPressed("M")) {
+                if (wasReleasedM && player.skillPoints > 0) {
+                    player.getStats().upgradeSpeed();
+                    player.skillPoints--;
+                    wasReleasedM = false;
+                }
+            } else {
+                wasReleasedM = true;
             }
 
             // ---- debug
@@ -197,6 +248,7 @@ public class Canvas extends JPanel {
             ArrayList<Monster> deadguys = new ArrayList<>();
 
             player.move(movement, player.getStats().getSpeed() / 10 + 0.5, allEntities);
+            lastHit++;
 
             for (Monster badguy : badguys) {
                 Vector2D difference = Vector2D.subtract(player.getPosition(), badguy.getPosition());
@@ -205,7 +257,7 @@ public class Canvas extends JPanel {
                     if (difference.norm() > minDistance) {
                         // Normalize the vector to set the direction
                         difference.normalize();
-                        badguy.move(difference, allEntities);
+                        badguy.move(difference, badguy.getStats().getSpeed() / 10 + 0.5, allEntities);
                     } else if (difference.norm() <= minDistance) {
                         // Stop monster movement and attempt an attack
                         badguy.stopMoving();
@@ -214,6 +266,8 @@ public class Canvas extends JPanel {
                         // Handle monster attack
                         if (Collision.checkMonsterAttack(badguy, player, badguy.getPosition(), player.getPosition())) {
                             Collision.handleMonsterAttack(badguy, player, badguy.getPosition(), player.getPosition());
+
+                            lastHit = 0;
                         }
                     }
                 } else {
@@ -228,12 +282,29 @@ public class Canvas extends JPanel {
 
                 if (badguy.isDead()) {
                     deadguys.add(badguy);
+
+                    player.xp += badguy.xp;
+                    
+                    while (player.xp / (player.level * 500 + 1000) > 0) {
+                        player.xp -= player.level * 500 + 1000;
+                        player.level++;
+                        player.skillPoints++;
+                    }
+                    
                 }
             }
 
             for (Monster deadguy : deadguys) {
                 badguys.remove(deadguy);
                 allEntities.remove(deadguy);
+                
+                deadguy.current.stop();
+            }
+
+            // Auto regen
+            if (lastHit > 1000) {
+                lastHit = 750;
+                player.getStats().heal(1);
             }
 
             return null;
@@ -282,6 +353,13 @@ public class Canvas extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+        if (player.isDead()) {
+            camera.drawTextFixed(g, (int)getCenter().x - 240, (int)getCenter().y - 10, "YOU DIED", 48, new Color(181, 0, 6));
+            camera.drawTextFixed(g, (int)getCenter().x - 310, (int)getCenter().y + 30, "Press ENTER to restart.", 24, Color.white);
+            return;
+        }
+
 
         // TESTING PURPOSE
 
@@ -334,16 +412,26 @@ public class Canvas extends JPanel {
                     badguy.getPosition().y,
                     SCALE, badguy.getOffset());
 
-            int healthLength = (int)(badguy.getSpriteSize().x * badguy.getStats().getHealth().getPercent());
-            int healthOffset = (int)(badguy.getSpriteSize().x * (1 - badguy.getStats().getHealth().getPercent()) / 2);
-                        
-            this.camera.fillRectClamped(g, this.map, badguy.getPosition().x, badguy.getPosition().y - (int)(badguy.getSpriteSize().y / 1.5), (int)badguy.getSpriteSize().x, 3 * SCALE, Color.red);
-            this.camera.fillRectClamped(g, this.map, badguy.getPosition().x - healthOffset, badguy.getPosition().y - (int)(badguy.getSpriteSize().y / 1.5), healthLength, 3 * SCALE, Color.green);
-            this.camera.drawRectClamped(g, this.map, badguy.getPosition().x, badguy.getPosition().y - (int)(badguy.getSpriteSize().y / 1.5), (int)badguy.getSpriteSize().x, 3 * SCALE, Color.black);
+            HUD.drawEntityHealth(g, camera, map, badguy, SCALE);
         }
 
         this.camera.drawImageClamped(g, this.map, this.player.getSprite(), this.player.getPosition().x, this.player.getPosition().y,
                 SCALE, this.player.getOffset());
+
+        // LEFT HUD
+
+        
+        HUD.drawPlayerHealth(g, camera, player);
+        HUD.drawStat(g, camera, player.getStats().getAttack(), "Attack", 25, 65, 150, 50);
+        HUD.drawStat(g, camera, player.getStats().getDefence(), "Defence", 25,85, 150, 70);
+        HUD.drawStat(g, camera, player.getStats().getSpeed(), "Speed", 25, 105, 150, 90);
+
+        // RIGHT HUD
+
+        HUD.drawXP(g, camera, this, player);
+
+        // Bottom HUD
+        HUD.drawCommands(g, camera, this);
 
         // ---------------
     }

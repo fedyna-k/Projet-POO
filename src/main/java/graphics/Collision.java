@@ -324,8 +324,7 @@ public class Collision {
             Vector2D newPositionPlayer) {
         if (currentStateMonster != EntityState.HITSTUN) {
             if (getSwordHitboxMonster(monster) != null) {
-                if (monster.isAttacking() && !monster.isBeingHit() && !player.isBlocking() && !player.isDodging()
-                        && !player.isAttacking()) {
+                if (monster.isAttacking() && !monster.isBeingHit() && !player.isDodging() && !player.isAttacking()) {
 
                     player.getDamage(monster);
                 }

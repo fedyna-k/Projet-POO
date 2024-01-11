@@ -38,7 +38,7 @@ public class Window extends JFrame {
      * Creates a new Window with fullscreen turned off using the full constructor.
      */
     public Window() {
-        this(true);
+        this(false);
     }
 
     /**

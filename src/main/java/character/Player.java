@@ -23,6 +23,10 @@ import geometry.Vector2D;
  * @see character.Entity
  */
 public class Player extends Entity {
+    public int level = 1;
+    public int xp = 0;
+    public int skillPoints = 0;
+
     /**
      * @brief Default constructor.
      * 
@@ -44,7 +48,7 @@ public class Player extends Entity {
         this.setAnimations("player/");
         this.coordinates = new Vector2D(x, y);
         this.isFacingLeft = false;
-        this.stats = new EntityStats(100, 100, 10, 1, 1, 1);
+        this.stats = new EntityStats(100, 100, 3, 3, 5, 3);
     }
 
     /**

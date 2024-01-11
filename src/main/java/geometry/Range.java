@@ -104,6 +104,14 @@ public class Range {
     }
 
     /**
+     * @brief Gets the stored max.
+     * @return The stored max.
+     */
+    public int getMax() {
+        return this.max;
+    }
+
+    /**
      * @brief Gets the ratio of current over max.
      * 
      * \f[
