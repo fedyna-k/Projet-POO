@@ -67,6 +67,7 @@ public abstract class Entity {
     protected boolean isDodging;
     /** @brief State if is blocking */
     protected boolean isBlocking;
+    public boolean isActive = true;
     /** @brief Used in block loading */
     protected boolean isInitiatingBlock;
     /** @brief Used for damage taking */
@@ -481,7 +482,7 @@ public abstract class Entity {
      * @param animationIndex A constant index that describes the type of animation.
      */
     public void swapAnimation(AnimationIndex animationIndex) {
-        if (isBeingHit && animationIndex != AnimationIndex.DAMAGE) {
+        if (!isActive || (isBeingHit && animationIndex != AnimationIndex.DAMAGE)) {
             return;
         }
 

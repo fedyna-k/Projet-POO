@@ -16,6 +16,7 @@ public class HUD {
         camera.fillRectClamped(g, map, entity.getPosition().x, entity.getPosition().y - (int)(entity.getSpriteSize().y / 1.2), (int)entity.getSpriteSize().x, 1 * scale, Color.lightGray);
         camera.fillRectClamped(g, map, entity.getPosition().x - healthOffset, entity.getPosition().y - (int)(entity.getSpriteSize().y / 1.2), healthLength, 1 * scale, new Color((int)(255 *  (1 - healthPercent)), (int)(255 *  healthPercent), 0));
         camera.drawTextClamped(g, map, (int)entity.getPosition().x - (int)(entity.getSpriteSize().x / 2), (int)entity.getPosition().y - (int)(entity.getSpriteSize().y / 1.15), entity.getStats().getHealth().get() + "/" + entity.getStats().getHealth().getMax(), 8, Color.white);
+        camera.drawTextClamped(g, map, (int)entity.getPosition().x - (int)(entity.getSpriteSize().x / 2), (int)entity.getPosition().y - (int)(entity.getSpriteSize().y), (int)entity.getStats().getAttack() + "/" + (int)entity.getStats().getDefence() + "/" + (int)entity.getStats().getSpeed(), 8, Color.white);
     }
 
     static public void drawPlayerHealth(Graphics g, Camera camera, Player player) {
@@ -73,7 +74,7 @@ public class HUD {
         g.fillPolygon(new int[]{canvas.getWidth() - 20, canvas.getWidth() - 220, canvas.getWidth() - 210, canvas.getWidth() - 10}, new int[]{50, 50, 80, 80}, 4);
         g.setColor(Color.blue);
 
-        double xpPercent = 1d * player.xp / (player.level * 500 + 1000);
+        double xpPercent = 1d * player.xp / (player.level * 250 + 500);
 
         g.fillPolygon(new int[]{canvas.getWidth() - 220, canvas.getWidth() - 210, canvas.getWidth() - (int)(200 * (1 - xpPercent)) - 10, canvas.getWidth() - (int)(200 * (1 - xpPercent)) - 20}, new int[]{50, 80, 80, 50}, 4);
         
@@ -82,7 +83,7 @@ public class HUD {
     }
 
     static public void drawCommands(Graphics g, Camera camera, Canvas canvas) {
-        camera.drawTextFixed(g, canvas.getWidth() / 2 - 498,canvas.getHeight() - 28, "Move - ZQSD   Dodge - Space   Attack - O   Block - I   Use Skill Point - KLM", 14, Color.black);
-        camera.drawTextFixed(g, canvas.getWidth() / 2 - 500,canvas.getHeight() - 30, "Move - ZQSD   Dodge - Space   Attack - O   Block - I   Use Skill Point - KLM", 14, Color.white);
+        camera.drawTextFixed(g, canvas.getWidth() / 2 - (canvas.isFullscreen ? 498 : 378), canvas.getHeight() - 28, "Move - ZQSD   Dodge - Space   Attack - O   Block - I   Use Skill Point - KLM", canvas.isFullscreen ? 14 : 10, Color.black);
+        camera.drawTextFixed(g, canvas.getWidth() / 2 - (canvas.isFullscreen ? 500 : 380), canvas.getHeight() - 30, "Move - ZQSD   Dodge - Space   Attack - O   Block - I   Use Skill Point - KLM", canvas.isFullscreen ? 14 : 10, Color.white);
     }
 }

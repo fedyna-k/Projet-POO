@@ -15,10 +15,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.function.Function;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -44,7 +46,7 @@ import map.Map;
  */
 public class Canvas extends JPanel {
     /** @brief Tells if the window is in fullscreen. */
-    private boolean isFullscreen;
+    public boolean isFullscreen;
     /** @brief The main timer that refreshes the screen. */
     private Timer paintTimer;
     /** @brief Timer that does not depend on EDT, handles all computations. */
@@ -69,6 +71,11 @@ public class Canvas extends JPanel {
     private boolean wasReleasedK;
     private boolean wasReleasedL;
     private boolean wasReleasedM;
+    private boolean wasReleasedH;
+
+    private boolean hasStarted = false;
+    private boolean isPaused = false;
+    private boolean showHelp = true;
 
     boolean entitiesCollision = false;
 
@@ -104,7 +111,7 @@ public class Canvas extends JPanel {
         this.camera = Camera.getCamera(this);
         setBackground(new Color(42, 42, 42, 255));
 
-        this.player = new Player(10, 10);
+        this.player = new Player(300, 1250);
         this.allEntities = new ArrayList<>(); 
         this.badguys = new ArrayList<>();
 
@@ -127,24 +134,59 @@ public class Canvas extends JPanel {
         stack.listenTo("ENTER");
         stack.listenTo("O");
         stack.listenTo("I");
-        stack.listenTo("P");
+        stack.listenTo("ESCAPE");
         stack.listenTo("K");
         stack.listenTo("L");
         stack.listenTo("M");
+        stack.listenTo("H");
 
         this.camera.setFocusOn(player);
         // ---------------
 
         Function<Void, Void> loop = e -> {
-
-            if (player.isDead()) {
+            if (!hasStarted || player.isDead()) {
                 if (stack.isPressed("ENTER")) {
-                    this.player = new Player(10, 10);
+
+                    for (Entity ent : allEntities) {
+                        ent.current.stop();
+                    }
+
+                    this.player = new Player(1300, 7500);
                     this.allEntities = new ArrayList<>(); 
+                    this.allEntities.add(player);
                     this.badguys = new ArrayList<>();
                     this.camera.setFocusOn(player);
+
+                    this.hasStarted = true;
                 }
 
+                return null;
+            }
+
+            if (stack.isPressed("ESCAPE")) {
+                if (wasReleasedP) {
+                    if (isPaused) {
+                        isPaused = false;
+                        for (Entity ent : this.allEntities) {
+                            ent.current.resume();
+                        }
+                    } else {
+                        isPaused = true;
+                        for (Entity ent : this.allEntities) {
+                            ent.current.stop();
+                        }
+                    }
+                    // Monster newMonster = new Monster(player.getPosition().x + 100, player.getPosition().y, player);
+                    // this.allEntities.add(newMonster);
+                    // this.badguys.add(newMonster);
+                    wasReleasedP = false;
+                    return null;
+                }
+            } else {
+                wasReleasedP = true;
+            }
+
+            if (isPaused) {
                 return null;
             }
 
@@ -182,6 +224,16 @@ public class Canvas extends JPanel {
                 wasReleasedSpace = true;
             }
 
+            if (stack.isPressed("H")) {
+                if (wasReleasedH) {
+                    //showHelp = !showHelp;
+                    System.out.println(player.getPosition());
+                    wasReleasedH = false;
+                }
+            } else {
+                wasReleasedH = true;
+            }
+
             if (stack.isPressed("K")) {
                 if (wasReleasedK && player.skillPoints > 0) {
                     player.getStats().upgradeAttack();
@@ -212,19 +264,6 @@ public class Canvas extends JPanel {
                 wasReleasedM = true;
             }
 
-            // ---- debug
-            if (stack.isPressed("P")) {
-                if (wasReleasedP) {
-                    Monster newMonster = new Monster(player.getPosition().x + 100, player.getPosition().y);
-                    this.allEntities.add(newMonster);
-                    this.badguys.add(newMonster);
-                    wasReleasedP = false;
-                }
-            } else {
-                wasReleasedP = true;
-            }
-            // ---- debug
-
             if (stack.isPressed("I") && wasReleasedI) {
                 player.block();
                 wasReleasedI = false;
@@ -254,6 +293,8 @@ public class Canvas extends JPanel {
                 Vector2D difference = Vector2D.subtract(player.getPosition(), badguy.getPosition());
 
                 if (difference.norm() < AGGRO_RANGE) {
+                    badguy.isActive = true;
+
                     if (difference.norm() > minDistance) {
                         // Normalize the vector to set the direction
                         difference.normalize();
@@ -272,6 +313,14 @@ public class Canvas extends JPanel {
                     }
                 } else {
                     // If outside aggro range, make the monster move randomly
+                    if (difference.norm() > getWidth() / this.map.getTileSize() * 2) {
+                        badguy.current.stop();
+                        badguy.isActive = false;
+                    } else {
+                        badguy.current.play();
+                        badguy.isActive = false;
+                    }
+
                     badguy.randMovement(allEntities);
                 }
 
@@ -285,8 +334,8 @@ public class Canvas extends JPanel {
 
                     player.xp += badguy.xp;
                     
-                    while (player.xp / (player.level * 500 + 1000) > 0) {
-                        player.xp -= player.level * 500 + 1000;
+                    while (player.xp / (player.level * 250 + 500) > 0) {
+                        player.xp -= player.level * 250 + 500;
                         player.level++;
                         player.skillPoints++;
                     }
@@ -354,9 +403,21 @@ public class Canvas extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
+        if (!hasStarted) {
+            camera.drawTextFixed(g, 20, 100, "Les chevaliers", 48, Color.white);
+            camera.drawTextFixed(g, 20, 150, "d'Ether", 48, Color.white);
+            camera.drawTextFixed(g, 150, 500, "Press ENTER to begin...", 24, Color.white);
+            
+            try {
+                g.drawImage(ImageIO.read(new File("../src/main/resources/logo.png")), 300, 150, 350, 350, this);
+            } catch (Exception e) {}
+
+            return;
+        }
+
         if (player.isDead()) {
-            camera.drawTextFixed(g, (int)getCenter().x - 240, (int)getCenter().y - 10, "YOU DIED", 48, new Color(181, 0, 6));
-            camera.drawTextFixed(g, (int)getCenter().x - 310, (int)getCenter().y + 30, "Press ENTER to restart.", 24, Color.white);
+            camera.drawTextFixed(g, (int)getCenter().x - (isFullscreen ? 240 : 200), (int)getCenter().y - 10, "YOU DIED", 48, new Color(181, 0, 6));
+            camera.drawTextFixed(g, (int)getCenter().x - (isFullscreen ? 310 : 270), (int)getCenter().y + 30, "Press ENTER to restart.", 24, Color.white);
             return;
         }
 
@@ -378,8 +439,8 @@ public class Canvas extends JPanel {
         int lowerTileIndexX = focusX / (this.map.getTileSize() * SCALE) - width / 2 - 1;
         int lowerTileIndexY = focusY / (this.map.getTileSize() * SCALE) - height / 2 - 1;
 
-        int upperTileIndexX = focusX / (this.map.getTileSize() * SCALE) + width / 2 + 2;
-        int upperTileIndexY = focusY / (this.map.getTileSize() * SCALE) + height / 2 + 2;
+        int upperTileIndexX = focusX / (this.map.getTileSize() * SCALE) + width / 2 + 3;
+        int upperTileIndexY = focusY / (this.map.getTileSize() * SCALE) + height / 2 + 3;
 
         if (lowerTileIndexX < 0) {
             upperTileIndexX -= lowerTileIndexX;
@@ -431,7 +492,13 @@ public class Canvas extends JPanel {
         HUD.drawXP(g, camera, this, player);
 
         // Bottom HUD
-        HUD.drawCommands(g, camera, this);
+        if (showHelp) {
+            HUD.drawCommands(g, camera, this);
+        }
+
+        if (isPaused) {
+            camera.drawTextFixed(g, (int)getCenter().x - 100, (int)getCenter().y, "Paused", 24, Color.white);
+        }
 
         // ---------------
     }

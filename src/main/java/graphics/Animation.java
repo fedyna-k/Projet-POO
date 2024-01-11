@@ -154,7 +154,14 @@ public class Animation {
      */
     public void stop() {
         this.frameTimer.stop();
+        this.frameOnceTimer.stop();
         this.isPlaying = false;
+    }
+
+    public void resume() {
+        this.frameTimer.start();
+        this.frameOnceTimer.start();
+        this.isPlaying = true;
     }
 
     /**
