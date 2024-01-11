@@ -339,6 +339,7 @@ public class Canvas extends JPanel {
                         
             this.camera.fillRectClamped(g, this.map, badguy.getPosition().x, badguy.getPosition().y - (int)(badguy.getSpriteSize().y / 1.5), (int)badguy.getSpriteSize().x, 3 * SCALE, Color.red);
             this.camera.fillRectClamped(g, this.map, badguy.getPosition().x - healthOffset, badguy.getPosition().y - (int)(badguy.getSpriteSize().y / 1.5), healthLength, 3 * SCALE, Color.green);
+            this.camera.drawRectClamped(g, this.map, badguy.getPosition().x, badguy.getPosition().y - (int)(badguy.getSpriteSize().y / 1.5), (int)badguy.getSpriteSize().x, 3 * SCALE, Color.black);
         }
 
         this.camera.drawImageClamped(g, this.map, this.player.getSprite(), this.player.getPosition().x, this.player.getPosition().y,

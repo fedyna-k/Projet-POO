@@ -323,8 +323,8 @@ public class Camera {
         }
 
         // Compute clamped focus
-        double mapHeight = map.getHeight() * map.getTileSize();
-        double mapWidth = map.getWidth() * map.getTileSize();
+        double mapHeight = map.getHeight() * map.getTileSize() * 2;
+        double mapWidth = map.getWidth() * map.getTileSize() * 2;
         Vector2D canvasRadii = singleton.canvas.getCenter();
         double focusX = singleton.focused.getPosition().x;
         double focusY = singleton.focused.getPosition().y;
@@ -361,8 +361,8 @@ public class Camera {
         }
 
         // Compute clamped focus
-        double mapHeight = map.getHeight() * map.getTileSize();
-        double mapWidth = map.getWidth() * map.getTileSize();
+        double mapHeight = map.getHeight() * map.getTileSize() * 2;
+        double mapWidth = map.getWidth() * map.getTileSize() * 2;
         Vector2D canvasRadii = singleton.canvas.getCenter();
         double focusX = singleton.focused.getPosition().x;
         double focusY = singleton.focused.getPosition().y;
