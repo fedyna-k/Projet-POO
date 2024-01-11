@@ -318,7 +318,7 @@ public class Collision {
      * @return True if the player's attack collides with the monster; otherwise,
      *         false.
      */
-    public static boolean checkPlayerAttack(Player player, Monster monster, Vector2D newPositionPlayer,
+    public static boolean checkPlayerAttack(Entity player, Monster monster, Vector2D newPositionPlayer,
             Vector2D newPositionMonster) {
         Rectangle monsterHitbox = getMonsterHitbox(monster, newPositionMonster);
         Rectangle playerSwordHitbox = getSwordHitbox(player);
@@ -342,7 +342,7 @@ public class Collision {
      * @return True if the monster's attack collides with the player; otherwise,
      *         false.
      */
-    public static boolean checkMonsterAttack(Monster monster, Player player, Vector2D newPositionMonster,
+    public static boolean checkMonsterAttack(Monster monster, Entity player, Vector2D newPositionMonster,
             Vector2D newPositionPlayer) {
         Rectangle playerHitbox = getPlayerHitbox(player, newPositionPlayer);
         Rectangle monsterSwordHitbox = getSwordHitboxMonster(monster);
@@ -367,7 +367,7 @@ public class Collision {
      * @param newPositionPlayer  The intended new position of the player.
      * @param newPositionMonster The intended new position of the monster.
      */
-    public static void handlePlayerAttack(Player player, Monster monster, Vector2D newPositionPlayer,
+    public static void handlePlayerAttack(Entity player, Monster monster, Vector2D newPositionPlayer,
             Vector2D newPositionMonster) {
         attackCooldown++;
         damageCooldown++;
@@ -407,7 +407,7 @@ public class Collision {
      * @param newPositionMonster The intended new position of the monster.
      * @param newPositionPlayer  The intended new position of the player.
      */
-    public static void handleMonsterAttack(Monster monster, Player player, Vector2D newPositionMonster,
+    public static void handleMonsterAttack(Monster monster, Entity player, Vector2D newPositionMonster,
             Vector2D newPositionPlayer) {
         monsterattackCooldown++;
         monsterdamageCooldown++;

@@ -35,6 +35,15 @@ public abstract class Entity {
         STANDING, LEFTRUN, RIGHTRUN, ATTACK, DODGE, BLOCK, BLOCKWALK, BLOCKSTAND, DAMAGE
     };
 
+    // Life Points of the entity
+    private int lifePoints;
+
+    // Force of the entity
+    private int force;
+
+    // Damage taken by the entity
+    private int damage;
+
     /** @brief The coordinates in absolute positions */
     public Vector2D coordinates;
     /** @brief The height of the entity */
@@ -258,7 +267,7 @@ public abstract class Entity {
      *                - true if the player is in a dodging state.
      *                - false if the player is not in a dodging state.
      *
-     * @see isDodging
+     *
      */
     public void setDodging(boolean dodging) {
         isDodging = dodging;

@@ -21,10 +21,11 @@ import java.util.Random;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import character.Player;
-import character.Monster;
+import character.*;
+
 import geometry.Vector2D;
 import map.Map;
+
 
 /**
  * @class Canvas
@@ -49,7 +50,7 @@ public class Canvas extends JPanel {
 
     // TESTING PURPOSE
     private Map map;
-    private Player player;
+    private Mage mage;
     private Monster badguy;
     private KeyStack stack;
     private boolean wasReleasedO;
@@ -61,6 +62,8 @@ public class Canvas extends JPanel {
     static final double PROBABILITY_OF_ATTACK = 0.8;
     static final double AGGRO_RANGE = 500.0;
     Random random = new Random();
+
+    //private Mage mage;
 
     // ---------------
 
@@ -91,7 +94,7 @@ public class Canvas extends JPanel {
         setBackground(new Color(42, 42, 42, 255));
 
         // TESTING PURPOSE
-        this.player = new Player(0, 0);
+        this.mage = new Mage(0, 0);
         this.badguy = new Monster(this, 400, 0);
         this.map = new Map("../src/main/resources/map/");
         this.stack = new KeyStack(this);
@@ -107,7 +110,8 @@ public class Canvas extends JPanel {
         stack.listenTo("SPACE");
         stack.listenTo("I");
 
-        this.camera.setFocusOn(player);
+        //this.camera.setFocusOn(player);
+        this.camera.setFocusOn(mage);
         // ---------------
 
         timer = new Timer(0, event -> {
@@ -126,8 +130,8 @@ public class Canvas extends JPanel {
                 movement.x += 1;
             }
             if (stack.isPressed("O")) {
-                if (wasReleasedO && !player.isDodging() && !player.isBlocking()) {
-                    player.attack();
+                if (wasReleasedO && !mage.isDodging() && !mage.isBlocking()) {
+                    mage.attack();
                     wasReleasedO = false;
                 }
             } else {
@@ -135,7 +139,7 @@ public class Canvas extends JPanel {
             }
             if (stack.isPressed("SPACE")) {
                 if (wasReleasedSpace) {
-                    player.dodge();
+                    mage.dodge();
                     wasReleasedSpace = false;
                 }
             } else {
@@ -143,12 +147,12 @@ public class Canvas extends JPanel {
             }
 
             if (stack.isPressed("I") && wasReleasedI) {
-                player.block();
+                mage.block();
                 wasReleasedI = false;
             }
 
             if (!stack.isPressed("I") && !wasReleasedI) {
-                player.stopBlocking();
+                mage.stopBlocking();
                 wasReleasedI = true;
             }
 
@@ -163,19 +167,19 @@ public class Canvas extends JPanel {
             double cooldown = 60.0;
 
             // Check if there is no collision before moving entities
-            if (!Collision.checkCollision(badguy, player.getPosition())
-                    && !Collision.checkCollision(player, player.getPosition())
-                    && !Collision.checkCollisionWithEntities(player, badguy, player.getPosition(),
+            if (!Collision.checkCollision(badguy, mage.getPosition())
+                    && !Collision.checkCollision(mage, mage.getPosition())
+                    && !Collision.checkCollisionWithEntities(mage, badguy, mage.getPosition(),
                             badguy.getPosition())) {
 
                 // Save the current positions before movement to revert in case of collision
-                Vector2D playerPositionBeforeMove = new Vector2D(player.getPosition().x, player.getPosition().y);
+                Vector2D playerPositionBeforeMove = new Vector2D(mage.getPosition().x, mage.getPosition().y);
                 Vector2D badguyPositionBeforeMove = new Vector2D(badguy.getPosition().x, badguy.getPosition().y);
 
                 // Calculate the vector representing the distance between player and monster
-                Vector2D difference = Vector2D.subtract(player.getPosition(), badguy.getPosition());
+                Vector2D difference = Vector2D.subtract(mage.getPosition(), badguy.getPosition());
                 // Move the player if there is no collision
-                player.move(movement);
+                mage.move(movement);
 
                 // Compute monster movement based on aggro range
                 if (difference.norm() < AGGRO_RANGE) {
@@ -186,11 +190,11 @@ public class Canvas extends JPanel {
                     } else if (difference.norm() <= minDistance) {
                         // Stop monster movement and attempt an attack
                         badguy.stopMoving();
-                        Monster.tryAttack(badguy, player, difference, PROBABILITY_OF_ATTACK, cooldown);
+                        Monster.tryAttack(badguy, mage, difference, PROBABILITY_OF_ATTACK, cooldown);
 
                         // Handle monster attack
-                        if (Collision.checkMonsterAttack(badguy, player, badguy.getPosition(), player.getPosition())) {
-                            Collision.handleMonsterAttack(badguy, player, badguy.getPosition(), player.getPosition());
+                        if (Collision.checkMonsterAttack(badguy, mage, badguy.getPosition(), mage.getPosition())) {
+                            Collision.handleMonsterAttack(badguy, mage, badguy.getPosition(), mage.getPosition());
                         }
                     }
                 } else {
@@ -199,18 +203,18 @@ public class Canvas extends JPanel {
                 }
 
                 // Handle player attack
-                if (Collision.checkPlayerAttack(player, badguy, player.getPosition(), badguy.getPosition())) {
-                    Collision.handlePlayerAttack(player, badguy, player.getPosition(), badguy.getPosition());
+                if (Collision.checkPlayerAttack(mage, badguy, mage.getPosition(), badguy.getPosition())) {
+                    Collision.handlePlayerAttack(mage, badguy, mage.getPosition(), badguy.getPosition());
                 }
 
                 // Check for collisions after movement
-                if (Collision.checkCollision(badguy, player.getPosition())
-                        || Collision.checkCollision(player, player.getPosition())
-                        || Collision.checkCollisionWithEntities(player, badguy, player.getPosition(),
+                if (Collision.checkCollision(badguy, mage.getPosition())
+                        || Collision.checkCollision(mage, mage.getPosition())
+                        || Collision.checkCollisionWithEntities(mage, badguy, mage.getPosition(),
                                 badguy.getPosition())) {
 
                     // Collision detected, revert movements
-                    player.setPosition(playerPositionBeforeMove.x, playerPositionBeforeMove.y);
+                    mage.setPosition(playerPositionBeforeMove.x, playerPositionBeforeMove.y);
                     badguy.setPosition(badguyPositionBeforeMove.x, badguyPositionBeforeMove.y);
                 }
             }
@@ -282,19 +286,19 @@ public class Canvas extends JPanel {
         this.camera.drawImage(g, this.badguy.getSprite(), this.badguy.getPosition().x,
                 this.badguy.getPosition().y,
                 SCALE, this.badguy.getOffset());
-        this.camera.drawImage(g, this.player.getSprite(), this.player.getPosition().x, this.player.getPosition().y,
-                SCALE, this.player.getOffset());
+        this.camera.drawImage(g, this.mage.getSprite(), this.mage.getPosition().x, this.mage.getPosition().y,
+                SCALE, this.mage.getOffset());
 
         /* Drawing Hitbox */
 
         // hitbox player
-        Rectangle playerHitbox = Collision.getPlayerHitbox(player, player.getPosition());
+        Rectangle playerHitbox = Collision.getPlayerHitbox(mage, mage.getPosition());
         camera.drawRect(g, playerHitbox.x, playerHitbox.y,
                 (int) playerHitbox.getWidth(), (int) playerHitbox.getHeight(), Color.RED);
 
         // sword hitbox for player
-        Rectangle swordHitboxPlayer = Collision.getSwordHitbox(player);
-        if (player.isAttacking()) {
+        Rectangle swordHitboxPlayer = Collision.getSwordHitbox(mage);
+        if (mage.isAttacking()) {
             camera.drawRect(g, swordHitboxPlayer.x, swordHitboxPlayer.y,
                     (int) swordHitboxPlayer.getWidth(), (int) swordHitboxPlayer.getHeight(), Color.RED);
         }
