@@ -20,7 +20,7 @@ public class Monster extends Entity {
      *        Initializes a Monster at the origin (0, 0).
      */
     public Monster(Player player) {
-        this(0, 0, player);
+        this(0, 0, player, 1);
     }
 
     /**
@@ -33,16 +33,16 @@ public class Monster extends Entity {
      * @param x      The x-coordinate of the Monster.
      * @param y      The y-coordinate of the Monster.
      */
-    public Monster(double x, double y, Player player) {
+    public Monster(double x, double y, Player player, int zone) {
         this.setAnimations("monster/");
         this.coordinates = new Vector2D(x, y);
         this.isFacingLeft = false;
 
-        int attack = (int)Math.floor(Math.random() * (player.level + 3)) + 1;
-        int speed = (int)Math.floor(Math.random() * (player.level + 3)) + 1;
-        int defence = (int)Math.floor(Math.random() * (player.level + 3)) + 1;
+        int attack = Math.min((int)Math.floor(Math.random() * (player.level + 3)) + (zone - 1) * 3 + 1, zone * 10);
+        int speed = Math.min((int)Math.floor(Math.random() * (player.level + 3)) + (zone - 1) * 3 + 1, zone * 10);
+        int defence = Math.min((int)Math.floor(Math.random() * (player.level + 3)) + (zone - 1) * 3 + 1, zone * 10);
 
-        this.stats = new EntityStats(100, 100, speed, attack, 1, defence);
+        this.stats = new EntityStats((zone + 1) * 50, 100, speed, attack, 1, defence);
         this.xp = 10 * defence + 15 * attack + 8 * speed;
     }
 

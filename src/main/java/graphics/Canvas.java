@@ -22,9 +22,9 @@ import java.util.function.Function;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
 import character.Player;
+import character.Enemies;
 import character.Entity;
 import character.Monster;
 import geometry.Vector2D;
@@ -47,8 +47,6 @@ import map.Map;
 public class Canvas extends JPanel {
     /** @brief Tells if the window is in fullscreen. */
     public boolean isFullscreen;
-    /** @brief The main timer that refreshes the screen. */
-    private Timer paintTimer;
     /** @brief Timer that does not depend on EDT, handles all computations. */
     private TrueTimer mainTimer;
     /** @brief The camera that follows the player. */
@@ -59,6 +57,7 @@ public class Canvas extends JPanel {
     /** @brief The player */
     private Player player;
     private int lastHit = 0;
+    private int accel = 0;
     /** @brief Monster pool */
     private ArrayList<Monster> badguys;
     /** @brief All entities */
@@ -67,7 +66,7 @@ public class Canvas extends JPanel {
     private boolean wasReleasedO;
     private boolean wasReleasedSpace;
     private boolean wasReleasedI;
-    private boolean wasReleasedP;
+    private boolean wasReleasedEsc;
     private boolean wasReleasedK;
     private boolean wasReleasedL;
     private boolean wasReleasedM;
@@ -76,6 +75,8 @@ public class Canvas extends JPanel {
     private boolean hasStarted = false;
     private boolean isPaused = false;
     private boolean showHelp = true;
+    private int[] hasSpawned = new int[Enemies.enemies.length];
+    private int[] isNotThere = new int[Enemies.enemies.length];
 
     boolean entitiesCollision = false;
 
@@ -114,6 +115,11 @@ public class Canvas extends JPanel {
         this.player = new Player(300, 1250);
         this.allEntities = new ArrayList<>(); 
         this.badguys = new ArrayList<>();
+
+        for (int i = 0 ; i < hasSpawned.length ; i++) {
+            hasSpawned[i] = 0;
+            isNotThere[i] = 0;
+        }
 
         this.allEntities.add(player);
 
@@ -160,11 +166,13 @@ public class Canvas extends JPanel {
                     this.hasStarted = true;
                 }
 
+
+                repaint();
                 return null;
             }
 
             if (stack.isPressed("ESCAPE")) {
-                if (wasReleasedP) {
+                if (wasReleasedEsc) {
                     if (isPaused) {
                         isPaused = false;
                         for (Entity ent : this.allEntities) {
@@ -176,18 +184,38 @@ public class Canvas extends JPanel {
                             ent.current.stop();
                         }
                     }
-                    // Monster newMonster = new Monster(player.getPosition().x + 100, player.getPosition().y, player);
-                    // this.allEntities.add(newMonster);
-                    // this.badguys.add(newMonster);
-                    wasReleasedP = false;
+                    wasReleasedEsc = false;
+
+                    repaint();
                     return null;
                 }
             } else {
-                wasReleasedP = true;
+                wasReleasedEsc = true;
             }
 
             if (isPaused) {
+                repaint();
                 return null;
+            }
+
+
+            for (int i = 0 ; i < Enemies.enemies.length ; i++) {
+                int x = Enemies.enemies[i][0] - (int)player.coordinates.x;
+                int y = Enemies.enemies[i][1] - (int)player.coordinates.y;
+
+                hasSpawned[i] = Math.max(0, hasSpawned[i] - 1);
+                
+                if (x * x < getWidth() * getWidth() / 4 && y * y < getHeight() * getHeight() / 4) {
+                    if (hasSpawned[i] == 0 && isNotThere[i] == 0) {
+                        Monster newMonster = new Monster(Enemies.enemies[i][0], Enemies.enemies[i][1], player, Enemies.enemies[i][2]);
+                        allEntities.add(newMonster);
+                        badguys.add(newMonster);
+                        hasSpawned[i] = 2000;
+                        isNotThere[i] = 1;
+                    }
+                } else {
+                    isNotThere[i] = 0;
+                }
             }
 
             // TESTING PURPOSE
@@ -292,8 +320,16 @@ public class Canvas extends JPanel {
             for (Monster badguy : badguys) {
                 Vector2D difference = Vector2D.subtract(player.getPosition(), badguy.getPosition());
 
+                if (difference.norm() > getWidth() * 2) {
+                    deadguys.add(badguy);
+                    continue;
+                }
+
                 if (difference.norm() < AGGRO_RANGE) {
                     badguy.isActive = true;
+                    if (!badguy.isDodging() && !badguy.isBlocking() && !badguy.isAttacking() && !badguy.current.isPlaying()) {
+                        badguy.current.resume();
+                    }
 
                     if (difference.norm() > minDistance) {
                         // Normalize the vector to set the direction
@@ -309,6 +345,7 @@ public class Canvas extends JPanel {
                             Collision.handleMonsterAttack(badguy, player, badguy.getPosition(), player.getPosition());
 
                             lastHit = 0;
+                            accel = 0;
                         }
                     }
                 } else {
@@ -317,8 +354,8 @@ public class Canvas extends JPanel {
                         badguy.current.stop();
                         badguy.isActive = false;
                     } else {
-                        badguy.current.play();
-                        badguy.isActive = false;
+                        badguy.current.resume();
+                        badguy.isActive = true;
                     }
 
                     badguy.randMovement(allEntities);
@@ -352,18 +389,17 @@ public class Canvas extends JPanel {
 
             // Auto regen
             if (lastHit > 1000) {
-                lastHit = 750;
+                accel++;
+                lastHit = 750 + accel * 10;
                 player.getStats().heal(1);
             }
 
+            repaint();
             return null;
         };
 
         mainTimer = new TrueTimer(4, loop);
         mainTimer.execute();
-
-        paintTimer = new Timer(4, e -> repaint());
-        paintTimer.start();
     }
 
     /**
