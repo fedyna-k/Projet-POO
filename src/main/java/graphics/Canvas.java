@@ -210,7 +210,7 @@ public class Canvas extends JPanel {
                         Monster newMonster = new Monster(Enemies.enemies[i][0], Enemies.enemies[i][1], player, Enemies.enemies[i][2]);
                         allEntities.add(newMonster);
                         badguys.add(newMonster);
-                        hasSpawned[i] = 2000;
+                        hasSpawned[i] = 5000;
                         isNotThere[i] = 1;
                     }
                 } else {

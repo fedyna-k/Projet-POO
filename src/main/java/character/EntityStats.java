@@ -121,6 +121,7 @@ public class EntityStats {
      * @param amount The amount of damage
      */
     public void takeDamage(int amount) {
+        amount = Math.max(amount, 0);
         health.set(health.get() - amount);
     }
 
