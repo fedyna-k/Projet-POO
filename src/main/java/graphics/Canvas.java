@@ -24,6 +24,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import character.Player;
+import character.Dragon;
 import character.Enemies;
 import character.Entity;
 import character.Monster;
@@ -77,6 +78,9 @@ public class Canvas extends JPanel {
     private boolean showHelp = true;
     private int[] hasSpawned = new int[Enemies.enemies.length];
     private int[] isNotThere = new int[Enemies.enemies.length];
+
+    private int[] hasSpawnedDragon = new int[Enemies.dragons.length];
+    private int[] isNotThereDragon = new int[Enemies.dragons.length];
 
     boolean entitiesCollision = false;
 
@@ -158,6 +162,7 @@ public class Canvas extends JPanel {
                     }
 
                     this.player = new Player(1300, 7500);
+                    
                     this.allEntities = new ArrayList<>(); 
                     this.allEntities.add(player);
                     this.badguys = new ArrayList<>();
@@ -218,6 +223,25 @@ public class Canvas extends JPanel {
                 }
             }
 
+            for (int i = 0 ; i < Enemies.dragons.length ; i++) {
+                int x = Enemies.dragons[i][0] - (int)player.coordinates.x;
+                int y = Enemies.dragons[i][1] - (int)player.coordinates.y;
+
+                hasSpawnedDragon[i] = Math.max(0, hasSpawnedDragon[i] - 1);
+                
+                if (x * x < getWidth() * getWidth() / 4 && y * y < getHeight() * getHeight() / 4) {
+                    if (hasSpawnedDragon[i] == 0 && isNotThereDragon[i] == 0) {
+                        Dragon newMonster = new Dragon(Enemies.dragons[i][0], Enemies.dragons[i][1], player, Enemies.dragons[i][2]);
+                        allEntities.add(newMonster);
+                        badguys.add(newMonster);
+                        hasSpawnedDragon[i] = 5000;
+                        isNotThereDragon[i] = 1;
+                    }
+                } else {
+                    isNotThereDragon[i] = 0;
+                }
+            }
+
             // TESTING PURPOSE
             Vector2D movement = new Vector2D();
             if (stack.isPressed("C")) {
@@ -255,7 +279,12 @@ public class Canvas extends JPanel {
             if (stack.isPressed("H")) {
                 if (wasReleasedH) {
                     //showHelp = !showHelp;
-                    System.out.println(player.getPosition());
+                    //System.out.println(player.getPosition());
+
+                    Dragon newMonster = new Dragon(player.getPosition().x + 100, player.getPosition().y, player, 1);
+                    allEntities.add(newMonster);
+                    badguys.add(newMonster);
+
                     wasReleasedH = false;
                 }
             } else {

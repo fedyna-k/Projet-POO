@@ -286,7 +286,7 @@ public abstract class Entity {
             attackTimer = new Timer(0, e -> {
                 this.attackCooldown++;
     
-                if (this.attackCooldown > 50 * (1000 - this.stats.getSpeed() * 80)) {
+                if (this.attackCooldown > (1000 - this.stats.getSpeed() * 80)) { // 50 * (1000 - this.stats.getSpeed() * 80)) {  // <-- Linux
                     attackCooldown = 0;
                     this.canAttack = true;
                     this.attackTimer.stop();
@@ -401,7 +401,7 @@ public abstract class Entity {
             this.hitstunTimer = new Timer(0, e -> {
                 this.hitstunCooldown++;
 
-                if (this.hitstunCooldown > 80 * 120) {
+                if (this.hitstunCooldown > 80) { // * 120) {  // <-- Linux
                     this.hitstunCooldown = 0;
                     this.isBeingHit = false;
                     this.currentState = EntityState.NORMAL;

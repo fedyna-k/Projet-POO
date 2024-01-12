@@ -82,7 +82,7 @@ public class Monster extends Entity {
         move(randomMovement, stats.getSpeed() / 10 + 0.5, others);
     }
 
-    private static double attackCooldownTimer;
+    public static double attackCooldownTimer;
 
     /**
      * @brief Tries to perform an attack based on specified conditions.
