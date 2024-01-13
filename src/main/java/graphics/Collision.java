@@ -21,7 +21,7 @@ public class Collision {
     /**
      * @brief The map used for collision detection.
      */
-    private static Map map = new Map("../src/main/resources/map/");
+    private static Map map = new Map("resources/map/");
 
     /**
      * @brief The current state of the player entity.

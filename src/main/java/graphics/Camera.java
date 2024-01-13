@@ -43,7 +43,7 @@ public class Camera {
 
     private Camera(Canvas canvas) {
         try {
-            Camera.font = Font.createFont(Font.TRUETYPE_FONT, new File("../src/main/resources/PrStart.ttf"));
+            Camera.font = Font.createFont(Font.TRUETYPE_FONT, new File("resources/PrStart.ttf"));
         } catch (Exception e) {}
 
         this.canvas = canvas;

@@ -36,7 +36,7 @@ public class Animation {
     /**
      * @brief Constant that points to the resources folder of the game.
      */
-    public static final String RESOURCES_FOLDER = "../src/main/resources/";
+    public static final String RESOURCES_FOLDER = "resources/";
     
     /** @brief An array containing the frames. */
     private BufferedImage[] frames;

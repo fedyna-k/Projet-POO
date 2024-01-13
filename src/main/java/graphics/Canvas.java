@@ -131,7 +131,7 @@ public class Canvas extends JPanel {
 
         this.allEntities.add(player);
 
-        this.map = new Map("../src/main/resources/map/");
+        this.map = new Map("resources/map/");
         this.stack = new KeyStack(this);
         this.wasReleasedO = true;
         this.wasReleasedSpace = true;
@@ -495,7 +495,7 @@ public class Canvas extends JPanel {
             camera.drawTextFixed(g, 150, 500, "Press ENTER to begin...", 24, Color.white);
             
             try {
-                g.drawImage(ImageIO.read(new File("../src/main/resources/logo.png")), 300, 150, 350, 350, this);
+                g.drawImage(ImageIO.read(new File("resources/logo.png")), 300, 150, 350, 350, this);
             } catch (Exception e) {}
 
             return;
