@@ -84,6 +84,7 @@ public class Collision {
         return new Rectangle((int) newPosition.x, (int) newPosition.y, rectWidth, rectHeight);
     }
 
+
     /**
      * @brief Retrieves the hitbox for the monster at the specified position.
      *
@@ -130,7 +131,24 @@ public class Collision {
 
         return null;
     }
+    /*
+    public static Rectangle getShieldHitbox(Entity entity) {
 
+        Vector2D offset = entity.getOffset();
+        double directionMultiplier = entity.isFacingLeft() ? -1 : 1;
+        int spriteWidth = entity.getSprite().getWidth();
+
+        int shieldHeight = (int) (entity.getSprite().getHeight() * SCALE / 4);
+
+        if (entity.isAttacking()) {
+            double centershieldY = entity.getPosition().y - offset.y * SCALE + 10;
+            double centershieldX = entity.getPosition().x - offset.x + directionMultiplier * 64;
+            int shieldWidth = (int) (spriteWidth);
+            return new Rectangle((int) centershieldX, (int) centershieldY, shieldWidth, shieldHeight);
+        }
+
+        return null;
+    }*/
     /**
      * @brief Retrieves the hitbox for a monster entity's sword during an attack.
      *
