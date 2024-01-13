@@ -181,9 +181,9 @@ public class EntityStats {
      */
     public void upgradeSpeed() {
         speed += UP;
-        attack -= DOWN;
-        power -= DOWN;
-        defence -= DOWN;
+        attack = Math.max(0,attack - DOWN);
+        power = Math.max(0,power - DOWN);
+        defence = Math.max(0,defence - DOWN);
 
         setMaxHealth(70 + (int)(10 * defence));
     }
@@ -193,9 +193,9 @@ public class EntityStats {
      */
     public void upgradeAttack() {
         attack += UP;
-        speed -= DOWN;
-        power -= DOWN;
-        defence -= DOWN;
+        speed = Math.max(0,speed - DOWN);
+        power = Math.max(0,power - DOWN);
+        defence = Math.max(0,defence - DOWN);
 
         setMaxHealth(70 + (int)(10 * defence));
     }
@@ -205,9 +205,9 @@ public class EntityStats {
      */
     public void upgradePower() {
         power += UP;
-        attack -= DOWN;
-        speed -= DOWN;
-        defence -= DOWN;
+        attack = Math.max(0,attack - DOWN);
+        speed = Math.max(0,speed - DOWN);
+        defence = Math.max(0,defence - DOWN);
 
         setMaxHealth(70 + (int)(10 * defence));
     }
@@ -217,9 +217,9 @@ public class EntityStats {
      */
     public void upgradeDefence() {
         defence += UP;
-        attack -= DOWN;
-        power -= DOWN;
-        speed -= DOWN;
+        attack = Math.max(0,attack - DOWN);
+        power = Math.max(0,power - DOWN);
+        speed = Math.max(0,speed - DOWN);
 
         setMaxHealth(70 + (int)(10 * defence));
     }

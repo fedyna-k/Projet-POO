@@ -424,7 +424,7 @@ public class Canvas extends JPanel {
                     while (player.xp / (player.level * 250 + 500) > 0) {
                         player.xp -= player.level * 250 + 500;
                         player.level++;
-                        player.skillPoints++;
+                        player.skillPoints += 5;
                     }
                     
                 }
