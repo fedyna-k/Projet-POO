@@ -97,8 +97,8 @@ public class Canvas extends JPanel {
 
         // TESTING PURPOSE
         this.mage = new Mage(0, 0);
-        this.blueCrystal = new Crystal(40, 0, "blue");
-        this.purpleCrystal = new Crystal(80, 0, "purple");
+        this.blueCrystal = new Crystal(400, 0, "blue");
+        this.purpleCrystal = new Crystal(800, 100, "purple");
         this.badguy = new Monster(this, 400, 0);
         this.map = new Map("../src/main/resources/map/");
         this.stack = new KeyStack(this);
@@ -308,20 +308,37 @@ public class Canvas extends JPanel {
                 Color.BLUE
         );
 
-        Rectangle crystalPurpleHitbox = Collision.getPlayerHitbox(blueCrystal, blueCrystal.getPosition());
+        Rectangle crystalPurpleHitbox = Collision.getPlayerHitbox(purpleCrystal, purpleCrystal.getPosition());
         camera.drawRect(
                 g, crystalPurpleHitbox.x,
                 crystalPurpleHitbox.y,
                 (int) crystalPurpleHitbox.getWidth(),
                 (int) crystalPurpleHitbox.getHeight(),
-                Color.BLUE
+                Color.PINK
         );
 
 
         // hitbox mage
         Rectangle playerHitbox = Collision.getPlayerHitbox(mage, mage.getPosition());
-        camera.drawRect(g, playerHitbox.x, playerHitbox.y,
-                (int) playerHitbox.getWidth(), (int) playerHitbox.getHeight(), Color.RED);
+        if(mage.isBlocking()){
+            if(!mage.isFacingLeft()){
+                camera.drawRect(g, playerHitbox.x, playerHitbox.y,
+                        (int) playerHitbox.getWidth(), (int) playerHitbox.getHeight(), Color.RED);
+                camera.drawRect(g, playerHitbox.x +50 , playerHitbox.y,
+                        (int) playerHitbox.getWidth() , (int) playerHitbox.getHeight()+40, Color.RED);
+            } else{
+                camera.drawRect(g, playerHitbox.x, playerHitbox.y,
+                        (int) playerHitbox.getWidth(), (int) playerHitbox.getHeight(), Color.RED);
+                camera.drawRect(g, playerHitbox.x - 50, playerHitbox.y,
+                        (int) playerHitbox.getWidth(), (int) playerHitbox.getHeight() + 40, Color.RED);
+            }
+        } else{
+            camera.drawRect(g, playerHitbox.x, playerHitbox.y,
+                    (int) playerHitbox.getWidth(), (int) playerHitbox.getHeight(), Color.RED);
+        }
+
+
+
 
         // sword hitbox for mage
         Rectangle swordHitboxPlayer = Collision.getSwordHitbox(mage);
@@ -329,6 +346,8 @@ public class Canvas extends JPanel {
             camera.drawRect(g, swordHitboxPlayer.x, swordHitboxPlayer.y,
                     (int) swordHitboxPlayer.getWidth(), (int) swordHitboxPlayer.getHeight(), Color.RED);
         }
+
+
 
         // hitbox bad guy
         Rectangle monsterHitbox = Collision.getMonsterHitbox(badguy, badguy.getPosition());
