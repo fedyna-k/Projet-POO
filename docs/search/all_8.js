@@ -1,11 +1,25 @@
 var searchData=
 [
-  ['inputs_0',['inputs',['../classgraphics_1_1_key_stack.html#ae4b6b03bc4e2f698d6bcde415fa954fa',1,'graphics::KeyStack']]],
-  ['isattacking_1',['isattacking',['../classcharacter_1_1_entity.html#a824044a93399412de9f4c1a32a6dcd6e',1,'character.Entity.isAttacking'],['../classcharacter_1_1_entity.html#a8f733ea1bcaed91d959d32489212e2c6',1,'character.Entity.isAttacking()']]],
-  ['isdodging_2',['isdodging',['../classcharacter_1_1_entity.html#ae5bb21e84a54cd46ff936c560b7b05df',1,'character.Entity.isDodging'],['../classcharacter_1_1_entity.html#a69a282b36cc8512d4900cb398d8a4a81',1,'character.Entity.isDodging()']]],
-  ['isfacingleft_3',['isfacingleft',['../classcharacter_1_1_entity.html#a076efb9e12510cbdaeb28c52e7766e1c',1,'character.Entity.isFacingLeft'],['../classcharacter_1_1_entity.html#a809cc5ecb57547943ccb24c3affb156e',1,'character.Entity.isFacingLeft()']]],
-  ['isfullscreen_4',['isFullscreen',['../classgraphics_1_1_canvas.html#a0ff2c64ef0866e60614e6cd130a6cd62',1,'graphics::Canvas']]],
-  ['isnull_5',['isNull',['../classgeometry_1_1_vector2_d.html#ab3e39ebc744567434364c5e4bc604fa2',1,'geometry::Vector2D']]],
-  ['isplaying_6',['isplaying',['../classgraphics_1_1_animation.html#a2fda15ac0274a231a43e8fd526971028',1,'graphics.Animation.isPlaying'],['../classgraphics_1_1_animation.html#ab0986b0aa26d8d65952d2a87a1af958a',1,'graphics.Animation.isPlaying()']]],
-  ['ispressed_7',['isPressed',['../classgraphics_1_1_key_stack.html#aa67ed28b407c7eea00dc0525a29ffa21',1,'graphics::KeyStack']]]
+  ['indialog_0',['inDialog',['../classgraphics_1_1_canvas.html#ad0720396fd5f5c9cc186edde4f6a31b1',1,'graphics::Canvas']]],
+  ['inputs_1',['inputs',['../classgraphics_1_1_key_stack.html#ae4b6b03bc4e2f698d6bcde415fa954fa',1,'graphics::KeyStack']]],
+  ['isactive_2',['isActive',['../classcharacter_1_1_entity.html#a5234c21f4f0c18888bd9cbbfb08c65dd',1,'character::Entity']]],
+  ['isattacking_3',['isattacking',['../classcharacter_1_1_entity.html#a824044a93399412de9f4c1a32a6dcd6e',1,'character.Entity.isAttacking'],['../classcharacter_1_1_entity.html#a8f733ea1bcaed91d959d32489212e2c6',1,'character.Entity.isAttacking()']]],
+  ['isbeinghit_4',['isbeinghit',['../classcharacter_1_1_entity.html#ab4f2b00c46ba52af634a40cd020dc2c8',1,'character.Entity.isBeingHit'],['../classcharacter_1_1_entity.html#a1ea00b272e95ca80b19d0a3de719b233',1,'character.Entity.isBeingHit()']]],
+  ['isblocking_5',['isblocking',['../classcharacter_1_1_entity.html#aad03a5b129cd89dee3f87ff142bf8943',1,'character.Entity.isBlocking'],['../classcharacter_1_1_entity.html#afcf47baee64980ce63f525d9e35e3ccb',1,'character.Entity.isBlocking()']]],
+  ['isdead_6',['isdead',['../classcharacter_1_1_entity.html#a6a8b767551d6f2cc9475d6e66c98d67a',1,'character.Entity.isDead()'],['../classcharacter_1_1_entity_stats.html#a2688d721f6a792c953c7b5130cfeaf3a',1,'character.EntityStats.isDead()']]],
+  ['isdodging_7',['isdodging',['../classcharacter_1_1_entity.html#ae5bb21e84a54cd46ff936c560b7b05df',1,'character.Entity.isDodging'],['../classcharacter_1_1_entity.html#a69a282b36cc8512d4900cb398d8a4a81',1,'character.Entity.isDodging()']]],
+  ['isfacingleft_8',['isfacingleft',['../classcharacter_1_1_entity.html#a076efb9e12510cbdaeb28c52e7766e1c',1,'character.Entity.isFacingLeft'],['../classcharacter_1_1_entity.html#a809cc5ecb57547943ccb24c3affb156e',1,'character.Entity.isFacingLeft()']]],
+  ['isfullscreen_9',['isFullscreen',['../classgraphics_1_1_canvas.html#a0ff2c64ef0866e60614e6cd130a6cd62',1,'graphics::Canvas']]],
+  ['isin_10',['isIn',['../classgeometry_1_1_range.html#aaa56b699474860ca9eb3abdf7b33c696',1,'geometry::Range']]],
+  ['isinitiatingblock_11',['isInitiatingBlock',['../classcharacter_1_1_entity.html#a4cd15209b9aa8f9b2dbeef68e2c9be20',1,'character::Entity']]],
+  ['ismax_12',['isMax',['../classgeometry_1_1_range.html#a87edb27ea2336756222a6a63b1fc47d7',1,'geometry::Range']]],
+  ['ismin_13',['isMin',['../classgeometry_1_1_range.html#aed273fc36fdcc4d7bb741f9842169880',1,'geometry::Range']]],
+  ['ismonster_14',['isMonster',['../classcharacter_1_1_entity.html#a33dcbf4b21be016f52b7e4f5345b63c1',1,'character::Entity']]],
+  ['isnotthere_15',['isNotThere',['../classgraphics_1_1_canvas.html#aa1a9439887d60b82fb052676f5e78b63',1,'graphics::Canvas']]],
+  ['isnottheredragon_16',['isNotThereDragon',['../classgraphics_1_1_canvas.html#af7f24500c427052b092dfe99bde2d95e',1,'graphics::Canvas']]],
+  ['isnull_17',['isNull',['../classgeometry_1_1_vector2_d.html#ab3e39ebc744567434364c5e4bc604fa2',1,'geometry::Vector2D']]],
+  ['ispaused_18',['isPaused',['../classgraphics_1_1_canvas.html#a40443066826881933529f24df8e7abf0',1,'graphics::Canvas']]],
+  ['isplaying_19',['isplaying',['../classgraphics_1_1_animation.html#a2fda15ac0274a231a43e8fd526971028',1,'graphics.Animation.isPlaying'],['../classgraphics_1_1_animation.html#ab0986b0aa26d8d65952d2a87a1af958a',1,'graphics.Animation.isPlaying()']]],
+  ['ispressed_20',['isPressed',['../classgraphics_1_1_key_stack.html#aa67ed28b407c7eea00dc0525a29ffa21',1,'graphics::KeyStack']]],
+  ['iswall_21',['isWall',['../classmap_1_1_map.html#a6d3f401b25130e7e0bd49a1e6a45a028',1,'map::Map']]]
 ];

@@ -7,6 +7,7 @@ var classgraphics_1_1_animation =
     [ "load", "classgraphics_1_1_animation.html#af0f4334d5a50ca3939054a42e1b34944", null ],
     [ "play", "classgraphics_1_1_animation.html#ae6eb4058fe11c9c433d98ccb711880af", null ],
     [ "playOnce", "classgraphics_1_1_animation.html#a1a545dbfc451ba7d7135d0d309eee17c", null ],
+    [ "resume", "classgraphics_1_1_animation.html#ae39c6ed44521438053142fc64ba56b56", null ],
     [ "stop", "classgraphics_1_1_animation.html#a03d26485487c684c85441d8d4359db89", null ],
     [ "frameCounter", "classgraphics_1_1_animation.html#afe90139990bddcff0bff00da81cfa792", null ],
     [ "frameIndex", "classgraphics_1_1_animation.html#abd1e1dc0b8c40c7b7f9f1761d73a1b64", null ],

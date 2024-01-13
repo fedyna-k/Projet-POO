@@ -36,7 +36,7 @@ window.MathJax = {
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Les chevaliers d&#39;Ether<span id="projectnumber">&#160;0.1.0</span>
+   <div id="projectname">Les chevaliers d&#39;Ether<span id="projectnumber">&#160;1.0.0</span>
    </div>
    <div id="projectbrief">A game made for a OOP project.</div>
   </td>
@@ -104,6 +104,7 @@ $(document).ready(function(){initNavTree('classcharacter_1_1_entity.html',''); i
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
@@ -120,7 +121,9 @@ Inheritance diagram for character.Entity:</div>
  <div class="center">
   <img src="classcharacter_1_1_entity.png" usemap="#character.Entity_map" alt=""/>
   <map id="character.Entity_map" name="character.Entity_map">
-<area href="classcharacter_1_1_player.html" title="This class represents the player. It extends Entity." alt="character.Player" shape="rect" coords="0,56,108,80"/>
+<area href="classcharacter_1_1_monster.html" title="Represents a Monster entity in the game." alt="character.Monster" shape="rect" coords="0,56,117,80"/>
+<area href="classcharacter_1_1_player.html" title="This class represents the player. It extends Entity." alt="character.Player" shape="rect" coords="127,56,244,80"/>
+<area href="classcharacter_1_1_dragon.html" alt="character.Dragon" shape="rect" coords="0,112,117,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -128,6 +131,9 @@ Inheritance diagram for character.Entity:</div>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="enumcharacter_1_1_entity_1_1_animation_index.html">AnimationIndex</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">All possible animations.  <a href="enumcharacter_1_1_entity_1_1_animation_index.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="enumcharacter_1_1_entity_1_1_entity_state.html">EntityState</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration representing the different states of an entity.  <a href="enumcharacter_1_1_entity_1_1_entity_state.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -138,12 +144,27 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5fbe70c0eac66ce03c8fbd5f1ca83e0f" id="r_a5fbe70c0eac66ce03c8fbd5f1ca83e0f"><td class="memItemLeft" align="right" valign="top">abstract Vector2D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a5fbe70c0eac66ce03c8fbd5f1ca83e0f">getOffset</a> ()</td></tr>
 <tr class="memdesc:a5fbe70c0eac66ce03c8fbd5f1ca83e0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use this function to return offsets depending on contexts and sprites.  <br /></td></tr>
 <tr class="separator:a5fbe70c0eac66ce03c8fbd5f1ca83e0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2287d32a8d8a5af00c623b09d87cec70" id="r_a2287d32a8d8a5af00c623b09d87cec70"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a2287d32a8d8a5af00c623b09d87cec70">move</a> (double dx, double dy)</td></tr>
-<tr class="memdesc:a2287d32a8d8a5af00c623b09d87cec70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move Entity by a given vector.  <br /></td></tr>
-<tr class="separator:a2287d32a8d8a5af00c623b09d87cec70"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3fca5ad5aff028d27a00c744a92523b" id="r_aa3fca5ad5aff028d27a00c744a92523b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#aa3fca5ad5aff028d27a00c744a92523b">move</a> (Vector2D movement)</td></tr>
-<tr class="memdesc:aa3fca5ad5aff028d27a00c744a92523b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move Entity by a given vector.  <br /></td></tr>
-<tr class="separator:aa3fca5ad5aff028d27a00c744a92523b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f2f7a15c8d0fca447f04b02a05e869f" id="r_a3f2f7a15c8d0fca447f04b02a05e869f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a3f2f7a15c8d0fca447f04b02a05e869f">move</a> (double dx, double dy, double speed, ArrayList&lt; <a class="el" href="classcharacter_1_1_entity.html">Entity</a> &gt; others)</td></tr>
+<tr class="memdesc:a3f2f7a15c8d0fca447f04b02a05e869f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move Entity by a given vector.  <br /></td></tr>
+<tr class="separator:a3f2f7a15c8d0fca447f04b02a05e869f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c7b7fee122886bb0ba12408dbdd4ce4" id="r_a2c7b7fee122886bb0ba12408dbdd4ce4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a2c7b7fee122886bb0ba12408dbdd4ce4">move</a> (Vector2D movement, ArrayList&lt; <a class="el" href="classcharacter_1_1_entity.html">Entity</a> &gt; others)</td></tr>
+<tr class="memdesc:a2c7b7fee122886bb0ba12408dbdd4ce4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move Entity by a given vector.  <br /></td></tr>
+<tr class="separator:a2c7b7fee122886bb0ba12408dbdd4ce4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac39c17684a255a298997b2f8d5288c35" id="r_ac39c17684a255a298997b2f8d5288c35"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#ac39c17684a255a298997b2f8d5288c35">move</a> (Vector2D movement, double speed, ArrayList&lt; <a class="el" href="classcharacter_1_1_entity.html">Entity</a> &gt; others)</td></tr>
+<tr class="memdesc:ac39c17684a255a298997b2f8d5288c35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move Entity by a given vector.  <br /></td></tr>
+<tr class="separator:ac39c17684a255a298997b2f8d5288c35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12d2f0f78566c1d61dce88fb0129c482" id="r_a12d2f0f78566c1d61dce88fb0129c482"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a12d2f0f78566c1d61dce88fb0129c482">move</a> (double dx, double dy, ArrayList&lt; <a class="el" href="classcharacter_1_1_entity.html">Entity</a> &gt; others)</td></tr>
+<tr class="memdesc:a12d2f0f78566c1d61dce88fb0129c482"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move Entity by a given vector.  <br /></td></tr>
+<tr class="separator:a12d2f0f78566c1d61dce88fb0129c482"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a8b767551d6f2cc9475d6e66c98d67a" id="r_a6a8b767551d6f2cc9475d6e66c98d67a"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a6a8b767551d6f2cc9475d6e66c98d67a">isDead</a> ()</td></tr>
+<tr class="memdesc:a6a8b767551d6f2cc9475d6e66c98d67a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tells if the entity is dead or not.  <br /></td></tr>
+<tr class="separator:a6a8b767551d6f2cc9475d6e66c98d67a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82f60b3cc07b76f11c92a058e9e96c83" id="r_a82f60b3cc07b76f11c92a058e9e96c83"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcharacter_1_1_entity_stats.html">EntityStats</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a82f60b3cc07b76f11c92a058e9e96c83">getStats</a> ()</td></tr>
+<tr class="memdesc:a82f60b3cc07b76f11c92a058e9e96c83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all entity stats.  <br /></td></tr>
+<tr class="separator:a82f60b3cc07b76f11c92a058e9e96c83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3a35c673cc4ac22bb428d3b62ad2a68" id="r_ac3a35c673cc4ac22bb428d3b62ad2a68"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#ac3a35c673cc4ac22bb428d3b62ad2a68">stopMoving</a> ()</td></tr>
+<tr class="memdesc:ac3a35c673cc4ac22bb428d3b62ad2a68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the moving animation.  <br /></td></tr>
+<tr class="separator:ac3a35c673cc4ac22bb428d3b62ad2a68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3918617dafb901349f081368c4cd80cd" id="r_a3918617dafb901349f081368c4cd80cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a3918617dafb901349f081368c4cd80cd">attack</a> ()</td></tr>
 <tr class="memdesc:a3918617dafb901349f081368c4cd80cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Put the entity into attack state.  <br /></td></tr>
 <tr class="separator:a3918617dafb901349f081368c4cd80cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -156,9 +177,27 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a69a282b36cc8512d4900cb398d8a4a81" id="r_a69a282b36cc8512d4900cb398d8a4a81"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a69a282b36cc8512d4900cb398d8a4a81">isDodging</a> ()</td></tr>
 <tr class="memdesc:a69a282b36cc8512d4900cb398d8a4a81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the dodging state of the entity.  <br /></td></tr>
 <tr class="separator:a69a282b36cc8512d4900cb398d8a4a81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f1c46069bcfd0583c6dafd7e23d00ea" id="r_a9f1c46069bcfd0583c6dafd7e23d00ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a9f1c46069bcfd0583c6dafd7e23d00ea">setDodging</a> (boolean dodging)</td></tr>
+<tr class="memdesc:a9f1c46069bcfd0583c6dafd7e23d00ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the dodging state of the player.  <br /></td></tr>
+<tr class="separator:a9f1c46069bcfd0583c6dafd7e23d00ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9be4ed91ef82cf059505835bcef2545" id="r_af9be4ed91ef82cf059505835bcef2545"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#af9be4ed91ef82cf059505835bcef2545">stopDodging</a> ()</td></tr>
+<tr class="separator:af9be4ed91ef82cf059505835bcef2545"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac56c4eea14c4d84d5c801c8c36591d61" id="r_ac56c4eea14c4d84d5c801c8c36591d61"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#ac56c4eea14c4d84d5c801c8c36591d61">block</a> ()</td></tr>
+<tr class="separator:ac56c4eea14c4d84d5c801c8c36591d61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcf47baee64980ce63f525d9e35e3ccb" id="r_afcf47baee64980ce63f525d9e35e3ccb"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#afcf47baee64980ce63f525d9e35e3ccb">isBlocking</a> ()</td></tr>
+<tr class="separator:afcf47baee64980ce63f525d9e35e3ccb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9c3fc859074648e7eaacfa4fc7ff2af" id="r_ac9c3fc859074648e7eaacfa4fc7ff2af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#ac9c3fc859074648e7eaacfa4fc7ff2af">stopBlocking</a> ()</td></tr>
+<tr class="separator:ac9c3fc859074648e7eaacfa4fc7ff2af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a809cc5ecb57547943ccb24c3affb156e" id="r_a809cc5ecb57547943ccb24c3affb156e"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a809cc5ecb57547943ccb24c3affb156e">isFacingLeft</a> ()</td></tr>
 <tr class="memdesc:a809cc5ecb57547943ccb24c3affb156e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the entity's orientation.  <br /></td></tr>
 <tr class="separator:a809cc5ecb57547943ccb24c3affb156e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b61d60f06406c3de44f1141dc6b760f" id="r_a6b61d60f06406c3de44f1141dc6b760f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a6b61d60f06406c3de44f1141dc6b760f">getDamage</a> (<a class="el" href="classcharacter_1_1_entity.html">Entity</a> attacker)</td></tr>
+<tr class="separator:a6b61d60f06406c3de44f1141dc6b760f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ea00b272e95ca80b19d0a3de719b233" id="r_a1ea00b272e95ca80b19d0a3de719b233"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a1ea00b272e95ca80b19d0a3de719b233">isBeingHit</a> ()</td></tr>
+<tr class="separator:a1ea00b272e95ca80b19d0a3de719b233"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75031367ad0928192266b3718f29741f" id="r_a75031367ad0928192266b3718f29741f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a75031367ad0928192266b3718f29741f">setPosition</a> (double x, double y)</td></tr>
+<tr class="memdesc:a75031367ad0928192266b3718f29741f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the position of the entity.  <br /></td></tr>
+<tr class="separator:a75031367ad0928192266b3718f29741f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ebbeb658f3d46482f75861beebbedda" id="r_a2ebbeb658f3d46482f75861beebbedda"><td class="memItemLeft" align="right" valign="top">BufferedImage&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a2ebbeb658f3d46482f75861beebbedda">getSprite</a> ()</td></tr>
 <tr class="memdesc:a2ebbeb658f3d46482f75861beebbedda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get entity sprite to display.  <br /></td></tr>
 <tr class="separator:a2ebbeb658f3d46482f75861beebbedda"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -168,6 +207,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a28bfab6b4ff0f725051bbe22d013bda5" id="r_a28bfab6b4ff0f725051bbe22d013bda5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a28bfab6b4ff0f725051bbe22d013bda5">swapAnimation</a> (<a class="el" href="enumcharacter_1_1_entity_1_1_animation_index.html">AnimationIndex</a> animationIndex)</td></tr>
 <tr class="memdesc:a28bfab6b4ff0f725051bbe22d013bda5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the animation to display.  <br /></td></tr>
 <tr class="separator:a28bfab6b4ff0f725051bbe22d013bda5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a33dcbf4b21be016f52b7e4f5345b63c1" id="r_a33dcbf4b21be016f52b7e4f5345b63c1"><td class="memItemLeft" align="right" valign="top">static boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a33dcbf4b21be016f52b7e4f5345b63c1">isMonster</a> (<a class="el" href="classcharacter_1_1_entity.html">Entity</a> entity)</td></tr>
+<tr class="memdesc:a33dcbf4b21be016f52b7e4f5345b63c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the given entity is an instance of the Monster class.  <br /></td></tr>
+<tr class="separator:a33dcbf4b21be016f52b7e4f5345b63c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -183,6 +228,14 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a7d1698374f6e43786f9ef81405626198" id="r_a7d1698374f6e43786f9ef81405626198"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a7d1698374f6e43786f9ef81405626198">name</a></td></tr>
 <tr class="memdesc:a7d1698374f6e43786f9ef81405626198"><td class="mdescLeft">&#160;</td><td class="mdescRight">The name of the entity.  <br /></td></tr>
 <tr class="separator:a7d1698374f6e43786f9ef81405626198"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6e84d221e8fdc10ab7c758b2629e387" id="r_ac6e84d221e8fdc10ab7c758b2629e387"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#ac6e84d221e8fdc10ab7c758b2629e387">attackCooldown</a> = 0</td></tr>
+<tr class="memdesc:ac6e84d221e8fdc10ab7c758b2629e387"><td class="mdescLeft">&#160;</td><td class="mdescRight">State if is attacking.  <br /></td></tr>
+<tr class="separator:ac6e84d221e8fdc10ab7c758b2629e387"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5234c21f4f0c18888bd9cbbfb08c65dd" id="r_a5234c21f4f0c18888bd9cbbfb08c65dd"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a5234c21f4f0c18888bd9cbbfb08c65dd">isActive</a> = true</td></tr>
+<tr class="separator:a5234c21f4f0c18888bd9cbbfb08c65dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15fe9214a0c0c7d36dc130bed22b2e6f" id="r_a15fe9214a0c0c7d36dc130bed22b2e6f"><td class="memItemLeft" align="right" valign="top">Animation&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a15fe9214a0c0c7d36dc130bed22b2e6f">current</a></td></tr>
+<tr class="memdesc:a15fe9214a0c0c7d36dc130bed22b2e6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Animation currently playing.  <br /></td></tr>
+<tr class="separator:a15fe9214a0c0c7d36dc130bed22b2e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -192,21 +245,42 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a890dd2f2163ba64fed860ca1bf409078" id="r_a890dd2f2163ba64fed860ca1bf409078"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcharacter_1_1_entity_stats.html">EntityStats</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a890dd2f2163ba64fed860ca1bf409078">stats</a></td></tr>
+<tr class="memdesc:a890dd2f2163ba64fed860ca1bf409078"><td class="mdescLeft">&#160;</td><td class="mdescRight">The entity stats.  <br /></td></tr>
+<tr class="separator:a890dd2f2163ba64fed860ca1bf409078"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a824044a93399412de9f4c1a32a6dcd6e" id="r_a824044a93399412de9f4c1a32a6dcd6e"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a824044a93399412de9f4c1a32a6dcd6e">isAttacking</a></td></tr>
 <tr class="memdesc:a824044a93399412de9f4c1a32a6dcd6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">State if is attacking.  <br /></td></tr>
 <tr class="separator:a824044a93399412de9f4c1a32a6dcd6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa88af2c7f180ce1ee67f8543d0c35611" id="r_aa88af2c7f180ce1ee67f8543d0c35611"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#aa88af2c7f180ce1ee67f8543d0c35611">canAttack</a> = true</td></tr>
+<tr class="memdesc:aa88af2c7f180ce1ee67f8543d0c35611"><td class="mdescLeft">&#160;</td><td class="mdescRight">State if is attacking.  <br /></td></tr>
+<tr class="separator:aa88af2c7f180ce1ee67f8543d0c35611"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f2f5887d1b3ee966fa4b217d9eeffd2" id="r_a9f2f5887d1b3ee966fa4b217d9eeffd2"><td class="memItemLeft" align="right" valign="top">Timer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a9f2f5887d1b3ee966fa4b217d9eeffd2">attackTimer</a></td></tr>
+<tr class="memdesc:a9f2f5887d1b3ee966fa4b217d9eeffd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">State if is attacking.  <br /></td></tr>
+<tr class="separator:a9f2f5887d1b3ee966fa4b217d9eeffd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa333fc3cfcafe8bee794b4b9c44c89f6" id="r_aa333fc3cfcafe8bee794b4b9c44c89f6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#aa333fc3cfcafe8bee794b4b9c44c89f6">hitstunCooldown</a> = 0</td></tr>
+<tr class="memdesc:aa333fc3cfcafe8bee794b4b9c44c89f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">State if is attacking.  <br /></td></tr>
+<tr class="separator:aa333fc3cfcafe8bee794b4b9c44c89f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac273663cfcb7f71957c1b3a83c2b00b5" id="r_ac273663cfcb7f71957c1b3a83c2b00b5"><td class="memItemLeft" align="right" valign="top">Timer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#ac273663cfcb7f71957c1b3a83c2b00b5">hitstunTimer</a></td></tr>
+<tr class="memdesc:ac273663cfcb7f71957c1b3a83c2b00b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">State if is attacking.  <br /></td></tr>
+<tr class="separator:ac273663cfcb7f71957c1b3a83c2b00b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a076efb9e12510cbdaeb28c52e7766e1c" id="r_a076efb9e12510cbdaeb28c52e7766e1c"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a076efb9e12510cbdaeb28c52e7766e1c">isFacingLeft</a></td></tr>
 <tr class="memdesc:a076efb9e12510cbdaeb28c52e7766e1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">State if is facing left.  <br /></td></tr>
 <tr class="separator:a076efb9e12510cbdaeb28c52e7766e1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5bb21e84a54cd46ff936c560b7b05df" id="r_ae5bb21e84a54cd46ff936c560b7b05df"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#ae5bb21e84a54cd46ff936c560b7b05df">isDodging</a></td></tr>
 <tr class="memdesc:ae5bb21e84a54cd46ff936c560b7b05df"><td class="mdescLeft">&#160;</td><td class="mdescRight">State if is dodging.  <br /></td></tr>
 <tr class="separator:ae5bb21e84a54cd46ff936c560b7b05df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad03a5b129cd89dee3f87ff142bf8943" id="r_aad03a5b129cd89dee3f87ff142bf8943"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#aad03a5b129cd89dee3f87ff142bf8943">isBlocking</a></td></tr>
+<tr class="memdesc:aad03a5b129cd89dee3f87ff142bf8943"><td class="mdescLeft">&#160;</td><td class="mdescRight">State if is blocking.  <br /></td></tr>
+<tr class="separator:aad03a5b129cd89dee3f87ff142bf8943"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cd15209b9aa8f9b2dbeef68e2c9be20" id="r_a4cd15209b9aa8f9b2dbeef68e2c9be20"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a4cd15209b9aa8f9b2dbeef68e2c9be20">isInitiatingBlock</a></td></tr>
+<tr class="memdesc:a4cd15209b9aa8f9b2dbeef68e2c9be20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used in block loading.  <br /></td></tr>
+<tr class="separator:a4cd15209b9aa8f9b2dbeef68e2c9be20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4f2b00c46ba52af634a40cd020dc2c8" id="r_ab4f2b00c46ba52af634a40cd020dc2c8"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#ab4f2b00c46ba52af634a40cd020dc2c8">isBeingHit</a> = false</td></tr>
+<tr class="memdesc:ab4f2b00c46ba52af634a40cd020dc2c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used for damage taking.  <br /></td></tr>
+<tr class="separator:ab4f2b00c46ba52af634a40cd020dc2c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affb85dd4e2e50c30c643c08b6d29681b" id="r_affb85dd4e2e50c30c643c08b6d29681b"><td class="memItemLeft" align="right" valign="top">Vector2D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#affb85dd4e2e50c30c643c08b6d29681b">bufferedMovement</a></td></tr>
 <tr class="memdesc:affb85dd4e2e50c30c643c08b6d29681b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The last registered movement before dodging.  <br /></td></tr>
 <tr class="separator:affb85dd4e2e50c30c643c08b6d29681b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15fe9214a0c0c7d36dc130bed22b2e6f" id="r_a15fe9214a0c0c7d36dc130bed22b2e6f"><td class="memItemLeft" align="right" valign="top">Animation&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a15fe9214a0c0c7d36dc130bed22b2e6f">current</a></td></tr>
-<tr class="memdesc:a15fe9214a0c0c7d36dc130bed22b2e6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Animation currently playing.  <br /></td></tr>
-<tr class="separator:a15fe9214a0c0c7d36dc130bed22b2e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adda9fa5453c09b2d7fe02e03ad890d58" id="r_adda9fa5453c09b2d7fe02e03ad890d58"><td class="memItemLeft" align="right" valign="top">Animation&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#adda9fa5453c09b2d7fe02e03ad890d58">standing</a></td></tr>
 <tr class="memdesc:adda9fa5453c09b2d7fe02e03ad890d58"><td class="mdescLeft">&#160;</td><td class="mdescRight">The idle animation.  <br /></td></tr>
 <tr class="separator:adda9fa5453c09b2d7fe02e03ad890d58"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -228,14 +302,37 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a623ffd1a5f3a208599e95669e65242ab" id="r_a623ffd1a5f3a208599e95669e65242ab"><td class="memItemLeft" align="right" valign="top">Animation&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a623ffd1a5f3a208599e95669e65242ab">leftDodge</a></td></tr>
 <tr class="memdesc:a623ffd1a5f3a208599e95669e65242ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">The animation when dodging right.  <br /></td></tr>
 <tr class="separator:a623ffd1a5f3a208599e95669e65242ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22338fbf33cc8beefffd4c8656d9a65a" id="r_a22338fbf33cc8beefffd4c8656d9a65a"><td class="memItemLeft" align="right" valign="top">Animation&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a22338fbf33cc8beefffd4c8656d9a65a">rightBlock</a></td></tr>
+<tr class="separator:a22338fbf33cc8beefffd4c8656d9a65a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c0462522650985340e5fac25b0f5d60" id="r_a6c0462522650985340e5fac25b0f5d60"><td class="memItemLeft" align="right" valign="top">Animation&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a6c0462522650985340e5fac25b0f5d60">leftBlock</a></td></tr>
+<tr class="separator:a6c0462522650985340e5fac25b0f5d60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20391bc1a5ca1a7e7cc2ac4d1b8a8b5f" id="r_a20391bc1a5ca1a7e7cc2ac4d1b8a8b5f"><td class="memItemLeft" align="right" valign="top">Animation&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a20391bc1a5ca1a7e7cc2ac4d1b8a8b5f">rightBlockStand</a></td></tr>
+<tr class="separator:a20391bc1a5ca1a7e7cc2ac4d1b8a8b5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6f504bd9ad55541b226477c1d2bcda6" id="r_af6f504bd9ad55541b226477c1d2bcda6"><td class="memItemLeft" align="right" valign="top">Animation&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#af6f504bd9ad55541b226477c1d2bcda6">leftBlockStand</a></td></tr>
+<tr class="separator:af6f504bd9ad55541b226477c1d2bcda6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12a888eea3a335ee871f6792b2b22568" id="r_a12a888eea3a335ee871f6792b2b22568"><td class="memItemLeft" align="right" valign="top">Animation&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a12a888eea3a335ee871f6792b2b22568">rightBlockWalk</a></td></tr>
+<tr class="separator:a12a888eea3a335ee871f6792b2b22568"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bd7d9c71f5df9c02b8a1cfc39bfed5f" id="r_a8bd7d9c71f5df9c02b8a1cfc39bfed5f"><td class="memItemLeft" align="right" valign="top">Animation&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a8bd7d9c71f5df9c02b8a1cfc39bfed5f">leftBlockWalk</a></td></tr>
+<tr class="separator:a8bd7d9c71f5df9c02b8a1cfc39bfed5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5494c4d60f15751384d09102e8eef1d" id="r_ac5494c4d60f15751384d09102e8eef1d"><td class="memItemLeft" align="right" valign="top">Animation&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#ac5494c4d60f15751384d09102e8eef1d">leftTakesDamage</a></td></tr>
+<tr class="separator:ac5494c4d60f15751384d09102e8eef1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a292d08d03f5623695d3ac1ec9e2eaf0a" id="r_a292d08d03f5623695d3ac1ec9e2eaf0a"><td class="memItemLeft" align="right" valign="top">Animation&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a292d08d03f5623695d3ac1ec9e2eaf0a">rightTakesDamage</a></td></tr>
+<tr class="separator:a292d08d03f5623695d3ac1ec9e2eaf0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98943cea24346e3654f49beea72ea4de" id="r_a98943cea24346e3654f49beea72ea4de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="enumcharacter_1_1_entity_1_1_entity_state.html">EntityState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcharacter_1_1_entity.html#a98943cea24346e3654f49beea72ea4de">currentState</a></td></tr>
+<tr class="separator:a98943cea24346e3654f49beea72ea4de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class represents an arbitrary entity. It should be a base for all entities. </p>
+<p>This class represents the entity stats such as health, speed, etc...</p>
 <dl class="section author"><dt>Author</dt><dd>Kevin Fedyna </dd>
 <dd>
 Imene Bousmaha </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>16/11/2023</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classcharacter_1_1_player.html" title="This class represents the player. It extends Entity.">character.Player</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classcharacter_1_1_player.html" title="This class represents the player. It extends Entity.">character.Player</a></dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Kevin Fedyna </dd>
+<dd>
+Imene Bousmaha </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>9/1/2024 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a3918617dafb901349f081368c4cd80cd" name="a3918617dafb901349f081368c4cd80cd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3918617dafb901349f081368c4cd80cd">&#9670;&#160;</a></span>attack()</h2>
@@ -256,6 +353,24 @@ Imene Bousmaha </dd></dl>
 
 </div>
 </div>
+<a id="ac56c4eea14c4d84d5c801c8c36591d61" name="ac56c4eea14c4d84d5c801c8c36591d61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac56c4eea14c4d84d5c801c8c36591d61">&#9670;&#160;</a></span>block()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void character.Entity.block </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Put the entity into block state </p>
+
+</div>
+</div>
 <a id="acf34692aa2cb7927e97fd1b6f8cadbd4" name="acf34692aa2cb7927e97fd1b6f8cadbd4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acf34692aa2cb7927e97fd1b6f8cadbd4">&#9670;&#160;</a></span>dodge()</h2>
 
@@ -272,6 +387,25 @@ Imene Bousmaha </dd></dl>
 </div><div class="memdoc">
 
 <p>Put the entity into dodge state. </p>
+
+</div>
+</div>
+<a id="a6b61d60f06406c3de44f1141dc6b760f" name="a6b61d60f06406c3de44f1141dc6b760f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b61d60f06406c3de44f1141dc6b760f">&#9670;&#160;</a></span>getDamage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void character.Entity.getDamage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcharacter_1_1_entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>attacker</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Inflicts damage on the entity, putting it in a hit stun state. This method changes the entity's state to EntityState.HITSTUN and swaps its animation to a damage animation. </p>
 
 </div>
 </div>
@@ -301,7 +435,7 @@ Imene Bousmaha </dd></dl>
 <p>Use this function to return offsets depending on contexts and sprites. </p>
 <dl class="section return"><dt>Returns</dt><dd>A Vector2D representing offset to apply (specific to base sprite). </dd></dl>
 
-<p>Reimplemented in <a class="el" href="classcharacter_1_1_player.html#a6e11e546335ad7dda96ddc9682fa03a0">character.Player</a>.</p>
+<p>Reimplemented in <a class="el" href="classcharacter_1_1_monster.html#acebd6f970328ee8ae1247dea5f5dbcd1">character.Monster</a>, and <a class="el" href="classcharacter_1_1_player.html#a6e11e546335ad7dda96ddc9682fa03a0">character.Player</a>.</p>
 
 </div>
 </div>
@@ -365,6 +499,26 @@ Imene Bousmaha </dd></dl>
 
 </div>
 </div>
+<a id="a82f60b3cc07b76f11c92a058e9e96c83" name="a82f60b3cc07b76f11c92a058e9e96c83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82f60b3cc07b76f11c92a058e9e96c83">&#9670;&#160;</a></span>getStats()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classcharacter_1_1_entity_stats.html">EntityStats</a> character.Entity.getStats </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get all entity stats. </p>
+<dl class="section return"><dt>Returns</dt><dd>The stats </dd></dl>
+
+</div>
+</div>
 <a id="a8f733ea1bcaed91d959d32489212e2c6" name="a8f733ea1bcaed91d959d32489212e2c6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8f733ea1bcaed91d959d32489212e2c6">&#9670;&#160;</a></span>isAttacking()</h2>
 
@@ -382,6 +536,64 @@ Imene Bousmaha </dd></dl>
 
 <p>Get the attacking state of the entity. </p>
 <dl class="section return"><dt>Returns</dt><dd>The attacking state. </dd></dl>
+
+</div>
+</div>
+<a id="a1ea00b272e95ca80b19d0a3de719b233" name="a1ea00b272e95ca80b19d0a3de719b233"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ea00b272e95ca80b19d0a3de719b233">&#9670;&#160;</a></span>isBeingHit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean character.Entity.isBeingHit </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Checks if the entity is currently in a hit stun state.</p>
+<dl class="section return"><dt>Returns</dt><dd>True if the entity is being hit (in hit stun); otherwise, false. </dd></dl>
+
+</div>
+</div>
+<a id="afcf47baee64980ce63f525d9e35e3ccb" name="afcf47baee64980ce63f525d9e35e3ccb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcf47baee64980ce63f525d9e35e3ccb">&#9670;&#160;</a></span>isBlocking()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean character.Entity.isBlocking </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get the blocking state of the entity</p>
+<dl class="section return"><dt>Returns</dt><dd>The blocking state </dd></dl>
+
+</div>
+</div>
+<a id="a6a8b767551d6f2cc9475d6e66c98d67a" name="a6a8b767551d6f2cc9475d6e66c98d67a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a8b767551d6f2cc9475d6e66c98d67a">&#9670;&#160;</a></span>isDead()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean character.Entity.isDead </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Tells if the entity is dead or not. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if dead. </dd></dl>
 
 </div>
 </div>
@@ -425,8 +637,46 @@ Imene Bousmaha </dd></dl>
 
 </div>
 </div>
-<a id="a2287d32a8d8a5af00c623b09d87cec70" name="a2287d32a8d8a5af00c623b09d87cec70"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2287d32a8d8a5af00c623b09d87cec70">&#9670;&#160;</a></span>move() <span class="overload">[1/2]</span></h2>
+<a id="a33dcbf4b21be016f52b7e4f5345b63c1" name="a33dcbf4b21be016f52b7e4f5345b63c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33dcbf4b21be016f52b7e4f5345b63c1">&#9670;&#160;</a></span>isMonster()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static boolean character.Entity.isMonster </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcharacter_1_1_entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the given entity is an instance of the Monster class. </p>
+<pre class="fragment">   This method determines whether the provided entity is a Monster by
+   checking
+   its type using the instanceof operator.
+</pre> <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td>The entity to be checked. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the entity is a Monster; otherwise, false. </dd></dl>
+
+</div>
+</div>
+<a id="a12d2f0f78566c1d61dce88fb0129c482" name="a12d2f0f78566c1d61dce88fb0129c482"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12d2f0f78566c1d61dce88fb0129c482">&#9670;&#160;</a></span>move() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -441,7 +691,13 @@ Imene Bousmaha </dd></dl>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>dy</em>&#160;</td>
+          <td class="paramname"><em>dy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ArrayList&lt; <a class="el" href="classcharacter_1_1_entity.html">Entity</a> &gt;&#160;</td>
+          <td class="paramname"><em>others</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -456,14 +712,66 @@ Imene Bousmaha </dd></dl>
   <table class="params">
     <tr><td class="paramname">dx</td><td>x coordinate of vector. </td></tr>
     <tr><td class="paramname">dy</td><td>y coordinate of vector. </td></tr>
+    <tr><td class="paramname">others</td><td>Set of other entities that will be collided. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="aa3fca5ad5aff028d27a00c744a92523b" name="aa3fca5ad5aff028d27a00c744a92523b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa3fca5ad5aff028d27a00c744a92523b">&#9670;&#160;</a></span>move() <span class="overload">[2/2]</span></h2>
+<a id="a3f2f7a15c8d0fca447f04b02a05e869f" name="a3f2f7a15c8d0fca447f04b02a05e869f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f2f7a15c8d0fca447f04b02a05e869f">&#9670;&#160;</a></span>move() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void character.Entity.move </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>dx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>dy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>speed</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ArrayList&lt; <a class="el" href="classcharacter_1_1_entity.html">Entity</a> &gt;&#160;</td>
+          <td class="paramname"><em>others</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Move Entity by a given vector. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dx</td><td>x coordinate of vector. </td></tr>
+    <tr><td class="paramname">dy</td><td>y coordinate of vector. </td></tr>
+    <tr><td class="paramname">speed</td><td>Set a custom speed to the character. </td></tr>
+    <tr><td class="paramname">others</td><td>Set of other entities that will be collided. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2c7b7fee122886bb0ba12408dbdd4ce4" name="a2c7b7fee122886bb0ba12408dbdd4ce4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c7b7fee122886bb0ba12408dbdd4ce4">&#9670;&#160;</a></span>move() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -472,8 +780,18 @@ Imene Bousmaha </dd></dl>
           <td class="memname">void character.Entity.move </td>
           <td>(</td>
           <td class="paramtype">Vector2D&#160;</td>
-          <td class="paramname"><em>movement</em></td><td>)</td>
+          <td class="paramname"><em>movement</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">ArrayList&lt; <a class="el" href="classcharacter_1_1_entity.html">Entity</a> &gt;&#160;</td>
+          <td class="paramname"><em>others</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -482,6 +800,51 @@ Imene Bousmaha </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">movement</td><td>The [dx, dy] vector. </td></tr>
+    <tr><td class="paramname">others</td><td>Set of other entities that will be collided. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac39c17684a255a298997b2f8d5288c35" name="ac39c17684a255a298997b2f8d5288c35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac39c17684a255a298997b2f8d5288c35">&#9670;&#160;</a></span>move() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void character.Entity.move </td>
+          <td>(</td>
+          <td class="paramtype">Vector2D&#160;</td>
+          <td class="paramname"><em>movement</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>speed</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ArrayList&lt; <a class="el" href="classcharacter_1_1_entity.html">Entity</a> &gt;&#160;</td>
+          <td class="paramname"><em>others</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Move Entity by a given vector. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">movement</td><td>The [dx, dy] vector. </td></tr>
+    <tr><td class="paramname">speed</td><td>Set a custom speed to the character. </td></tr>
+    <tr><td class="paramname">others</td><td>Set of other entities that will be collided. </td></tr>
   </table>
   </dd>
 </dl>
@@ -522,6 +885,134 @@ Imene Bousmaha </dd></dl>
 
 </div>
 </div>
+<a id="a9f1c46069bcfd0583c6dafd7e23d00ea" name="a9f1c46069bcfd0583c6dafd7e23d00ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f1c46069bcfd0583c6dafd7e23d00ea">&#9670;&#160;</a></span>setDodging()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void character.Entity.setDodging </td>
+          <td>(</td>
+          <td class="paramtype">boolean&#160;</td>
+          <td class="paramname"><em>dodging</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the dodging state of the player. </p>
+<pre class="fragment">   This method sets the dodging state of the player to the specified
+   value.
+   When the player is in a dodging state, certain actions or behaviors
+   may be
+   affected in the game.
+</pre> <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dodging</td><td>The new dodging state for the player.<ul>
+<li>true if the player is in a dodging state.</li>
+<li>false if the player is not in a dodging state.</li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd>isDodging </dd></dl>
+
+</div>
+</div>
+<a id="a75031367ad0928192266b3718f29741f" name="a75031367ad0928192266b3718f29741f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75031367ad0928192266b3718f29741f">&#9670;&#160;</a></span>setPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void character.Entity.setPosition </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the position of the entity. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>The new x-coordinate. </td></tr>
+    <tr><td class="paramname">y</td><td>The new y-coordinate. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac9c3fc859074648e7eaacfa4fc7ff2af" name="ac9c3fc859074648e7eaacfa4fc7ff2af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9c3fc859074648e7eaacfa4fc7ff2af">&#9670;&#160;</a></span>stopBlocking()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void character.Entity.stopBlocking </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Goes back to normal state from blocking state </p>
+
+</div>
+</div>
+<a id="af9be4ed91ef82cf059505835bcef2545" name="af9be4ed91ef82cf059505835bcef2545"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9be4ed91ef82cf059505835bcef2545">&#9670;&#160;</a></span>stopDodging()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void character.Entity.stopDodging </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Goes back to normal state from dodging state </p>
+
+</div>
+</div>
+<a id="ac3a35c673cc4ac22bb428d3b62ad2a68" name="ac3a35c673cc4ac22bb428d3b62ad2a68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3a35c673cc4ac22bb428d3b62ad2a68">&#9670;&#160;</a></span>stopMoving()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void character.Entity.stopMoving </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Stops the moving animation. </p>
+
+</div>
+</div>
 <a id="a28bfab6b4ff0f725051bbe22d013bda5" name="a28bfab6b4ff0f725051bbe22d013bda5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a28bfab6b4ff0f725051bbe22d013bda5">&#9670;&#160;</a></span>swapAnimation()</h2>
 
@@ -539,8 +1030,8 @@ Imene Bousmaha </dd></dl>
 </div><div class="memdoc">
 
 <p>Change the animation to display. </p>
-<p>If the animation is the same than before, no change is made.</p>
-<dl class="params"><dt>Parameters</dt><dd>
+<pre class="fragment">   If the animation is the same than before, no change is made.
+</pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">animationIndex</td><td>A constant index that describes the type of animation. </td></tr>
   </table>
@@ -550,6 +1041,46 @@ Imene Bousmaha </dd></dl>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="ac6e84d221e8fdc10ab7c758b2629e387" name="ac6e84d221e8fdc10ab7c758b2629e387"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6e84d221e8fdc10ab7c758b2629e387">&#9670;&#160;</a></span>attackCooldown</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int character.Entity.attackCooldown = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>State if is attacking. </p>
+
+</div>
+</div>
+<a id="a9f2f5887d1b3ee966fa4b217d9eeffd2" name="a9f2f5887d1b3ee966fa4b217d9eeffd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f2f5887d1b3ee966fa4b217d9eeffd2">&#9670;&#160;</a></span>attackTimer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Timer character.Entity.attackTimer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>State if is attacking. </p>
+
+</div>
+</div>
 <a id="affb85dd4e2e50c30c643c08b6d29681b" name="affb85dd4e2e50c30c643c08b6d29681b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#affb85dd4e2e50c30c643c08b6d29681b">&#9670;&#160;</a></span>bufferedMovement</h2>
 
@@ -574,6 +1105,30 @@ Imene Bousmaha </dd></dl>
 
 </div>
 </div>
+<a id="aa88af2c7f180ce1ee67f8543d0c35611" name="aa88af2c7f180ce1ee67f8543d0c35611"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa88af2c7f180ce1ee67f8543d0c35611">&#9670;&#160;</a></span>canAttack</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean character.Entity.canAttack = true</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>State if is attacking. </p>
+
+</div>
+</div>
 <a id="a7b76d22fc2f84b550979dd30e0fae687" name="a7b76d22fc2f84b550979dd30e0fae687"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7b76d22fc2f84b550979dd30e0fae687">&#9670;&#160;</a></span>coordinates</h2>
 
@@ -595,12 +1150,28 @@ Imene Bousmaha </dd></dl>
 
 <div class="memitem">
 <div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Animation character.Entity.current</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The Animation currently playing. </p>
+
+</div>
+</div>
+<a id="a98943cea24346e3654f49beea72ea4de" name="a98943cea24346e3654f49beea72ea4de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98943cea24346e3654f49beea72ea4de">&#9670;&#160;</a></span>currentState</h2>
+
+<div class="memitem">
+<div class="memproto">
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Animation character.Entity.current</td>
+          <td class="memname"><a class="el" href="enumcharacter_1_1_entity_1_1_entity_state.html">EntityState</a> character.Entity.currentState</td>
         </tr>
       </table>
   </td>
@@ -609,8 +1180,6 @@ Imene Bousmaha </dd></dl>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>The Animation currently playing. </p>
 
 </div>
 </div>
@@ -627,6 +1196,68 @@ Imene Bousmaha </dd></dl>
 </div><div class="memdoc">
 
 <p>The height of the entity. </p>
+
+</div>
+</div>
+<a id="aa333fc3cfcafe8bee794b4b9c44c89f6" name="aa333fc3cfcafe8bee794b4b9c44c89f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa333fc3cfcafe8bee794b4b9c44c89f6">&#9670;&#160;</a></span>hitstunCooldown</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int character.Entity.hitstunCooldown = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>State if is attacking. </p>
+
+</div>
+</div>
+<a id="ac273663cfcb7f71957c1b3a83c2b00b5" name="ac273663cfcb7f71957c1b3a83c2b00b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac273663cfcb7f71957c1b3a83c2b00b5">&#9670;&#160;</a></span>hitstunTimer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Timer character.Entity.hitstunTimer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>State if is attacking. </p>
+
+</div>
+</div>
+<a id="a5234c21f4f0c18888bd9cbbfb08c65dd" name="a5234c21f4f0c18888bd9cbbfb08c65dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5234c21f4f0c18888bd9cbbfb08c65dd">&#9670;&#160;</a></span>isActive</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean character.Entity.isActive = true</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -651,6 +1282,54 @@ Imene Bousmaha </dd></dl>
 </div><div class="memdoc">
 
 <p>State if is attacking. </p>
+
+</div>
+</div>
+<a id="ab4f2b00c46ba52af634a40cd020dc2c8" name="ab4f2b00c46ba52af634a40cd020dc2c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4f2b00c46ba52af634a40cd020dc2c8">&#9670;&#160;</a></span>isBeingHit</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean character.Entity.isBeingHit = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Used for damage taking. </p>
+
+</div>
+</div>
+<a id="aad03a5b129cd89dee3f87ff142bf8943" name="aad03a5b129cd89dee3f87ff142bf8943"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad03a5b129cd89dee3f87ff142bf8943">&#9670;&#160;</a></span>isBlocking</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean character.Entity.isBlocking</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>State if is blocking. </p>
 
 </div>
 </div>
@@ -702,6 +1381,30 @@ Imene Bousmaha </dd></dl>
 
 </div>
 </div>
+<a id="a4cd15209b9aa8f9b2dbeef68e2c9be20" name="a4cd15209b9aa8f9b2dbeef68e2c9be20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cd15209b9aa8f9b2dbeef68e2c9be20">&#9670;&#160;</a></span>isInitiatingBlock</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean character.Entity.isInitiatingBlock</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Used in block loading. </p>
+
+</div>
+</div>
 <a id="ae1b64d590914e3c384041d2c24ec5cf4" name="ae1b64d590914e3c384041d2c24ec5cf4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae1b64d590914e3c384041d2c24ec5cf4">&#9670;&#160;</a></span>leftAttack</h2>
 
@@ -723,6 +1426,72 @@ Imene Bousmaha </dd></dl>
 </div><div class="memdoc">
 
 <p>The animation when attacking left. </p>
+
+</div>
+</div>
+<a id="a6c0462522650985340e5fac25b0f5d60" name="a6c0462522650985340e5fac25b0f5d60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c0462522650985340e5fac25b0f5d60">&#9670;&#160;</a></span>leftBlock</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Animation character.Entity.leftBlock</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af6f504bd9ad55541b226477c1d2bcda6" name="af6f504bd9ad55541b226477c1d2bcda6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6f504bd9ad55541b226477c1d2bcda6">&#9670;&#160;</a></span>leftBlockStand</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Animation character.Entity.leftBlockStand</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8bd7d9c71f5df9c02b8a1cfc39bfed5f" name="a8bd7d9c71f5df9c02b8a1cfc39bfed5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bd7d9c71f5df9c02b8a1cfc39bfed5f">&#9670;&#160;</a></span>leftBlockWalk</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Animation character.Entity.leftBlockWalk</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -774,6 +1543,28 @@ Imene Bousmaha </dd></dl>
 
 </div>
 </div>
+<a id="ac5494c4d60f15751384d09102e8eef1d" name="ac5494c4d60f15751384d09102e8eef1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5494c4d60f15751384d09102e8eef1d">&#9670;&#160;</a></span>leftTakesDamage</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Animation character.Entity.leftTakesDamage</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a7d1698374f6e43786f9ef81405626198" name="a7d1698374f6e43786f9ef81405626198"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7d1698374f6e43786f9ef81405626198">&#9670;&#160;</a></span>name</h2>
 
@@ -811,6 +1602,72 @@ Imene Bousmaha </dd></dl>
 </div><div class="memdoc">
 
 <p>The animation when attacking right. </p>
+
+</div>
+</div>
+<a id="a22338fbf33cc8beefffd4c8656d9a65a" name="a22338fbf33cc8beefffd4c8656d9a65a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22338fbf33cc8beefffd4c8656d9a65a">&#9670;&#160;</a></span>rightBlock</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Animation character.Entity.rightBlock</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a20391bc1a5ca1a7e7cc2ac4d1b8a8b5f" name="a20391bc1a5ca1a7e7cc2ac4d1b8a8b5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20391bc1a5ca1a7e7cc2ac4d1b8a8b5f">&#9670;&#160;</a></span>rightBlockStand</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Animation character.Entity.rightBlockStand</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a12a888eea3a335ee871f6792b2b22568" name="a12a888eea3a335ee871f6792b2b22568"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12a888eea3a335ee871f6792b2b22568">&#9670;&#160;</a></span>rightBlockWalk</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Animation character.Entity.rightBlockWalk</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -862,6 +1719,28 @@ Imene Bousmaha </dd></dl>
 
 </div>
 </div>
+<a id="a292d08d03f5623695d3ac1ec9e2eaf0a" name="a292d08d03f5623695d3ac1ec9e2eaf0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a292d08d03f5623695d3ac1ec9e2eaf0a">&#9670;&#160;</a></span>rightTakesDamage</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Animation character.Entity.rightTakesDamage</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="adda9fa5453c09b2d7fe02e03ad890d58" name="adda9fa5453c09b2d7fe02e03ad890d58"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adda9fa5453c09b2d7fe02e03ad890d58">&#9670;&#160;</a></span>standing</h2>
 
@@ -886,6 +1765,30 @@ Imene Bousmaha </dd></dl>
 
 </div>
 </div>
+<a id="a890dd2f2163ba64fed860ca1bf409078" name="a890dd2f2163ba64fed860ca1bf409078"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a890dd2f2163ba64fed860ca1bf409078">&#9670;&#160;</a></span>stats</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classcharacter_1_1_entity_stats.html">EntityStats</a> character.Entity.stats</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The entity stats. </p>
+
+</div>
+</div>
 <a id="ae5ed55792826bb904435e31c90a5c1c5" name="ae5ed55792826bb904435e31c90a5c1c5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae5ed55792826bb904435e31c90a5c1c5">&#9670;&#160;</a></span>width</h2>
 
@@ -903,7 +1806,7 @@ Imene Bousmaha </dd></dl>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/main/java/character/<a class="el" href="_entity_8java.html">Entity.java</a></li>
+<li>C:/Users/fedyn/Code/Projet POO/src/main/java/character/<a class="el" href="_entity_8java.html">Entity.java</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['resources_5ffolder_0',['RESOURCES_FOLDER',['../classgraphics_1_1_animation.html#a177f9694e2e32ea8b1b83409c8327a0d',1,'graphics::Animation']]],
-  ['rightattack_1',['rightAttack',['../classcharacter_1_1_entity.html#a5df83d48c434f80977efdb37cff338d4',1,'character::Entity']]],
-  ['rightdodge_2',['rightDodge',['../classcharacter_1_1_entity.html#a191d82da193a5a25465af94ce5d00aec',1,'character::Entity']]],
-  ['rightrun_3',['rightrun',['../classcharacter_1_1_entity.html#a39e202e43b8c70cd3a35056d8af35ee0',1,'character.Entity.rightRun'],['../enumcharacter_1_1_entity_1_1_animation_index.html#af10f0b6876da14fc23a90da366fdbb62',1,'character.Entity.AnimationIndex.RIGHTRUN']]]
+  ['player_0',['player',['../classgraphics_1_1_canvas.html#a528c10919254bfcb159f77ee956be088',1,'graphics::Canvas']]],
+  ['power_1',['power',['../classcharacter_1_1_entity_stats.html#a178bbc28e8ade1ebe3f3e423ed96a15f',1,'character::EntityStats']]],
+  ['probability_5fof_5fattack_2',['PROBABILITY_OF_ATTACK',['../classgraphics_1_1_canvas.html#ab5327a26d64da6563966ef80b10ebdc5',1,'graphics::Canvas']]]
 ];

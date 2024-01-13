@@ -36,7 +36,7 @@ window.MathJax = {
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Les chevaliers d&#39;Ether<span id="projectnumber">&#160;0.1.0</span>
+   <div id="projectname">Les chevaliers d&#39;Ether<span id="projectnumber">&#160;1.0.0</span>
    </div>
    <div id="projectbrief">A game made for a OOP project.</div>
   </td>
@@ -118,9 +118,20 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6f734061b51e0da8adf965667cc0ef3b" id="r_a6f734061b51e0da8adf965667cc0ef3b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_map.html#a6f734061b51e0da8adf965667cc0ef3b">Map</a> (String mapDir)</td></tr>
 <tr class="memdesc:a6f734061b51e0da8adf965667cc0ef3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map constructor.  <br /></td></tr>
 <tr class="separator:a6f734061b51e0da8adf965667cc0ef3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace436ff7a7301c972526db0eeaa0ac3d" id="r_ace436ff7a7301c972526db0eeaa0ac3d"><td class="memItemLeft" align="right" valign="top">BufferedImage&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_map.html#ace436ff7a7301c972526db0eeaa0ac3d">getTile</a> (int x, int y)</td></tr>
-<tr class="memdesc:ace436ff7a7301c972526db0eeaa0ac3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to get the wanted tile.  <br /></td></tr>
-<tr class="separator:ace436ff7a7301c972526db0eeaa0ac3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86856fc531d724f30f8286aa9cdf88b6" id="r_a86856fc531d724f30f8286aa9cdf88b6"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_map.html#a86856fc531d724f30f8286aa9cdf88b6">drawTile</a> (Camera cam, Graphics g, int x, int y, double scale)</td></tr>
+<tr class="memdesc:a86856fc531d724f30f8286aa9cdf88b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to draw the wanted tile.  <br /></td></tr>
+<tr class="separator:a86856fc531d724f30f8286aa9cdf88b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c7ec673b7e464efcaee6e59c2802d10" id="r_a3c7ec673b7e464efcaee6e59c2802d10"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_map.html#a3c7ec673b7e464efcaee6e59c2802d10">getTileSize</a> ()</td></tr>
+<tr class="memdesc:a3c7ec673b7e464efcaee6e59c2802d10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the tile size.  <br /></td></tr>
+<tr class="separator:a3c7ec673b7e464efcaee6e59c2802d10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c2c2e30e428edf4c408be40fa316062" id="r_a8c2c2e30e428edf4c408be40fa316062"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_map.html#a8c2c2e30e428edf4c408be40fa316062">getWidth</a> ()</td></tr>
+<tr class="memdesc:a8c2c2e30e428edf4c408be40fa316062"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the width of the map.  <br /></td></tr>
+<tr class="separator:a8c2c2e30e428edf4c408be40fa316062"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a510802d03bac43fedc9061db596f176b" id="r_a510802d03bac43fedc9061db596f176b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_map.html#a510802d03bac43fedc9061db596f176b">getHeight</a> ()</td></tr>
+<tr class="memdesc:a510802d03bac43fedc9061db596f176b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the height of the map.  <br /></td></tr>
+<tr class="separator:a510802d03bac43fedc9061db596f176b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d3f401b25130e7e0bd49a1e6a45a028" id="r_a6d3f401b25130e7e0bd49a1e6a45a028"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_map.html#a6d3f401b25130e7e0bd49a1e6a45a028">isWall</a> (int x, int y)</td></tr>
+<tr class="separator:a6d3f401b25130e7e0bd49a1e6a45a028"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -130,9 +141,24 @@ Private Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a2ecf33dd4f661f6456e1c39b2ea14c7c" id="r_a2ecf33dd4f661f6456e1c39b2ea14c7c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmap_1_1_reader.html">Reader</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_map.html#a2ecf33dd4f661f6456e1c39b2ea14c7c">mapReader</a></td></tr>
-<tr class="memdesc:a2ecf33dd4f661f6456e1c39b2ea14c7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instance of finite state machine that reads the file.  <br /></td></tr>
-<tr class="separator:a2ecf33dd4f661f6456e1c39b2ea14c7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f490187727a4e842eae1a79b234c0d4" id="r_a5f490187727a4e842eae1a79b234c0d4"><td class="memItemLeft" align="right" valign="top">BufferedImage[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_map.html#a5f490187727a4e842eae1a79b234c0d4">tiles</a></td></tr>
+<tr class="memdesc:a5f490187727a4e842eae1a79b234c0d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores all tiles.  <br /></td></tr>
+<tr class="separator:a5f490187727a4e842eae1a79b234c0d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48ddff9eb441934fea253b72db03dea5" id="r_a48ddff9eb441934fea253b72db03dea5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_map.html#a48ddff9eb441934fea253b72db03dea5">tileSize</a></td></tr>
+<tr class="memdesc:a48ddff9eb441934fea253b72db03dea5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The map tiles size.  <br /></td></tr>
+<tr class="separator:a48ddff9eb441934fea253b72db03dea5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad422f053fa2bd7b855439f6324c56417" id="r_ad422f053fa2bd7b855439f6324c56417"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_map.html#ad422f053fa2bd7b855439f6324c56417">width</a></td></tr>
+<tr class="memdesc:ad422f053fa2bd7b855439f6324c56417"><td class="mdescLeft">&#160;</td><td class="mdescRight">The map width in tile unit (tu)  <br /></td></tr>
+<tr class="separator:ad422f053fa2bd7b855439f6324c56417"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ffe8cafb364c48ace6d70873eb9891e" id="r_a1ffe8cafb364c48ace6d70873eb9891e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_map.html#a1ffe8cafb364c48ace6d70873eb9891e">height</a></td></tr>
+<tr class="memdesc:a1ffe8cafb364c48ace6d70873eb9891e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The map height in tile unit (tu)  <br /></td></tr>
+<tr class="separator:a1ffe8cafb364c48ace6d70873eb9891e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac9a05bd92b22ed3455f2ebc9c1e7c44" id="r_aac9a05bd92b22ed3455f2ebc9c1e7c44"><td class="memItemLeft" align="right" valign="top">String[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_map.html#aac9a05bd92b22ed3455f2ebc9c1e7c44">walls</a></td></tr>
+<tr class="memdesc:aac9a05bd92b22ed3455f2ebc9c1e7c44"><td class="mdescLeft">&#160;</td><td class="mdescRight">The map wall layers names.  <br /></td></tr>
+<tr class="separator:aac9a05bd92b22ed3455f2ebc9c1e7c44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa612bc43bab2c42e0c6d25c7582637f2" id="r_aa612bc43bab2c42e0c6d25c7582637f2"><td class="memItemLeft" align="right" valign="top">LinkedHashMap&lt; String, int[]&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmap_1_1_map.html#aa612bc43bab2c42e0c6d25c7582637f2">layers</a></td></tr>
+<tr class="memdesc:aa612bc43bab2c42e0c6d25c7582637f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The layers.  <br /></td></tr>
+<tr class="separator:aa612bc43bab2c42e0c6d25c7582637f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class allows to read a map directory and get tile on position given. </p>
@@ -171,15 +197,27 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ace436ff7a7301c972526db0eeaa0ac3d" name="ace436ff7a7301c972526db0eeaa0ac3d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ace436ff7a7301c972526db0eeaa0ac3d">&#9670;&#160;</a></span>getTile()</h2>
+<a id="a86856fc531d724f30f8286aa9cdf88b6" name="a86856fc531d724f30f8286aa9cdf88b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86856fc531d724f30f8286aa9cdf88b6">&#9670;&#160;</a></span>drawTile()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">BufferedImage map.Map.getTile </td>
+          <td class="memname">boolean map.Map.drawTile </td>
           <td>(</td>
+          <td class="paramtype">Camera&#160;</td>
+          <td class="paramname"><em>cam</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Graphics&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>x</em>, </td>
         </tr>
@@ -187,7 +225,13 @@ Private Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>y</em>&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>scale</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -197,16 +241,39 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Method to get the wanted tile. </p>
-<p>When a tile is asked, it will compute all the layers and return the final tile.</p>
+<p>Method to draw the wanted tile. </p>
+<p>By passing the camera object, we draw directly onto it and save time.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">cam</td><td>The camera on which to draw the tile. </td></tr>
+    <tr><td class="paramname">g</td><td>The graphics object on which to draw tile. </td></tr>
     <tr><td class="paramname">x</td><td>The x coordinate in the map grid. </td></tr>
     <tr><td class="paramname">y</td><td>The y coordinate in the map grid. </td></tr>
+    <tr><td class="paramname">scale</td><td>The scale of the drawn tile. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The computed tile. </dd></dl>
+
+</div>
+</div>
+<a id="a510802d03bac43fedc9061db596f176b" name="a510802d03bac43fedc9061db596f176b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a510802d03bac43fedc9061db596f176b">&#9670;&#160;</a></span>getHeight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int map.Map.getHeight </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the height of the map. </p>
+<dl class="section return"><dt>Returns</dt><dd>The map height. </dd></dl>
 
 </div>
 </div>
@@ -245,9 +312,86 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a3c7ec673b7e464efcaee6e59c2802d10" name="a3c7ec673b7e464efcaee6e59c2802d10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c7ec673b7e464efcaee6e59c2802d10">&#9670;&#160;</a></span>getTileSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int map.Map.getTileSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the tile size. </p>
+<dl class="section return"><dt>Returns</dt><dd>The tile size. </dd></dl>
+
+</div>
+</div>
+<a id="a8c2c2e30e428edf4c408be40fa316062" name="a8c2c2e30e428edf4c408be40fa316062"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c2c2e30e428edf4c408be40fa316062">&#9670;&#160;</a></span>getWidth()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int map.Map.getWidth </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the width of the map. </p>
+<dl class="section return"><dt>Returns</dt><dd>The map width. </dd></dl>
+
+</div>
+</div>
+<a id="a6d3f401b25130e7e0bd49a1e6a45a028" name="a6d3f401b25130e7e0bd49a1e6a45a028"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d3f401b25130e7e0bd49a1e6a45a028">&#9670;&#160;</a></span>isWall()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean map.Map.isWall </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Checks if a specified location contains a wall.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>The x-coordinate of the location. </td></tr>
+    <tr><td class="paramname">y</td><td>The y-coordinate of the location. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the location contains a wall, false otherwise. </dd></dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a2ecf33dd4f661f6456e1c39b2ea14c7c" name="a2ecf33dd4f661f6456e1c39b2ea14c7c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ecf33dd4f661f6456e1c39b2ea14c7c">&#9670;&#160;</a></span>mapReader</h2>
+<a id="a1ffe8cafb364c48ace6d70873eb9891e" name="a1ffe8cafb364c48ace6d70873eb9891e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ffe8cafb364c48ace6d70873eb9891e">&#9670;&#160;</a></span>height</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -256,7 +400,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classmap_1_1_reader.html">Reader</a> map.Map.mapReader</td>
+          <td class="memname">int map.Map.height</td>
         </tr>
       </table>
   </td>
@@ -266,12 +410,136 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Instance of finite state machine that reads the file. </p>
+<p>The map height in tile unit (tu) </p>
+
+</div>
+</div>
+<a id="aa612bc43bab2c42e0c6d25c7582637f2" name="aa612bc43bab2c42e0c6d25c7582637f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa612bc43bab2c42e0c6d25c7582637f2">&#9670;&#160;</a></span>layers</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">LinkedHashMap&lt;String, int[]&gt; map.Map.layers</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The layers. </p>
+<p>The structure is made as follows :</p><ul>
+<li>The <b>key</b> is the string representing the layer name.</li>
+<li>The <b>value</b> is the array that store the layer's tilemap. </li>
+</ul>
+
+</div>
+</div>
+<a id="a5f490187727a4e842eae1a79b234c0d4" name="a5f490187727a4e842eae1a79b234c0d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f490187727a4e842eae1a79b234c0d4">&#9670;&#160;</a></span>tiles</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">BufferedImage [] map.Map.tiles</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stores all tiles. </p>
+
+</div>
+</div>
+<a id="a48ddff9eb441934fea253b72db03dea5" name="a48ddff9eb441934fea253b72db03dea5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48ddff9eb441934fea253b72db03dea5">&#9670;&#160;</a></span>tileSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int map.Map.tileSize</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The map tiles size. </p>
+
+</div>
+</div>
+<a id="aac9a05bd92b22ed3455f2ebc9c1e7c44" name="aac9a05bd92b22ed3455f2ebc9c1e7c44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac9a05bd92b22ed3455f2ebc9c1e7c44">&#9670;&#160;</a></span>walls</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">String [] map.Map.walls</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The map wall layers names. </p>
+
+</div>
+</div>
+<a id="ad422f053fa2bd7b855439f6324c56417" name="ad422f053fa2bd7b855439f6324c56417"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad422f053fa2bd7b855439f6324c56417">&#9670;&#160;</a></span>width</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int map.Map.width</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The map width in tile unit (tu) </p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/main/java/map/<a class="el" href="_map_8java.html">Map.java</a></li>
+<li>C:/Users/fedyn/Code/Projet POO/src/main/java/map/<a class="el" href="_map_8java.html">Map.java</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
