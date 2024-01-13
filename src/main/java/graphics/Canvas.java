@@ -28,6 +28,7 @@ import character.Dragon;
 import character.Enemies;
 import character.Entity;
 import character.Monster;
+import geometry.Range;
 import geometry.Vector2D;
 import map.Map;
 
@@ -72,7 +73,10 @@ public class Canvas extends JPanel {
     private boolean wasReleasedL;
     private boolean wasReleasedM;
     private boolean wasReleasedH;
+    private boolean wasReleasedEnter;
 
+    private boolean inDialog = false;
+    private int dialogIndex = 0;
     private boolean hasStarted = false;
     private boolean isPaused = false;
     private boolean showHelp = true;
@@ -161,7 +165,7 @@ public class Canvas extends JPanel {
                         ent.current.stop();
                     }
 
-                    this.player = new Player(1300, 7500);
+                    this.player = new Player(1300, 7300);
                     
                     this.allEntities = new ArrayList<>(); 
                     this.allEntities.add(player);
@@ -169,6 +173,9 @@ public class Canvas extends JPanel {
                     this.camera.setFocusOn(player);
 
                     this.hasStarted = true;
+                    this.inDialog = true;
+                    this.dialogIndex = 0;
+                    this.wasReleasedEnter = false;
                 }
 
 
@@ -201,6 +208,17 @@ public class Canvas extends JPanel {
             if (isPaused) {
                 repaint();
                 return null;
+            }
+
+
+            for (int i = 0 ; i < Dialogs.triggers.length ; i++) {
+                if (dialogIndex < i + 1
+                    && Range.isIn(Dialogs.triggers[i][0], Dialogs.triggers[i][1], (int)player.coordinates.x)
+                    && Range.isIn(Dialogs.triggers[i][2], Dialogs.triggers[i][3], (int)player.coordinates.y)) {
+                    
+                    dialogIndex = i + 1;
+                    inDialog = true;
+                }
             }
 
 
@@ -278,17 +296,20 @@ public class Canvas extends JPanel {
 
             if (stack.isPressed("H")) {
                 if (wasReleasedH) {
-                    //showHelp = !showHelp;
-                    //System.out.println(player.getPosition());
-
-                    Dragon newMonster = new Dragon(player.getPosition().x + 100, player.getPosition().y, player, 1);
-                    allEntities.add(newMonster);
-                    badguys.add(newMonster);
-
+                    showHelp = !showHelp;
                     wasReleasedH = false;
                 }
             } else {
                 wasReleasedH = true;
+            }
+
+            if (stack.isPressed("ENTER")) {
+                if (wasReleasedEnter && inDialog) {
+                    inDialog = false;
+                    wasReleasedEnter = false;
+                }
+            } else {
+                wasReleasedEnter = true;
             }
 
             if (stack.isPressed("K")) {
@@ -539,6 +560,7 @@ public class Canvas extends JPanel {
                     SCALE, badguy.getOffset());
 
             HUD.drawEntityHealth(g, camera, map, badguy, SCALE);
+            HUD.drawEntityCooldown(g, camera, map, badguy, SCALE);
         }
 
         this.camera.drawImageClamped(g, this.map, this.player.getSprite(), this.player.getPosition().x, this.player.getPosition().y,
@@ -546,7 +568,7 @@ public class Canvas extends JPanel {
 
         // LEFT HUD
 
-        
+        HUD.drawEntityCooldown(g, camera, map, player, SCALE);
         HUD.drawPlayerHealth(g, camera, player);
         HUD.drawStat(g, camera, player.getStats().getAttack(), "Attack", 25, 65, 150, 50);
         HUD.drawStat(g, camera, player.getStats().getDefence(), "Defence", 25,85, 150, 70);
@@ -563,6 +585,10 @@ public class Canvas extends JPanel {
 
         if (isPaused) {
             camera.drawTextFixed(g, (int)getCenter().x - 100, (int)getCenter().y, "Paused", 24, Color.white);
+        }
+
+        if (inDialog) {
+            HUD.drawDialog(g, camera, this, Dialogs.get(dialogIndex));
         }
 
         // ---------------

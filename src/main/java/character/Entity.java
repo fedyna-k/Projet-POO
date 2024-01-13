@@ -54,7 +54,7 @@ public abstract class Entity {
     /** @brief State if is attacking */
     protected boolean canAttack = true;
     /** @brief State if is attacking */
-    protected int attackCooldown = 0;
+    public int attackCooldown = 0;
     /** @brief State if is attacking */
     protected Timer attackTimer;
     /** @brief State if is attacking */

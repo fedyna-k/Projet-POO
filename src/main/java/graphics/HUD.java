@@ -2,6 +2,7 @@ package graphics;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 import character.Entity;
 import character.Player;
@@ -17,6 +18,19 @@ public class HUD {
         camera.fillRectClamped(g, map, entity.getPosition().x - healthOffset, entity.getPosition().y - (int)(entity.getSpriteSize().y / 1.2), healthLength, 1 * scale, new Color((int)(255 *  (1 - healthPercent)), (int)(255 *  healthPercent), 0));
         camera.drawTextClamped(g, map, (int)entity.getPosition().x - (int)(entity.getSpriteSize().x / 2), (int)entity.getPosition().y - (int)(entity.getSpriteSize().y / 1.15), entity.getStats().getHealth().get() + "/" + entity.getStats().getHealth().getMax(), 8, Color.white);
         camera.drawTextClamped(g, map, (int)entity.getPosition().x - (int)(entity.getSpriteSize().x / 2), (int)entity.getPosition().y - (int)(entity.getSpriteSize().y), (int)entity.getStats().getAttack() + "/" + (int)entity.getStats().getDefence() + "/" + (int)entity.getStats().getSpeed(), 8, Color.white);
+    }
+
+    static public void drawEntityCooldown(Graphics g, Camera camera, Map map, Entity entity, int scale) {
+        double cooldownPercent = 1d * entity.attackCooldown / (1000 - entity.getStats().getSpeed() * 80); // 50 * (1000 - this.stats.getSpeed() * 80);  // <-- Linux
+        if (cooldownPercent == 0) {
+            return;
+        }
+
+        int cdLength = (int)(entity.getSpriteSize().x * cooldownPercent);
+        int cdOffset = (int)(entity.getSpriteSize().x * (1 - cooldownPercent) / 2);
+                    
+        camera.fillRectClamped(g, map, entity.getPosition().x, entity.getPosition().y - (int)(entity.getSpriteSize().y / 1.3), (int)entity.getSpriteSize().x, 1 * scale, Color.lightGray);
+        camera.fillRectClamped(g, map, entity.getPosition().x - cdOffset, entity.getPosition().y - (int)(entity.getSpriteSize().y / 1.3), cdLength, 1 * scale, new Color((int)(255 *  (1 - cooldownPercent)), (int)(255 *  cooldownPercent), 0));
     }
 
     static public void drawPlayerHealth(Graphics g, Camera camera, Player player) {
@@ -85,5 +99,40 @@ public class HUD {
     static public void drawCommands(Graphics g, Camera camera, Canvas canvas) {
         camera.drawTextFixed(g, canvas.getWidth() / 2 - (canvas.isFullscreen ? 498 : 378), canvas.getHeight() - 28, "Move - ZQSD   Dodge - Space   Attack - O   Block - I   Use Skill Point - KLM", canvas.isFullscreen ? 14 : 10, Color.black);
         camera.drawTextFixed(g, canvas.getWidth() / 2 - (canvas.isFullscreen ? 500 : 380), canvas.getHeight() - 30, "Move - ZQSD   Dodge - Space   Attack - O   Block - I   Use Skill Point - KLM", canvas.isFullscreen ? 14 : 10, Color.white);
+    }
+
+    static public void drawDialog(Graphics g, Camera camera, Canvas canvas, String text) {
+        g.setColor(Color.black);
+        g.fillRoundRect(10, canvas.getHeight() - 150, canvas.getWidth() - 20, 140, 20, 20);
+        
+        g.setColor(Color.white);
+        g.fillRoundRect(20, canvas.getHeight() - 140, canvas.getWidth() - 40, 120, 10, 10);
+
+        final int STR_LENGTH = (canvas.getWidth() - 80) / 24;
+        
+        ArrayList<String> lines = new ArrayList<>();
+        String[] words = text.split(" ");
+        String line = "";
+        int len = 0;
+
+        for (String word : words) {
+            if (len + word.length() > STR_LENGTH) {
+                lines.add(line);
+                line = "";
+                len = 0;
+            }
+
+            line += word + " ";
+            len += word.length() + 1;
+        }
+        lines.add(line);
+
+        for (int i = 0 ; i < Math.min(lines.size(), 3) ; i++) {
+            camera.drawTextFixed(g, 40, canvas.getHeight() - 100 + i * 30, lines.get(i), 24, Color.black);
+        }
+
+        g.fillRect(canvas.getWidth() - 50, canvas.getHeight() - 50, 4, 10);
+        g.fillRect(canvas.getWidth() - 70, canvas.getHeight() - 40, 24, 4);
+        g.fillPolygon(new int[]{canvas.getWidth() - 80, canvas.getWidth() - 70, canvas.getWidth() - 70}, new int[]{canvas.getHeight() - 38, canvas.getHeight() - 44, canvas.getHeight() - 32}, 3);
     }
 }
