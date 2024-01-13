@@ -20,14 +20,14 @@
                     <img src="https://avatars.githubusercontent.com/u/125656250" width="100px" style="clip-path: circle(50%)"> <br/>
                     <b>Imene BOUSMAHA</b>
                 </a> <br/>
-                <a title="Code" href="https://github.com/fedyna-k/Projet-POO/commits?author=imeneamel">💻</a> <a title="Game Design" href="">🎮</a>
+                <a title="Code" href="https://github.com/fedyna-k/Projet-POO/commits?author=imeneamel">💻</a> <a title="Game Design" href="">🎮</a> <a title="Artworks" href="src/main/resources/">🖌️</a>
             </td>
             <td width="25%" align="center" valign="top">
                 <a href="https://github.com/ARAB-Ryan">
                     <img src="https://avatars.githubusercontent.com/u/102685281" width="100px" style="clip-path: circle(50%)"> <br/>
                     <b>Ryan ARAB</b>
                 </a> <br/>
-                <a title="Code" href="https://github.com/fedyna-k/Projet-POO/commits?author=ARAB-Ryan">💻</a> <a title="Game Design" href="">🎮</a>
+                <a title="Code" href="https://github.com/fedyna-k/Projet-POO/commits?author=ARAB-Ryan">💻</a> <a title="Game Design" href="">🎮</a> <a title="Artworks" href="src/main/resources/">🖌️</a>
             </td>
             <td width="25%" align="center" valign="top">
                 <a href="https://github.com/Agheroo">
