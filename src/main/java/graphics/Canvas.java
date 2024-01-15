@@ -16,6 +16,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.io.File;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.function.Function;
@@ -74,6 +76,10 @@ public class Canvas extends JPanel {
     private boolean wasReleasedM;
     private boolean wasReleasedH;
     private boolean wasReleasedEnter;
+
+    private Instant start;
+    private Instant end;
+    private boolean isBossDead;
 
     private boolean inDialog = false;
     private int dialogIndex = 0;
@@ -158,7 +164,7 @@ public class Canvas extends JPanel {
         // ---------------
 
         Function<Void, Void> loop = e -> {
-            if (!hasStarted || player.isDead()) {
+            if (!hasStarted || player.isDead() || isBossDead) {
                 if (stack.isPressed("ENTER")) {
 
                     for (Entity ent : allEntities) {
@@ -176,6 +182,9 @@ public class Canvas extends JPanel {
                     this.inDialog = true;
                     this.dialogIndex = 0;
                     this.wasReleasedEnter = false;
+
+                    this.start = Instant.now();
+                    this.isBossDead = false;
                 }
 
 
@@ -426,6 +435,13 @@ public class Canvas extends JPanel {
                         player.level++;
                         player.skillPoints += 5;
                     }
+
+                    if (badguy instanceof Dragon) {
+                        if (((Dragon)badguy).zone == 5) {
+                            isBossDead = true;
+                            end = Instant.now();
+                        }
+                    }
                     
                 }
             }
@@ -507,6 +523,22 @@ public class Canvas extends JPanel {
             return;
         }
 
+        if (isBossDead) {
+            camera.drawTextFixed(g, (int)getCenter().x - (isFullscreen ? 240 : 200), (int)getCenter().y - 10, "YOU WON!", 48, new Color(65, 250, 139));
+            
+            Duration total = Duration.between(start, end);
+            int milli = total.toMillisPart();
+            int sec = total.toSecondsPart();
+            int min = total.toMinutesPart();
+            int hour = total.toHoursPart();
+
+            String format = String.format("%02d:%02d:%02d.%03d", hour, min, sec, milli);
+            
+            camera.drawTextFixed(g, (getWidth() - (13 + format.length()) * 18) / 2, (int)getCenter().y + 30, "Total time : " + format, 18, Color.white);
+            camera.drawTextFixed(g, (int)getCenter().x - (isFullscreen ? 310 : 270), (int)getCenter().y + 60, "Press ENTER to restart.", 24, Color.white);
+            return;
+        }
+
 
         // TESTING PURPOSE
 
@@ -565,6 +597,8 @@ public class Canvas extends JPanel {
 
         this.camera.drawImageClamped(g, this.map, this.player.getSprite(), this.player.getPosition().x, this.player.getPosition().y,
                 SCALE, this.player.getOffset());
+
+        HUD.drawTime(g, camera, this, start);
 
         // LEFT HUD
 

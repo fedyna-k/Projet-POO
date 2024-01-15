@@ -3,6 +3,8 @@ package character;
 import geometry.Vector2D;
 
 public class Dragon extends Monster {
+    public int zone;
+
     /**
      * @brief Constructor for Monster with specified coordinates.
      *
@@ -18,6 +20,7 @@ public class Dragon extends Monster {
         this.setAnimations("dragon/");
         this.coordinates = new Vector2D(x, y);
         this.isFacingLeft = false;
+        this.zone = zone;
 
         int attack = Math.min((int)Math.floor(Math.random() * (player.level + 5)) + (zone - 1) * 4 + 3, zone * 15);
         int speed = Math.min((int)Math.floor(Math.random() * (player.level + 5)) + (zone - 1) * 4 + 3, zone * 15);

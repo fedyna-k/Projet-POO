@@ -2,6 +2,8 @@ package graphics;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 
 import character.Entity;
@@ -134,5 +136,18 @@ public class HUD {
         g.fillRect(canvas.getWidth() - 50, canvas.getHeight() - 50, 4, 10);
         g.fillRect(canvas.getWidth() - 70, canvas.getHeight() - 40, 24, 4);
         g.fillPolygon(new int[]{canvas.getWidth() - 80, canvas.getWidth() - 70, canvas.getWidth() - 70}, new int[]{canvas.getHeight() - 38, canvas.getHeight() - 44, canvas.getHeight() - 32}, 3);
+    }
+
+    static public void drawTime(Graphics g, Camera camera, Canvas canvas, Instant start) {
+        Duration total = Duration.between(start, Instant.now());
+        int milli = total.toMillisPart();
+        int sec = total.toSecondsPart();
+        int min = total.toMinutesPart();
+        int hour = total.toHoursPart();
+
+        String format = String.format("%02d:%02d:%02d.%03d", hour, min, sec, milli);
+
+        camera.drawTextFixed(g, (canvas.getWidth() - format.length() * 16) / 2 + 2, 22, format, 16, Color.black);
+        camera.drawTextFixed(g, (canvas.getWidth() - format.length() * 16) / 2, 20, format, 16, Color.white);
     }
 }
