@@ -39,6 +39,15 @@ public abstract class Entity {
         STANDING, LEFTRUN, RIGHTRUN, ATTACK, DODGE, BLOCK, BLOCKWALK, BLOCKSTAND, DAMAGE
     };
 
+    // Life Points of the entity
+    private int lifePoints;
+
+    // Force of the entity
+    private int force;
+
+    // Damage taken by the entity
+    private int damage;
+
     /** @brief The coordinates in absolute positions */
     public Vector2D coordinates;
     /** @brief The height of the entity */
@@ -338,7 +347,7 @@ public abstract class Entity {
      *                - true if the player is in a dodging state.
      *                - false if the player is not in a dodging state.
      *
-     * @see isDodging
+     *
      */
     public void setDodging(boolean dodging) {
         isDodging = dodging;
@@ -456,6 +465,47 @@ public abstract class Entity {
         rightTakesDamage = Animation.load("lefttakesdamage", Animation.RESOURCES_FOLDER + dir, 60);
         current = standing;
         current.play();
+    }
+
+    protected void setAnimations(String dir, String value) {
+        if(value.equals("purple")) {
+            standing = Animation.load("crystal_purple", Animation.RESOURCES_FOLDER + dir, 10);
+            leftRun = Animation.load("crystal_purple", Animation.RESOURCES_FOLDER + dir, 10);
+            rightRun = Animation.load("crystal_purple", Animation.RESOURCES_FOLDER + dir, 10);
+            leftAttack = Animation.load("crystal_purple", Animation.RESOURCES_FOLDER + dir, 10);
+            rightAttack = Animation.load("crystal_purple", Animation.RESOURCES_FOLDER + dir, 10);
+            rightDodge = Animation.load("crystal_purple", Animation.RESOURCES_FOLDER + dir, 10);
+            leftDodge = Animation.load("crystal_purple", Animation.RESOURCES_FOLDER + dir, 10);
+            leftBlock = Animation.load("crystal_purple", Animation.RESOURCES_FOLDER + dir, 10);
+            rightBlockStand = Animation.load("crystal_purple", Animation.RESOURCES_FOLDER + dir, 10);
+            leftBlockStand = Animation.load("crystal_purple", Animation.RESOURCES_FOLDER + dir, 10);
+            rightBlockWalk = Animation.load("crystal_purple", Animation.RESOURCES_FOLDER + dir, 10);
+            leftBlockWalk = Animation.load("crystal_purple", Animation.RESOURCES_FOLDER + dir, 10);
+            leftTakesDamage = Animation.load("crystal_purple", Animation.RESOURCES_FOLDER + dir, 10);
+            rightTakesDamage = Animation.load("crystal_purple", Animation.RESOURCES_FOLDER + dir, 10);
+            current = standing;
+            current.play();
+        }
+
+        if(value.equals("blue")) {
+            standing = Animation.load("crystal_blue", Animation.RESOURCES_FOLDER + dir, 10);
+            leftRun = Animation.load("crystal_blue", Animation.RESOURCES_FOLDER + dir, 10);
+            rightRun = Animation.load("crystal_blue", Animation.RESOURCES_FOLDER + dir, 10);
+            leftAttack = Animation.load("crystal_blue", Animation.RESOURCES_FOLDER + dir, 10);
+            rightAttack = Animation.load("crystal_blue", Animation.RESOURCES_FOLDER + dir, 10);
+            rightDodge = Animation.load("crystal_blue", Animation.RESOURCES_FOLDER + dir, 10);
+            leftDodge = Animation.load("crystal_blue", Animation.RESOURCES_FOLDER + dir, 10);
+            leftBlock = Animation.load("crystal_blue", Animation.RESOURCES_FOLDER + dir, 10);
+            rightBlockStand = Animation.load("crystal_blue", Animation.RESOURCES_FOLDER + dir, 10);
+            leftBlockStand = Animation.load("crystal_blue", Animation.RESOURCES_FOLDER + dir, 10);
+            rightBlockWalk = Animation.load("crystal_blue", Animation.RESOURCES_FOLDER + dir, 10);
+            leftBlockWalk = Animation.load("crystal_blue", Animation.RESOURCES_FOLDER + dir, 10);
+            leftTakesDamage = Animation.load("crystal_blue", Animation.RESOURCES_FOLDER + dir, 10);
+            rightTakesDamage = Animation.load("crystal_blue", Animation.RESOURCES_FOLDER + dir, 10);
+            current = standing;
+            current.play();
+        }
+
     }
 
     /**

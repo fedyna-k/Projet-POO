@@ -4,6 +4,7 @@
  * @file Canvas.java
  * @author Kevin Fedyna
  * @author Imene Bousmaha
+ * @author ARAB Ryan
  * @date 10/01/2024
  *
  * Part of the `graphics` package. It contains a class that allow to draw on screen.
@@ -25,14 +26,20 @@ import java.util.function.Function;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+
+import character.*;
+
+
 import character.Player;
 import character.Dragon;
 import character.Enemies;
 import character.Entity;
 import character.Monster;
 import geometry.Range;
+
 import geometry.Vector2D;
 import map.Map;
+
 
 /**
  * @class Canvas
@@ -58,6 +65,13 @@ public class Canvas extends JPanel {
 
     /** @brief The map object */
     private Map map;
+
+    private Mage mage;
+    private Crystal blueCrystal;
+
+    private Crystal purpleCrystal;
+    private Monster badguy;
+
     /** @brief The player */
     private Player player;
     private int lastHit = 0;
@@ -66,6 +80,7 @@ public class Canvas extends JPanel {
     private ArrayList<Monster> badguys;
     /** @brief All entities */
     private ArrayList<Entity> allEntities;
+
     private KeyStack stack;
     private boolean wasReleasedO;
     private boolean wasReleasedSpace;
@@ -98,6 +113,7 @@ public class Canvas extends JPanel {
     static final double AGGRO_RANGE = 500.0;
     Random random = new Random();
 
+
     // ---------------
 
     /**
@@ -126,6 +142,14 @@ public class Canvas extends JPanel {
         this.camera = Camera.getCamera(this);
         setBackground(new Color(42, 42, 42, 255));
 
+
+        // TESTING PURPOSE
+        this.mage = new Mage(0, 0);
+        this.blueCrystal = new Crystal(400, 0, "blue");
+        this.purpleCrystal = new Crystal(800, 100, "purple");
+        this.badguy = new Monster(this, 400, 0);
+        this.map = new Map("../src/main/resources/map/");
+
         this.player = new Player(300, 1250);
         this.allEntities = new ArrayList<>(); 
         this.badguys = new ArrayList<>();
@@ -138,6 +162,7 @@ public class Canvas extends JPanel {
         this.allEntities.add(player);
 
         this.map = new Map("resources/map/");
+
         this.stack = new KeyStack(this);
         this.wasReleasedO = true;
         this.wasReleasedSpace = true;
@@ -160,7 +185,8 @@ public class Canvas extends JPanel {
         stack.listenTo("M");
         stack.listenTo("H");
 
-        this.camera.setFocusOn(player);
+        //this.camera.setFocusOn(player);
+        this.camera.setFocusOn(mage);
         // ---------------
 
         Function<Void, Void> loop = e -> {
@@ -287,8 +313,8 @@ public class Canvas extends JPanel {
                 movement.x += 1;
             }
             if (stack.isPressed("O")) {
-                if (wasReleasedO && !player.isDodging() && !player.isBlocking()) {
-                    player.attack();
+                if (wasReleasedO && !mage.isDodging() && !mage.isBlocking()) {
+                    mage.attack();
                     wasReleasedO = false;
                 }
             } else {
@@ -296,7 +322,7 @@ public class Canvas extends JPanel {
             }
             if (stack.isPressed("SPACE")) {
                 if (wasReleasedSpace) {
-                    player.dodge();
+                    mage.dodge();
                     wasReleasedSpace = false;
                 }
             } else {
@@ -352,12 +378,12 @@ public class Canvas extends JPanel {
             }
 
             if (stack.isPressed("I") && wasReleasedI) {
-                player.block();
+                mage.block();
                 wasReleasedI = false;
             }
 
             if (!stack.isPressed("I") && !wasReleasedI) {
-                player.stopBlocking();
+                mage.stopBlocking();
                 wasReleasedI = true;
             }
 
@@ -371,6 +397,22 @@ public class Canvas extends JPanel {
             // Cooldown time for monster attacks
             double cooldown = 60.0;
 
+
+            // Check if there is no collision before moving entities
+            if (!Collision.checkCollision(badguy, mage.getPosition())
+                    && !Collision.checkCollision(mage, mage.getPosition())
+                    && !Collision.checkCollisionWithEntities(mage, badguy, mage.getPosition(),
+                            badguy.getPosition())) {
+
+                // Save the current positions before movement to revert in case of collision
+                Vector2D playerPositionBeforeMove = new Vector2D(mage.getPosition().x, mage.getPosition().y);
+                Vector2D badguyPositionBeforeMove = new Vector2D(badguy.getPosition().x, badguy.getPosition().y);
+
+                // Calculate the vector representing the distance between player and monster
+                Vector2D difference = Vector2D.subtract(mage.getPosition(), badguy.getPosition());
+                // Move the player if there is no collision
+                mage.move(movement);
+
             ArrayList<Monster> deadguys = new ArrayList<>();
 
             player.move(movement, player.getStats().getSpeed() / 10 + 0.5, allEntities);
@@ -378,6 +420,7 @@ public class Canvas extends JPanel {
 
             for (Monster badguy : badguys) {
                 Vector2D difference = Vector2D.subtract(player.getPosition(), badguy.getPosition());
+
 
                 if (difference.norm() > getWidth() * 2) {
                     deadguys.add(badguy);
@@ -397,14 +440,19 @@ public class Canvas extends JPanel {
                     } else if (difference.norm() <= minDistance) {
                         // Stop monster movement and attempt an attack
                         badguy.stopMoving();
-                        Monster.tryAttack(badguy, player, difference, PROBABILITY_OF_ATTACK, cooldown);
+                        Monster.tryAttack(badguy, mage, difference, PROBABILITY_OF_ATTACK, cooldown);
 
                         // Handle monster attack
+
+                        if (Collision.checkMonsterAttack(badguy, mage, badguy.getPosition(), mage.getPosition())) {
+                            Collision.handleMonsterAttack(badguy, mage, badguy.getPosition(), mage.getPosition());
+
                         if (Collision.checkMonsterAttack(badguy, player, badguy.getPosition(), player.getPosition())) {
                             Collision.handleMonsterAttack(badguy, player, badguy.getPosition(), player.getPosition());
 
                             lastHit = 0;
                             accel = 0;
+
                         }
                     }
                 } else {
@@ -421,9 +469,20 @@ public class Canvas extends JPanel {
                 }
 
                 // Handle player attack
-                if (Collision.checkPlayerAttack(player, badguy, player.getPosition(), badguy.getPosition())) {
-                    Collision.handlePlayerAttack(player, badguy, player.getPosition(), badguy.getPosition());
+                if (Collision.checkPlayerAttack(mage, badguy, mage.getPosition(), badguy.getPosition())) {
+                    Collision.handlePlayerAttack(mage, badguy, mage.getPosition(), badguy.getPosition());
                 }
+
+
+                // Check for collisions after movement
+                if (Collision.checkCollision(badguy, mage.getPosition())
+                        || Collision.checkCollision(mage, mage.getPosition())
+                        || Collision.checkCollisionWithEntities(mage, badguy, mage.getPosition(),
+                                badguy.getPosition())) {
+
+                    // Collision detected, revert movements
+                    mage.setPosition(playerPositionBeforeMove.x, playerPositionBeforeMove.y);
+                    badguy.setPosition(badguyPositionBeforeMove.x, badguyPositionBeforeMove.y);
 
                 if (badguy.isDead()) {
                     deadguys.add(badguy);
@@ -443,6 +502,7 @@ public class Canvas extends JPanel {
                         }
                     }
                     
+
                 }
             }
 
@@ -586,6 +646,76 @@ public class Canvas extends JPanel {
             }
         }
 
+
+        this.camera.drawImage(g, this.badguy.getSprite(), this.badguy.getPosition().x,
+                this.badguy.getPosition().y,
+                SCALE, this.badguy.getOffset());
+        this.camera.drawImage(g, this.mage.getSprite(), this.mage.getPosition().x, this.mage.getPosition().y,
+                SCALE, this.mage.getOffset());
+        this.camera.drawImage(g, this.blueCrystal.getSprite(), this.blueCrystal.getPosition().x, this.blueCrystal.getPosition().y,
+                SCALE, this.blueCrystal.getOffset());
+        this.camera.drawImage(g, this.purpleCrystal.getSprite(), this.purpleCrystal.getPosition().x, this.purpleCrystal.getPosition().y,
+                SCALE, this.purpleCrystal.getOffset());
+
+        /* Drawing Hitbox */
+        // hitbox crystal
+        Rectangle crystalBlueHitbox = Collision.getPlayerHitbox(blueCrystal, blueCrystal.getPosition());
+        camera.drawRect(
+                g, crystalBlueHitbox.x,
+                crystalBlueHitbox.y,
+                (int) crystalBlueHitbox.getWidth(),
+                (int) crystalBlueHitbox.getHeight(),
+                Color.BLUE
+        );
+
+        Rectangle crystalPurpleHitbox = Collision.getPlayerHitbox(purpleCrystal, purpleCrystal.getPosition());
+        camera.drawRect(
+                g, crystalPurpleHitbox.x,
+                crystalPurpleHitbox.y,
+                (int) crystalPurpleHitbox.getWidth(),
+                (int) crystalPurpleHitbox.getHeight(),
+                Color.PINK
+        );
+
+
+        // hitbox mage
+        Rectangle playerHitbox = Collision.getPlayerHitbox(mage, mage.getPosition());
+        if(mage.isBlocking()){
+            if(!mage.isFacingLeft()){
+                camera.drawRect(g, playerHitbox.x, playerHitbox.y,
+                        (int) playerHitbox.getWidth(), (int) playerHitbox.getHeight(), Color.RED);
+                camera.drawRect(g, playerHitbox.x +50 , playerHitbox.y,
+                        (int) playerHitbox.getWidth() , (int) playerHitbox.getHeight()+40, Color.RED);
+            } else{
+                camera.drawRect(g, playerHitbox.x, playerHitbox.y,
+                        (int) playerHitbox.getWidth(), (int) playerHitbox.getHeight(), Color.RED);
+                camera.drawRect(g, playerHitbox.x - 50, playerHitbox.y,
+                        (int) playerHitbox.getWidth(), (int) playerHitbox.getHeight() + 40, Color.RED);
+            }
+        } else{
+            camera.drawRect(g, playerHitbox.x, playerHitbox.y,
+                    (int) playerHitbox.getWidth(), (int) playerHitbox.getHeight(), Color.RED);
+        }
+
+
+
+
+        // sword hitbox for mage
+        Rectangle swordHitboxPlayer = Collision.getSwordHitbox(mage);
+        if (mage.isAttacking()) {
+            camera.drawRect(g, swordHitboxPlayer.x, swordHitboxPlayer.y,
+                    (int) swordHitboxPlayer.getWidth(), (int) swordHitboxPlayer.getHeight(), Color.RED);
+        }
+
+
+
+        // hitbox bad guy
+        Rectangle monsterHitbox = Collision.getMonsterHitbox(badguy, badguy.getPosition());
+        if (monsterHitbox != null) {
+            camera.drawRect(g, monsterHitbox.x, monsterHitbox.y,
+                    (int) monsterHitbox.getWidth(), (int) monsterHitbox.getHeight(), Color.GREEN);
+        }
+
         for (Entity badguy : badguys) {
             this.camera.drawImageClamped(g, this.map, badguy.getSprite(), badguy.getPosition().x,
                     badguy.getPosition().y,
@@ -611,6 +741,7 @@ public class Canvas extends JPanel {
         // RIGHT HUD
 
         HUD.drawXP(g, camera, this, player);
+
 
         // Bottom HUD
         if (showHelp) {

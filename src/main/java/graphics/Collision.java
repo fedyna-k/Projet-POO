@@ -65,6 +65,7 @@ public class Collision {
         return new Rectangle((int) newPosition.x, (int) newPosition.y, rectWidth, rectHeight);
     }
 
+
     /**
      * @brief Retrieves the hitbox for the monster at the specified position.
      *
@@ -111,7 +112,24 @@ public class Collision {
 
         return null;
     }
+    /*
+    public static Rectangle getShieldHitbox(Entity entity) {
 
+        Vector2D offset = entity.getOffset();
+        double directionMultiplier = entity.isFacingLeft() ? -1 : 1;
+        int spriteWidth = entity.getSprite().getWidth();
+
+        int shieldHeight = (int) (entity.getSprite().getHeight() * SCALE / 4);
+
+        if (entity.isAttacking()) {
+            double centershieldY = entity.getPosition().y - offset.y * SCALE + 10;
+            double centershieldX = entity.getPosition().x - offset.x + directionMultiplier * 64;
+            int shieldWidth = (int) (spriteWidth);
+            return new Rectangle((int) centershieldX, (int) centershieldY, shieldWidth, shieldHeight);
+        }
+
+        return null;
+    }*/
     /**
      * @brief Retrieves the hitbox for a monster entity's sword during an attack.
      *
@@ -241,7 +259,7 @@ public class Collision {
      * @return True if the player's attack collides with the monster; otherwise,
      *         false.
      */
-    public static boolean checkPlayerAttack(Player player, Monster monster, Vector2D newPositionPlayer,
+    public static boolean checkPlayerAttack(Entity player, Monster monster, Vector2D newPositionPlayer,
             Vector2D newPositionMonster) {
         Rectangle monsterHitbox = getMonsterHitbox(monster, newPositionMonster);
         Rectangle playerSwordHitbox = getSwordHitbox(player);
@@ -265,7 +283,7 @@ public class Collision {
      * @return True if the monster's attack collides with the player; otherwise,
      *         false.
      */
-    public static boolean checkMonsterAttack(Monster monster, Player player, Vector2D newPositionMonster,
+    public static boolean checkMonsterAttack(Monster monster, Entity player, Vector2D newPositionMonster,
             Vector2D newPositionPlayer) {
         Rectangle playerHitbox = getPlayerHitbox(player, newPositionPlayer);
         Rectangle monsterSwordHitbox = getSwordHitboxMonster(monster);
@@ -290,7 +308,7 @@ public class Collision {
      * @param newPositionPlayer  The intended new position of the player.
      * @param newPositionMonster The intended new position of the monster.
      */
-    public static void handlePlayerAttack(Player player, Monster monster, Vector2D newPositionPlayer,
+    public static void handlePlayerAttack(Entity player, Monster monster, Vector2D newPositionPlayer,
             Vector2D newPositionMonster) {
         if (currentState != EntityState.HITSTUN) {
             if (getSwordHitbox(player) != null) {
@@ -320,7 +338,7 @@ public class Collision {
      * @param newPositionMonster The intended new position of the monster.
      * @param newPositionPlayer  The intended new position of the player.
      */
-    public static void handleMonsterAttack(Monster monster, Player player, Vector2D newPositionMonster,
+    public static void handleMonsterAttack(Monster monster, Entity player, Vector2D newPositionMonster,
             Vector2D newPositionPlayer) {
         if (currentStateMonster != EntityState.HITSTUN) {
             if (getSwordHitboxMonster(monster) != null) {

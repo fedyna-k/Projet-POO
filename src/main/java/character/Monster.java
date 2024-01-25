@@ -98,7 +98,7 @@ public class Monster extends Entity {
      * @param attackProbability The probability of a successful attack.
      * @param cooldown          The cooldown period for the attack.
      */
-    public static void tryAttack(Monster monster, Player player, Vector2D difference, double attackProbability,
+    public static void tryAttack(Monster monster, Entity player, Vector2D difference, double attackProbability,
             double cooldown) {
         double attackRadius = 150.0;
 
