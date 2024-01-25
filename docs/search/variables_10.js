@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['x_0',['x',['../classgeometry_1_1_vector2_d.html#aeeec9dcee08521aadc91bee0773ec862',1,'geometry::Vector2D']]]
+  ['up_0',['UP',['../classcharacter_1_1_entity_stats.html#a31b519657c58614399aa2a903c880a9a',1,'character::EntityStats']]]
 ];

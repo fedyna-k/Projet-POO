@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['entity_0',['Entity',['../classcharacter_1_1_entity.html',1,'character']]]
+  ['dialogs_0',['Dialogs',['../classgraphics_1_1_dialogs.html',1,'graphics']]],
+  ['dragon_1',['Dragon',['../classcharacter_1_1_dragon.html',1,'character']]]
 ];

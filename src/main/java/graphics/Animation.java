@@ -36,7 +36,7 @@ public class Animation {
     /**
      * @brief Constant that points to the resources folder of the game.
      */
-    public static final String RESOURCES_FOLDER = "../src/main/resources/";
+    public static final String RESOURCES_FOLDER = "resources/";
     
     /** @brief An array containing the frames. */
     private BufferedImage[] frames;
@@ -68,7 +68,7 @@ public class Animation {
         try {
             return new Animation(framesName, baseURL, frameRate);
         } catch (IOException e) {
-            System.err.println("Couldn't load animation named \"" + framesName + "\" : " + e);
+            // System.err.println("Couldn't load animation named \"" + framesName + "\" : " + e);
         }
 
         return null;
@@ -154,7 +154,14 @@ public class Animation {
      */
     public void stop() {
         this.frameTimer.stop();
+        this.frameOnceTimer.stop();
         this.isPlaying = false;
+    }
+
+    public void resume() {
+        this.frameTimer.start();
+        this.frameOnceTimer.start();
+        this.isPlaying = true;
     }
 
     /**

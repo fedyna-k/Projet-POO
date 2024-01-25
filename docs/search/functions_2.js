@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['dodge_0',['dodge',['../classcharacter_1_1_entity.html#acf34692aa2cb7927e97fd1b6f8cadbd4',1,'character::Entity']]],
-  ['dot_1',['dot',['../classgeometry_1_1_vector2_d.html#ac69715f1a381a872b6767ba94f84603a',1,'geometry::Vector2D']]],
-  ['drawimage_2',['drawimage',['../classgraphics_1_1_camera.html#a201ac84d2ae9629113a7e3048a996f68',1,'graphics.Camera.drawImage(Graphics graph, BufferedImage image, double x, double y)'],['../classgraphics_1_1_camera.html#abbd20efc69f97d958123475a86afb245',1,'graphics.Camera.drawImage(Graphics graph, BufferedImage image, double x, double y, double scale)'],['../classgraphics_1_1_camera.html#ac3171f92013c4d82c78d62361613df8f',1,'graphics.Camera.drawImage(Graphics graph, BufferedImage image, double x, double y, double scale, Vector2D offset)']]],
-  ['drawrect_3',['drawRect',['../classgraphics_1_1_camera.html#a72c41599e38c5d64034c62530cf1e97a',1,'graphics::Camera']]]
+  ['camera_0',['Camera',['../classgraphics_1_1_camera.html#ac03005a5e0eb73eef5194500e43605d4',1,'graphics::Camera']]],
+  ['canvas_1',['canvas',['../classgraphics_1_1_canvas.html#ac44b5e55e635b38c3f393dc45bf10bcf',1,'graphics.Canvas.Canvas()'],['../classgraphics_1_1_canvas.html#a81ee3442398153350af065c9407626c1',1,'graphics.Canvas.Canvas(boolean isFullscreen)']]],
+  ['checkcollision_2',['checkCollision',['../classgraphics_1_1_collision.html#adf9cf2f5c17623243604f3ed0bfd6be7',1,'graphics::Collision']]],
+  ['checkmonsterattack_3',['checkMonsterAttack',['../classgraphics_1_1_collision.html#ab992343b2bbd0cfe2e4c1f68fa5ff69c',1,'graphics::Collision']]],
+  ['checkplayerattack_4',['checkPlayerAttack',['../classgraphics_1_1_collision.html#a122214fae237834670548da7e5e77b23',1,'graphics::Collision']]],
+  ['computedamage_5',['computeDamage',['../classcharacter_1_1_entity_stats.html#a86b61d06e9fca65c8992a3b11d23278f',1,'character::EntityStats']]]
 ];

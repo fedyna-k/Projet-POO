@@ -20,14 +20,14 @@
                     <img src="https://avatars.githubusercontent.com/u/125656250" width="100px" style="clip-path: circle(50%)"> <br/>
                     <b>Imene BOUSMAHA</b>
                 </a> <br/>
-                <a title="Code" href="https://github.com/fedyna-k/Projet-POO/commits?author=imeneamel">💻</a> <a title="Game Design" href="">🎮</a>
+                <a title="Code" href="https://github.com/fedyna-k/Projet-POO/commits?author=imeneamel">💻</a> <a title="Game Design" href="">🎮</a> <a title="Artworks" href="src/main/resources/">🖌️</a>
             </td>
             <td width="25%" align="center" valign="top">
                 <a href="https://github.com/ARAB-Ryan">
                     <img src="https://avatars.githubusercontent.com/u/102685281" width="100px" style="clip-path: circle(50%)"> <br/>
                     <b>Ryan ARAB</b>
                 </a> <br/>
-                <a title="Code" href="https://github.com/fedyna-k/Projet-POO/commits?author=ARAB-Ryan">💻</a> <a title="Game Design" href="">🎮</a>
+                <a title="Code" href="https://github.com/fedyna-k/Projet-POO/commits?author=ARAB-Ryan">💻</a> <a title="Game Design" href="">🎮</a> <a title="Artworks" href="src/main/resources/">🖌️</a>
             </td>
             <td width="25%" align="center" valign="top">
                 <a href="https://github.com/Agheroo">
@@ -51,7 +51,16 @@ All commits are available [here](https://github.com/fedyna-k/Projet-POO/commits/
     <img src="src/main/resources/logo.png" width="256px">
 </div>
 
-The game is called **Les chevaliers d'Ether** and the goal is to defeat a big monster.
+The game is called **Les chevaliers d'Ether** and the goal is to defeat the big and evil **Cabezenon**.
+
+### Game screenshots
+
+<p align="center">
+    <img src="./image_docs/image1.png"> <img src="./image_docs/image2.png">
+</p>
+<p align="center">
+    <img src="./image_docs/image3.png"> <img src="./image_docs/image4.png">
+</p>
 
 ### Controls
 
@@ -63,6 +72,11 @@ The game is called **Les chevaliers d'Ether** and the goal is to defeat a big mo
 |Move right|**D**|<img src="https://github.com/fedyna-k/Projet-POO/blob/main/src/main/resources/player/gif%20animations/rightrun.gif?raw=true" width="64px">|
 |Dodge|**Space**|<img src="https://github.com/fedyna-k/Projet-POO/blob/main/src/main/resources/player/gif%20animations/rightdodge.gif?raw=true" width="64px"> <img src="https://github.com/fedyna-k/Projet-POO/blob/main/src/main/resources/player/gif%20animations/leftdodge.gif?raw=true" width="64px">|
 |Slice|**O**|<img src="https://github.com/fedyna-k/Projet-POO/blob/main/src/main/resources/player/gif%20animations/rightattack.gif?raw=true" height="64px"> <img src="https://github.com/fedyna-k/Projet-POO/blob/main/src/main/resources/player/gif%20animations/leftattack.gif?raw=true" height="64px">|
+|Block|**I**|<img src="https://github.com/fedyna-k/Projet-POO/blob/main/src/main/resources/player/gif%20animations/rightblock.gif?raw=true" height="64px"> <img src="https://github.com/fedyna-k/Projet-POO/blob/main/src/main/resources/player/gif%20animations/leftblock.gif?raw=true" height="64px">|
+|Upgrade attack|**K**|``none``|
+|Upgrade defence|**L**|``none``|
+|Upgrade speed|**M**|``none``|
+|Toggle help|**H**|``none``|
 
 ## 💻 Compiling and launching the game 💻
 

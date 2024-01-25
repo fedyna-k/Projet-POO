@@ -52,6 +52,8 @@ public class Reader {
     private int width;
     /** @brief The map tilesize */
     private int tileSize;
+    /** @brief The map walls */
+    private String[] walls;
 
     /** @brief Constant used internally to know sections flags. */
     private final static LinkedHashMap<String, Integer> dataflagDic = new LinkedHashMap<String, Integer>(){{
@@ -108,14 +110,16 @@ public class Reader {
             // Reading constants
             if (currentDataflag == 0b010) {
                 String constant = line.split(" - ")[0];
-                int constantValue = Integer.parseInt(line.split(" - ")[1]);
+                String constantValue = line.split(" - ")[1];
 
                 if (constant.equals("HEIGHT")) {
-                    height = constantValue;
+                    height = Integer.parseInt(constantValue);
                 } else if (constant.equals("WIDTH")) {
-                    width = constantValue;
+                    width = Integer.parseInt(constantValue);
                 } else if (constant.equals("TILESIZE")) {
-                    tileSize = constantValue;
+                    tileSize = Integer.parseInt(constantValue);
+                } else if (constant.equals("WALLS")) {
+                    walls = constantValue.split(",");
                 }
             }
 
@@ -200,4 +204,10 @@ public class Reader {
      * @return the tile size
      */
     public int getTileSize() {return tileSize;}
+
+    /**
+     * @brief Getter function for wall layers
+     * @return the wall layer names
+     */
+    public String[] getWalls() {return walls;}
 }

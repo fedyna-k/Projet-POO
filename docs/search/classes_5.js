@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['player_0',['Player',['../classcharacter_1_1_player.html',1,'character']]]
+  ['keystack_0',['KeyStack',['../classgraphics_1_1_key_stack.html',1,'graphics']]]
 ];

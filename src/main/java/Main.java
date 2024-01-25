@@ -68,6 +68,6 @@ public class Main {
      * @param args The arguments given in the console.
      */
     public static void main(String[] args) {
-        new Window(true);
+        new Window(false);
     }
 }

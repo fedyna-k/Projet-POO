@@ -1,11 +1,25 @@
 var searchData=
 [
-  ['scale_0',['scale',['../classgeometry_1_1_vector2_d.html#aea84390c8e6cefaf9d8e2967d87aa262',1,'geometry::Vector2D']]],
-  ['setanimations_1',['setAnimations',['../classcharacter_1_1_entity.html#aaebac27ea5505a17c97a509c99fd6c38',1,'character::Entity']]],
-  ['setfocuson_2',['setFocusOn',['../classgraphics_1_1_camera.html#a0486063d82d079910601bfcb0e393f0c',1,'graphics::Camera']]],
-  ['singleton_3',['singleton',['../classgraphics_1_1_camera.html#af44c3ef71cc96dc9005977d8d1d5eecf',1,'graphics::Camera']]],
-  ['stack_4',['stack',['../classgraphics_1_1_canvas.html#a6cb6c8447eea02a0e1bcdd2d6ed3ea07',1,'graphics::Canvas']]],
-  ['standing_5',['standing',['../classcharacter_1_1_entity.html#adda9fa5453c09b2d7fe02e03ad890d58',1,'character.Entity.standing'],['../enumcharacter_1_1_entity_1_1_animation_index.html#a1febfbcdc3176de5fa4a5f363b59cdb9',1,'character.Entity.AnimationIndex.STANDING']]],
-  ['stop_6',['stop',['../classgraphics_1_1_animation.html#a03d26485487c684c85441d8d4359db89',1,'graphics::Animation']]],
-  ['swapanimation_7',['swapAnimation',['../classcharacter_1_1_entity.html#a28bfab6b4ff0f725051bbe22d013bda5',1,'character::Entity']]]
+  ['scale_0',['scale',['../classgeometry_1_1_vector2_d.html#aea84390c8e6cefaf9d8e2967d87aa262',1,'geometry.Vector2D.scale()'],['../classgraphics_1_1_collision.html#a8fa1e2bfc0f64addb5b56964647c6f71',1,'graphics.Collision.SCALE']]],
+  ['set_1',['set',['../classgeometry_1_1_range.html#a25a37d6e3723173ca31a408acd89a1f8',1,'geometry::Range']]],
+  ['setanimations_2',['setAnimations',['../classcharacter_1_1_entity.html#aaebac27ea5505a17c97a509c99fd6c38',1,'character::Entity']]],
+  ['setdodging_3',['setDodging',['../classcharacter_1_1_entity.html#a9f1c46069bcfd0583c6dafd7e23d00ea',1,'character::Entity']]],
+  ['setfocuson_4',['setFocusOn',['../classgraphics_1_1_camera.html#a0486063d82d079910601bfcb0e393f0c',1,'graphics::Camera']]],
+  ['setmaxether_5',['setMaxEther',['../classcharacter_1_1_entity_stats.html#a83cef734fbae9b11e9b4715984ea2e51',1,'character::EntityStats']]],
+  ['setmaxhealth_6',['setMaxHealth',['../classcharacter_1_1_entity_stats.html#a97d5f622e477f5ad95d05134ab8c23d6',1,'character::EntityStats']]],
+  ['setposition_7',['setPosition',['../classcharacter_1_1_entity.html#a75031367ad0928192266b3718f29741f',1,'character::Entity']]],
+  ['showhelp_8',['showHelp',['../classgraphics_1_1_canvas.html#aa738e689df52a183adcdfb9c1bd35d2f',1,'graphics::Canvas']]],
+  ['singleton_9',['singleton',['../classgraphics_1_1_camera.html#af44c3ef71cc96dc9005977d8d1d5eecf',1,'graphics::Camera']]],
+  ['skillpoints_10',['skillPoints',['../classcharacter_1_1_player.html#a2562fd6b14ff6453afd850c32154854b',1,'character::Player']]],
+  ['speed_11',['speed',['../classcharacter_1_1_entity_stats.html#a6e0ad2024a1fa37c449ac6d8be7269a6',1,'character::EntityStats']]],
+  ['spendether_12',['spendEther',['../classcharacter_1_1_entity_stats.html#a79581f69001e01d0469e94c3234ad50b',1,'character::EntityStats']]],
+  ['stack_13',['stack',['../classgraphics_1_1_canvas.html#a6cb6c8447eea02a0e1bcdd2d6ed3ea07',1,'graphics::Canvas']]],
+  ['standing_14',['standing',['../enumcharacter_1_1_entity_1_1_animation_index.html#a1febfbcdc3176de5fa4a5f363b59cdb9',1,'character.Entity.AnimationIndex.STANDING'],['../classcharacter_1_1_entity.html#adda9fa5453c09b2d7fe02e03ad890d58',1,'character.Entity.standing']]],
+  ['stats_15',['stats',['../classcharacter_1_1_entity.html#a890dd2f2163ba64fed860ca1bf409078',1,'character::Entity']]],
+  ['stop_16',['stop',['../classgraphics_1_1_animation.html#a03d26485487c684c85441d8d4359db89',1,'graphics::Animation']]],
+  ['stopblocking_17',['stopBlocking',['../classcharacter_1_1_entity.html#ac9c3fc859074648e7eaacfa4fc7ff2af',1,'character::Entity']]],
+  ['stopdodging_18',['stopDodging',['../classcharacter_1_1_entity.html#af9be4ed91ef82cf059505835bcef2545',1,'character::Entity']]],
+  ['stopmoving_19',['stopMoving',['../classcharacter_1_1_entity.html#ac3a35c673cc4ac22bb428d3b62ad2a68',1,'character::Entity']]],
+  ['subtract_20',['subtract',['../classgeometry_1_1_vector2_d.html#a69bb0663be2d4ca67f126273710dd540',1,'geometry::Vector2D']]],
+  ['swapanimation_21',['swapAnimation',['../classcharacter_1_1_entity.html#a28bfab6b4ff0f725051bbe22d013bda5',1,'character::Entity']]]
 ];

@@ -1,7 +1,8 @@
 package character;
 
+import java.util.ArrayList;
+
 import geometry.Vector2D;
-import graphics.Canvas;
 
 /**
  * @brief Represents a Monster entity in the game.
@@ -11,14 +12,15 @@ import graphics.Canvas;
  *        Monster entities, such as random movement and attacking.
  */
 public class Monster extends Entity {
+    public int xp;
 
     /**
      * @brief Default constructor for Monster.
      *
      *        Initializes a Monster at the origin (0, 0).
      */
-    public Monster() {
-        this(0, 0);
+    public Monster(Player player) {
+        this(0, 0, player, 1);
     }
 
     /**
@@ -28,27 +30,22 @@ public class Monster extends Entity {
      *        animations
      *        and facing direction.
      *
-     * @param canvas The canvas for rendering.
      * @param x      The x-coordinate of the Monster.
      * @param y      The y-coordinate of the Monster.
      */
-    public Monster(Canvas canvas, double x, double y) {
+    public Monster(double x, double y, Player player, int zone) {
         this.setAnimations("monster/");
         this.coordinates = new Vector2D(x, y);
         this.isFacingLeft = false;
+
+        int attack = Math.min((int)Math.floor(Math.random() * (player.level + 3)) + (zone - 1) * 3 + 1, zone * 10);
+        int speed = Math.min((int)Math.floor(Math.random() * (player.level + 3)) + (zone - 1) * 3 + 1, zone * 10);
+        int defence = Math.min((int)Math.floor(Math.random() * (player.level + 3)) + (zone - 1) * 3 + 1, zone * 10);
+
+        this.stats = new EntityStats((zone + 1) * 50, 100, speed, attack, 1, defence);
+        this.xp = 10 * defence + 15 * attack + 8 * speed;
     }
 
-    /**
-     * @brief Constructor for Monster with specified coordinates.
-     *
-     *        Initializes a Monster at the specified coordinates without specifying
-     *        animations and facing direction.
-     *
-     * @param i Unused parameter.
-     * @param j Unused parameter.
-     */
-    public Monster(int i, int j) {
-    }
 
     /**
      * @brief Gets the offset for rendering based on the attack state.
@@ -72,19 +69,20 @@ public class Monster extends Entity {
      *
      *        Generates a random movement vector and applies it to the Monster's
      *        position.
+     * 
+     * @param others Set of other entities that will be collided.
      */
-    public void randMovement() {
-        double range = 1000;
-        double randomX = (Math.random() * (20 * range)) - range;
-        double randomY = (Math.random() * (20 * range)) - range;
+    public void randMovement(ArrayList<Entity> others) {
+        double randomX = Math.random() - 0.5;
+        double randomY = Math.random() - 0.5;
 
-        Vector2D randomMovement = new Vector2D(randomX, randomY);
-
-        randomMovement.normalize();
-        move(Vector2D.scale(randomMovement, 2));
+        Vector2D delta = new Vector2D(randomX * 0.25, randomY * 0.25);
+        Vector2D randomMovement = Vector2D.add(bufferedMovement, delta);
+        
+        move(randomMovement, stats.getSpeed() / 10 + 0.5, others);
     }
 
-    private static double attackCooldownTimer;
+    public static double attackCooldownTimer;
 
     /**
      * @brief Tries to perform an attack based on specified conditions.

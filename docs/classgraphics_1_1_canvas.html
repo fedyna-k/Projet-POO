@@ -36,7 +36,7 @@ window.MathJax = {
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Les chevaliers d&#39;Ether<span id="projectnumber">&#160;0.1.0</span>
+   <div id="projectname">Les chevaliers d&#39;Ether<span id="projectnumber">&#160;1.0.0</span>
    </div>
    <div id="projectbrief">A game made for a OOP project.</div>
   </td>
@@ -103,7 +103,10 @@ $(document).ready(function(){initNavTree('classgraphics_1_1_canvas.html',''); in
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pac-attribs">Package Attributes</a> &#124;
+<a href="#pac-static-attribs">Static Package Attributes</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classgraphics_1_1_canvas-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">graphics.Canvas Class Reference</div></div>
@@ -131,49 +134,110 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:afe167860f8ed4b0cc819334622945b47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the size of the window for cpu/gpu handle.  <br /></td></tr>
 <tr class="separator:afe167860f8ed4b0cc819334622945b47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8292b012b2cb105b2924688d394b13d4" id="r_a8292b012b2cb105b2924688d394b13d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#a8292b012b2cb105b2924688d394b13d4">update</a> (Graphics g)</td></tr>
-<tr class="memdesc:a8292b012b2cb105b2924688d394b13d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Redefined for optimizing.  <br /></td></tr>
+<tr class="memdesc:a8292b012b2cb105b2924688d394b13d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Where we draw everything.  <br /></td></tr>
 <tr class="separator:a8292b012b2cb105b2924688d394b13d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad20479667dc27e2104a3a26502b2753" id="r_aad20479667dc27e2104a3a26502b2753"><td class="memItemLeft" align="right" valign="top">Vector2D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#aad20479667dc27e2104a3a26502b2753">getCenter</a> ()</td></tr>
 <tr class="memdesc:aad20479667dc27e2104a3a26502b2753"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Canvas center point.  <br /></td></tr>
 <tr class="separator:aad20479667dc27e2104a3a26502b2753"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:a5502dd13c1c84b9af48da467f15f56d7" id="r_a5502dd13c1c84b9af48da467f15f56d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#a5502dd13c1c84b9af48da467f15f56d7">paintComponent</a> (Graphics g)</td></tr>
-<tr class="memdesc:a5502dd13c1c84b9af48da467f15f56d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Where we draw everything.  <br /></td></tr>
-<tr class="separator:a5502dd13c1c84b9af48da467f15f56d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
-Private Attributes</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
 <tr class="memitem:a0ff2c64ef0866e60614e6cd130a6cd62" id="r_a0ff2c64ef0866e60614e6cd130a6cd62"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#a0ff2c64ef0866e60614e6cd130a6cd62">isFullscreen</a></td></tr>
 <tr class="memdesc:a0ff2c64ef0866e60614e6cd130a6cd62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tells if the window is in fullscreen.  <br /></td></tr>
 <tr class="separator:a0ff2c64ef0866e60614e6cd130a6cd62"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a80626fb9dbc8a965b43d01b8fefe8c" id="r_a1a80626fb9dbc8a965b43d01b8fefe8c"><td class="memItemLeft" align="right" valign="top">Timer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#a1a80626fb9dbc8a965b43d01b8fefe8c">timer</a></td></tr>
-<tr class="memdesc:a1a80626fb9dbc8a965b43d01b8fefe8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The main timer that refreshes the screen.  <br /></td></tr>
-<tr class="separator:a1a80626fb9dbc8a965b43d01b8fefe8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a5502dd13c1c84b9af48da467f15f56d7" id="r_a5502dd13c1c84b9af48da467f15f56d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#a5502dd13c1c84b9af48da467f15f56d7">paintComponent</a> (Graphics g)</td></tr>
+<tr class="separator:a5502dd13c1c84b9af48da467f15f56d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pac-attribs" name="pac-attribs"></a>
+Package Attributes</h2></td></tr>
+<tr class="memitem:a612279999b42ea4ffc90ec02c4e15bfb" id="r_a612279999b42ea4ffc90ec02c4e15bfb"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#a612279999b42ea4ffc90ec02c4e15bfb">entitiesCollision</a> = false</td></tr>
+<tr class="separator:a612279999b42ea4ffc90ec02c4e15bfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c2cd68bee780856c47169e384d5a914" id="r_a2c2cd68bee780856c47169e384d5a914"><td class="memItemLeft" align="right" valign="top">Random&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#a2c2cd68bee780856c47169e384d5a914">random</a> = new Random()</td></tr>
+<tr class="separator:a2c2cd68bee780856c47169e384d5a914"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pac-static-attribs" name="pac-static-attribs"></a>
+Static Package Attributes</h2></td></tr>
+<tr class="memitem:ab5327a26d64da6563966ef80b10ebdc5" id="r_ab5327a26d64da6563966ef80b10ebdc5"><td class="memItemLeft" align="right" valign="top">static final double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#ab5327a26d64da6563966ef80b10ebdc5">PROBABILITY_OF_ATTACK</a> = 0.8</td></tr>
+<tr class="separator:ab5327a26d64da6563966ef80b10ebdc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc72af86d487f8a667ec971ca2c17f81" id="r_acc72af86d487f8a667ec971ca2c17f81"><td class="memItemLeft" align="right" valign="top">static final double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#acc72af86d487f8a667ec971ca2c17f81">AGGRO_RANGE</a> = 500.0</td></tr>
+<tr class="separator:acc72af86d487f8a667ec971ca2c17f81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a88390ba5a0bbbd56ca368ac72be756fd" id="r_a88390ba5a0bbbd56ca368ac72be756fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgraphics_1_1_true_timer.html">TrueTimer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#a88390ba5a0bbbd56ca368ac72be756fd">mainTimer</a></td></tr>
+<tr class="memdesc:a88390ba5a0bbbd56ca368ac72be756fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer that does not depend on EDT, handles all computations.  <br /></td></tr>
+<tr class="separator:a88390ba5a0bbbd56ca368ac72be756fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1985d48d8f8ceed866a06d3cedfcf01d" id="r_a1985d48d8f8ceed866a06d3cedfcf01d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgraphics_1_1_camera.html">Camera</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#a1985d48d8f8ceed866a06d3cedfcf01d">camera</a></td></tr>
 <tr class="memdesc:a1985d48d8f8ceed866a06d3cedfcf01d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The camera that follows the player.  <br /></td></tr>
 <tr class="separator:a1985d48d8f8ceed866a06d3cedfcf01d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab03655da6af1c020355409402765c664" id="r_ab03655da6af1c020355409402765c664"><td class="memItemLeft" align="right" valign="top">Map&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#ab03655da6af1c020355409402765c664">map</a></td></tr>
+<tr class="memdesc:ab03655da6af1c020355409402765c664"><td class="mdescLeft">&#160;</td><td class="mdescRight">The map object.  <br /></td></tr>
+<tr class="separator:ab03655da6af1c020355409402765c664"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a528c10919254bfcb159f77ee956be088" id="r_a528c10919254bfcb159f77ee956be088"><td class="memItemLeft" align="right" valign="top">Player&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#a528c10919254bfcb159f77ee956be088">player</a></td></tr>
+<tr class="memdesc:a528c10919254bfcb159f77ee956be088"><td class="mdescLeft">&#160;</td><td class="mdescRight">The player.  <br /></td></tr>
 <tr class="separator:a528c10919254bfcb159f77ee956be088"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8bad2f809137d663118429948ef98ac7" id="r_a8bad2f809137d663118429948ef98ac7"><td class="memItemLeft" align="right" valign="top">Player&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#a8bad2f809137d663118429948ef98ac7">player2</a></td></tr>
-<tr class="separator:a8bad2f809137d663118429948ef98ac7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75373868b598660bdfa461b3c288a7aa" id="r_a75373868b598660bdfa461b3c288a7aa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#a75373868b598660bdfa461b3c288a7aa">lastHit</a> = 0</td></tr>
+<tr class="separator:a75373868b598660bdfa461b3c288a7aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a923ce7acb2f7cff3d0faf7b4a5d19a7f" id="r_a923ce7acb2f7cff3d0faf7b4a5d19a7f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#a923ce7acb2f7cff3d0faf7b4a5d19a7f">accel</a> = 0</td></tr>
+<tr class="separator:a923ce7acb2f7cff3d0faf7b4a5d19a7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae92809bc81147e9de0ff951a3f7aee11" id="r_ae92809bc81147e9de0ff951a3f7aee11"><td class="memItemLeft" align="right" valign="top">ArrayList&lt; Monster &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#ae92809bc81147e9de0ff951a3f7aee11">badguys</a></td></tr>
+<tr class="memdesc:ae92809bc81147e9de0ff951a3f7aee11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Monster pool.  <br /></td></tr>
+<tr class="separator:ae92809bc81147e9de0ff951a3f7aee11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3b18a6d48ba8c7f3e70be67a9728ea2" id="r_ab3b18a6d48ba8c7f3e70be67a9728ea2"><td class="memItemLeft" align="right" valign="top">ArrayList&lt; Entity &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#ab3b18a6d48ba8c7f3e70be67a9728ea2">allEntities</a></td></tr>
+<tr class="memdesc:ab3b18a6d48ba8c7f3e70be67a9728ea2"><td class="mdescLeft">&#160;</td><td class="mdescRight">All entities.  <br /></td></tr>
+<tr class="separator:ab3b18a6d48ba8c7f3e70be67a9728ea2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6cb6c8447eea02a0e1bcdd2d6ed3ea07" id="r_a6cb6c8447eea02a0e1bcdd2d6ed3ea07"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgraphics_1_1_key_stack.html">KeyStack</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#a6cb6c8447eea02a0e1bcdd2d6ed3ea07">stack</a></td></tr>
 <tr class="separator:a6cb6c8447eea02a0e1bcdd2d6ed3ea07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8de145a173fad68f656af34f598c199e" id="r_a8de145a173fad68f656af34f598c199e"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#a8de145a173fad68f656af34f598c199e">wasReleasedO</a></td></tr>
 <tr class="separator:a8de145a173fad68f656af34f598c199e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6377f36e4aff67ebbb69fd3f1a72b8d7" id="r_a6377f36e4aff67ebbb69fd3f1a72b8d7"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#a6377f36e4aff67ebbb69fd3f1a72b8d7">wasReleasedSpace</a></td></tr>
 <tr class="separator:a6377f36e4aff67ebbb69fd3f1a72b8d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab03655da6af1c020355409402765c664" id="r_ab03655da6af1c020355409402765c664"><td class="memItemLeft" align="right" valign="top">Map&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#ab03655da6af1c020355409402765c664">map</a></td></tr>
-<tr class="separator:ab03655da6af1c020355409402765c664"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac558d0825a66c5c8db029b5cebfb1be4" id="r_ac558d0825a66c5c8db029b5cebfb1be4"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#ac558d0825a66c5c8db029b5cebfb1be4">wasReleasedI</a></td></tr>
+<tr class="separator:ac558d0825a66c5c8db029b5cebfb1be4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92a6bde070ee1cbdb02bbdbcfb428175" id="r_a92a6bde070ee1cbdb02bbdbcfb428175"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#a92a6bde070ee1cbdb02bbdbcfb428175">wasReleasedEsc</a></td></tr>
+<tr class="separator:a92a6bde070ee1cbdb02bbdbcfb428175"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abab6d561606f9380e600393bca59e83b" id="r_abab6d561606f9380e600393bca59e83b"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#abab6d561606f9380e600393bca59e83b">wasReleasedK</a></td></tr>
+<tr class="separator:abab6d561606f9380e600393bca59e83b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aead3a27584dd0afadeb72a963b450b19" id="r_aead3a27584dd0afadeb72a963b450b19"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#aead3a27584dd0afadeb72a963b450b19">wasReleasedL</a></td></tr>
+<tr class="separator:aead3a27584dd0afadeb72a963b450b19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78cb4f1b92388b4a4cdc3fdc4b6b923a" id="r_a78cb4f1b92388b4a4cdc3fdc4b6b923a"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#a78cb4f1b92388b4a4cdc3fdc4b6b923a">wasReleasedM</a></td></tr>
+<tr class="separator:a78cb4f1b92388b4a4cdc3fdc4b6b923a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e65c01fba67a0dc1c7cafb752e55512" id="r_a8e65c01fba67a0dc1c7cafb752e55512"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#a8e65c01fba67a0dc1c7cafb752e55512">wasReleasedH</a></td></tr>
+<tr class="separator:a8e65c01fba67a0dc1c7cafb752e55512"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70d45b9f4443c18515744dd5b2494a6c" id="r_a70d45b9f4443c18515744dd5b2494a6c"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#a70d45b9f4443c18515744dd5b2494a6c">wasReleasedEnter</a></td></tr>
+<tr class="separator:a70d45b9f4443c18515744dd5b2494a6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0720396fd5f5c9cc186edde4f6a31b1" id="r_ad0720396fd5f5c9cc186edde4f6a31b1"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#ad0720396fd5f5c9cc186edde4f6a31b1">inDialog</a> = false</td></tr>
+<tr class="separator:ad0720396fd5f5c9cc186edde4f6a31b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8f31684686e024c8edc9f5065874be8" id="r_ad8f31684686e024c8edc9f5065874be8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#ad8f31684686e024c8edc9f5065874be8">dialogIndex</a> = 0</td></tr>
+<tr class="separator:ad8f31684686e024c8edc9f5065874be8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0de4141195dbf2a4edfe864c09adae9" id="r_ac0de4141195dbf2a4edfe864c09adae9"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#ac0de4141195dbf2a4edfe864c09adae9">hasStarted</a> = false</td></tr>
+<tr class="separator:ac0de4141195dbf2a4edfe864c09adae9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40443066826881933529f24df8e7abf0" id="r_a40443066826881933529f24df8e7abf0"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#a40443066826881933529f24df8e7abf0">isPaused</a> = false</td></tr>
+<tr class="separator:a40443066826881933529f24df8e7abf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa738e689df52a183adcdfb9c1bd35d2f" id="r_aa738e689df52a183adcdfb9c1bd35d2f"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#aa738e689df52a183adcdfb9c1bd35d2f">showHelp</a> = true</td></tr>
+<tr class="separator:aa738e689df52a183adcdfb9c1bd35d2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab961932dba2ac4474acb101c4cfe9d28" id="r_ab961932dba2ac4474acb101c4cfe9d28"><td class="memItemLeft" align="right" valign="top">int[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#ab961932dba2ac4474acb101c4cfe9d28">hasSpawned</a> = new int[Enemies.enemies.length]</td></tr>
+<tr class="separator:ab961932dba2ac4474acb101c4cfe9d28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1a9439887d60b82fb052676f5e78b63" id="r_aa1a9439887d60b82fb052676f5e78b63"><td class="memItemLeft" align="right" valign="top">int[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#aa1a9439887d60b82fb052676f5e78b63">isNotThere</a> = new int[Enemies.enemies.length]</td></tr>
+<tr class="separator:aa1a9439887d60b82fb052676f5e78b63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5717bc51b6a61d989a41df9e35f4e3e2" id="r_a5717bc51b6a61d989a41df9e35f4e3e2"><td class="memItemLeft" align="right" valign="top">int[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#a5717bc51b6a61d989a41df9e35f4e3e2">hasSpawnedDragon</a> = new int[Enemies.dragons.length]</td></tr>
+<tr class="separator:a5717bc51b6a61d989a41df9e35f4e3e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7f24500c427052b092dfe99bde2d95e" id="r_af7f24500c427052b092dfe99bde2d95e"><td class="memItemLeft" align="right" valign="top">int[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgraphics_1_1_canvas.html#af7f24500c427052b092dfe99bde2d95e">isNotThereDragon</a> = new int[Enemies.dragons.length]</td></tr>
+<tr class="separator:af7f24500c427052b092dfe99bde2d95e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class allows to draw on screen. </p>
-<dl class="section author"><dt>Author</dt><dd>Kevin Fedyna </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>16/11/2023</dd></dl>
-<p>It should only be instancied once per Window.</p>
-<p>The instanciation takes place inside the Window class.</p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classgraphics_1_1_window.html" title="This class is the main class for the GUI.">graphics.Window</a> </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Kevin Fedyna </dd>
+<dd>
+Imene Bousmaha </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>10/01/2024</dd></dl>
+<pre class="fragment">   It should only be instancied once per Window.
+
+   The instanciation takes place inside the Window class.
+</pre> <dl class="section see"><dt>See also</dt><dd><a class="el" href="classgraphics_1_1_window.html" title="This class is the main class for the GUI.">graphics.Window</a> </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac44b5e55e635b38c3f393dc45bf10bcf" name="ac44b5e55e635b38c3f393dc45bf10bcf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac44b5e55e635b38c3f393dc45bf10bcf">&#9670;&#160;</a></span>Canvas() <span class="overload">[1/2]</span></h2>
@@ -191,8 +255,8 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The default constructor. </p>
-<p>Calls the main constructor with fullscreen set to false. </p>
-
+<pre class="fragment">   Calls the main constructor with fullscreen set to false.
+</pre> 
 </div>
 </div>
 <a id="a81ee3442398153350af065c9407626c1" name="a81ee3442398153350af065c9407626c1"></a>
@@ -212,9 +276,11 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The main constructor. </p>
-<p>First starts by constructing a JFrame with double buffer.</p>
-<p>The timer is set here, so if you want to add things to the main loop you should edit this.</p>
-<dl class="params"><dt>Parameters</dt><dd>
+<pre class="fragment">   First starts by constructing a JFrame with double buffer.
+
+   The timer is set here, so if you want to add things to the main loop
+   you should edit this.
+</pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">isFullscreen</td><td>Is the screen in fullscreen mode ? </td></tr>
   </table>
@@ -261,8 +327,8 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Return the size of the window for cpu/gpu handle. </p>
-<p>The default size of the window is 800x600 (in pixels).</p>
-<dl class="section return"><dt>Returns</dt><dd>The size depending on the mode. </dd></dl>
+<pre class="fragment">   The default size of the window is 800x600 (in pixels).
+</pre> <dl class="section return"><dt>Returns</dt><dd>The size depending on the mode. </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>It will take the dimensions of the main screen, the game could be on portrait mode and get glitchy. </dd></dl>
 
 </div>
@@ -291,16 +357,6 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Where we draw everything. </p>
-<p>You should use the Camera class to draw as it computes all the evil maths behind the conversion between absolute and canvas-relative positions.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">g</td><td>The objects that stores informations that will be drawn. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section warning"><dt>Warning</dt><dd>If too much is drawn, it can lag quite much. </dd></dl>
-
 </div>
 </div>
 <a id="a8292b012b2cb105b2924688d394b13d4" name="a8292b012b2cb105b2924688d394b13d4"></a>
@@ -319,18 +375,113 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Redefined for optimizing. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Where we draw everything. </p>
+<pre class="fragment">   You should use the Camera class to draw as it computes all the evil
+   maths
+   behind the conversion between absolute and canvas-relative positions.
+</pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">g</td><td>The objects that stores informations that will be drawn. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section warning"><dt>Warning</dt><dd>Do not edit this. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>If too much is drawn, it can lag quite much. </dd></dl>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a923ce7acb2f7cff3d0faf7b4a5d19a7f" name="a923ce7acb2f7cff3d0faf7b4a5d19a7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a923ce7acb2f7cff3d0faf7b4a5d19a7f">&#9670;&#160;</a></span>accel</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int graphics.Canvas.accel = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acc72af86d487f8a667ec971ca2c17f81" name="acc72af86d487f8a667ec971ca2c17f81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc72af86d487f8a667ec971ca2c17f81">&#9670;&#160;</a></span>AGGRO_RANGE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final double graphics.Canvas.AGGRO_RANGE = 500.0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">package</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab3b18a6d48ba8c7f3e70be67a9728ea2" name="ab3b18a6d48ba8c7f3e70be67a9728ea2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3b18a6d48ba8c7f3e70be67a9728ea2">&#9670;&#160;</a></span>allEntities</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ArrayList&lt;Entity&gt; graphics.Canvas.allEntities</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>All entities. </p>
+
+</div>
+</div>
+<a id="ae92809bc81147e9de0ff951a3f7aee11" name="ae92809bc81147e9de0ff951a3f7aee11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae92809bc81147e9de0ff951a3f7aee11">&#9670;&#160;</a></span>badguys</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ArrayList&lt;Monster&gt; graphics.Canvas.badguys</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Monster pool. </p>
+
+</div>
+</div>
 <a id="a1985d48d8f8ceed866a06d3cedfcf01d" name="a1985d48d8f8ceed866a06d3cedfcf01d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1985d48d8f8ceed866a06d3cedfcf01d">&#9670;&#160;</a></span>camera</h2>
 
@@ -355,8 +506,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a0ff2c64ef0866e60614e6cd130a6cd62" name="a0ff2c64ef0866e60614e6cd130a6cd62"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0ff2c64ef0866e60614e6cd130a6cd62">&#9670;&#160;</a></span>isFullscreen</h2>
+<a id="ad8f31684686e024c8edc9f5065874be8" name="ad8f31684686e024c8edc9f5065874be8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8f31684686e024c8edc9f5065874be8">&#9670;&#160;</a></span>dialogIndex</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -365,7 +516,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">boolean graphics.Canvas.isFullscreen</td>
+          <td class="memname">int graphics.Canvas.dialogIndex = 0</td>
         </tr>
       </table>
   </td>
@@ -375,7 +526,243 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+</div>
+</div>
+<a id="a612279999b42ea4ffc90ec02c4e15bfb" name="a612279999b42ea4ffc90ec02c4e15bfb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a612279999b42ea4ffc90ec02c4e15bfb">&#9670;&#160;</a></span>entitiesCollision</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean graphics.Canvas.entitiesCollision = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">package</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab961932dba2ac4474acb101c4cfe9d28" name="ab961932dba2ac4474acb101c4cfe9d28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab961932dba2ac4474acb101c4cfe9d28">&#9670;&#160;</a></span>hasSpawned</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int [] graphics.Canvas.hasSpawned = new int[Enemies.enemies.length]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5717bc51b6a61d989a41df9e35f4e3e2" name="a5717bc51b6a61d989a41df9e35f4e3e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5717bc51b6a61d989a41df9e35f4e3e2">&#9670;&#160;</a></span>hasSpawnedDragon</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int [] graphics.Canvas.hasSpawnedDragon = new int[Enemies.dragons.length]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac0de4141195dbf2a4edfe864c09adae9" name="ac0de4141195dbf2a4edfe864c09adae9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0de4141195dbf2a4edfe864c09adae9">&#9670;&#160;</a></span>hasStarted</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean graphics.Canvas.hasStarted = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad0720396fd5f5c9cc186edde4f6a31b1" name="ad0720396fd5f5c9cc186edde4f6a31b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0720396fd5f5c9cc186edde4f6a31b1">&#9670;&#160;</a></span>inDialog</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean graphics.Canvas.inDialog = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0ff2c64ef0866e60614e6cd130a6cd62" name="a0ff2c64ef0866e60614e6cd130a6cd62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ff2c64ef0866e60614e6cd130a6cd62">&#9670;&#160;</a></span>isFullscreen</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean graphics.Canvas.isFullscreen</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
 <p>Tells if the window is in fullscreen. </p>
+
+</div>
+</div>
+<a id="aa1a9439887d60b82fb052676f5e78b63" name="aa1a9439887d60b82fb052676f5e78b63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1a9439887d60b82fb052676f5e78b63">&#9670;&#160;</a></span>isNotThere</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int [] graphics.Canvas.isNotThere = new int[Enemies.enemies.length]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af7f24500c427052b092dfe99bde2d95e" name="af7f24500c427052b092dfe99bde2d95e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7f24500c427052b092dfe99bde2d95e">&#9670;&#160;</a></span>isNotThereDragon</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int [] graphics.Canvas.isNotThereDragon = new int[Enemies.dragons.length]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a40443066826881933529f24df8e7abf0" name="a40443066826881933529f24df8e7abf0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40443066826881933529f24df8e7abf0">&#9670;&#160;</a></span>isPaused</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean graphics.Canvas.isPaused = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a75373868b598660bdfa461b3c288a7aa" name="a75373868b598660bdfa461b3c288a7aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75373868b598660bdfa461b3c288a7aa">&#9670;&#160;</a></span>lastHit</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int graphics.Canvas.lastHit = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a88390ba5a0bbbd56ca368ac72be756fd" name="a88390ba5a0bbbd56ca368ac72be756fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88390ba5a0bbbd56ca368ac72be756fd">&#9670;&#160;</a></span>mainTimer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classgraphics_1_1_true_timer.html">TrueTimer</a> graphics.Canvas.mainTimer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Timer that does not depend on EDT, handles all computations. </p>
 
 </div>
 </div>
@@ -399,6 +786,8 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>The map object. </p>
+
 </div>
 </div>
 <a id="a528c10919254bfcb159f77ee956be088" name="a528c10919254bfcb159f77ee956be088"></a>
@@ -421,10 +810,12 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>The player. </p>
+
 </div>
 </div>
-<a id="a8bad2f809137d663118429948ef98ac7" name="a8bad2f809137d663118429948ef98ac7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8bad2f809137d663118429948ef98ac7">&#9670;&#160;</a></span>player2</h2>
+<a id="ab5327a26d64da6563966ef80b10ebdc5" name="ab5327a26d64da6563966ef80b10ebdc5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5327a26d64da6563966ef80b10ebdc5">&#9670;&#160;</a></span>PROBABILITY_OF_ATTACK</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -433,7 +824,51 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Player graphics.Canvas.player2</td>
+          <td class="memname">final double graphics.Canvas.PROBABILITY_OF_ATTACK = 0.8</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">package</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2c2cd68bee780856c47169e384d5a914" name="a2c2cd68bee780856c47169e384d5a914"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c2cd68bee780856c47169e384d5a914">&#9670;&#160;</a></span>random</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Random graphics.Canvas.random = new Random()</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">package</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa738e689df52a183adcdfb9c1bd35d2f" name="aa738e689df52a183adcdfb9c1bd35d2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa738e689df52a183adcdfb9c1bd35d2f">&#9670;&#160;</a></span>showHelp</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean graphics.Canvas.showHelp = true</td>
         </tr>
       </table>
   </td>
@@ -467,8 +902,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a1a80626fb9dbc8a965b43d01b8fefe8c" name="a1a80626fb9dbc8a965b43d01b8fefe8c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a80626fb9dbc8a965b43d01b8fefe8c">&#9670;&#160;</a></span>timer</h2>
+<a id="a70d45b9f4443c18515744dd5b2494a6c" name="a70d45b9f4443c18515744dd5b2494a6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70d45b9f4443c18515744dd5b2494a6c">&#9670;&#160;</a></span>wasReleasedEnter</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -477,7 +912,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Timer graphics.Canvas.timer</td>
+          <td class="memname">boolean graphics.Canvas.wasReleasedEnter</td>
         </tr>
       </table>
   </td>
@@ -487,7 +922,137 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>The main timer that refreshes the screen. </p>
+</div>
+</div>
+<a id="a92a6bde070ee1cbdb02bbdbcfb428175" name="a92a6bde070ee1cbdb02bbdbcfb428175"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92a6bde070ee1cbdb02bbdbcfb428175">&#9670;&#160;</a></span>wasReleasedEsc</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean graphics.Canvas.wasReleasedEsc</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8e65c01fba67a0dc1c7cafb752e55512" name="a8e65c01fba67a0dc1c7cafb752e55512"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e65c01fba67a0dc1c7cafb752e55512">&#9670;&#160;</a></span>wasReleasedH</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean graphics.Canvas.wasReleasedH</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac558d0825a66c5c8db029b5cebfb1be4" name="ac558d0825a66c5c8db029b5cebfb1be4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac558d0825a66c5c8db029b5cebfb1be4">&#9670;&#160;</a></span>wasReleasedI</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean graphics.Canvas.wasReleasedI</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abab6d561606f9380e600393bca59e83b" name="abab6d561606f9380e600393bca59e83b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abab6d561606f9380e600393bca59e83b">&#9670;&#160;</a></span>wasReleasedK</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean graphics.Canvas.wasReleasedK</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aead3a27584dd0afadeb72a963b450b19" name="aead3a27584dd0afadeb72a963b450b19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aead3a27584dd0afadeb72a963b450b19">&#9670;&#160;</a></span>wasReleasedL</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean graphics.Canvas.wasReleasedL</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a78cb4f1b92388b4a4cdc3fdc4b6b923a" name="a78cb4f1b92388b4a4cdc3fdc4b6b923a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78cb4f1b92388b4a4cdc3fdc4b6b923a">&#9670;&#160;</a></span>wasReleasedM</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean graphics.Canvas.wasReleasedM</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -536,7 +1101,7 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/main/java/graphics/<a class="el" href="_canvas_8java.html">Canvas.java</a></li>
+<li>C:/Users/fedyn/Code/Projet POO/src/main/java/graphics/<a class="el" href="_canvas_8java.html">Canvas.java</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

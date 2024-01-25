@@ -10,6 +10,7 @@ var classgeometry_1_1_vector2_d =
     [ "norm", "classgeometry_1_1_vector2_d.html#a172aafd21ef1fce8256555c6bbee135f", null ],
     [ "normalize", "classgeometry_1_1_vector2_d.html#ab58b1687aa4ed73f7c21336461150091", null ],
     [ "scale", "classgeometry_1_1_vector2_d.html#aea84390c8e6cefaf9d8e2967d87aa262", null ],
+    [ "subtract", "classgeometry_1_1_vector2_d.html#a69bb0663be2d4ca67f126273710dd540", null ],
     [ "toString", "classgeometry_1_1_vector2_d.html#a37ab16522a018fdd67bd1f9b6712963c", null ],
     [ "x", "classgeometry_1_1_vector2_d.html#aeeec9dcee08521aadc91bee0773ec862", null ],
     [ "y", "classgeometry_1_1_vector2_d.html#aa1ac0a3b6587aa74bfded880e1c42d02", null ]
